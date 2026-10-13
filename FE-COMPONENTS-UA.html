@@ -2336,6 +2336,20 @@
         <p>Той самий патерн expand/collapse, що §13.35–13.38 / §13.39, у контексті «Опис» лота (truncated + toggle).</p>
       </div>
 
+      <h3>14.17. RelatedCarsSlider — слайдер карток</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/car-item/17-related-cars-slider-desktop.jpg" alt="Слайдер карток авто десктоп" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 17 · ряд CarCard · стрілка next справа · SaveButton / CTA / Детальніше — як §5</div>
+      </div>
+      <div class="box ok">
+        <h4>RelatedCarsSlider</h4>
+        <ul>
+          <li><strong>Item = CarCard</strong> (§5) — не нова картка, reuse</li>
+          <li><strong>Desktop:</strong> горизонтальний слайдер + кнопка/шеврон <strong>справа</strong> (next)</li>
+          <li><strong>Mobile:</strong> звичайний слайдер · <strong>без кнопок</strong> · <strong>без dots</strong> (як CarCardsSlider / ClientCards на home §4–5)</li>
+        </ul>
+      </div>
+
       <h3>Підсумок · сторінка авто</h3>
       <table>
         <thead>
@@ -2389,6 +2403,12 @@
             <td>Truncate + DetailsToggle</td>
             <td>Те саме</td>
             <td>Детальніше ↔ Приховати</td>
+          </tr>
+          <tr>
+            <td>RelatedCarsSlider</td>
+            <td>CarCard + стрілка справа</td>
+            <td>Без кнопок · без dots</td>
+            <td>Reuse CarCard §5</td>
           </tr>
           <tr>
             <td>Shared chrome</td>
