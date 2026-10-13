@@ -141,7 +141,7 @@
         <li><a href="#home-more">Головна · коротка форма · FAQ · інфоблок · новини</a></li>
         <li><a href="#home-bonus">Головна · ExpandText · банер бонусу</a></li>
         <li><a href="#site-footer">Футер</a> (desktop + mobile)</li>
-        <li><a href="#cars-listing">Каталог /cars/</a> — breadcrumb · селекти · картка · показати ще · пагінація</li>
+        <li><a href="#cars-listing">Каталог /cars/</a> — breadcrumb · селекти · картка · показати ще · пагінація · фільтр-акордеон</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -1635,6 +1635,50 @@
         <div class="cap">Скрін 11 · <strong>ідентична</strong> до desktop (скріни 8–9) · той самий Pagination</div>
       </div>
 
+      <h3>13.12. Фільтр-акордеон — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/cars/12-filter-accordion-desktop.png" alt="Фільтр-акордеон каталогу десктоп" />
+        <div class="cap">Скрін 12 · секції Марка (відкрита) · Рік · Ціна · Пробіг · search + checkbox list + «Показати більше»</div>
+      </div>
+      <div class="box brand">
+        <h4>CatalogFilterAccordion</h4>
+        <ul>
+          <li>Стек акордеонів: заголовок + chevron · роздільники між секціями</li>
+          <li>Відкрита «Марка»: Input «Пошук» (іконка лупи) · список Checkbox (Acura…BMW) · лінк expand</li>
+          <li>Закриті: «Рік випуску» · «Ціна в США $» · «Пробіг (миль)»</li>
+          <li>Не плутати з PageSize/Sort (§13.3) — це сайдбар фільтрів лотів</li>
+        </ul>
+      </div>
+
+      <h3>13.13. «Показати більше» (у списку опцій фільтра)</h3>
+      <div class="shot">
+        <img src="component-shots/cars/13-filter-show-more.png" alt="Лінк Показати більше у фільтрі" />
+        <div class="cap">Скрін 13 · стан collapsed списку опцій · underlined link «Показати більше»</div>
+      </div>
+      <div class="box ok">
+        <h4>FilterOptionsExpand (≠ ShowMoreButton §13.6)</h4>
+        <ul>
+          <li>Текстовий лінк під checkbox-списком, не outline-кнопка «Показати ще» лістингу</li>
+          <li>Toggle: «Показати більше» ↔ «Показати менше»</li>
+        </ul>
+      </div>
+
+      <h3>13.14. «Показати менше»</h3>
+      <div class="shot">
+        <img src="component-shots/cars/14-filter-show-less.png" alt="Лінк Показати менше у фільтрі" />
+        <div class="cap">Скрін 14 · стан expanded · той самий лінк, текст «Показати менше»</div>
+      </div>
+
+      <h3>13.15. Фільтр-акордеон — mobile</h3>
+      <div class="shot">
+        <img src="component-shots/cars/15-filter-accordion-mobile.png" alt="Фільтр-акордеон каталогу мобайл" />
+        <div class="cap">Скрін 15 (= скрін 4 у цій серії) · <strong>ідентичний</strong> desktop: той самий вид і поведінка (акордеон + більше/менше)</div>
+      </div>
+      <div class="box">
+        <h4>Desktop = Mobile</h4>
+        <p>Один CatalogFilterAccordion · без окремого mobile-layout. Відкриття секцій і toggle «більше/менше» — як на десктопі.</p>
+      </div>
+
       <h3>Підсумок</h3>
       <table>
         <thead>
@@ -1671,11 +1715,17 @@
             <td>= Desktop</td>
             <td>Active / hover = чорна рамка</td>
           </tr>
+          <tr>
+            <td>CatalogFilterAccordion</td>
+            <td>Секції + search + checkboxes</td>
+            <td>= Desktop</td>
+            <td>FilterOptionsExpand більше ↔ менше</td>
+          </tr>
         </tbody>
       </table>
       <div class="note">
         <div class="label">Далі</div>
-        <p>Фільтри каталогу / інші URL (/lot/, калькулятор…) — наступними секціями за скрінами.</p>
+        <p>Інші фільтр-секції (рік / ціна / пробіг відкриті) і URL (/lot/, калькулятор…) — наступними скрінами.</p>
       </div>
     </section>
 
