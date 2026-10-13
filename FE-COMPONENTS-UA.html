@@ -141,7 +141,7 @@
         <li><a href="#home-more">Головна · коротка форма · FAQ · інфоблок · новини</a></li>
         <li><a href="#home-bonus">Головна · ExpandText · банер бонусу</a></li>
         <li><a href="#site-footer">Футер</a> (desktop + mobile)</li>
-        <li><a href="#cars-listing">Каталог /cars/</a> — фільтри · ContentAccordion · Детальніше · TitleText</li>
+        <li><a href="#cars-listing">Каталог /cars/</a> — фільтри · контент · форми · shared header/footer</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -1942,6 +1942,59 @@
         <p>Структура desktop = mobile; масштабуються типографічні розміри. Body може бути p, ul, table.</p>
       </div>
 
+      <h3>13.42. FeedbackSplit — форма + картинка</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/cars/42-feedback-split-form.jpg" alt="Форма зворотного звʼязку зі зображенням" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 42 · split: фото зліва · headline · Input імʼя/телефон · disclaimer · CTA</div>
+      </div>
+      <div class="box brand">
+        <h4>CatalogFeedbackForm</h4>
+        <ul>
+          <li>Layout 50/50: media | form</li>
+          <li>Поля: Імʼя * · Номер телефону * (underline inputs)</li>
+          <li>Disclaimer під полями · primary CTA «Замовити підбір авто»</li>
+        </ul>
+      </div>
+
+      <h3>13.43. CTA форми — без hover</h3>
+      <div class="shot">
+        <img src="component-shots/cars/43-feedback-submit-no-hover.png" alt="Кнопка Замовити підбір авто без hover" />
+        <div class="cap">Скрін 43 · «Замовити підбір авто» · brand-red · <strong>немає hover-стану</strong> (вигляд default = hover)</div>
+      </div>
+      <div class="box ok">
+        <h4>NoHoverPrimaryButton</h4>
+        <p>Фіксуємо: для цієї CTA на /cars/ hover-ефект відсутній (на відміну від ShowMore / ResetFilters).</p>
+      </div>
+
+      <h3>13.44. BonusLeadForm — як на головній</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/cars/44-bonus-form-like-home.jpg" alt="Форма отримати бонус як на home" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 44 · той самий патерн, що <a href="#home-bonus">§11</a>: bg-банер · checklist · white card · імʼя/email · checkbox · «Отримати бонус»</div>
+      </div>
+      <div class="box">
+        <h4>Reuse з home</h4>
+        <ul>
+          <li>Компонент <strong>той самий</strong>, що BonusBanner / бонус-форма на головній (§11)</li>
+          <li>Контент (заголовок / список переваг) може відрізнятись за CMS, UI-скелет спільний</li>
+          <li>CTA «Отримати бонус» — також <strong>без окремого hover</strong> (як на home / як NoHover pattern вище)</li>
+        </ul>
+      </div>
+
+      <h3>13.45. Shared Header + Footer на /cars/</h3>
+      <div class="box brand">
+        <h4>Повторювані оболонки сторінки</h4>
+        <ul>
+          <li><strong>Header</strong> — той самий, що на головній → <a href="#home-header">§2</a> (SiteHeader / nav / search / mobile menu)</li>
+          <li><strong>Footer</strong> — той самий → <a href="#site-footer">§12</a> (SiteFooter · nav · tags · contacts · map)</li>
+          <li>На /cars/ <strong>не дублюємо</strong> окремі скріни header/footer — один shared instance на всіх URL</li>
+        </ul>
+      </div>
+      <div class="meta">
+        <span class="chip soft">Reuse: §2 Header</span>
+        <span class="chip soft">Reuse: §12 Footer</span>
+        <span class="chip soft">Reuse: §11 Bonus</span>
+      </div>
+
       <h3>Підсумок</h3>
       <table>
         <thead>
@@ -2038,11 +2091,29 @@
             <td>Менші шрифти</td>
             <td>Гнучкий body slot</td>
           </tr>
+          <tr>
+            <td>CatalogFeedbackForm</td>
+            <td>Split image + form</td>
+            <td>(адаптив пізніше)</td>
+            <td>CTA без hover</td>
+          </tr>
+          <tr>
+            <td>BonusLeadForm</td>
+            <td>= §11 home</td>
+            <td>= §11</td>
+            <td>Shared component</td>
+          </tr>
+          <tr>
+            <td>SiteHeader / SiteFooter</td>
+            <td>§2 / §12</td>
+            <td>§2 / §12</td>
+            <td>Повторюються на /cars/</td>
+          </tr>
         </tbody>
       </table>
       <div class="note">
         <div class="label">Далі</div>
-        <p>Інші URL (/lot/, калькулятор, VIN…) — наступними секціями за скрінами.</p>
+        <p>Сторінка /cars/ (блоки) майже зібрана. Інші URL (/lot/, калькулятор, VIN…) — наступними секціями за скрінами.</p>
       </div>
     </section>
 
