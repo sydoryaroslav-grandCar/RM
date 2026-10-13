@@ -157,6 +157,7 @@
         <li><a href="#delivery-page">Доставка авто</a> — DeliveryStep · AuctionPartners</li>
         <li><a href="#payment-page">Оплата /oplata/</a> — PaymentTimeline (anim · vertical mobile)</li>
         <li><a href="#zsu-page">Допомога ЗСУ</a> — UnitsTicker · DonationStats · ThanksVideo · GalleryLightbox</li>
+        <li><a href="#blog-page">Блог /blog/</a> — CategoryNav · ArticleCard · Pagination variant · ExpertCard/Slider</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -3832,6 +3833,121 @@
             <td>GalleryLightbox</td>
             <td><strong>Нове</strong></td>
             <td>fullscreen · zoom · share · counter</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Блог — <a href="#blog-page">§27</a>. Інші URL — далі за скрінами.</p>
+      </div>
+    </section>
+
+
+    <section id="blog-page">
+      <h2>27. Блог · /blog/</h2>
+      <p class="lead">
+        Лістинг блогу: навігація категорій, картка статті (desktop horizontal / mobile vertical),
+        пагінація (варіант із first/last), блок «Експертна думка» — ExpertCard у auto+swipe слайдері.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /blog/</span>
+        <span class="chip soft">Блок: BlogListingPage</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>27.1. BlogCategoryNav — desktop</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/blog/01-category-nav-desktop.jpg" alt="Навігація категорій блогу desktop" style="max-width:640px;max-height:120px" />
+        <div class="cap">Скрін 1 · горизонтальний ряд pills · active = brand red + white text · inactive = white + shadow</div>
+      </div>
+      <div class="box ok">
+        <h4>BlogCategoryNav</h4>
+        <ul>
+          <li>Категорії: Авто новини · Корисне · Наші кейси · Новини компанії · Про авто з США</li>
+          <li>Active state — червоний фон; inactive — біла картка з тінню</li>
+        </ul>
+      </div>
+
+      <h3>27.2. ArticleCard — desktop (horizontal)</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/blog/02-article-card-desktop.jpg" alt="Картка статті desktop" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 2 · image left · title · date · excerpt · #category tag bottom-right · GrandCar watermark на фото</div>
+      </div>
+
+      <h3>27.3. Pagination — blog variant</h3>
+      <div class="shot" style="max-width:560px">
+        <img src="component-shots/blog/03-pagination-blog.jpg" alt="Пагінація блогу" style="max-width:560px;max-height:160px" />
+        <div class="cap">Скрін 3 · «ще один варіант» · << < 1 2 3 … 28 > >> · first/last double chevrons · active = dark border</div>
+      </div>
+      <div class="box brand">
+        <h4>Vs Pagination §13.9–13.11</h4>
+        <p>Той самий сімейний патерн (квадратні кнопки · ellipsis · active border). На блозі додані <strong>first/last</strong> («« / »»). У реєстрі — <strong>1 компонента Pagination</strong> + variant props, не окрема верстка з нуля.</p>
+      </div>
+
+      <h3>27.4. ExpertCard</h3>
+      <div class="shot" style="max-width:400px">
+        <img src="component-shots/blog/04-expert-card.jpg" alt="Картка експерта" style="max-width:400px;max-height:520px" />
+        <div class="cap">Скрін 4 · avatar circle · expert badge (зірка) · name (red) · role · featured article title · CTA «Переглянути всі статті експерта →»</div>
+      </div>
+
+      <h3>27.5. ExpertOpinionSlider — desktop</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/blog/05-expert-slider.jpg" alt="Слайдер експертної думки desktop" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 5 · секція «Експертна думка» · ряд ExpertCard · auto-scroll · swipe · <strong>без кнопок і dots</strong></div>
+      </div>
+      <div class="box ok">
+        <h4>ExpertOpinionSlider</h4>
+        <p>Auto + swipe ticker/carousel · no arrows · no dots · items = ExpertCard.</p>
+      </div>
+
+      <h3>27.6. ArticleCard — mobile (vertical)</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/blog/06-article-card-mobile.png" alt="Картка статті mobile" style="max-width:360px;max-height:480px" />
+        <div class="cap">Скрін 6 · той самий ArticleCard · vertical stack: image top · title · date · excerpt · #tag</div>
+      </div>
+
+      <h3>27.7. ExpertOpinionSlider — mobile scroll</h3>
+      <div class="shot" style="max-width:400px">
+        <img src="component-shots/blog/07-expert-slider-mobile.png" alt="Слайдер експертів mobile" style="max-width:400px;max-height:520px" />
+        <div class="cap">Скрін 7 · mobile: горизонтальний scroll / auto · peek сусідньої картки · без кнопок/dots</div>
+      </div>
+
+      <h3>27.8. BlogCategoryNav — mobile</h3>
+      <div class="shot" style="max-width:400px">
+        <img src="component-shots/blog/08-category-nav-mobile.png" alt="Навігація категорій mobile" style="max-width:400px;max-height:240px" />
+        <div class="cap">Скрін 8 · wrap grid 2+2+1 · ті самі категорії · white shadow pills</div>
+      </div>
+
+      <h3>Підсумок · /blog/</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BlogCategoryNav</td>
+            <td><strong>Нове</strong></td>
+            <td>desktop row · mobile wrap grid</td>
+          </tr>
+          <tr>
+            <td>ArticleCard</td>
+            <td><strong>Нове</strong></td>
+            <td>desktop horizontal · mobile vertical</td>
+          </tr>
+          <tr>
+            <td>Pagination</td>
+            <td>Варіант §13</td>
+            <td>+ first/last chevrons · не дубль з нуля</td>
+          </tr>
+          <tr>
+            <td>ExpertCard</td>
+            <td><strong>Нове</strong></td>
+            <td>avatar · badge · CTA</td>
+          </tr>
+          <tr>
+            <td>ExpertOpinionSlider</td>
+            <td><strong>Нове</strong></td>
+            <td>auto + swipe · no buttons/dots · desktop/mobile</td>
           </tr>
         </tbody>
       </table>
