@@ -153,6 +153,8 @@
         <li><a href="#vin-check-page">Перевірка VIN</a> — VinSearch · Status · SpecCards · SalesHistory</li>
         <li><a href="#history-report-page">Звіт перевірки /zvit…/</a> — ReportHero · BannerAnchor</li>
         <li><a href="#about-page">Про компанію /pro-kompaniyu/</a> — ValueCard · Departments · JoinTeam</li>
+        <li><a href="#guarantees-page">Гарантії доставки</a> — GuaranteeFeatureCard</li>
+        <li><a href="#delivery-page">Доставка авто</a> — DeliveryStep · AuctionPartners</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -3501,6 +3503,127 @@
             <td>JoinTeamCta</td>
             <td><strong>Нове</strong></td>
             <td>vacancies CTA · no photo on mobile</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Гарантії / доставка — <a href="#guarantees-page">§23</a> · <a href="#delivery-page">§24</a>.</p>
+      </div>
+    </section>
+
+
+    <section id="guarantees-page">
+      <h2>23. Гарантії доставки · /garantiyi-dostavky-avto-z-ssha/</h2>
+      <p class="lead">
+        Сторінка гарантій: сітка feature-карток (icon · title · text · optional link).
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /garantiyi-dostavky-avto-z-ssha/</span>
+        <span class="chip soft">Блок: GuaranteesPage</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>23.1. GuaranteeFeatureCard — base</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/guarantees/01-feature-card.png" alt="Feature card перевірка" style="max-width:360px" />
+        <div class="cap">Скрін 1 · centered icon · title · description</div>
+      </div>
+
+      <h3>23.2. GuaranteeFeatureCard — with link (mobile)</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/guarantees/02-feature-card-with-link.png" alt="Feature card з лінком" style="max-width:360px" />
+        <div class="cap">Скрін 2 · той самий патерн + inline link «Дізнатись детальніше.»</div>
+      </div>
+      <div class="box ok">
+        <h4>GuaranteeFeatureCard</h4>
+        <ul>
+          <li>Icon + title + body (center)</li>
+          <li>Optional text-link CTA в кінці опису</li>
+          <li>Grid на desktop · stack на mobile</li>
+        </ul>
+      </div>
+
+      <h3>Підсумок · Гарантії</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GuaranteeFeatureCard</td>
+            <td><strong>Нове</strong></td>
+            <td>base · with link</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Доставка — <a href="#delivery-page">§24</a>.</p>
+      </div>
+    </section>
+
+    <section id="delivery-page">
+      <h2>24. Доставка авто · /dostavka-avto-z-ssha/</h2>
+      <p class="lead">
+        Сторінка доставки: нумеровані кроки процесу + блок партнерства з аукціонами.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /dostavka-avto-z-ssha/</span>
+        <span class="chip soft">Блок: DeliveryPage</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>24.1. DeliveryStep — text</h3>
+      <div class="shot" style="max-width:420px">
+        <img src="component-shots/delivery/01-step-text.png" alt="Крок доставки текст" style="max-width:420px" />
+        <div class="cap">Скрін 3 · велике red № · title · description</div>
+      </div>
+
+      <h3>24.2. DeliveryStep — with image</h3>
+      <div class="shot" style="max-width:480px">
+        <img src="component-shots/delivery/02-step-with-image.png" alt="Крок доставки з фото" style="max-width:480px" />
+        <div class="cap">Скрін 4 · № · photo авто · short title (фінальний крок)</div>
+      </div>
+      <div class="box ok">
+        <h4>DeliveryStep</h4>
+        <ul>
+          <li>Variants: <code>text</code> (title+body) · <code>image</code> (photo+caption)</li>
+          <li>Large red step number зліва</li>
+        </ul>
+      </div>
+
+      <h3>24.3. AuctionPartnersCard — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/delivery/03-partners-desktop.jpg" alt="Партнери аукціонів desktop" />
+        <div class="cap">Скрін 5 · shadow card · text зліва · logos Copart / IAA / Manheim справа</div>
+      </div>
+
+      <h3>24.4. AuctionPartnersCard — mobile</h3>
+      <div class="shot" style="max-width:400px">
+        <img src="component-shots/delivery/04-partners-mobile.png" alt="Партнери аукціонів mobile" style="max-width:400px" />
+        <div class="cap">Скрін 6 · stack: title · text · logos row</div>
+      </div>
+      <div class="box brand">
+        <h4>AuctionPartnersCard</h4>
+        <p>Desktop 2-col · mobile vertical · partner logos row.</p>
+      </div>
+
+      <h3>Підсумок · Доставка</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DeliveryStep</td>
+            <td><strong>Нове</strong></td>
+            <td>text · with image</td>
+          </tr>
+          <tr>
+            <td>AuctionPartnersCard</td>
+            <td><strong>Нове</strong></td>
+            <td>desktop · mobile</td>
           </tr>
         </tbody>
       </table>
