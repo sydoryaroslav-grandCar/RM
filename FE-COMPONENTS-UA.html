@@ -156,6 +156,7 @@
         <li><a href="#guarantees-page">Гарантії доставки</a> — GuaranteeFeatureCard</li>
         <li><a href="#delivery-page">Доставка авто</a> — DeliveryStep · AuctionPartners</li>
         <li><a href="#payment-page">Оплата /oplata/</a> — PaymentTimeline (anim · vertical mobile)</li>
+        <li><a href="#zsu-page">Допомога ЗСУ</a> — UnitsTicker · DonationStats · ThanksVideo · GalleryLightbox</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -3694,6 +3695,143 @@
             <td>PaymentTimeline</td>
             <td><strong>Нове</strong></td>
             <td>horizontal desktop · vertical mobile · appear anim</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Допомога ЗСУ — <a href="#zsu-page">§26</a>. Інші URL — далі за скрінами.</p>
+      </div>
+    </section>
+
+
+    <section id="zsu-page">
+      <h2>26. Допомога ЗСУ · /dopomoga-zsu/</h2>
+      <p class="lead">
+        Сторінка допомоги: auto-ticker підрозділів, статистика донатів,
+        відео-подяки, галерея подяк з lightbox (zoom · share · counter).
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /dopomoga-zsu/</span>
+        <span class="chip soft">Блок: ZsuHelpPage</span>
+        <span class="chip red">Desktop + Mobile · auto carousel</span>
+      </div>
+
+      <h3>26.1. HelpedUnitsTicker — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/zsu/01-helped-units-ticker.jpg" alt="Кому ми вже допомогли ticker" />
+        <div class="cap">Скрін 1 · «КОМУ МИ ВЖЕ ДОПОМОГЛИ» · infinite auto-scroll logos · edge fade · без кнопок/свайпа</div>
+      </div>
+
+      <h3>26.2. HelpedUnitsTicker — close / mobile same</h3>
+      <div class="shot">
+        <img src="component-shots/zsu/02-helped-units-ticker-close.png" alt="Ticker closer" />
+        <div class="cap">Скрін 2 · той самий auto ticker · mobile поведінка ідентична</div>
+      </div>
+      <div class="box ok">
+        <h4>HelpedUnitsTicker</h4>
+        <p>CSS/JS infinite marquee · no arrows · no drag · seamless loop · mask fade на краях.</p>
+      </div>
+
+      <h3>26.3. DonationStats — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/zsu/03-donation-stats-desktop.jpg" alt="Статистика донатів desktop" />
+        <div class="cap">Скрін 3 · black card · сума ₴ зліва · item rows (авто/дрони/…)</div>
+      </div>
+
+      <h3>26.4. DonationStats — mobile</h3>
+      <div class="shot" style="max-width:400px">
+        <img src="component-shots/zsu/04-donation-stats-mobile.png" alt="Статистика донатів mobile" style="max-width:400px;max-height:560px" />
+        <div class="cap">Скрін 4 · stack · сума зверху · items нижче · camo bg context</div>
+      </div>
+      <div class="box ok">
+        <h4>DonationStats</h4>
+        <p>Total donated + list IconStatRow (label · count).</p>
+      </div>
+
+      <h3>26.5. ThanksVideoCard — idle</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/zsu/05-thanks-video-card.png" alt="Відео-подяка idle" style="max-width:360px;max-height:560px" />
+        <div class="cap">Скрін 5 · vertical video · YouTube play · badges · title · дата відправки</div>
+      </div>
+
+      <h3>26.6. ThanksVideoCard — playing</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/zsu/06-thanks-video-playing.png" alt="Відео-подяка playing" style="max-width:360px;max-height:560px" />
+        <div class="cap">Скрін 6 · inline player controls · progress · captions</div>
+      </div>
+      <div class="box brand">
+        <h4>Vs home video/player</h4>
+        <p>Окремий card layout (vertical media · pill overlays · «Дата відправки») — не той самий блок що на home.</p>
+      </div>
+
+      <h3>26.7. ThanksGallery — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/zsu/07-thanks-gallery-desktop.jpg" alt="Галерея подяк desktop" />
+        <div class="cap">Скрін 7 · shelf bg · white panel · «ГАЛЕРЕЯ ПОДЯК» · arrows · auto carousel cards</div>
+      </div>
+
+      <h3>26.8. ThanksGallery — mobile</h3>
+      <div class="shot">
+        <img src="component-shots/zsu/08-thanks-gallery-mobile.png" alt="Галерея подяк mobile" />
+        <div class="cap">Скрін 8 · slider carousel на mobile теж</div>
+      </div>
+
+      <h3>26.9. GalleryLightbox — fullscreen</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/zsu/09-gallery-lightbox.jpg" alt="Lightbox fullscreen" style="max-width:640px;max-height:480px" />
+        <div class="cap">Скрін 9 · click card → fullscreen · counter 12/13 · image</div>
+      </div>
+
+      <h3>26.10. GalleryLightbox — share menu</h3>
+      <div class="shot" style="max-width:480px">
+        <img src="component-shots/zsu/10-lightbox-share-menu.png" alt="Share menu" style="max-width:480px" />
+        <div class="cap">Скрін 10 · counter · toolbar · share dropdown (FB · Tweet · Pin · Download)</div>
+      </div>
+
+      <h3>26.11. GalleryLightbox — toolbar</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/zsu/11-lightbox-toolbar.png" alt="Toolbar icons" style="max-width:360px" />
+        <div class="cap">Скрін 11–12 · close · share · fullscreen · zoom (+ counter у lightbox)</div>
+      </div>
+      <div class="box ok">
+        <h4>ThanksGallery + GalleryLightbox</h4>
+        <ul>
+          <li>Carousel auto-rotate · nav arrows desktop</li>
+          <li>Click → lightbox: slider · zoom · share · counter</li>
+        </ul>
+      </div>
+
+      <h3>Підсумок · /dopomoga-zsu/</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>HelpedUnitsTicker</td>
+            <td><strong>Нове</strong></td>
+            <td>auto infinite · no swipe/buttons</td>
+          </tr>
+          <tr>
+            <td>DonationStats</td>
+            <td><strong>Нове</strong></td>
+            <td>desktop · mobile</td>
+          </tr>
+          <tr>
+            <td>ThanksVideoCard</td>
+            <td><strong>Нове</strong> (≠ home player)</td>
+            <td>idle · playing</td>
+          </tr>
+          <tr>
+            <td>ThanksGallery</td>
+            <td><strong>Нове</strong></td>
+            <td>auto carousel · desktop/mobile</td>
+          </tr>
+          <tr>
+            <td>GalleryLightbox</td>
+            <td><strong>Нове</strong></td>
+            <td>fullscreen · zoom · share · counter</td>
           </tr>
         </tbody>
       </table>
