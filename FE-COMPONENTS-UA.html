@@ -141,7 +141,7 @@
         <li><a href="#home-more">Головна · коротка форма · FAQ · інфоблок · новини</a></li>
         <li><a href="#home-bonus">Головна · ExpandText · банер бонусу</a></li>
         <li><a href="#site-footer">Футер</a> (desktop + mobile)</li>
-        <li><a href="#cars-listing">Каталог /cars/</a> — фільтри · пошук у фільтрі · range slider · модалка · чіпи</li>
+        <li><a href="#cars-listing">Каталог /cars/</a> — фільтри · ContentAccordion · Детальніше · TitleText</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -1844,6 +1844,104 @@
         <div class="cap">Скрін 30 · <strong>ідентичний</strong> desktop · той самий FilterRangeSlider</div>
       </div>
 
+      <h3>13.31. FilterCheckbox — active / inactive</h3>
+      <div class="shot">
+        <img src="component-shots/cars/31-filter-checkbox-states.png" alt="Чекбокс фільтра активний і неактивний" />
+        <div class="cap">Скрін 31 · checked (галочка) «Пошкоджене» · unchecked «Ціле»</div>
+      </div>
+      <div class="box ok">
+        <h4>FilterCheckbox</h4>
+        <p>Квадрат з легким radius · inactive = порожній outline · active = чорна галочка. Використовується в опціях CatalogFilterAccordion; стан ↔ URL.</p>
+      </div>
+
+      <h3>13.32. ContentAccordion (звичайний) — collapsed</h3>
+      <div class="shot">
+        <img src="component-shots/cars/32-content-accordion-collapsed.png" alt="Контентний акордеон згорнутий" />
+        <div class="cap">Скрін 32 · title секції «Популярні запитання» · картки-питання · chevron вниз</div>
+      </div>
+      <div class="box brand">
+        <h4>⚠️ Два різні акордеони (не плутати)</h4>
+        <ul>
+          <li><strong>CatalogFilterAccordion</strong> (§13.12+) — плоский сайдбар: роздільники, search, checkbox, range · без «карток»</li>
+          <li><strong>ContentAccordion</strong> (тут) — окремі білі картки з тінью/відступом · title + текстовий body · FAQ / контент на /cars/</li>
+          <li>Стилізація <strong>різна</strong> · не один shared skin з двома режимами «на око»</li>
+          <li>Близький патерн до FAQ на home (§10.2), але фіксуємо як ContentAccordion на каталозі</li>
+        </ul>
+      </div>
+
+      <h3>13.33. ContentAccordion — expanded</h3>
+      <div class="shot">
+        <img src="component-shots/cars/33-content-accordion-expanded.png" alt="Контентний акордеон розгорнутий" />
+        <div class="cap">Скрін 33 · відкритий пункт: chevron вгору · абзац відповіді · сусідні пункти згорнуті</div>
+      </div>
+
+      <h3>13.34. ContentAccordion — mobile</h3>
+      <div class="shot">
+        <img src="component-shots/cars/34-content-accordion-mobile.png" alt="Контентний акордеон мобайл" />
+        <div class="cap">Скрін 34 · той самий ContentAccordion на мобайлі (картки + open/close)</div>
+      </div>
+
+      <h3>13.35. «Детальніше» — default</h3>
+      <div class="shot">
+        <img src="component-shots/cars/35-details-toggle-default.png" alt="Кнопка Детальніше default" />
+        <div class="cap">Скрін 35 · текст «Детальніше» + стрілка вниз · без підкреслення</div>
+      </div>
+
+      <h3>13.36. «Детальніше» — hover</h3>
+      <div class="shot">
+        <img src="component-shots/cars/36-details-toggle-hover.png" alt="Кнопка Детальніше hover" />
+        <div class="cap">Скрін 36 · hover: підкреслення на всю ширину тексту+іконки</div>
+      </div>
+
+      <h3>13.37. Після кліку — «Приховати»</h3>
+      <div class="shot">
+        <img src="component-shots/cars/37-details-toggle-expanded.png" alt="Кнопка Приховати" />
+        <div class="cap">Скрін 37 · expanded: «Приховати» + стрілка вгору</div>
+      </div>
+
+      <h3>13.38. «Приховати» — hover</h3>
+      <div class="shot">
+        <img src="component-shots/cars/38-details-toggle-expanded-hover.png" alt="Кнопка Приховати hover" />
+        <div class="cap">Скрін 38 · hover expanded: підкреслення · той самий патерн, що §13.36</div>
+      </div>
+      <div class="box">
+        <h4>DetailsToggle</h4>
+        <ul>
+          <li>Toggle: <strong>Детальніше ↓</strong> ↔ <strong>Приховати ↑</strong></li>
+          <li>Hover в обох станах = underline</li>
+          <li>Не плутати з «Детальніше» на CarCard (§5 / §13.4) — там outline-кнопка, тут link-toggle контенту</li>
+        </ul>
+      </div>
+
+      <h3>13.39. TitleText — заголовок + параграфи</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/cars/39-title-text-paragraphs.png" alt="TitleText з параграфами" style="max-width:640px;max-height:420px" />
+        <div class="cap">Скрін 39 · H + кілька &lt;p&gt; · контентний блок опису</div>
+      </div>
+      <div class="box brand">
+        <h4>TitleText (гнучкий контент)</h4>
+        <ul>
+          <li>Слоти: <strong>title</strong> + <strong>body</strong> (параграфи, списки…)</li>
+          <li>Може містити <strong>таблицю</strong> (§13.40) — закладати rich content, не лише plain string</li>
+        </ul>
+      </div>
+
+      <h3>13.40. TitleText — з таблицею</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/cars/40-title-text-with-table.png" alt="TitleText з таблицею" style="max-width:640px;max-height:420px" />
+        <div class="cap">Скрін 40 · title + intro &lt;p&gt; + table (двигун / де зустрічається / нотатки)</div>
+      </div>
+
+      <h3>13.41. TitleText — mobile</h3>
+      <div class="shot">
+        <img src="component-shots/cars/41-title-text-mobile.png" alt="TitleText мобайл" />
+        <div class="cap">Скрін 41 · той самий компонент · <strong>різниця лише в розмірі шрифту</strong> (title / body / list)</div>
+      </div>
+      <div class="box ok">
+        <h4>Responsive</h4>
+        <p>Структура desktop = mobile; масштабуються типографічні розміри. Body може бути p, ul, table.</p>
+      </div>
+
       <h3>Підсумок</h3>
       <table>
         <thead>
@@ -1884,7 +1982,7 @@
             <td>CatalogFilterAccordion</td>
             <td>У сайдбарі</td>
             <td>У MobileFiltersModal</td>
-            <td>Вміст однаковий · URL sync</td>
+            <td>≠ ContentAccordion за стилем</td>
           </tr>
           <tr>
             <td>ResetFiltersButton</td>
@@ -1915,6 +2013,30 @@
             <td>Dual-handle + від—до</td>
             <td>= Desktop</td>
             <td>Обидва thumbs · URL sync</td>
+          </tr>
+          <tr>
+            <td>FilterCheckbox</td>
+            <td>Checked / unchecked</td>
+            <td>= Desktop</td>
+            <td>Опції фільтра · URL sync</td>
+          </tr>
+          <tr>
+            <td>ContentAccordion</td>
+            <td>Картки FAQ/текст</td>
+            <td>Те саме</td>
+            <td>≠ Filter accordion skin</td>
+          </tr>
+          <tr>
+            <td>DetailsToggle</td>
+            <td>Детальніше ↔ Приховати</td>
+            <td>Те саме</td>
+            <td>Hover = underline</td>
+          </tr>
+          <tr>
+            <td>TitleText</td>
+            <td>Title + p / table / list</td>
+            <td>Менші шрифти</td>
+            <td>Гнучкий body slot</td>
           </tr>
         </tbody>
       </table>
