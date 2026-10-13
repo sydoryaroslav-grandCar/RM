@@ -159,6 +159,7 @@
         <li><a href="#zsu-page">Допомога ЗСУ</a> — UnitsTicker · DonationStats · ThanksVideo · GalleryLightbox</li>
         <li><a href="#blog-page">Блог /blog/</a> — CategoryNav · ArticleCard · Pagination variant · ExpertCard/Slider</li>
         <li><a href="#expert-page">Експерт /experts/{slug}/</a> — Profile · Values · ArticleBody · Share · meta</li>
+        <li><a href="#contacts-page">Контакти /contacts/</a> — OfficeMap · ContactsInfo</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -4148,6 +4149,74 @@
             <td>ReadingTime</td>
             <td><strong>Нове</strong></td>
             <td>clock + label</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Контакти — <a href="#contacts-page">§29</a>. Інші URL — далі за скрінами.</p>
+      </div>
+    </section>
+
+
+    <section id="contacts-page">
+      <h2>29. Контакти · /contacts/</h2>
+      <p class="lead">
+        Сторінка контактів: Google Maps embed з info-card / directions,
+        блок «Наші контакти» (адреса · телефон · email · соцмережі).
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /contacts/</span>
+        <span class="chip soft">Блок: ContactsPage</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>29.1. OfficeMap — desktop</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/contacts/01-map-desktop.jpg" alt="Карта офісу desktop" style="max-width:640px;max-height:420px" />
+        <div class="cap">Скрін 1 · Google Maps embed · pin · overlay card (title · address · rating · «Відкрити на Картах» · directions)</div>
+      </div>
+
+      <h3>29.2. ContactsInfo — desktop</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/contacts/02-contacts-desktop.jpg" alt="Наші контакти desktop" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 2 · title · 2×2 grid: адреса · телефони · email · соцмережі (outline icons)</div>
+      </div>
+      <div class="box ok">
+        <h4>ContactsInfo</h4>
+        <ul>
+          <li>ContactRow: icon + value (address / phone / email)</li>
+          <li>SocialLinksRow: IG · FB · YT · Telegram · TikTok</li>
+        </ul>
+      </div>
+
+      <h3>29.3. OfficeMap — mobile</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/contacts/03-map-mobile.png" alt="Карта офісу mobile" style="max-width:360px;max-height:360px" />
+        <div class="cap">Скрін 3 · той самий OfficeMap · компактніший viewport · overlay card зверху</div>
+      </div>
+
+      <h3>29.4. ContactsInfo — mobile</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/contacts/04-contacts-mobile.png" alt="Наші контакти mobile" style="max-width:360px;max-height:360px" />
+        <div class="cap">Скрін 4 · vertical stack (не 2×2) · ті самі ContactRow + SocialLinksRow</div>
+      </div>
+
+      <h3>Підсумок · /contacts/</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>OfficeMap</td>
+            <td><strong>Нове</strong></td>
+            <td>Google Maps embed · info card · desktop/mobile</td>
+          </tr>
+          <tr>
+            <td>ContactsInfo</td>
+            <td><strong>Нове</strong></td>
+            <td>grid desktop · stack mobile · SocialLinksRow</td>
           </tr>
         </tbody>
       </table>
