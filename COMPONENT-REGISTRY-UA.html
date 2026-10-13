@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Реєстр компонентів FE — grandcar.ua</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --bg2: #fffdf9;
+      --ink: #1a1c1e;
+      --muted: #5c636a;
+      --line: #d9d2c8;
+      --brand: #c41230;
+      --brand-soft: #f8e6e9;
+      --ok-soft: #e6f3ec;
+      --wait-soft: #f7efd6;
+      --card: #fff;
+      --shadow: 0 8px 24px rgba(26,28,30,0.06);
+      --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+    a { color: var(--brand); }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 72px; }
+    .hero {
+      background: #1a1c1e; color: #f5f2ec; border-radius: 18px;
+      padding: 28px 26px; margin-bottom: 14px; box-shadow: var(--shadow);
+    }
+    .hero h1 { margin: 0 0 8px; font-size: 1.55rem; }
+    .hero p { margin: 0; color: #cfc9c0; max-width: 46rem; }
+    .hero a { color: #ffb3bf; }
+    .hero .meta { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+      background: rgba(255,255,255,0.12); color: #fff;
+    }
+    .chip.red { background: var(--brand); }
+    .chip.soft { background: #eef1f4; color: var(--ink); }
+    .hint { font-size: 13px; color: var(--muted); margin: 0 0 16px; }
+    .banner {
+      background: var(--ok-soft); border: 1px solid #b7d8c5; border-radius: 12px;
+      padding: 12px 14px; margin-bottom: 16px; font-size: 0.95rem;
+    }
+    .banner strong { color: #1f6b45; }
+    nav.toc {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+      padding: 14px 16px; margin-bottom: 16px; box-shadow: var(--shadow);
+    }
+    nav.toc strong { display: block; margin-bottom: 6px; }
+    nav.toc ol { margin: 0; padding-left: 1.2rem; columns: 2; gap: 24px; }
+    @media (max-width: 720px) { nav.toc ol { columns: 1; } }
+    nav.toc li { margin: 3px 0; break-inside: avoid; }
+    section {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+      padding: 18px 20px; margin-bottom: 14px; box-shadow: var(--shadow);
+    }
+    h2 { margin: 0 0 6px; font-size: 1.2rem; }
+    .lead { color: var(--muted); margin: 0 0 12px; font-size: 0.95rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td {
+      border: 1px solid var(--line); padding: 7px 9px; text-align: left; vertical-align: top;
+    }
+    th { background: #f3efe8; font-size: 0.8rem; }
+    td code { font-size: 0.82rem; }
+    .size {
+      display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px;
+      border-radius: 999px; background: #1a1c1e; color: #fff;
+    }
+    .size.m { background: #3d5a80; }
+    .size.l { background: var(--brand); }
+    .size.xl { background: #5a1a28; }
+    .est { color: var(--muted); white-space: nowrap; }
+    .note {
+      margin-top: 10px; padding: 10px 12px; border-left: 4px solid var(--brand);
+      background: var(--brand-soft); border-radius: 0 10px 10px 0; font-size: 0.92rem;
+    }
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px;
+    }
+    @media (max-width: 720px) { .stats { grid-template-columns: 1fr 1fr; } }
+    .stat {
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+      padding: 14px; box-shadow: var(--shadow); text-align: center;
+    }
+    .stat .n { font-size: 1.6rem; font-weight: 800; line-height: 1; }
+    .stat .l { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 18px; }
+    .legend { font-size: 13px; color: var(--muted); margin: 0 0 12px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1>Реєстр унікальних компонентів · grandcar.ua</h1>
+      <p>
+        Шар B: одна компонента — один рядок (варіанти в колонці, не дублі).
+        Скріни й контекст сторінок — у
+        <a href="FE-COMPONENTS-UA.html">page inventory</a>.
+        План робіт — <a href="index.html">роадмап</a>.
+      </p>
+      <div class="meta">
+        <span class="chip red">UA only · research freeze</span>
+        <span class="chip">Джерело скрінів не змінюємо</span>
+        <span class="chip">Естімейти — чернетка (TBD refine)</span>
+      </div>
+    </header>
+
+    <div class="banner">
+      <strong>Нічого не втрачено.</strong>
+      Page inventory (§1–30) лишається каноном скрінів і якорів
+      (<code>#cars-listing</code> тощо). Ця сторінка — лише dedup + оцінка для roadmap.
+    </div>
+
+    <p class="hint">
+      Розмір: <span class="size">S</span> atom/control ·
+      <span class="size m">M</span> картка / простий блок ·
+      <span class="size l">L</span> складний блок / форма / слайдер ·
+      <span class="size xl">XL</span> shell / listing system.
+      Години — орієнтир на 1 FE (верстка + стани + адаптив), без backend/CMS.
+    </p>
+
+    <div class="stats">
+      <div class="stat"><div class="n" id="stat-unique">—</div><div class="l">унікальних</div></div>
+      <div class="stat"><div class="n" id="stat-s">—</div><div class="l">S</div></div>
+      <div class="stat"><div class="n" id="stat-ml">—</div><div class="l">M+L+XL</div></div>
+      <div class="stat"><div class="n" id="stat-est">—</div><div class="l">≈ год (чернетка)</div></div>
+    </div>
+
+    <nav class="toc">
+      <strong>Групи</strong>
+      <ol>
+        <li><a href="#shell">Shell / chrome</a></li>
+        <li><a href="#atoms">Atoms / controls</a></li>
+        <li><a href="#cards">Cards</a></li>
+        <li><a href="#sliders">Sliders / carousels</a></li>
+        <li><a href="#forms">Forms / modals</a></li>
+        <li><a href="#catalog">Catalog / filters</a></li>
+        <li><a href="#offer">Offer / lot / auction</a></li>
+        <li><a href="#content">Content / blog / expert</a></li>
+        <li><a href="#pages">Page sections</a></li>
+        <li><a href="#meta">Meta / utility</a></li>
+      </ol>
+    </nav>
+
+    <!-- ========== SHELL ========== -->
+    <section id="shell">
+      <h2>1. Shell / chrome</h2>
+      <p class="lead">Глобальний каркас — один раз, на всіх сторінках.</p>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Компонент</th><th>Варіанти</th><th>Де</th><th>Inventory</th><th>Size</th><th>Est.h</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>SiteHeader</code></td>
+            <td>Шапка (logo · search · nav · lang · phone · social · favorites · CTA)</td>
+            <td>desktop 2-row · mobile bar + drawer</td>
+            <td>Усі</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-header">§2</a> · <a href="FE-COMPONENTS-UA.html#reuse">§1</a></td>
+            <td><span class="size xl">XL</span></td>
+            <td class="est">24–32</td>
+          </tr>
+          <tr>
+            <td><code>SiteFooter</code></td>
+            <td>Футер (nav · tags · contacts · map · social)</td>
+            <td>desktop 2-zone · mobile stack</td>
+            <td>Усі</td>
+            <td><a href="FE-COMPONENTS-UA.html#site-footer">§12</a></td>
+            <td><span class="size xl">XL</span></td>
+            <td class="est">16–22</td>
+          </tr>
+          <tr>
+            <td><code>Breadcrumb</code></td>
+            <td>Хлібні крихти</td>
+            <td>shallow · deep (make/model/lot)</td>
+            <td>/cars/ · item · auctions · …</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a> · <a href="FE-COMPONENTS-UA.html#car-item">§14</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>PageLoader</code></td>
+            <td>Глобальний loader overlay (3 dots)</td>
+            <td>page overlay</td>
+            <td>saved · будь-який fetch</td>
+            <td><a href="FE-COMPONENTS-UA.html#saved-page">§30</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== ATOMS ========== -->
+    <section id="atoms">
+      <h2>2. Atoms / controls</h2>
+      <p class="lead">Кнопки, інпути, бейджі — перевикористовуються скрізь.</p>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Компонент</th><th>Варіанти</th><th>Де</th><th>Inventory</th><th>Size</th><th>Est.h</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Button</code></td>
+            <td>Primary / outline / icon / HomeButton</td>
+            <td>filled · outline · hover · +icon · HomeButton</td>
+            <td>Усі CTA</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-controls">§6</a> · <a href="FE-COMPONENTS-UA.html#not-found-page">§16</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">3–4</td>
+          </tr>
+          <tr>
+            <td><code>TextLink</code></td>
+            <td>Текстовий лінк зі стрілкою</td>
+            <td>default · hover</td>
+            <td>home · sections</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-controls">§6</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1–2</td>
+          </tr>
+          <tr>
+            <td><code>Input</code> / <code>PhoneInput</code></td>
+            <td>Текстові поля + phone</td>
+            <td>idle · error · required *</td>
+            <td>форми · модалки</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-banner">§3</a> · <a href="FE-COMPONENTS-UA.html#home-controls">§6</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>Checkbox</code></td>
+            <td>Чекбокс з лейблом</td>
+            <td>checked · unchecked</td>
+            <td>форми · фільтри</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-bonus">§11</a> · <a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1–2</td>
+          </tr>
+          <tr>
+            <td><code>Badge</code></td>
+            <td>Бейдж (БЛОГЕР · status · …)</td>
+            <td>на фото / inline</td>
+            <td>client cards · lots</td>
+            <td><a href="FE-COMPONENTS-UA.html#client-cards">§4</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1–2</td>
+          </tr>
+          <tr>
+            <td><code>SaveButton</code></td>
+            <td>«Зберегти» / збережено</td>
+            <td>idle · saved («Збережено»)</td>
+            <td>CarCard · saved page</td>
+            <td><a href="FE-COMPONENTS-UA.html#car-cards">§5</a> · <a href="FE-COMPONENTS-UA.html#saved-page">§30</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>FavoritesCounter</code></td>
+            <td>Серце + лічильник у шапці</td>
+            <td>desktop · mobile</td>
+            <td>header</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-header">§2</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>IconText</code></td>
+            <td>Іконка + текст</td>
+            <td>—</td>
+            <td>steps · features</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-steps">§7</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1–2</td>
+          </tr>
+          <tr>
+            <td><code>FeatureItem</code></td>
+            <td>icon + title + body</td>
+            <td>—</td>
+            <td>home</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-controls">§6</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1–2</td>
+          </tr>
+          <tr>
+            <td><code>SlideCounter</code></td>
+            <td>01—02—03</td>
+            <td>—</td>
+            <td>banner · news</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-banner">§3</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1–2</td>
+          </tr>
+          <tr>
+            <td><code>SliderDots</code></td>
+            <td>Bar-dots / track thumb</td>
+            <td>bar style</td>
+            <td>Google reviews</td>
+            <td><a href="FE-COMPONENTS-UA.html#google-reviews">§9</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>ScrollHint</code></td>
+            <td>Підказка скролу</td>
+            <td>desktop only</td>
+            <td>home banner</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-banner">§3</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1</td>
+          </tr>
+          <tr>
+            <td><code>ExpandText</code> / <code>DetailsToggle</code></td>
+            <td>Детальніше ↔ Приховати</td>
+            <td>text / content block</td>
+            <td>home · catalog · offer</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-bonus">§11</a> · <a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>CopyLinkButton</code> / <code>ShareCopyControl</code></td>
+            <td>Копіювати / поділитися</td>
+            <td>icon+toast · labeled · mobile ShareBar</td>
+            <td>offer · expert · article</td>
+            <td><a href="FE-COMPONENTS-UA.html#car-item">§14</a> · <a href="FE-COMPONENTS-UA.html#expert-page">§28</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>ViewCount</code></td>
+            <td>Перегляди</td>
+            <td>eye + number</td>
+            <td>expert / article</td>
+            <td><a href="FE-COMPONENTS-UA.html#expert-page">§28</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1</td>
+          </tr>
+          <tr>
+            <td><code>ReadingTime</code></td>
+            <td>Час читання</td>
+            <td>clock + label</td>
+            <td>expert / article</td>
+            <td><a href="FE-COMPONENTS-UA.html#expert-page">§28</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1</td>
+          </tr>
+          <tr>
+            <td><code>LotStatusBadge</code> / <code>AuctionBrand</code></td>
+            <td>Статус лота / бренд аукціону</td>
+            <td>active · inactive TBD</td>
+            <td>VIN / lots</td>
+            <td><a href="FE-COMPONENTS-UA.html#vin-check-page">§20</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== CARDS ========== -->
+    <section id="cards">
+      <h2>3. Cards</h2>
+      <p class="lead">Картки — сімейства з варіантами layout / state, не окремі «нові» з нуля.</p>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Компонент</th><th>Варіанти</th><th>Де</th><th>Inventory</th><th>Size</th><th>Est.h</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>CarCard</code></td>
+            <td>Картка авто / лота / збереженого</td>
+            <td>home · CatalogCarCard · AuctionCard(+timer) · Saved(+badge) · horizontal/vertical</td>
+            <td>home · /cars/ · auctions · saved · related</td>
+            <td><a href="FE-COMPONENTS-UA.html#car-cards">§5</a> · <a href="FE-COMPONENTS-UA.html#cars-listing">§13</a> · <a href="FE-COMPONENTS-UA.html#auctions-listing">§15</a> · <a href="FE-COMPONENTS-UA.html#saved-page">§30</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">12–16</td>
+          </tr>
+          <tr>
+            <td><code>ClientCard</code></td>
+            <td>Картка клієнта</td>
+            <td>+ Badge · hover photo</td>
+            <td>home</td>
+            <td><a href="FE-COMPONENTS-UA.html#client-cards">§4</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">6–8</td>
+          </tr>
+          <tr>
+            <td><code>ReviewCard</code></td>
+            <td>YouTube-відгук</td>
+            <td>+ embed player</td>
+            <td>home</td>
+            <td><a href="FE-COMPONENTS-UA.html#reviews">§8</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">6–8</td>
+          </tr>
+          <tr>
+            <td><code>GoogleReviewCard</code></td>
+            <td>Текстовий Google-відгук</td>
+            <td>—</td>
+            <td>home</td>
+            <td><a href="FE-COMPONENTS-UA.html#google-reviews">§9</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>NewsCard</code></td>
+            <td>Картка новини (home)</td>
+            <td>horizontal · vertical</td>
+            <td>home</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-more">§10</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–5</td>
+          </tr>
+          <tr>
+            <td><code>ArticleCard</code></td>
+            <td>Картка статті блогу</td>
+            <td>horizontal · vertical · text-only · +author · +CTA «Детальніше»</td>
+            <td>/blog/ · expert</td>
+            <td><a href="FE-COMPONENTS-UA.html#blog-page">§27</a> · <a href="FE-COMPONENTS-UA.html#expert-page">§28</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">8–12</td>
+          </tr>
+          <tr>
+            <td><code>ExpertCard</code></td>
+            <td>Teaser експерта в слайдері блогу</td>
+            <td>avatar · badge · CTA articles</td>
+            <td>/blog/</td>
+            <td><a href="FE-COMPONENTS-UA.html#blog-page">§27</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">5–7</td>
+          </tr>
+          <tr>
+            <td><code>ValueCard</code> / <code>ExpertValueItem</code></td>
+            <td>Цінність / принцип</td>
+            <td>shadow card · centered item</td>
+            <td>about · expert</td>
+            <td><a href="FE-COMPONENTS-UA.html#about-page">§22</a> · <a href="FE-COMPONENTS-UA.html#expert-page">§28</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>GuaranteeFeatureCard</code></td>
+            <td>Картка гарантії</td>
+            <td>base · with link</td>
+            <td>guarantees</td>
+            <td><a href="FE-COMPONENTS-UA.html#guarantees-page">§23</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">3–4</td>
+          </tr>
+          <tr>
+            <td><code>VinSpecCard</code></td>
+            <td>Spec / summary / auction / accidents cards</td>
+            <td>4 layouts + shadow</td>
+            <td>VIN check</td>
+            <td><a href="FE-COMPONENTS-UA.html#vin-check-page">§20</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">6–8</td>
+          </tr>
+          <tr>
+            <td><code>HistoryStatusCard</code></td>
+            <td>Статус історії (clear / detected)</td>
+            <td>—</td>
+            <td>Korea</td>
+            <td><a href="FE-COMPONENTS-UA.html#korea-auctions">§18</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== SLIDERS ========== -->
+    <section id="sliders">
+      <h2>4. Sliders / carousels</h2>
+      <p class="lead">Спільні патерни: auto · swipe · arrows · no-dots. Item = різна картка.</p>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Компонент</th><th>Варіанти</th><th>Де</th><th>Inventory</th><th>Size</th><th>Est.h</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>SharedCardsSlider</code></td>
+            <td>Базовий слайдер карток</td>
+            <td>auto · no dots · ± arrow · mobile swipe</td>
+            <td>clients · cars · reviews · related</td>
+            <td><a href="FE-COMPONENTS-UA.html#client-cards">§4</a> · <a href="FE-COMPONENTS-UA.html#car-cards">§5</a> · <a href="FE-COMPONENTS-UA.html#reviews">§8</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">10–14</td>
+          </tr>
+          <tr>
+            <td><code>GoogleReviewsSlider</code></td>
+            <td>Слайдер Google + ReviewViewer</td>
+            <td>arrows · auto · bar-dots · fullscreen viewer</td>
+            <td>home</td>
+            <td><a href="FE-COMPONENTS-UA.html#google-reviews">§9</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">10–12</td>
+          </tr>
+          <tr>
+            <td><code>NewsSlider</code></td>
+            <td>Слайдер новин</td>
+            <td>+ SlideCounter desktop · no dots mobile</td>
+            <td>home</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-more">§10</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>HelpedUnitsTicker</code></td>
+            <td>Infinite auto ticker (logos)</td>
+            <td>no swipe · no buttons · edge fade</td>
+            <td>ZSU</td>
+            <td><a href="FE-COMPONENTS-UA.html#zsu-page">§26</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>ExpertOpinionSlider</code></td>
+            <td>Слайдер експертів</td>
+            <td>auto + swipe · no buttons/dots</td>
+            <td>/blog/</td>
+            <td><a href="FE-COMPONENTS-UA.html#blog-page">§27</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>ThanksGallery</code> + <code>GalleryLightbox</code></td>
+            <td>Галерея подяк + lightbox</td>
+            <td>auto · arrows · zoom · share · counter</td>
+            <td>ZSU</td>
+            <td><a href="FE-COMPONENTS-UA.html#zsu-page">§26</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">12–16</td>
+          </tr>
+          <tr>
+            <td><code>PopularLots</code></td>
+            <td>Горизонтальний ряд популярних лотів</td>
+            <td>3-row h-scroll · hover</td>
+            <td>auction item</td>
+            <td><a href="FE-COMPONENTS-UA.html#auction-item">§17</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== FORMS ========== -->
+    <section id="forms">
+      <h2>5. Forms / modals</h2>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Компонент</th><th>Варіанти</th><th>Де</th><th>Inventory</th><th>Size</th><th>Est.h</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>CallbackModal</code></td>
+            <td>Модалка «Замовити дзвінок»</td>
+            <td>validation · disclaimer</td>
+            <td>header CTA</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-banner">§3</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">6–8</td>
+          </tr>
+          <tr>
+            <td><code>PromoTelegramModal</code></td>
+            <td>Auto-попап → Telegram</td>
+            <td>≠ TelegramCta in-page</td>
+            <td>багато URL</td>
+            <td><a href="FE-COMPONENTS-UA.html#promo-telegram-modal">promo</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>LeadForm</code> / <code>ContactForm</code></td>
+            <td>Форми підбору / контакту</td>
+            <td>full · short fields · validation</td>
+            <td>home</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-controls">§6</a> · <a href="FE-COMPONENTS-UA.html#home-more">§10</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">8–12</td>
+          </tr>
+          <tr>
+            <td><code>BonusLeadForm</code></td>
+            <td>«Отримати бонус» / ТОП-5</td>
+            <td>desktop · mobile · <strong>один на всіх сторінках</strong></td>
+            <td>home · cars · item · auctions · 404 · …</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-bonus">§11</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">8–10</td>
+          </tr>
+          <tr>
+            <td><code>CatalogFeedbackForm</code></td>
+            <td>Форма фідбеку каталогу</td>
+            <td>split image + form</td>
+            <td>/cars/</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">5–7</td>
+          </tr>
+          <tr>
+            <td><code>TurnkeyPriceModal</code></td>
+            <td>Модалка «ціна під ключ»</td>
+            <td>desktop photo+form · mobile form-only</td>
+            <td>catalog · item · auctions</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">8–10</td>
+          </tr>
+          <tr>
+            <td><code>FormValidationAlert</code></td>
+            <td>Алерт валідації у шапці форми</td>
+            <td>—</td>
+            <td>модалки / forms</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1–2</td>
+          </tr>
+          <tr>
+            <td><code>TelegramCta</code></td>
+            <td>In-page підписка Telegram</td>
+            <td>≠ auto PromoTelegramModal</td>
+            <td>/auctions/</td>
+            <td><a href="FE-COMPONENTS-UA.html#auctions-listing">§15</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">3–4</td>
+          </tr>
+          <tr>
+            <td><code>CustomsCalculator</code></td>
+            <td>Калькулятор розмитнення</td>
+            <td>form + breakdown · desktop/mobile</td>
+            <td>/calculator/</td>
+            <td><a href="FE-COMPONENTS-UA.html#calculator-page">§19</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">12–16</td>
+          </tr>
+          <tr>
+            <td><code>VinSearch</code></td>
+            <td>Пошук по VIN</td>
+            <td>default · hover · mobile</td>
+            <td>VIN page</td>
+            <td><a href="FE-COMPONENTS-UA.html#vin-check-page">§20</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== CATALOG ========== -->
+    <section id="catalog">
+      <h2>6. Catalog / filters</h2>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Компонент</th><th>Варіанти</th><th>Де</th><th>Inventory</th><th>Size</th><th>Est.h</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>CatalogFilterAccordion</code></td>
+            <td>Фільтр-акордеон</td>
+            <td>sidebar · у MobileFiltersModal</td>
+            <td>/cars/ · /auctions/</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size xl">XL</span></td>
+            <td class="est">20–28</td>
+          </tr>
+          <tr>
+            <td><code>FilterSearchInput</code></td>
+            <td>Пошук у секції фільтра</td>
+            <td>—</td>
+            <td>filters</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>FilterCheckbox</code></td>
+            <td>Чекбокс фільтра</td>
+            <td>checked · unchecked</td>
+            <td>filters</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1–2</td>
+          </tr>
+          <tr>
+            <td><code>FilterRangeSlider</code></td>
+            <td>Dual-handle range</td>
+            <td>від—до</td>
+            <td>filters</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">6–8</td>
+          </tr>
+          <tr>
+            <td><code>FilterDatePicker</code></td>
+            <td>Datepicker у фільтрах</td>
+            <td>inputs + calendar</td>
+            <td>/auctions/</td>
+            <td><a href="FE-COMPONENTS-UA.html#auctions-listing">§15</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">8–12</td>
+          </tr>
+          <tr>
+            <td><code>FilterChip</code></td>
+            <td>Чіп активного фільтра / tip</td>
+            <td>+ «Скинути…»</td>
+            <td>/cars/ · modal</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>ResetFiltersButton</code></td>
+            <td>Скинути фільтри</td>
+            <td>sidebar · modal footer</td>
+            <td>/cars/</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1–2</td>
+          </tr>
+          <tr>
+            <td><code>MobileFiltersTrigger</code> / <code>Modal</code></td>
+            <td>Мобільні фільтри</td>
+            <td>slide-in left</td>
+            <td>/cars/</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">8–10</td>
+          </tr>
+          <tr>
+            <td><code>PageSizeSelect</code> / <code>SortSelect</code></td>
+            <td>Селекти розміру/сорту</td>
+            <td>custom trigger</td>
+            <td>/cars/ · auctions</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>ShowMoreButton</code></td>
+            <td>«Показати ще»</td>
+            <td>outline → brand hover</td>
+            <td>/cars/ · auctions</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1–2</td>
+          </tr>
+          <tr>
+            <td><code>Pagination</code></td>
+            <td>Пагінація</td>
+            <td>base · +first/last (blog)</td>
+            <td>/cars/ · /blog/ · auctions</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a> · <a href="FE-COMPONENTS-UA.html#blog-page">§27</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>ContentAccordion</code> / <code>FAQ</code></td>
+            <td>Акордеон контенту / FAQ</td>
+            <td>—</td>
+            <td>home · catalog</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-more">§10</a> · <a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>TitleText</code></td>
+            <td>Title + rich text (p/table/list)</td>
+            <td>—</td>
+            <td>/cars/ content</td>
+            <td><a href="FE-COMPONENTS-UA.html#cars-listing">§13</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">3–4</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== OFFER ========== -->
+    <section id="offer">
+      <h2>7. Offer / lot / auction</h2>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Компонент</th><th>Варіанти</th><th>Де</th><th>Inventory</th><th>Size</th><th>Est.h</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>OfferGallery</code></td>
+            <td>Галерея офера</td>
+            <td>preview · fullscreen · zoom</td>
+            <td>car item · auction item</td>
+            <td><a href="FE-COMPONENTS-UA.html#car-item">§14</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">12–16</td>
+          </tr>
+          <tr>
+            <td><code>OfferRating</code></td>
+            <td>Рейтинг зірками</td>
+            <td>empty · hover · active</td>
+            <td>car item</td>
+            <td><a href="FE-COMPONENTS-UA.html#car-item">§14</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">3–4</td>
+          </tr>
+          <tr>
+            <td><code>OfferSummary</code></td>
+            <td>Title · price · CTA · share</td>
+            <td>—</td>
+            <td>car item</td>
+            <td><a href="FE-COMPONENTS-UA.html#car-item">§14</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>SpecsList</code> / <code>SpecRow</code></td>
+            <td>Характеристики</td>
+            <td>icon · title · value</td>
+            <td>car item</td>
+            <td><a href="FE-COMPONENTS-UA.html#car-item">§14</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">3–4</td>
+          </tr>
+          <tr>
+            <td><code>EquipmentBlock</code></td>
+            <td>Комплектація</td>
+            <td>pipe list</td>
+            <td>car item</td>
+            <td><a href="FE-COMPONENTS-UA.html#car-item">§14</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>OfferDescription</code></td>
+            <td>Опис + truncate</td>
+            <td>+ DetailsToggle</td>
+            <td>car item</td>
+            <td><a href="FE-COMPONENTS-UA.html#car-item">§14</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>ReviewsTeaser</code></td>
+            <td>Тизер відгуків на item</td>
+            <td>grid · text+CTA</td>
+            <td>car / auction item</td>
+            <td><a href="FE-COMPONENTS-UA.html#car-item">§14</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–5</td>
+          </tr>
+          <tr>
+            <td><code>AuctionTimer</code></td>
+            <td>Таймер аукціону</td>
+            <td>active countdown · inactive «проведено»</td>
+            <td>auctions · cards</td>
+            <td><a href="FE-COMPONENTS-UA.html#auctions-listing">§15</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">6–8</td>
+          </tr>
+          <tr>
+            <td><code>LotBadge</code> / <code>VinCopy</code></td>
+            <td>Бейдж лота + VIN copy</td>
+            <td>masked · full · copy feedback</td>
+            <td>auction item</td>
+            <td><a href="FE-COMPONENTS-UA.html#auction-item">§17</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–5</td>
+          </tr>
+          <tr>
+            <td><code>AuctionData</code></td>
+            <td>Дані аукціону</td>
+            <td>3-col desktop · list mobile</td>
+            <td>auction item</td>
+            <td><a href="FE-COMPONENTS-UA.html#auction-item">§17</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>LotDescription</code></td>
+            <td>Опис лота</td>
+            <td>title · divider · bold keys</td>
+            <td>auction item</td>
+            <td><a href="FE-COMPONENTS-UA.html#auction-item">§17</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>ModelRange</code></td>
+            <td>Сітка посилань модельний ряд</td>
+            <td>hover red · mobile</td>
+            <td>auction item</td>
+            <td><a href="FE-COMPONENTS-UA.html#auction-item">§17</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">3–4</td>
+          </tr>
+          <tr>
+            <td><code>PriceRelevanceTooltip</code></td>
+            <td>Tooltip біля ціни (Korea)</td>
+            <td>info popover</td>
+            <td>Korea</td>
+            <td><a href="FE-COMPONENTS-UA.html#korea-auctions">§18</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>BodyConditionReport</code></td>
+            <td>Схема стану кузова</td>
+            <td>легенда · Encar note</td>
+            <td>Korea</td>
+            <td><a href="FE-COMPONENTS-UA.html#korea-auctions">§18</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">10–14</td>
+          </tr>
+          <tr>
+            <td><code>HistoryOverview</code></td>
+            <td>Огляд історії</td>
+            <td>+ StatusCard</td>
+            <td>Korea</td>
+            <td><a href="FE-COMPONENTS-UA.html#korea-auctions">§18</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>InsuranceHistory</code></td>
+            <td>Таблиця страхування</td>
+            <td>empty · filled · mobile h-scroll</td>
+            <td>Korea</td>
+            <td><a href="FE-COMPONENTS-UA.html#korea-auctions">§18</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">5–7</td>
+          </tr>
+          <tr>
+            <td><code>OwnersInfo</code> / <code>MileageInfo</code></td>
+            <td>Власники / пробіг</td>
+            <td>tables · mobile h-scroll</td>
+            <td>Korea</td>
+            <td><a href="FE-COMPONENTS-UA.html#korea-auctions">§18</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>SalesHistory</code></td>
+            <td>Історія продажів</td>
+            <td>desktop · mobile h-scroll</td>
+            <td>VIN</td>
+            <td><a href="FE-COMPONENTS-UA.html#vin-check-page">§20</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== CONTENT ========== -->
+    <section id="content">
+      <h2>8. Content / blog / expert</h2>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Компонент</th><th>Варіанти</th><th>Де</th><th>Inventory</th><th>Size</th><th>Est.h</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>BlogCategoryNav</code></td>
+            <td>Навігація категорій блогу</td>
+            <td>desktop row · mobile wrap · active red</td>
+            <td>/blog/</td>
+            <td><a href="FE-COMPONENTS-UA.html#blog-page">§27</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">3–4</td>
+          </tr>
+          <tr>
+            <td><code>ExpertProfileHero</code></td>
+            <td>Hero профілю експерта</td>
+            <td>≠ ExpertCard · quote · socials</td>
+            <td>/experts/{slug}/</td>
+            <td><a href="FE-COMPONENTS-UA.html#expert-page">§28</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">5–7</td>
+          </tr>
+          <tr>
+            <td><code>ArticleBody</code></td>
+            <td>Rich text статті</td>
+            <td>title · date · bold · subheads · <strong>images</strong></td>
+            <td>expert · blog post</td>
+            <td><a href="FE-COMPONENTS-UA.html#expert-page">§28</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">8–12</td>
+          </tr>
+          <tr>
+            <td><code>BulletListSection</code></td>
+            <td>Title + red-dot list</td>
+            <td>—</td>
+            <td>expert</td>
+            <td><a href="FE-COMPONENTS-UA.html#expert-page">§28</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>TitleDescription</code></td>
+            <td>Section intro title + text</td>
+            <td>—</td>
+            <td>expert · pages</td>
+            <td><a href="FE-COMPONENTS-UA.html#expert-page">§28</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1–2</td>
+          </tr>
+          <tr>
+            <td><code>ShareBar</code></td>
+            <td>Mobile social share row</td>
+            <td>IG · FB · TG · Viber</td>
+            <td>expert / article</td>
+            <td><a href="FE-COMPONENTS-UA.html#expert-page">§28</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== PAGES ========== -->
+    <section id="pages">
+      <h2>9. Page sections</h2>
+      <p class="lead">Секції, прив’язані до конкретної сторінки (або рідко reuse).</p>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Компонент</th><th>Варіанти</th><th>Де</th><th>Inventory</th><th>Size</th><th>Est.h</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>InformativeBanner</code></td>
+            <td>Hero / info banner slider</td>
+            <td>home · report hero variant</td>
+            <td>home · zvit</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-banner">§3</a> · <a href="FE-COMPONENTS-UA.html#history-report-page">§21</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">10–14</td>
+          </tr>
+          <tr>
+            <td><code>CatalogPromo</code></td>
+            <td>Промо каталогу (фото+title+CTA)</td>
+            <td>desktop · mobile</td>
+            <td>home</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-catalog-promo">promo</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–5</td>
+          </tr>
+          <tr>
+            <td><code>StepsProgress</code></td>
+            <td>Етапи купівлі + progress rail</td>
+            <td>+ StepDescription</td>
+            <td>home</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-steps">§7</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">6–8</td>
+          </tr>
+          <tr>
+            <td><code>InfoBlock</code></td>
+            <td>Текст + CTA + image</td>
+            <td>—</td>
+            <td>home</td>
+            <td><a href="FE-COMPONENTS-UA.html#home-more">§10</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">3–4</td>
+          </tr>
+          <tr>
+            <td><code>NotFoundContent</code></td>
+            <td>404 контент</td>
+            <td>+ HomeButton</td>
+            <td>404</td>
+            <td><a href="FE-COMPONENTS-UA.html#not-found-page">§16</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">3–4</td>
+          </tr>
+          <tr>
+            <td><code>BannerAnchor</code></td>
+            <td>Scroll-down anchor на hero</td>
+            <td>—</td>
+            <td>zvit</td>
+            <td><a href="FE-COMPONENTS-UA.html#history-report-page">§21</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">1–2</td>
+          </tr>
+          <tr>
+            <td><code>DepartmentsSection</code></td>
+            <td>Відділи компанії</td>
+            <td>desktop tabs · mobile accordion</td>
+            <td>about</td>
+            <td><a href="FE-COMPONENTS-UA.html#about-page">§22</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">10–12</td>
+          </tr>
+          <tr>
+            <td><code>JoinTeamCta</code></td>
+            <td>CTA вакансій</td>
+            <td>no photo on mobile</td>
+            <td>about</td>
+            <td><a href="FE-COMPONENTS-UA.html#about-page">§22</a></td>
+            <td><span class="size">S</span></td>
+            <td class="est">2–3</td>
+          </tr>
+          <tr>
+            <td><code>DeliveryStep</code></td>
+            <td>Крок доставки</td>
+            <td>text · with image</td>
+            <td>delivery</td>
+            <td><a href="FE-COMPONENTS-UA.html#delivery-page">§24</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">3–4</td>
+          </tr>
+          <tr>
+            <td><code>AuctionPartnersCard</code></td>
+            <td>Партнери аукціонів</td>
+            <td>desktop · mobile</td>
+            <td>delivery</td>
+            <td><a href="FE-COMPONENTS-UA.html#delivery-page">§24</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">3–4</td>
+          </tr>
+          <tr>
+            <td><code>PaymentTimeline</code></td>
+            <td>Таймлайн оплати</td>
+            <td>horizontal · vertical · appear anim</td>
+            <td>/oplata/</td>
+            <td><a href="FE-COMPONENTS-UA.html#payment-page">§25</a></td>
+            <td><span class="size l">L</span></td>
+            <td class="est">8–12</td>
+          </tr>
+          <tr>
+            <td><code>DonationStats</code></td>
+            <td>Статистика донатів ЗСУ</td>
+            <td>desktop · mobile</td>
+            <td>ZSU</td>
+            <td><a href="FE-COMPONENTS-UA.html#zsu-page">§26</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">5–7</td>
+          </tr>
+          <tr>
+            <td><code>ThanksVideoCard</code></td>
+            <td>Відео-подяка (≠ home player)</td>
+            <td>idle · playing</td>
+            <td>ZSU</td>
+            <td><a href="FE-COMPONENTS-UA.html#zsu-page">§26</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">6–8</td>
+          </tr>
+          <tr>
+            <td><code>OfficeMap</code></td>
+            <td>Google Maps embed + info card</td>
+            <td>desktop · mobile</td>
+            <td>/contacts/</td>
+            <td><a href="FE-COMPONENTS-UA.html#contacts-page">§29</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">4–6</td>
+          </tr>
+          <tr>
+            <td><code>ContactsInfo</code></td>
+            <td>«Наші контакти»</td>
+            <td>2×2 grid · mobile stack · socials</td>
+            <td>/contacts/</td>
+            <td><a href="FE-COMPONENTS-UA.html#contacts-page">§29</a></td>
+            <td><span class="size m">M</span></td>
+            <td class="est">3–4</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== META ========== -->
+    <section id="meta">
+      <h2>10. Як читати естімейти</h2>
+      <p class="lead">Чернетка для roadmap. Не фінальний контракт.</p>
+      <ul class="legend">
+        <li><strong>Не множити</strong> на кількість сторінок: BonusLeadForm = один рядок, integration в layout ≈ 0.5–1 год / сторінка.</li>
+        <li><strong>Варіант</strong> (saved / blog pagination first-last) — частка від базової, уже закладена в діапазон.</li>
+        <li><strong>Buffer</strong> на design tokens, a11y, i18n keys, QA: +15–25% зверху суми.</li>
+        <li>Page inventory зі скрінами: <a href="FE-COMPONENTS-UA.html">FE-COMPONENTS-UA.html</a> (якорі не чіпаємо).</li>
+      </ul>
+      <div class="note">
+        Наступний крок після рев’ю реєстру: зафіксувати mid-point годин у роадмапі
+        (Shared shell → Listing → Item → Content → Niche).
+      </div>
+    </section>
+
+    <footer>
+      <a href="index.html">роадмап</a>
+      · <a href="FE-COMPONENTS-UA.html">page inventory</a>
+      · <code>COMPONENT-REGISTRY-UA.html</code>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var rows = document.querySelectorAll("table tbody tr");
+      var s = 0, ml = 0, estMin = 0, estMax = 0;
+      rows.forEach(function (tr) {
+        var sizeEl = tr.querySelector(".size");
+        var estEl = tr.querySelector(".est");
+        if (!sizeEl || !estEl) return;
+        var cls = sizeEl.className;
+        if (cls.indexOf(" m") >= 0 || cls.indexOf(" l") >= 0 || cls.indexOf(" xl") >= 0) ml++;
+        else s++;
+        var m = estEl.textContent.match(/(\d+)\s*[–-]\s*(\d+)/);
+        if (m) { estMin += +m[1]; estMax += +m[2]; }
+      });
+      var unique = s + ml;
+      var elU = document.getElementById("stat-unique");
+      var elS = document.getElementById("stat-s");
+      var elML = document.getElementById("stat-ml");
+      var elE = document.getElementById("stat-est");
+      if (elU) elU.textContent = unique;
+      if (elS) elS.textContent = s;
+      if (elML) elML.textContent = ml;
+      if (elE) elE.textContent = estMin + "–" + estMax;
+    })();
+  </script>
+</body>
+</html>
