@@ -1995,6 +1995,51 @@
         <span class="chip soft">Reuse: §11 Bonus</span>
       </div>
 
+      <h3>13.46. TurnkeyPriceModal — desktop</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/cars/45-turnkey-price-modal-desktop.jpg" alt="Модалка ціна під ключ десктоп" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 45 · відкривається з CTA «Дізнатися ціну під ключ» на CatalogCarCard · фото лота зліва · форма справа · close ✕</div>
+      </div>
+      <div class="box brand">
+        <h4>TurnkeyPriceModal</h4>
+        <ul>
+          <li>Тригер: primary кнопка на картці авто (§13.4 / §5)</li>
+          <li>Desktop: split — <strong>фото з картки</strong> | форма (імʼя · телефон · disclaimer · «Отримати прорахунок»)</li>
+          <li>Рядок «Авто: {TITLE}» з контексту лота</li>
+          <li>Close ✕ · overlay</li>
+        </ul>
+      </div>
+
+      <h3>13.47. FormAlert — desktop (валідація)</h3>
+      <div class="shot">
+        <img src="component-shots/cars/46-form-alert-desktop.png" alt="Кастомний алерт помилки форми десктоп" />
+        <div class="cap">Скрін 46 · при submit з порожніми полями · кастомний алерт у зоні шапки · «Виправте помилки…»</div>
+      </div>
+      <div class="box ok">
+        <h4>FormValidationAlert</h4>
+        <ul>
+          <li>Не native browser alert — окремий UI-компонент</li>
+          <li>Показується <strong>у шапці / зверху viewport</strong> після кліку «Отримати прорахунок» при незаповнених required</li>
+          <li>Білий фон · червоний текст · легка тінь / нижня червона риска</li>
+        </ul>
+      </div>
+
+      <h3>13.48. TurnkeyPriceModal — mobile (без фото)</h3>
+      <div class="shot">
+        <img src="component-shots/cars/47-turnkey-price-modal-mobile.png" alt="Модалка ціна під ключ мобайл" />
+        <div class="cap">Скрін 47 · mobile: <strong>немає картинки</strong> · лише форма + «Авто: …» · close ✕ · той самий CTA</div>
+      </div>
+      <div class="box">
+        <h4>Mobile layout</h4>
+        <p>На мобайлі колонка з фото лота прихована — лишається formal panel. Контекст авто — текстовим рядком.</p>
+      </div>
+
+      <h3>13.49. FormAlert — mobile</h3>
+      <div class="shot">
+        <img src="component-shots/cars/48-form-alert-mobile.png" alt="Кастомний алерт помилки форми мобайл" />
+        <div class="cap">Скрін 48 · той самий FormValidationAlert · поведінка <strong>ідентична</strong> desktop</div>
+      </div>
+
       <h3>Підсумок</h3>
       <table>
         <thead>
@@ -2108,6 +2153,18 @@
             <td>§2 / §12</td>
             <td>§2 / §12</td>
             <td>Повторюються на /cars/</td>
+          </tr>
+          <tr>
+            <td>TurnkeyPriceModal</td>
+            <td>Фото + форма</td>
+            <td>Лише форма (без фото)</td>
+            <td>З CTA картки «ціна під ключ»</td>
+          </tr>
+          <tr>
+            <td>FormValidationAlert</td>
+            <td>У шапці</td>
+            <td>= Desktop</td>
+            <td>Submit з порожніми полями</td>
           </tr>
         </tbody>
       </table>
