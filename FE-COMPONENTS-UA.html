@@ -130,6 +130,7 @@
       <strong>Зміст</strong>
       <ol>
         <li><a href="#reuse">Спільні / перевикористовувані</a></li>
+        <li><a href="#promo-telegram-modal">Promo modal → Telegram</a> (авто-попап на сторінках)</li>
         <li><a href="#home-header">Головна · шапка й меню</a> — <a href="https://www.grandcar.ua/">grandcar.ua/</a></li>
         <li><a href="#home-banner">Головна · інформативний банер</a> (+ кнопка, обране, модалка дзвінка)</li>
         <li><a href="#home-catalog-promo">Головна · промо каталогу</a> (фото · title · CTA) — пропущений блок</li>
@@ -337,6 +338,47 @@
         </tbody>
       </table>
     </section>
+
+    <section id="promo-telegram-modal">
+      <h2>Спільне · PromoTelegramModal (авто-попап)</h2>
+      <p class="lead">
+        Модалка сама зʼявляється; може зустрічатись на <strong>кожній новій сторінці</strong>.
+        CTA «Отримати» веде в <strong>Telegram-бота</strong>.
+      </p>
+      <div class="meta">
+        <span class="chip">Усі / нові сторінки</span>
+        <span class="chip soft">Блок: PromoTelegramModal</span>
+        <span class="chip red">Mobile (+ desktop той самий патерн)</span>
+      </div>
+
+      <h3>Mobile</h3>
+      <div class="shot">
+        <img src="component-shots/promo-modal/01-mobile.jpg" alt="Промо-модалка Telegram мобайл" />
+        <div class="cap">Скрін (моб) · green header + close ✕ · headline «ДОБІРКА АВТО ЗА ПАРАМЕТРАМИ» · badge «У 3 КЛІКИ» · trust line · CTA «Отримати»</div>
+      </div>
+      <div class="box brand">
+        <h4>Поведінка</h4>
+        <ul>
+          <li><strong>Auto-open</strong> — спливає сама (не з кнопки сайту); частота / умови показу — окремо (session / once per page visit)</li>
+          <li>Close ✕ або клік по overlay — закриває</li>
+          <li><strong>«Отримати»</strong> → зовнішнє посилання на Telegram bot (target _blank / deep link)</li>
+          <li>Може зʼявлятись на home, /cars/, /cars/{slug}/ тощо — <strong>один shared компонент</strong></li>
+        </ul>
+      </div>
+      <div class="box ok">
+        <h4>Контент (з скріна)</h4>
+        <ul>
+          <li>Заголовок: добірка авто за параметрами</li>
+          <li>Badge: у 3 кліки</li>
+          <li>Trust: понад 7 000 перевірених авто</li>
+        </ul>
+      </div>
+      <div class="note">
+        <div class="label">Desktop</div>
+        <p>Патерн той самий (auto-open · close · CTA → Telegram). Окремий desktop-скрін додамо, коли буде файл.</p>
+      </div>
+    </section>
+
 <section id="home-header">
       <h2>2. Головна · шапка й меню</h2>
       <p class="lead">
