@@ -150,6 +150,7 @@
         <li><a href="#auction-item">Лот /auctions/{id}/</a> — LotVin · AuctionData · LotDescription · ModelRange · PopularLots</li>
         <li><a href="#korea-auctions">Корейські аукціони</a> — PriceTooltip · BodyCondition · History · Insurance · Owners/Mileage</li>
         <li><a href="#calculator-page">Калькулятор</a> — CustomsCalculator mobile/desktop</li>
+        <li><a href="#vin-check-page">Перевірка VIN</a> — VinSearch · Status · SpecCards · SalesHistory</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -3207,7 +3208,139 @@
       </table>
       <div class="note">
         <div class="label">Далі</div>
-        <p>VIN / інші URL — наступними секціями за скрінами.</p>
+        <p>Перевірка VIN — <a href="#vin-check-page">§20</a>. Інші URL — далі за скрінами.</p>
+      </div>
+    </section>
+
+
+    <section id="vin-check-page">
+      <h2>20. Перевірка по VIN · /perevirka-po-vin-kodu/</h2>
+      <p class="lead">
+        Сторінка перевірки авто за VIN / номером лота
+        (приклад <code>?vin=1GB0WLE71NF249809</code>).
+        Пошук зверху · статус лота · картки характеристик · історія продажів.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /perevirka-po-vin-kodu/</span>
+        <span class="chip soft">Блок: VinCheckPage</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>20.1. VinSearch — default</h3>
+      <div class="shot">
+        <img src="component-shots/vin-check/01-vin-search-default.jpg" alt="Пошук VIN default" />
+        <div class="cap">Скрін 1 · title · input placeholder · кнопка «Шукати» + icon (red)</div>
+      </div>
+
+      <h3>20.2. VinSearch — hover / focus</h3>
+      <div class="shot">
+        <img src="component-shots/vin-check/02-vin-search-hover.jpg" alt="Пошук VIN hover" />
+        <div class="cap">Скрін 2 · hover/focus · кнопка dark navy · cursor у полі</div>
+      </div>
+
+      <h3>20.3. VinSearch — mobile</h3>
+      <div class="shot" style="max-width:400px">
+        <img src="component-shots/vin-check/03-vin-search-mobile.png" alt="Пошук VIN mobile" style="max-width:400px" />
+        <div class="cap">Скрін 3 · той самий блок · вужча ширина · red CTA</div>
+      </div>
+      <div class="box ok">
+        <h4>VinSearch</h4>
+        <ul>
+          <li>Title «Перевірити інше авто зі США»</li>
+          <li>Input «Введіть код або номер лота» + submit «Шукати»</li>
+          <li>States: default (red) · hover/focus (dark)</li>
+        </ul>
+      </div>
+
+      <h3>20.4. LotStatusBadge + AuctionBrand</h3>
+      <div class="shot">
+        <img src="component-shots/vin-check/04-lot-status-auction.png" alt="Статус Активний і Copart" />
+        <div class="cap">Скрін 4 · badge «Активний» (green) · логотип аукціону (Copart)</div>
+      </div>
+      <div class="box brand">
+        <h4>LotStatusBadge</h4>
+        <ul>
+          <li><strong>active</strong> — green «Активний» (на скріні)</li>
+          <li><strong>inactive</strong> — очікуваний варіант «Неактивний» (окремий скрін не додавався)</li>
+          <li>Поруч <strong>AuctionBrand</strong> (Copart / IAAI / …)</li>
+        </ul>
+      </div>
+
+      <h3>20.5. SpecCard — LotSummary</h3>
+      <div class="shot" style="max-width:480px">
+        <img src="component-shots/vin-check/05-lot-summary-card.jpg" alt="Картка лота summary" style="max-width:480px" />
+        <div class="cap">Скрін 5 · shadow card · key|value rows (лот, VIN, дата, продавець, оцінки)</div>
+      </div>
+
+      <h3>20.6. SpecCard — Auction</h3>
+      <div class="shot" style="max-width:480px">
+        <img src="component-shots/vin-check/06-auction-card.jpg" alt="Картка Аукціон" style="max-width:480px" />
+        <div class="cap">Скрін 6 · title «Аукціон» · дата · локація · документи</div>
+      </div>
+
+      <h3>20.7. SpecCard — Accidents</h3>
+      <div class="shot" style="max-width:480px">
+        <img src="component-shots/vin-check/07-accidents-card.jpg" alt="Картка Аварії" style="max-width:480px" />
+        <div class="cap">Скрін 7 · title «Аварії» · шкода · пошкодження · стан · ключі</div>
+      </div>
+
+      <h3>20.8. SpecCard — VehicleSpecs</h3>
+      <div class="shot" style="max-width:560px">
+        <img src="component-shots/vin-check/08-vehicle-specs-card.jpg" alt="Характеристики авто" style="max-width:560px" />
+        <div class="cap">Скрін 8 · «Характеристики авто» · 2 col · icon + label + value</div>
+      </div>
+      <div class="box ok">
+        <h4>VinSpecCard (нова стилізація)</h4>
+        <p>White card + soft shadow · title optional · label left / value right (або icon-grid для specs).</p>
+      </div>
+
+      <h3>20.9. SalesHistory — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/vin-check/09-sales-history-desktop.jpg" alt="Історія продажів desktop" />
+        <div class="cap">Скрін 9 · «Історія продажів» · колонки лот · аукціон · дата · ставка · статус</div>
+      </div>
+
+      <h3>20.10. SalesHistory — mobile</h3>
+      <div class="shot" style="max-width:400px">
+        <img src="component-shots/vin-check/10-sales-history-mobile.png" alt="Історія продажів mobile" style="max-width:400px" />
+        <div class="cap">Скрін 10 · та сама таблиця · <strong>horizontal scroll</strong></div>
+      </div>
+      <div class="box ok">
+        <h4>SalesHistory</h4>
+        <p>Table card · desktop full width · mobile overflow-x scroll.</p>
+      </div>
+
+      <h3>Підсумок · VIN check</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>VinSearch</td>
+            <td><strong>Нове</strong></td>
+            <td>default · hover · mobile</td>
+          </tr>
+          <tr>
+            <td>LotStatusBadge + AuctionBrand</td>
+            <td><strong>Нове</strong></td>
+            <td>active (inactive — TBD shot)</td>
+          </tr>
+          <tr>
+            <td>VinSpecCard (summary / auction / accidents / specs)</td>
+            <td><strong>Нове</strong></td>
+            <td>нова компоновка + shadow cards</td>
+          </tr>
+          <tr>
+            <td>SalesHistory</td>
+            <td><strong>Нове</strong></td>
+            <td>desktop · mobile h-scroll</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Інші URL / сторінки — наступними секціями за скрінами.</p>
       </div>
     </section>
 
