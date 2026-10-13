@@ -145,6 +145,7 @@
         <li><a href="#site-footer">Футер</a> (desktop + mobile)</li>
         <li><a href="#cars-listing">Каталог /cars/</a> — фільтри · контент · форми · shared header/footer</li>
         <li><a href="#car-item">Сторінка авто /cars/{slug}/</a> — gallery · rating · specs · комплектація · опис</li>
+        <li><a href="#auctions-listing">Аукціони /auctions/</a> — datepicker · timer · Telegram CTA · reuse cards</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -2541,6 +2542,170 @@
             <td>Header · Footer · Bonus</td>
             <td>§2 / §12 / §11</td>
             <td>Як на /cars/</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Аукціони — <a href="#auctions-listing">§15</a>. Калькулятор / VIN — далі за скрінами.</p>
+      </div>
+    </section>
+
+
+    <section id="auctions-listing">
+      <h2>15. Аукціони · /auctions/</h2>
+      <p class="lead">
+        Лістинг аукціонних лотів:
+        <a href="https://www.grandcar.ua/auctions/" target="_blank" rel="noopener noreferrer">grandcar.ua/auctions/</a>.
+        Багато блоків = reuse з /cars/ (§13); нові — DatePicker, AuctionTimer, TelegramCta.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /auctions/</span>
+        <span class="chip soft">Блок: AuctionsListing</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <div class="box brand">
+        <h4>Reuse з /cars/ і shared</h4>
+        <ul>
+          <li><strong>CatalogFilterAccordion</strong> — як §13.12+ (той самий акордеон фільтрів)</li>
+          <li><strong>PageSizeSelect / SortSelect</strong> — як §13.3</li>
+          <li><strong>ShowMoreButton + Pagination</strong> — як §13.6–13.11</li>
+          <li><strong>TurnkeyPriceModal</strong> — як §13.46+</li>
+          <li><strong>BonusLeadForm</strong> — §11 / §13.44</li>
+          <li><strong>Header / Footer</strong> — §2 / §12</li>
+        </ul>
+      </div>
+
+      <h3>15.1. Breadcrumb</h3>
+      <div class="shot">
+        <img src="component-shots/auctions/01-breadcrumb.png" alt="Breadcrumb аукціони" />
+        <div class="cap">Скрін 1 · Головна / Аукціони · той самий Breadcrumb (§13.1)</div>
+      </div>
+
+      <h3>15.2. Filter tips (активні фільтри)</h3>
+      <div class="shot">
+        <img src="component-shots/auctions/02-filter-tips.png" alt="Tips фільтрів аукціони" />
+        <div class="cap">Скрін 2 · «Скинути фільтри» першою · FilterChip з датами + ✕ · як §13.22–13.23</div>
+      </div>
+
+      <h3>15.3. DatePicker inputs (у фільтр-акордеоні)</h3>
+      <div class="shot">
+        <img src="component-shots/auctions/03-datepicker-inputs.png" alt="Поля DatePicker" />
+        <div class="cap">Скрін 3 · два поля від—до (DD.MM.YYYY) · іконка календаря · у секції акордеону</div>
+      </div>
+
+      <h3>15.4. DatePicker — відкритий календар</h3>
+      <div class="shot">
+        <img src="component-shots/auctions/04-datepicker-open.png" alt="DatePicker відкритий" />
+        <div class="cap">Скрін 4 · popup calendar · місяць/рік · сітка днів · selected / hover · «Удалить» · «Сегодня»</div>
+      </div>
+      <div class="box ok">
+        <h4>FilterDatePicker (нове для /auctions/)</h4>
+        <ul>
+          <li>Два інпути range (from / to) + calendar popover</li>
+          <li>Значення ↔ URL / tips chips (як інші фільтри)</li>
+          <li>Акордеон фільтрів — той самий CatalogFilterAccordion + ця секція дат</li>
+        </ul>
+      </div>
+
+      <h3>15.5. TelegramCta — підписка на канал</h3>
+      <div class="shot">
+        <img src="component-shots/auctions/05-telegram-cta.png" alt="Блок переходу в Telegram" />
+        <div class="cap">Скрін 5 · title · blue card Telegram · «Підписатися» → канал/бот</div>
+      </div>
+      <div class="box brand">
+        <h4>TelegramCta</h4>
+        <p>Окремо від PromoTelegramModal (авто-попап). Тут — in-page блок переходу на Telegram.</p>
+      </div>
+
+      <h3>15.6. Page size + sort</h3>
+      <div class="shot">
+        <img src="component-shots/auctions/06-page-size-sort.png" alt="На сторінці і сортування" />
+        <div class="cap">Скрін 6 · <strong>ідентично</strong> /cars/ (§13.3): «На сторінці:» + SortSelect</div>
+      </div>
+
+      <h3>15.7. AuctionCard</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/auctions/07-auction-card.png" alt="Картка лота аукціону" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 7 · як CatalogCarCard (§13.4) + SaveButton · CTA · Детальніше · <strong>+ AuctionTimer</strong></div>
+      </div>
+      <div class="box">
+        <h4>Vs CarCard / CatalogCarCard</h4>
+        <ul>
+          <li>Базовий layout той самий (фото | контент · спеки · 2 CTA)</li>
+          <li>Ціна може бути «під ключ — за запитом»</li>
+          <li>Додано <strong>AuctionTimer</strong> під спеками</li>
+        </ul>
+      </div>
+
+      <h3>15.8. AuctionTimer</h3>
+      <div class="shot">
+        <img src="component-shots/auctions/08-auction-timer.png" alt="Таймер аукціону" />
+        <div class="cap">Скрін 8 · іконка годинника · DD:HH:MM:SS countdown</div>
+      </div>
+      <div class="box ok">
+        <h4>AuctionTimer</h4>
+        <p>Окремий компонент у картці; оновлює countdown до кінця лота.</p>
+      </div>
+
+      <h3>15.9. TurnkeyPriceModal</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/auctions/09-turnkey-modal.jpg" alt="Модалка прорахунку з аукціону" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 9 · та сама модалка §13.46 · фото лота + форма · з CTA картки</div>
+      </div>
+
+      <h3>15.10. Show more + Pagination</h3>
+      <div class="shot">
+        <img src="component-shots/auctions/10-show-more-pagination.png" alt="Показати ще і пагінація" />
+        <div class="cap">Скрін 10 · ShowMoreButton + Pagination · як §13.6–13.11</div>
+      </div>
+
+      <h3>15.11. BonusLeadForm + Footer</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/auctions/11-bonus-form.jpg" alt="Бонус-форма на аукціонах" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 11 · BonusLeadForm як §11 · нижче SiteFooter §12</div>
+      </div>
+
+      <h3>Підсумок · /auctions/</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Breadcrumb / Tips / Filter accordion</td>
+            <td>Reuse §13</td>
+            <td>+ DatePicker у фільтрах</td>
+          </tr>
+          <tr>
+            <td>FilterDatePicker</td>
+            <td><strong>Нове</strong></td>
+            <td>Inputs + open calendar</td>
+          </tr>
+          <tr>
+            <td>TelegramCta</td>
+            <td><strong>Нове</strong></td>
+            <td>In-page підписка (≠ auto modal)</td>
+          </tr>
+          <tr>
+            <td>PageSize / Sort / ShowMore / Pagination</td>
+            <td>Reuse §13</td>
+            <td>Як на /cars/</td>
+          </tr>
+          <tr>
+            <td>AuctionCard</td>
+            <td>CarCard + timer</td>
+            <td>Layout як каталог</td>
+          </tr>
+          <tr>
+            <td>AuctionTimer</td>
+            <td><strong>Нове</strong></td>
+            <td>DD:HH:MM:SS</td>
+          </tr>
+          <tr>
+            <td>TurnkeyPriceModal / Bonus / Header / Footer</td>
+            <td>Reuse</td>
+            <td>§13 / §11 / §2 / §12</td>
           </tr>
         </tbody>
       </table>
