@@ -141,7 +141,7 @@
         <li><a href="#home-more">Головна · коротка форма · FAQ · інфоблок · новини</a></li>
         <li><a href="#home-bonus">Головна · ExpandText · банер бонусу</a></li>
         <li><a href="#site-footer">Футер</a> (desktop + mobile)</li>
-        <li><a href="#cars-listing">Каталог /cars/</a> — breadcrumb · селекти · картка · показати ще · пагінація · фільтр-акордеон</li>
+        <li><a href="#cars-listing">Каталог /cars/</a> — breadcrumb · селекти · картка · пагінація · фільтри · моб. модалка · чіпи</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -1669,14 +1669,115 @@
         <div class="cap">Скрін 14 · стан expanded · той самий лінк, текст «Показати менше»</div>
       </div>
 
-      <h3>13.15. Фільтр-акордеон — mobile</h3>
+      <h3>13.15. Фільтр-акордеон — mobile (вміст)</h3>
       <div class="shot">
         <img src="component-shots/cars/15-filter-accordion-mobile.png" alt="Фільтр-акордеон каталогу мобайл" />
-        <div class="cap">Скрін 15 (= скрін 4 у цій серії) · <strong>ідентичний</strong> desktop: той самий вид і поведінка (акордеон + більше/менше)</div>
+        <div class="cap">Скрін 15 · вміст акордеону <strong>той самий</strong>, що desktop · на мобайлі відкривається в модалці (§13.19+)</div>
       </div>
       <div class="box">
-        <h4>Desktop = Mobile</h4>
-        <p>Один CatalogFilterAccordion · без окремого mobile-layout. Відкриття секцій і toggle «більше/менше» — як на десктопі.</p>
+        <h4>Вміст = Desktop</h4>
+        <p>Секції / checkbox / «більше·менше» — як на десктопі. Оболонка мобайлу — кнопка «Фільтри» + fullscreen-модалка (§13.19–13.21).</p>
+      </div>
+
+      <h3>13.16. Інші секції акордеону + «Скинути фільтри» (desktop)</h3>
+      <div class="shot">
+        <img src="component-shots/cars/16-filter-accordion-more-desktop.png" alt="Додаткові секції фільтрів і кнопка скинути" />
+        <div class="cap">Скрін 16 · Стан авто · Тип кузову · Привід · Трансмісія (відкрита) · Тип палива · Обʼєм · ResetFiltersButton знизу</div>
+      </div>
+      <div class="box brand">
+        <h4>Синхронізація з URL</h4>
+        <ul>
+          <li>Активні фільтри <strong>додаються в URL</strong> (query) і знімаються з URL при знятті опції</li>
+          <li>UI (чекбокси, range тощо) ↔ URL — одне джерело стану</li>
+          <li>«Скинути фільтри» очищає і URL, і всі активні контролы (чекбокси / range / чіпи)</li>
+        </ul>
+      </div>
+
+      <h3>13.17. ResetFiltersButton — default (desktop)</h3>
+      <div class="shot">
+        <img src="component-shots/cars/17-reset-filters-default.png" alt="Кнопка Скинути фільтри default" />
+        <div class="cap">Скрін 17 · default: темна заливка · білий текст «Скинути фільтри»</div>
+      </div>
+
+      <h3>13.18. ResetFiltersButton — hover (desktop)</h3>
+      <div class="shot">
+        <img src="component-shots/cars/18-reset-filters-hover.png" alt="Кнопка Скинути фільтри hover" />
+        <div class="cap">Скрін 18 · hover: білий фон · чорна рамка · чорний текст</div>
+      </div>
+      <div class="box ok">
+        <h4>ResetFiltersButton</h4>
+        <p>Повний скид: query URL → порожній від фільтрів · усі чекбокси/range/чіпи → inactive.</p>
+      </div>
+
+      <h3>13.19. Мобайл — кнопка відкриття фільтрів</h3>
+      <div class="shot">
+        <img src="component-shots/cars/19-mobile-filters-trigger.png" alt="Кнопка Фільтри мобайл" />
+        <div class="cap">Скрін 19 · тригер «Фільтри» + іконка funnel · відкриває модалку</div>
+      </div>
+      <div class="box">
+        <h4>MobileFiltersTrigger</h4>
+        <p>На мобайлі сайдбар-акордеон не в потоці сторінки — зʼявляється після тапу на цю кнопку.</p>
+      </div>
+
+      <h3>13.20. Мобайл — модалка на весь екран (зліва)</h3>
+      <div class="shot">
+        <img src="component-shots/cars/20-mobile-filters-modal.png" alt="Модалка фільтрів мобайл" />
+        <div class="cap">Скрін 20 · fullscreen · виїзд зліва · title «Фільтри» · close ✕ · CatalogFilterAccordion усередині</div>
+      </div>
+      <div class="box brand">
+        <h4>MobileFiltersModal</h4>
+        <ul>
+          <li>Повноекранна панель · анімація зліва</li>
+          <li>Header: «Фільтри» + Close</li>
+          <li>Body: той самий акордеон секцій (Марка…Обʼєм двигуна)</li>
+          <li>Footer actions — §13.21</li>
+        </ul>
+      </div>
+
+      <h3>13.21. Мобайл — низ модалки: скинути + Показати</h3>
+      <div class="shot">
+        <img src="component-shots/cars/21-mobile-modal-actions.png" alt="Кнопки скинути і показати в модалці" />
+        <div class="cap">Скрін 21 · «Скинути фільтри» (text) · «Показати» (primary red)</div>
+      </div>
+      <div class="box">
+        <h4>Mobile filter actions</h4>
+        <ul>
+          <li><strong>Скинути фільтри</strong> — той самий повний скид (URL + UI), що desktop Reset</li>
+          <li><strong>Показати</strong> — застосувати / закрити модалку й показати результати лістингу</li>
+        </ul>
+      </div>
+
+      <h3>13.22. Active filter chips (tips) — mobile</h3>
+      <div class="shot">
+        <img src="component-shots/cars/22-filter-chips-mobile.png" alt="Чіпи активних фільтрів мобайл" />
+        <div class="cap">Скрін 22 · темні чіпи з ✕ · тап на ✕ знімає цей фільтр (і з UI, і з URL)</div>
+      </div>
+      <div class="box ok">
+        <h4>FilterChip</h4>
+        <p>Один чіп = одне активне значення/діапазон. ✕ → remove цього фільтра. Не плутати з FooterTagChip (§12).</p>
+      </div>
+
+      <h3>13.23. Active filter chips — desktop (+ «Скинути» першою)</h3>
+      <div class="shot">
+        <img src="component-shots/cars/23-filter-chips-desktop.png" alt="Чіпи активних фільтрів десктоп" />
+        <div class="cap">Скрін 23 · при активних фільтрах першою в ряду — кнопка/чіп «Скинути фільтри» · далі FilterChip (напр. Acura ✕)</div>
+      </div>
+      <div class="box brand">
+        <h4>Desktop chips row</h4>
+        <ul>
+          <li>Якщо є ≥1 активний фільтр — першим у списку tips зʼявляється <strong>Скинути фільтри</strong> (повний скид)</li>
+          <li>Далі — окремі FilterChip з ✕</li>
+        </ul>
+      </div>
+
+      <h3>13.24. Мобайл — активні фільтри всередині модалки</h3>
+      <div class="shot">
+        <img src="component-shots/cars/24-mobile-modal-active-filters.png" alt="Активні фільтри в модалці мобайл" />
+        <div class="cap">Скрін 24 · під header — tips · відкриті секції (range рік/ціна · чекбокс стану) синхронні з чіпами</div>
+      </div>
+      <div class="box">
+        <h4>Стан у модалці</h4>
+        <p>Чіпи під «Фільтри» віддзеркалюють активні значення; зняття ✕ / чекбокса / range оновлює URL. Range-секції (рік, ціна) — dual-handle slider + підпис діапазону.</p>
       </div>
 
       <h3>Підсумок</h3>
@@ -1717,15 +1818,33 @@
           </tr>
           <tr>
             <td>CatalogFilterAccordion</td>
-            <td>Секції + search + checkboxes</td>
-            <td>= Desktop</td>
-            <td>FilterOptionsExpand більше ↔ менше</td>
+            <td>У сайдбарі</td>
+            <td>У MobileFiltersModal</td>
+            <td>Вміст однаковий · URL sync</td>
+          </tr>
+          <tr>
+            <td>ResetFiltersButton</td>
+            <td>Під акордеоном · hover</td>
+            <td>У футері модалки (text)</td>
+            <td>Чистить URL + усі контроли</td>
+          </tr>
+          <tr>
+            <td>MobileFiltersTrigger / Modal</td>
+            <td>—</td>
+            <td>Кнопка → slide-in зліва</td>
+            <td>+ «Показати» застосувати</td>
+          </tr>
+          <tr>
+            <td>FilterChip (tips)</td>
+            <td>Ряд · першим «Скинути…»</td>
+            <td>На сторінці + у модалці</td>
+            <td>✕ знімає один фільтр</td>
           </tr>
         </tbody>
       </table>
       <div class="note">
         <div class="label">Далі</div>
-        <p>Інші фільтр-секції (рік / ціна / пробіг відкриті) і URL (/lot/, калькулятор…) — наступними скрінами.</p>
+        <p>Інші URL (/lot/, калькулятор, VIN…) — наступними секціями за скрінами.</p>
       </div>
     </section>
 
