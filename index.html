@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Роадмап фронтенду — grandcar.ua</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --bg2: #fffdf9;
+      --ink: #1a1c1e;
+      --muted: #5c636a;
+      --line: #d9d2c8;
+      --brand: #c41230;
+      --brand-soft: #f8e6e9;
+      --ok-soft: #e6f3ec;
+      --wait-soft: #f7efd6;
+      --card: #ffffff;
+      --shadow: 0 10px 30px rgba(26, 28, 30, 0.06);
+      --radius: 14px;
+      --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #fff 0%, transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, #f0e8dc 0%, transparent 50%),
+        var(--bg);
+      line-height: 1.55;
+    }
+    a { color: var(--brand); }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 28px 20px 80px; }
+
+    .hero {
+      background: linear-gradient(145deg, #1a1c1e 0%, #2c3035 55%, #3a2226 100%);
+      color: #f5f2ec;
+      border-radius: 22px;
+      padding: 36px 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .hero .eyebrow {
+      font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      opacity: 0.75; margin-bottom: 10px;
+    }
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.45rem, 3vw, 2.05rem);
+      line-height: 1.2;
+    }
+    .hero p { margin: 0; max-width: 48rem; color: #d7d2cb; }
+    .hero .meta { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      display: inline-flex; padding: 6px 12px; border-radius: 999px; font-size: 13px;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.14);
+    }
+    .chip.red { background: rgba(196,18,48,0.25); border-color: rgba(196,18,48,0.45); }
+
+    .hint { font-size: 13px; color: var(--muted); margin: 0 0 18px; }
+
+    nav.toc {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 16px 18px; margin-bottom: 18px; box-shadow: var(--shadow);
+    }
+    nav.toc strong { display: block; margin-bottom: 8px; }
+    nav.toc ol { margin: 0; padding-left: 1.2rem; }
+    nav.toc li { margin: 4px 0; }
+
+    section {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 22px; margin-bottom: 14px; box-shadow: var(--shadow);
+    }
+    section h2 { margin: 0 0 8px; font-size: 1.28rem; }
+    .lead { color: var(--muted); margin: 0 0 14px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .box {
+      border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--bg2);
+    }
+    .box h4 { margin: 0 0 6px; font-size: 0.95rem; }
+    .box p, .box ul { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    .box ul { padding-left: 1.1rem; }
+    .box.ok { background: var(--ok-soft); border-color: #b7d8c5; }
+    .box.wait { background: var(--wait-soft); border-color: #e4d5a4; }
+    .box.brand { background: var(--brand-soft); border-color: #ecc0c8; }
+
+    .note {
+      margin-top: 12px; padding: 12px 14px; border-left: 4px solid var(--brand);
+      background: var(--brand-soft); border-radius: 0 12px 12px 0;
+    }
+    .note .label {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--brand); font-weight: 700; margin-bottom: 4px;
+    }
+    .note p { margin: 0; }
+
+    .card {
+      border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px;
+      margin: 12px 0; background: #fff;
+    }
+    .card-head {
+      display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 8px;
+    }
+    .badge {
+      font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+      background: #1a1c1e; color: #fff;
+    }
+    .badge.step { background: #3d5a80; }
+    .badge.todo { background: #8a6d1d; }
+    .badge.done { background: #1f6b45; }
+    .badge.rule { background: var(--brand); }
+    .card h3 { margin: 0; font-size: 1.05rem; }
+    .why {
+      margin: 10px 0 0; padding: 10px 12px; background: var(--bg2);
+      border-radius: 8px; border: 1px solid var(--line); font-size: 0.95rem;
+    }
+    .do-list { margin: 8px 0 0; padding-left: 1.2rem; color: var(--muted); font-size: 0.95rem; }
+    .do-list li { margin: 4px 0; }
+
+    .diagram {
+      margin: 14px 0 4px; padding: 16px; border: 1px dashed var(--line);
+      border-radius: 12px; background: #faf8f4; overflow-x: auto;
+    }
+    .diagram .caption {
+      font-size: 12px; color: var(--muted); margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
+    .node {
+      min-width: 110px; max-width: 170px; text-align: center; padding: 10px 12px;
+      border-radius: 12px; border: 1px solid var(--line); background: #fff;
+      font-size: 13px; font-weight: 600; line-height: 1.3;
+    }
+    .node small {
+      display: block; font-weight: 400; color: var(--muted); margin-top: 4px; font-size: 11px;
+    }
+    .node.dark { background: #1a1c1e; color: #fff; border-color: #1a1c1e; }
+    .node.dark small { color: #c9c4bc; }
+    .node.red { background: var(--brand); color: #fff; border-color: var(--brand); }
+    .node.red small { color: #ffe4e8; }
+    .node.green { background: var(--ok-soft); border-color: #9ecbb0; }
+    .node.amber { background: var(--wait-soft); border-color: #e0cc8f; }
+    .node.soft { background: #eef1f4; }
+    .arrow { color: var(--muted); font-size: 18px; font-weight: 700; align-self: center; }
+
+    table.simple { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    table.simple th, table.simple td {
+      border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top;
+    }
+    table.simple th { background: #f3efe8; }
+
+    ul.plain { color: var(--muted); }
+    ul.plain li { margin: 6px 0; }
+
+    footer.foot {
+      margin-top: 24px; color: var(--muted); font-size: 13px; text-align: center;
+    }
+    @media print {
+      body { background: #fff; }
+      .hero, section, nav.toc { box-shadow: none; break-inside: avoid; }
+      .hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="eyebrow">GrandCar · фронтенд · лише сайт України</div>
+      <h1>План робіт фронтенду<br />grandcar.ua</h1>
+      <p>
+        Що робимо на фронтенді й у якому порядку. Казахстан не входить.
+        Компоненти — <a href="FE-COMPONENTS-UA.html" style="color:#ffb3bf;">FE-COMPONENTS-UA.html</a>.
+        Узгодження UX — <strong>Telegram</strong> (уся команда міграції).
+      </p>
+      <div class="meta">
+        <span class="chip">uk + ru</span>
+        <span class="chip">паритет зі старим виглядом</span>
+        <span class="chip">Telegram</span>
+        <span class="chip red">оновлено 12.10.2026</span>
+      </div>
+    </header>
+
+    <p class="hint">Відкрити подвійним кліком у браузері. PDF: Друкувати → «Зберегти як PDF».</p>
+
+    <nav class="toc">
+      <strong>Зміст</strong>
+      <ol>
+        <li><a href="#status">Статус зараз</a></li>
+        <li><a href="#principles">Принципи та до обговорення</a></li>
+        <li><a href="#backend-req">Що потрібно від бекенду</a></li>
+        <li><a href="#schema">Схема робіт</a></li>
+        <li><a href="#steps">Етапи 1–5</a></li>
+        <li><a href="#env">Середовище для перевірки</a></li>
+        <li><a href="#seo">SEO у верстці</a></li>
+        <li><a href="#gsc">Паралельно: Google Search Console</a></li>
+        <li><a href="#known">Уже відомо</a></li>
+      </ol>
+    </nav>
+
+    <section id="status">
+      <h2>1. Статус зараз</h2>
+      <div class="grid-2">
+        <div class="box ok">
+          <h4><span class="badge done">Є</span></h4>
+          <ul>
+            <li>Скелет <code>web-ua</code> у репозиторії</li>
+            <li>Дослідження старого сайту</li>
+            <li>Цей план + список компонентів</li>
+          </ul>
+        </div>
+        <div class="box wait">
+          <h4><span class="badge todo">Ще треба</span></h4>
+          <ul>
+            <li>Робочі мови, рамка, клієнт API</li>
+            <li>Компоненти й сторінки</li>
+            <li>Підключення даних і перевірка зв’язки</li>
+            <li>Зручний перегляд зібраних частин (локально / dev)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="principles">
+      <h2>2. Принципи та до обговорення</h2>
+
+      <div class="card">
+        <div class="card-head"><span class="badge rule">Принцип</span><h3>Єдина бібліотека компонентів</h3></div>
+        <p style="margin:0;color:var(--muted);">
+          Одна кнопка, одне модальне вікно, спільні фільтри на каталогах і відгуках,
+          кастомні списки вибору. Повний перелік —
+          <a href="FE-COMPONENTS-UA.html">FE-COMPONENTS-UA.html</a>.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="badge rule">Принцип</span><h3>Мобільний у пікселях · десктоп у rem</h3></div>
+        <p style="margin:0;color:var(--muted);">
+          <strong>Навіщо:</strong> якщо все верстати лише «сирими» пікселями під один екран,
+          на інших моніторах (1280, 1440, 1920…) текст і відступи часто виїжджають з блоків —
+          доводиться вручну ловити кожну ширину.
+        </p>
+        <ul class="do-list">
+          <li><strong>Телефон</strong> — своя композиція в <strong>px</strong> (зручно для тачу).</li>
+          <li><strong>Планшет</strong> до редизайну — як телефон.</li>
+          <li><strong>Комп’ютер</strong> — відступи, шрифти, радіуси в <strong>rem</strong> від однієї базової шкали:
+            змінили корінь — пропорції тримаються на різних ширинах краще.</li>
+        </ul>
+        <div class="why">
+          Це рішення про якість верстки (один ритм UI), не про SEO.
+          Сайт один, HTML один.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="badge rule">Принцип</span><h3>Калькулятор у першій хвилі</h3></div>
+        <p style="margin:0;color:var(--muted);">
+          Екран і форма на фронті вже в першій хвилі. Суми рахує <strong>бекенд</strong> через API;
+          у браузері формули не дублюємо (на старому сайті частина логіки була лише в JS — важко підтримувати).
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="badge rule">Факт</span><h3>Переходи між сторінками</h3></div>
+        <p style="margin:0;color:var(--muted);">
+          На Next (App Router) переходи вже швидші за повне перезавантаження WordPress:
+          лишається оболонка сайту, підвантажується потрібний шмат сторінки.
+          Додатково не робимо зайвих повних reload і важких клієнтських «перемальовувань» усієї сторінки.
+          Окремо це не обговорюємо — це нормальна робота стеку.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="badge done">Узгоджено</span><h3>Чат — Telegram</h3></div>
+        <p style="margin:0;color:var(--muted);">
+          Швидкі UX-питання — у Telegram-чаті міграції. Учасники: уся команда.
+        </p>
+      </div>
+    </section>
+
+    <section id="backend-req">
+      <h2>3. Що потрібно від бекенду</h2>
+      <p class="lead">Не питання «чи буде», а умова роботи фронту.</p>
+      <div class="box brand">
+        <ul>
+          <li>Опис ендпоінтів (OpenAPI / Swagger) і полів JSON для TypeScript</li>
+          <li>Приклади відповідей (успіх / порожньо / помилка)</li>
+          <li>Endpoint розрахунку калькулятора</li>
+          <li>У відповідях — готові URL картинок для карток і галерей</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="schema">
+      <h2>4. Схема робіт</h2>
+      <div class="diagram">
+        <div class="caption">Що зробити</div>
+        <div class="flow" style="flex-wrap:nowrap; justify-content:flex-start;">
+          <div class="node dark" style="min-width:0;max-width:none;flex:1 1 0;">1. Підготовка<small>мови, рамка, API-клієнт</small></div>
+          <div class="arrow">→</div>
+          <div class="node red" style="min-width:0;max-width:none;flex:1 1 0;">2. Компоненти</div>
+          <div class="arrow">→</div>
+          <div class="node green" style="min-width:0;max-width:none;flex:1 1 0;">3. Сторінки</div>
+          <div class="arrow">→</div>
+          <div class="node amber" style="min-width:0;max-width:none;flex:1 1 0;">4. Дані з API<small>+ перевірка зв’язки</small></div>
+          <div class="arrow">→</div>
+          <div class="node green" style="min-width:0;max-width:none;flex:1 1 0;">5. Калькулятор</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <h2>5. Етапи 1–5</h2>
+
+      <div class="card">
+        <div class="card-head">
+          <span class="badge step">Етап 1</span>
+          <span class="badge todo">ще треба</span>
+          <h3>Підготовка проєкту</h3>
+        </div>
+        <p style="margin:0;color:var(--muted);">
+          Мови (uk у корені, <code>/ru/</code>), рамка сторінки, ключі перекладу, клієнт API.
+          App Router — без зайвих повних перезавантажень при навігації.
+        </p>
+        <div class="why">
+          <strong>Результат:</strong> можна запускати проєкт і одразу вішати на нього компоненти з етапу 2.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="badge step">Етап 2</span><h3>Бібліотека компонентів</h3></div>
+        <p style="margin:0;color:var(--muted);">
+          Фільтри, плашки обраних умов, пагінація, довантаження, хлібні крихти, картки,
+          hero, слайдери, відео, модалки (у т.ч. FirstPay ~60 с), loader, empty, нотифікації, 404, шапка/підвал.
+          Деталі — <a href="FE-COMPONENTS-UA.html">список компонентів</a>.
+        </p>
+        <div class="note">
+          <div class="label">Замітка</div>
+          <p>FirstPay (попап ~60 с) ≠ таймер зворотного відліку на лоті — різні компоненти.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="badge step">Етап 3</span><h3>Збірка сторінок</h3></div>
+        <p style="margin:0;color:var(--muted);">
+          Головна, каталоги, картки авто, збережені (localStorage), відгуки, блог, контакти,
+          пошук, VIN, оболонка калькулятора, 404.
+          Меню на старті — тимчасовий список у коді, далі з API коли буде готове.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="badge step">Етап 4</span><h3>Дані з API + перевірка зв’язки</h3></div>
+        <p style="margin:0;color:var(--muted);">
+          Наповнення з JSON бекенду (у т.ч. URL фото). Перевіряємо: успіх, порожньо, помилка,
+          фільтри ↔ URL ↔ запит, пагінація/скрол, нотифікації форм.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="badge step">Етап 5</span><h3>Калькулятор</h3></div>
+        <p style="margin:0;color:var(--muted);">
+          UI + виклик API розрахунку: показ результату або зрозумілої помилки.
+        </p>
+      </div>
+    </section>
+
+    <section id="env">
+      <h2>6. Середовище для перевірки готових частин</h2>
+      <p class="lead">
+        Потрібно зручно відкривати вже зібране (локально або спільний dev/preview), а не «порожній каркас для галочки».
+      </p>
+      <ul class="plain">
+        <li>Спочатку — локальний запуск + preview гілки за потреби</li>
+        <li>Коли є перші екрани — спільний URL для команди</li>
+        <li>CI на pull request — разом із регулярними збірками</li>
+      </ul>
+    </section>
+
+    <section id="seo">
+      <h2>7. SEO у верстці</h2>
+      <p class="lead">
+        Опираємось на SEO-аналітику аудиту сайту (жовтень 2026) і вимоги з неї для шаблонів сторінок.
+        Джерело:
+        <a href="https://docs.google.com/document/d/1u_NI-n6z6dHo7C8y2VkTNmECz7fa8h2o7WIgM3mtgqI/edit?hl=uk&amp;tab=t.0" target="_blank" rel="noopener noreferrer">Google Doc — SEO-аудит / аналітика</a>
+        (локальна копія також у <code>assets-from-production/</code> як файл аудиту .docx).
+      </p>
+      <ul class="plain">
+        <li>Один H1; title / description з даних API</li>
+        <li>Один canonical; hreflang uk ↔ ru у шапці HTML</li>
+        <li>Розміри картинок, lazy, пріоритет головного фото</li>
+        <li>Schema з полів API — за шаблоном з бекенду</li>
+      </ul>
+    </section>
+
+    <section id="gsc">
+      <h2>8. Паралельно: Google Search Console (не етап фронтенду)</h2>
+      <p class="lead">
+        Карта сайту (sitemap) уже зібрана з продакшену (~1.4M URL).
+        Чого ще немає — картина <strong>індексації в Google</strong>. Без цього важко безпечно вимкнути WordPress.
+        Фронт цим не верстає й не чекає на етапи 1–3.
+      </p>
+      <div class="box brand">
+        <h4>Запит до команди (достатньо файлів, постійний доступ у акаунт не обов’язковий)</h4>
+        <ul>
+          <li><strong>Індексація → Сторінки</strong> — повний експорт (що Google бачить / виключає)</li>
+          <li><strong>Ефективність → Сторінки</strong> — кліки, покази, CTR, позиція (максимальний період)</li>
+          <li><strong>Карти сайту</strong> — статус підключених sitemap (скрін або список)</li>
+        </ul>
+      </div>
+      <p style="margin:12px 0 0;color:var(--muted);font-size:0.95rem;">
+        Куди покласти: <code>assets-from-production/gsc/</code>.
+        Далі SEO + бекенд будують матрицю URL (залишити / редирект / прибрати) перед перемиканням домену.
+      </p>
+      <div class="note">
+        <div class="label">Замітка</div>
+        <p>
+          Це паралельний запит до cutover, не задача збірки компонентів.
+          Збірка UI йде незалежно; експорт GSC потрібен до дня переїзду.
+        </p>
+      </div>
+    </section>
+
+    <section id="known">
+      <h2>9. Уже відомо</h2>
+      <table class="simple">
+        <thead><tr><th>Тема</th><th>Висновок</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Збережені авто</td>
+            <td>На поточному сайті — <strong>localStorage</strong> (масив id). Так само орієнтуємось на новому фронті.</td>
+          </tr>
+          <tr>
+            <td>Чат</td>
+            <td><strong>Telegram</strong>, уся команда міграції.</td>
+          </tr>
+          <tr>
+            <td>Меню на старті</td>
+            <td>Тимчасовий список у коді → пізніше API.</td>
+          </tr>
+          <tr>
+            <td>Картинки</td>
+            <td>URL приходять у JSON від бекенду; фронт показує.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="foot">
+      <code>assets-from-production/FE-ROADMAP-UA.html</code>
+      · <a href="FE-COMPONENTS-UA.html">компоненти</a>
+      · офлайн
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Компоненти FE — grandcar.ua</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --bg2: #fffdf9;
+      --ink: #1a1c1e;
+      --muted: #5c636a;
+      --line: #d9d2c8;
+      --brand: #c41230;
+      --brand-soft: #f8e6e9;
+      --ok-soft: #e6f3ec;
+      --card: #fff;
+      --shadow: 0 8px 24px rgba(26,28,30,0.06);
+      --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 20px 72px; }
+    .hero {
+      background: #1a1c1e; color: #f5f2ec; border-radius: 18px;
+      padding: 28px 26px; margin-bottom: 16px; box-shadow: var(--shadow);
+    }
+    .hero h1 { margin: 0 0 8px; font-size: 1.55rem; }
+    .hero p { margin: 0; color: #cfc9c0; max-width: 42rem; }
+    .hero a { color: #ffb3bf; }
+    .hint { font-size: 13px; color: var(--muted); margin: 0 0 18px; }
+
+    nav.toc {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+      padding: 14px 16px; margin-bottom: 16px; box-shadow: var(--shadow);
+    }
+    nav.toc strong { display: block; margin-bottom: 6px; }
+    nav.toc ol { margin: 0; padding-left: 1.2rem; }
+    nav.toc li { margin: 3px 0; }
+
+    section {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+      padding: 18px 20px; margin-bottom: 14px; box-shadow: var(--shadow);
+    }
+    h2 { margin: 0 0 8px; font-size: 1.25rem; }
+    h3 { margin: 18px 0 8px; font-size: 1.05rem; }
+    .lead { color: var(--muted); margin: 0 0 12px; }
+
+    .meta {
+      display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px;
+    }
+    .chip {
+      font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+      background: #1a1c1e; color: #fff;
+    }
+    .chip.soft { background: #eef1f4; color: var(--ink); }
+    .chip.red { background: var(--brand); }
+
+    .shot {
+      margin: 10px 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #111;
+      max-width: 420px;
+    }
+    .shot img {
+      display: block;
+      width: 100%;
+      max-width: 420px;
+      max-height: 280px;
+      height: auto;
+      object-fit: contain;
+      object-position: top left;
+      vertical-align: top;
+      background: #1a1c1e;
+    }
+    .shot .cap {
+      background: var(--bg2);
+      color: var(--muted);
+      font-size: 12px;
+      padding: 8px 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .box {
+      border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--bg2);
+    }
+    .box h4 { margin: 0 0 6px; font-size: 0.95rem; }
+    .box p, .box ul { margin: 0; color: var(--muted); font-size: 0.92rem; }
+    .box ul { padding-left: 1.1rem; }
+    .box.ok { background: var(--ok-soft); border-color: #b7d8c5; }
+    .box.brand { background: var(--brand-soft); border-color: #ecc0c8; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 8px; }
+    th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+    th { background: #f3efe8; }
+
+    .note {
+      margin-top: 12px; padding: 10px 12px; border-left: 4px solid var(--brand);
+      background: var(--brand-soft); border-radius: 0 10px 10px 0; font-size: 0.95rem;
+    }
+    .note .label { font-size: 11px; font-weight: 700; color: var(--brand); text-transform: uppercase; letter-spacing: 0.04em; }
+
+    footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1>Компоненти FE · grandcar.ua</h1>
+      <p>
+        Каталог блоків зі скрінами: мобайл / десктоп, де повторюється, на яких сторінках.
+        План робіт — <a href="FE-ROADMAP-UA.html">FE-ROADMAP-UA.html</a>.
+        Скріни: <code>component-shots/</code>.
+      </p>
+    </header>
+    <p class="hint">Офлайн. Додаємо сторінку за сторінкою зі скрінів команди.</p>
+
+        <nav class="toc">
+      <strong>Зміст</strong>
+      <ol>
+        <li><a href="#reuse">Спільні / перевикористовувані</a></li>
+        <li><a href="#home-header">Головна · шапка й меню</a> — <a href="https://www.grandcar.ua/">grandcar.ua/</a></li>
+        <li><a href="#home-banner">Головна · інформативний банер</a> (+ кнопка, обране, модалка дзвінка)</li>
+        <li><a href="#client-cards">Головна · картки клієнтів</a> (слайдер без dots)</li>
+        <li><a href="#car-cards">Головна · картка авто</a> (зберегти · моб. слайдер)</li>
+        <li><a href="#home-controls">Головна · кнопки / лінки / форма підбору</a></li>
+        <li><a href="#home-steps">Головна · іконка+текст · етапи / progress</a></li>
+        <li><a href="#reviews">Головна · картки відгуків</a> (YouTube · слайдер)</li>
+        <li><a href="#google-reviews">Головна · Google-відгуки</a> (слайдер · fullscreen)</li>
+        <li><a href="#home-more">Головна · коротка форма · FAQ · інфоблок · новини</a></li>
+        <li><a href="#home-bonus">Головна · ExpandText · банер бонусу</a></li>
+        <li><a href="#site-footer">Футер</a> (desktop + mobile)</li>
+      </ol>
+    </nav>
+    <section id="reuse">
+      <h2>1. Спільні / перевикористовувані (з шапки)</h2>
+      <p class="lead">Ці частини майже на всіх сторінках сайту — один компонент, різні layout (desktop / mobile).</p>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Десктоп</th><th>Мобайл</th><th>Де ще</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Logo</strong></td>
+            <td>Зліва у верхньому ряду</td>
+            <td>Зліва в барі</td>
+            <td>Усі сторінки</td>
+          </tr>
+          <tr>
+            <td><strong>Пошук</strong> (поле + loader + картки + empty + «Всі результати»)</td>
+            <td>Поле в шапці + dropdown</td>
+            <td>Іконка → sticky-поле під баром + той самий dropdown</td>
+            <td>Усі сторінки з шапкою; empty: «Нічого не знайдено за "…"»</td>
+          </tr>
+          <tr>
+            <td><strong>CTA «Замовити дзвінок»</strong></td>
+            <td>Червона кнопка в шапці</td>
+            <td>Та сама в барі</td>
+            <td>Усі сторінки → модалка дзвінка</td>
+          </tr>
+          <tr>
+            <td><strong>Телефон</strong> (клік / tel:)</td>
+            <td>У верхньому ряду шапки</td>
+            <td>У низу моб. меню</td>
+            <td>Шапка / drawer</td>
+          </tr>
+          <tr>
+            <td><strong>Соцмережі</strong> (YouTube, Telegram, Instagram)</td>
+            <td>У шапці</td>
+            <td>У низу моб. меню</td>
+            <td>Шапка / drawer (+ можливо футер)</td>
+          </tr>
+          <tr>
+            <td><strong>Перемикач мови</strong> Укр | Рус</td>
+            <td>У шапці</td>
+            <td>У низу моб. меню</td>
+            <td>Усі сторінки</td>
+          </tr>
+          <tr>
+            <td><strong>Навігація</strong> (пункти + випадаючі / акордеон)</td>
+            <td>Другий ряд, hover/dropdown</td>
+            <td>Drawer + розкриття пунктів</td>
+            <td>Усі сторінки; дані меню з API / тимчасовий список</td>
+          </tr>
+          <tr>
+            <td><strong>Обране</strong> (серце + лічильник)</td>
+            <td>Праворуч у меню</td>
+            <td>Іконка в барі + рядок у drawer</td>
+            <td>→ <code>/favorites/</code>; id у localStorage</td>
+          </tr>
+          <tr>
+            <td><strong>Button</strong> (червона primary)</td>
+            <td>Шапка, банер, форми</td>
+            <td>Те саме</td>
+            <td>Різний текст / action</td>
+          </tr>
+          <tr>
+            <td><strong>CallbackModal</strong> + Input / PhoneInput</td>
+            <td>Оверлей з CTA дзвінка</td>
+            <td>Те саме</td>
+            <td>Валідація, дисклеймер</td>
+          </tr>
+          <tr>
+            <td><strong>InformativeBanner</strong></td>
+            <td>Hero-слайдер</td>
+            <td>Компактний слайдер</td>
+            <td>Home + інші (список пізніше); таймер</td>
+          </tr>
+          <tr>
+            <td><strong>SlideCounter</strong> (01—02—03)</td>
+            <td>У банері</td>
+            <td>У банері</td>
+            <td>Один з варіантів dots</td>
+          </tr>
+          <tr>
+            <td><strong>ClientCard</strong> + Badge</td>
+            <td>У слайдері клієнтів</td>
+            <td>Той самий у слайдері</td>
+            <td>Hover: зміна фото; outline «Детальніше»</td>
+          </tr>
+          <tr>
+            <td><strong>ClientCardsSlider</strong></td>
+            <td>Ряд карток, auto-scroll</td>
+            <td>Те саме, без dots</td>
+            <td>Таймер; dots немає · той самий патерн що CarCardsSlider</td>
+          </tr>
+          <tr>
+            <td><strong>CarCard</strong> + SaveButton</td>
+            <td>Сітка / блок на сторінці</td>
+            <td>У слайдері (як клієнти)</td>
+            <td>Hover на картку; «Зберегти» ↔ Favorites</td>
+          </tr>
+          <tr>
+            <td><strong>Button</strong> (outline / dark + icon)</td>
+            <td>«Дивитись більше авто» · hover змінює колір</td>
+            <td>Те саме (+ може приймати іконку)</td>
+            <td>Слот іконки; звірити mobile в DevTools</td>
+          </tr>
+          <tr>
+            <td><strong>TextLink</strong> (+ стрілка)</td>
+            <td>Hover → underline / стан</td>
+            <td>Схоже (перевірити DevTools)</td>
+            <td>«Більше про Grand Car»</td>
+          </tr>
+          <tr>
+            <td><strong>FeatureItem</strong></td>
+            <td>Іконка + title + текст</td>
+            <td>Те саме</td>
+            <td>Блок переваг / про нас</td>
+          </tr>
+          <tr>
+            <td><strong>LeadForm</strong> (підбір)</td>
+            <td>Поля + submit</td>
+            <td>Те саме</td>
+            <td>Input / Select / Phone + валідація</td>
+          </tr>
+          <tr>
+            <td><strong>IconText</strong></td>
+            <td>Іконка над текстом</td>
+            <td>Ідентично (розміри можуть відрізнятися)</td>
+            <td>Переваги / фічі</td>
+          </tr>
+          <tr>
+            <td><strong>Steps + Progress</strong></td>
+            <td>Вертикальний степер</td>
+            <td>Те саме (розміри)</td>
+            <td>Активація по scroll ↑↓</td>
+          </tr>
+          <tr>
+            <td><strong>ReviewCard</strong> + YouTube</td>
+            <td>У слайдері з стрілкою →</td>
+            <td>У слайдері як CarCards (§5)</td>
+            <td>Fullscreen у плеєрі</td>
+          </tr>
+          <tr>
+            <td><strong>GoogleReviewCard</strong> + Viewer</td>
+            <td>Слайдер ← → + auto · fullscreen list</td>
+            <td>Слайдер + bar-dots · fullscreen card</td>
+            <td>«Читати далі» → ReviewViewer</td>
+          </tr>
+          <tr>
+            <td><strong>ContactForm</strong> (коротка)</td>
+            <td>Ім’я · телефон · питання</td>
+            <td>Те саме</td>
+            <td>Варіант LeadForm з меншою кількістю полів</td>
+          </tr>
+          <tr>
+            <td><strong>Accordion</strong> (FAQ)</td>
+            <td>Список питань</td>
+            <td>Те саме (розміри)</td>
+            <td>Chevron ▾ · open/close</td>
+          </tr>
+          <tr>
+            <td><strong>InfoBlock</strong></td>
+            <td>Текст + CTA + фото</td>
+            <td>—</td>
+            <td>Схожий на банер, статичний</td>
+          </tr>
+          <tr>
+            <td><strong>NewsCard</strong> + Slider</td>
+            <td>Горизонтальна картка · 01—02 dots</td>
+            <td>Вертикальна · слайдер без dots (= video reviews §8)</td>
+            <td>SlideCounter як у банері (§3)</td>
+          </tr>
+          <tr>
+            <td><strong>ExpandText</strong></td>
+            <td>«Детальніше» / «Приховати»</td>
+            <td>Те саме (стилі трохи інші)</td>
+            <td>Collapse / expand довгого SEO-тексту</td>
+          </tr>
+          <tr>
+            <td><strong>BonusBanner</strong> + BonusForm</td>
+            <td>Фон + текст + форма</td>
+            <td>Усі елементи є</td>
+            <td>Input email · Checkbox · submit</td>
+          </tr>
+          <tr>
+            <td><strong>SiteFooter</strong></td>
+            <td>Колонки nav · контакти · map · tags</td>
+            <td>Стек: logo · social · contacts · map · nav · tags</td>
+            <td>На всіх сторінках</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+<section id="home-header">
+      <h2>2. Головна · шапка й меню</h2>
+      <p class="lead">
+        Сторінка: <a href="https://www.grandcar.ua/">https://www.grandcar.ua/</a>
+        (та сама шапка на інших URL — дубль layout).
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: Home</span>
+        <span class="chip soft">Блок: Header / chrome</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>2.1. Десктоп — повна шапка</h3>
+      <div class="shot">
+        <img src="component-shots/header/01-desktop-header.png" alt="Десктоп шапка GrandCar" />
+        <div class="cap">Скрін 1 · desktop header · два ряди: утиліти + навігація</div>
+      </div>
+      <div class="grid-2">
+        <div class="box">
+          <h4>Верхній ряд</h4>
+          <ul>
+            <li>Logo GRANDCAR</li>
+            <li>Пошук «Введіть марку авто»</li>
+            <li>Кнопка «Замовити дзвінок»</li>
+            <li>Телефон +38 073 802 00 61</li>
+            <li>Соцмережі</li>
+            <li>Укр | Рус</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h4>Нижній ряд (навігація)</h4>
+          <ul>
+            <li>Авто з США ▾ · Авто з Кореї ▾</li>
+            <li>Калькулятор</li>
+            <li>Перевірка авто ▾ · Відгуки ▾ · Про нас ▾</li>
+            <li>Блог · Кар’єра · Контакти</li>
+            <li>Обране (серце + число)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>2.2. Десктоп — пошук (live / autocomplete)</h3>
+      <div class="shot">
+        <img src="component-shots/header/02-desktop-search-dropdown.png" alt="Випадаючий список пошуку" />
+        <div class="cap">Скрін 2 · пошук: поле + випадаючий список карток + «Всі результати»</div>
+      </div>
+      <div class="shot">
+        <img src="component-shots/header/11-desktop-search-empty.png" alt="Пошук: нічого не знайдено (десктоп)" />
+        <div class="cap">Скрін 11 · стан empty: «Нічого не знайдено за "…"» під полем</div>
+      </div>
+      <div class="box brand">
+        <h4>Підкомпоненти / стани пошуку</h4>
+        <ul>
+          <li>Поле введення + іконка лупи</li>
+          <li><strong>Loader</strong> під час запиту</li>
+          <li>Випадаючий список: міні-картка (фото + назва/рік + «Ціна: … $»)</li>
+          <li>Футер списку: посилання «Всі результати» → повна сторінка пошуку</li>
+          <li><strong>Empty:</strong> світлий блок «Нічого не знайдено за "запит"» (той самий текст на мобайлі)</li>
+        </ul>
+      </div>
+
+      <h3>2.3. Десктоп — перемикач мови</h3>
+      <div class="shot">
+        <img src="component-shots/header/03-language-switcher.png" alt="Перемикач Укр Рус" />
+        <div class="cap">Скрін 3 · LanguageSwitcher · активна мова жирніша</div>
+      </div>
+
+      <h3>2.4. Десктоп — випадаюче меню навігації</h3>
+      <div class="shot">
+        <img src="component-shots/header/04-desktop-nav-dropdown.png" alt="Dropdown Авто з США" />
+        <div class="cap">Скрін 4 · приклад: «Авто з США» → Перевірені авто / Онлайн аукціон; серце з лічильником «3»</div>
+      </div>
+      <p class="lead" style="margin-top:8px;">
+        Той самий патерн dropdown для пунктів з ▾ (Корея, Перевірка авто, Відгуки, Про нас).
+      </p>
+
+      <h3>2.5. Мобайл — бар шапки</h3>
+      <div class="shot">
+        <img src="component-shots/header/05-mobile-header.png" alt="Мобільна шапка" />
+        <div class="cap">Скрін 5–6 · mobile header: logo · «Замовити дзвінок» · пошук · серце · бургер</div>
+      </div>
+      <div class="box">
+        <h4>Відмінність від десктопу</h4>
+        <ul>
+          <li>Немає видимого поля пошуку / телефону / соцмереж / мови в барі</li>
+          <li>Пошук і меню — через іконки; контакти й мова — у drawer</li>
+        </ul>
+      </div>
+
+      <h3>2.6. Мобайл — меню (drawer)</h3>
+      <div class="shot">
+        <img src="component-shots/header/06-mobile-menu.png" alt="Мобільне меню відкрите" />
+        <div class="cap">Скрін 6–7 · drawer поверх контенту · список пунктів навігації · серце з «3» унизу списку</div>
+      </div>
+
+      <h3>2.7. Мобайл — розкриття пункту (акордеон)</h3>
+      <div class="shot">
+        <img src="component-shots/header/07-mobile-menu-accordion.png" alt="Акордеон Перевірка авто" />
+        <div class="cap">Скрін 7 · «Перевірка авто» розкрито: VIN / Звіт перевірки · обводка активного стану</div>
+      </div>
+      <div class="box ok">
+        <h4>Перевикористання</h4>
+        <p>
+          Один компонент <strong>NavItem / Accordion</strong>: на десктопі — dropdown під пунктом,
+          на мобайлі — розкриття в списку. Ті самі пункти меню з даних.
+        </p>
+      </div>
+
+      <h3>2.8. Мобайл — низ меню (мова, телефон, соцмережі)</h3>
+      <div class="shot">
+        <img src="component-shots/header/08-mobile-menu-footer.png" alt="Низ мобільного меню" />
+        <div class="cap">Скрін 8 · Укр|Рус · телефон · YouTube / Telegram / Instagram — ті самі блоки, що на десктоп-шапці</div>
+      </div>
+
+      <h3>2.9. Мобайл — sticky пошук</h3>
+      <div class="shot">
+        <img src="component-shots/header/09-mobile-search-sticky.png" alt="Мобільний sticky пошук" />
+        <div class="cap">Скрін 9 · після тапу на лупу: sticky-поле під баром (помаранчева/золота обводка, фокус)</div>
+      </div>
+      <div class="box">
+        <h4>Поведінка</h4>
+        <ul>
+          <li>Відкривається іконкою пошуку в барі (не inline як на десктопі)</li>
+          <li>Поле «липне» під шапкою (sticky) поверх контенту</li>
+          <li>Той самий Search-компонент: input + лупа + dropdown / empty / loader</li>
+        </ul>
+      </div>
+
+      <h3>2.10. Мобайл — пошук empty</h3>
+      <div class="shot">
+        <img src="component-shots/header/10-mobile-search-empty.png" alt="Пошук: нічого не знайдено (мобайл)" />
+        <div class="cap">Скрін 10 · empty на мобайлі + червоний × закрити / скинути</div>
+      </div>
+
+      <h3>2.11. Мобайл — випадаючий список карток</h3>
+      <div class="shot">
+        <img src="component-shots/header/12-mobile-search-dropdown.png" alt="Випадаючий список пошуку на мобайлі" />
+        <div class="cap">Скрін 12 · ті самі міні-картки (фото + назва + ціна) + «Всі результати» + × закрити</div>
+      </div>
+      <div class="box ok">
+        <h4>Перевикористання Search</h4>
+        <p>
+          Один Search: стани idle / loading / results / empty.
+          Desktop — поле в шапці; mobile — sticky під баром.
+          Картка результату й empty-текст спільні.
+        </p>
+      </div>
+
+      <h3>Підсумок по Home header</h3>
+      <table>
+        <thead>
+          <tr><th>Блок</th><th>Desktop</th><th>Mobile</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Header bar</td>
+            <td>2 ряди</td>
+            <td>1 компактний ряд</td>
+            <td>Один Header, два layout</td>
+          </tr>
+          <tr>
+            <td>Search</td>
+            <td>Inline + dropdown / empty</td>
+            <td>Іконка → sticky поле + той самий dropdown / empty</td>
+            <td>Loader · results · empty · «Всі результати» · ×</td>
+          </tr>
+          <tr>
+            <td>Main nav</td>
+            <td>Horizontal + dropdown</td>
+            <td>Drawer + accordion</td>
+            <td>Спільне дерево пунктів</td>
+          </tr>
+          <tr>
+            <td>Lang / phone / social</td>
+            <td>У шапці</td>
+            <td>У низу drawer</td>
+            <td>Одні й ті самі компоненти</td>
+          </tr>
+          <tr>
+            <td>Favorites</td>
+            <td>У ряду меню</td>
+            <td>Іконка бару + рядок у меню</td>
+            <td>Лічильник з localStorage</td>
+          </tr>
+          <tr>
+            <td>CTA дзвінок</td>
+            <td>Кнопка</td>
+            <td>Кнопка</td>
+            <td>→ <a href="#home-banner">модалка §3</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        <div class="label">Далі в шапці</div>
+        <p>Інші блоки шапки — за потреби. Банер головної — <a href="#home-banner">§3</a>.</p>
+      </div>
+    </section>
+
+    <section id="home-banner">
+      <h2>3. Головна · інформативний банер (hero / slider)</h2>
+      <p class="lead">
+        Є на <a href="https://www.grandcar.ua/">головній</a> і на багатьох інших сторінках.
+        Пізніше допишемо повний список URL і варіанти наповнення.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: Home (+ інші)</span>
+        <span class="chip soft">Блок: InformativeBanner</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <div class="box brand">
+        <h4>Поведінка блоку</h4>
+        <ul>
+          <li>За таймером змінюються: картинка, текст, наповнення текстового блоку, кнопка (лейбл / посилання)</li>
+          <li>Спільний патерн «інформативний блок» — перевикористовується на інших сторінках (деталі — пізніше)</li>
+        </ul>
+      </div>
+      <h3>3.1. Десктоп — банер</h3>
+      <div class="shot">
+        <img src="component-shots/home-banner/01-desktop-banner.jpg" alt="Десктоп інформативний банер" />
+        <div class="cap">Скрін 1 · desktop: фон-фото · заголовок · CTA · лічильник слайдів · scroll-hint унизу</div>
+      </div>
+      <h3>3.2. Кнопка (Primary / CTA)</h3>
+      <div class="grid-2">
+        <div class="shot">
+          <img src="component-shots/home-banner/02-button-primary.png" alt="Кнопка Підібрати авто" />
+          <div class="cap">Скрін 2 · кнопка в банері («Підібрати авто»)</div>
+        </div>
+        <div class="shot">
+          <img src="component-shots/home-banner/03-button-header-cta.png" alt="Кнопка Замовити дзвінок" />
+          <div class="cap">Скрін 3 · та сама кнопка з десктоп-шапки («Замовити дзвінок»)</div>
+        </div>
+      </div>
+      <div class="box ok">
+        <h4>Компонент Button</h4>
+        <p>Один червоний primary: різний текст і action (лінк / відкрити модалку). У банері текст міняється зі слайдом.</p>
+      </div>
+      <h3>3.3. Обране (Favorites)</h3>
+      <div class="shot">
+        <img src="component-shots/home-banner/04-favorites.png" alt="Іконка обраного" />
+        <div class="cap">Скрін 4 · серце + лічильник усередині · id у localStorage · → /favorites/</div>
+      </div>
+      <h3>3.4. Модалка «Замовити дзвінок»</h3>
+      <div class="shot">
+        <img src="component-shots/home-banner/05-modal-callback.png" alt="Модалка замовити дзвінок" />
+        <div class="cap">Скрін 5 · Modal: заголовок · 2 поля · дисклеймер · «Надіслати» · ×</div>
+      </div>
+      <div class="shot">
+        <img src="component-shots/home-banner/06-input-validation.png" alt="Інпути з валідацією" />
+        <div class="cap">Скрін 6 · Input (підсвітка помилки) + PhoneInput (+380) · «Це обов'язкове поле»</div>
+      </div>
+      <div class="box">
+        <h4>Підкомпоненти форми</h4>
+        <ul>
+          <li><strong>Input</strong> — underline, * обов’язкове, error: червона лінія + текст</li>
+          <li><strong>PhoneInput</strong> — префікс / маска +380, та сама валідація</li>
+          <li>Відкривається з CTA «Замовити дзвінок» (шапка / інші місця)</li>
+        </ul>
+      </div>
+      <h3>3.5. Лічильник слайдів (dots-варіант)</h3>
+      <div class="shot">
+        <img src="component-shots/home-banner/07-slide-counter.png" alt="Лічильник слайдів 01 02 03" />
+        <div class="cap">Скрін 7 · 01 — 02 — 03 · активний більший · одна з різновидів dots для слайдерів проєкту</div>
+      </div>
+      <p class="lead" style="margin-top:8px;">Використовується в головному банері (скрін 1 / 9). Інші варіанти dots — коли дійдемо до інших слайдерів.</p>
+      <h3>3.6. Scroll-hint (лише desktop)</h3>
+      <div class="shot">
+        <img src="component-shots/home-banner/08-scroll-hint.png" alt="Іконка скролу вниз" />
+        <div class="cap">Скрін 8 · коло + подвійний шеврон · анімація руху · кліком не скролить · тільки desktop</div>
+      </div>
+      <h3>3.7. Мобайл — банер</h3>
+      <div class="shot">
+        <img src="component-shots/home-banner/09-mobile-banner.png" alt="Мобільний банер-слайдер" />
+        <div class="cap">Скрін 9 · той самий InformativeBanner: текст · CTA · лічильник слайдів · без scroll-hint</div>
+      </div>
+      <h3>Підсумок · банер і сусідні UI</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Роль</th><th>Де</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>InformativeBanner</td>
+            <td>Слайдер: фото + текст + кнопка</td>
+            <td>Home + багато сторінок</td>
+            <td>Таймер; список сторінок — пізніше</td>
+          </tr>
+          <tr>
+            <td>Button (primary)</td>
+            <td>Червона CTA</td>
+            <td>Банер, шапка, форми</td>
+            <td>Скріни 2–3 — один компонент</td>
+          </tr>
+          <tr>
+            <td>Favorites</td>
+            <td>Серце + лічильник</td>
+            <td>Шапка / меню</td>
+            <td>localStorage</td>
+          </tr>
+          <tr>
+            <td>CallbackModal</td>
+            <td>Лід-форма дзвінка</td>
+            <td>З CTA «Замовити дзвінок»</td>
+            <td>Input + PhoneInput + валідація</td>
+          </tr>
+          <tr>
+            <td>SlideCounter</td>
+            <td>01—02—03</td>
+            <td>Головний банер</td>
+            <td>Різновид dots слайдерів</td>
+          </tr>
+          <tr>
+            <td>ScrollHint</td>
+            <td>Підказка «нижче»</td>
+            <td>Лише desktop банер</td>
+            <td>Тільки анімація, без scroll action</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Картки клієнтів — <a href="#client-cards">§4</a>. Перевикористання банера по URL — допишемо окремо.</p>
+      </div>
+    </section>
+
+    <section id="client-cards">
+      <h2>4. Головна · картки клієнтів</h2>
+      <p class="lead">
+        Блок «успішні клієнти / угоди»: картка + слайдер без dots, з таймером автопрокрутки.
+        (Чи є на інших сторінках — уточнимо пізніше.)
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: Home</span>
+        <span class="chip soft">Блок: ClientCards</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <h3>4.1. Десктоп — картка клієнта</h3>
+      <div class="shot">
+        <img src="component-shots/client-cards/01-desktop-card.png" alt="Картка клієнта десктоп" />
+        <div class="cap">Скрін 1 · ClientCard: фото · badge · авто + ім’я · ціни · «Вигода» · «Детальніше»</div>
+      </div>
+      <div class="box brand">
+        <h4>Поведінка картки</h4>
+        <ul>
+          <li><strong>Hover на картинку</strong> → змінюється фото (друге зображення)</li>
+          <li>Червоний акцент: badge, ім’я клієнта, рядок «Вигода»</li>
+          <li>Кнопка outline «Детальніше» (варіант Button, не primary-червона)</li>
+        </ul>
+      </div>
+      <h3>4.2. Десктоп — слайдер карток</h3>
+      <div class="shot">
+        <img src="component-shots/client-cards/02-desktop-slider.jpg" alt="Слайдер карток клієнтів десктоп" />
+        <div class="cap">Скрін 2 · ClientCardsSlider · кілька карток у ряд · <strong>без dots</strong> · таймер автопрокрутки</div>
+      </div>
+      <h3>4.3. Badge на картці</h3>
+      <div class="shot">
+        <img src="component-shots/client-cards/03-badge.png" alt="Бейдж БЛОГЕР" />
+        <div class="cap">Скрін 3 · Badge (pill, червоний): «БЛОГЕР», «КОМІК» тощо · поверх фото</div>
+      </div>
+      <h3>4.4. Мобайл — картка</h3>
+      <div class="shot">
+        <img src="component-shots/client-cards/04-mobile-card.png" alt="Картка клієнта мобайл" />
+        <div class="cap">Скрін 4 · той самий ClientCard у слайдері · поведінка як на десктопі</div>
+      </div>
+      <h3>4.5. Мобайл — слайдер</h3>
+      <div class="shot">
+        <img src="component-shots/client-cards/05-mobile-slider.png" alt="Слайдер карток на мобайлі" />
+        <div class="cap">Скрін 5 · ClientCardsSlider mobile · без dots · таймер · peek сусідніх карток</div>
+      </div>
+      <h3>Підсумок</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Desktop</th><th>Mobile</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ClientCard</td>
+            <td>Картка в слайдері</td>
+            <td>Та сама</td>
+            <td>Hover → зміна фото</td>
+          </tr>
+          <tr>
+            <td>Badge</td>
+            <td>На фото</td>
+            <td>На фото</td>
+            <td>Текст з даних (роль/тег)</td>
+          </tr>
+          <tr>
+            <td>Button outline</td>
+            <td>«Детальніше»</td>
+            <td>«Детальніше»</td>
+            <td>Інший варіант від primary</td>
+          </tr>
+          <tr>
+            <td>ClientCardsSlider</td>
+            <td>Ряд, auto-scroll</td>
+            <td>Те саме</td>
+            <td>Dots немає; є таймер · <strong>той самий патерн слайдера</strong>, що для CarCard</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Картка авто — <a href="#car-cards">§5</a>.</p>
+      </div>
+    </section>
+
+    <section id="car-cards">
+      <h2>5. Головна · картка авто (CarCard)</h2>
+      <p class="lead">
+        Варіант картки лота/авто: фото, спеки, ціна в США, CTA.
+        На мобайлі — у слайдері <strong>того самого типу</strong>, що картки клієнтів (§4): без dots, таймер.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: Home (+ каталоги пізніше)</span>
+        <span class="chip soft">Блок: CarCard</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <h3>5.1. Десктоп — картка</h3>
+      <div class="shot">
+        <img src="component-shots/car-cards/01-desktop-card.png" alt="Картка авто десктоп" />
+        <div class="cap">Скрін 1 · CarCard: фото · «Зберегти» · назва · 4 спеки з іконками · ціна · primary + outline</div>
+      </div>
+      <div class="box brand">
+        <h4>Поведінка</h4>
+        <ul>
+          <li><strong>Hover на картку</strong> (не лише на фото) — візуальний стан hover</li>
+          <li>Primary: «Дізнатися ціну під ключ» · Outline: «Детальніше» (той самий Button-варіант)</li>
+          <li>Спеки: пробіг · привід · двигун · КПП</li>
+        </ul>
+      </div>
+      <h3>5.2. Кнопка «Зберегти» (2 стани)</h3>
+      <div class="shot">
+        <img src="component-shots/car-cards/02-save-button.png" alt="Кнопка Зберегти" />
+        <div class="cap">Скрін 2 · SaveButton поверх фото · стани: неактивна / активна (в обраному)</div>
+      </div>
+      <div class="box ok">
+        <h4>Зв’язок з Favorites</h4>
+        <p>Toggle додає/знімає id авто в localStorage · оновлює лічильник серця в шапці (§2 / §3).</p>
+      </div>
+      <h3>5.3. Мобайл — у слайдері</h3>
+      <div class="shot">
+        <img src="component-shots/car-cards/03-mobile-card.png" alt="Картка авто на мобайлі" />
+        <div class="cap">Скрін 3 · та сама CarCard · показується в слайдері · патерн як ClientCardsSlider (§4)</div>
+      </div>
+      <div class="box">
+        <h4>Слайдер (фіксуємо збіг)</h4>
+        <ul>
+          <li>Без dots</li>
+          <li>Таймер автопрокрутки</li>
+          <li>Peek сусідніх карток — як у блоці клієнтів</li>
+          <li>Один SharedCardsSlider / той самий патерн, різний item (ClientCard vs CarCard)</li>
+        </ul>
+      </div>
+      <h3>Підсумок</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Desktop</th><th>Mobile</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CarCard</td>
+            <td>Картка (hover)</td>
+            <td>У слайдері</td>
+            <td>Спеки + 2 CTA</td>
+          </tr>
+          <tr>
+            <td>SaveButton</td>
+            <td>На фото</td>
+            <td>На фото</td>
+            <td>inactive / active ↔ Favorites</td>
+          </tr>
+          <tr>
+            <td>CarCardsSlider</td>
+            <td>—</td>
+            <td>Ряд карток</td>
+            <td>= патерн ClientCardsSlider</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Кнопки / лінки / форма підбору — <a href="#home-controls">§6</a>.</p>
+      </div>
+    </section>
+
+    <section id="home-controls">
+      <h2>6. Головна · кнопки, лінки, feature, форма підбору</h2>
+      <p class="lead">
+        Спільні контролі після блоків карток: CTA «більше авто», текстові лінки,
+        пункт переваг, лід-форма «Отримати підбір».
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: Home</span>
+        <span class="chip soft">Блок: Controls + LeadForm</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <h3>6.1. Кнопка «Дивитись більше авто»</h3>
+      <div class="grid-2">
+        <div class="shot">
+          <img src="component-shots/home-controls/01-button-more-cars.png" alt="Кнопка дивитись більше авто" />
+          <div class="cap">Скрін 1 · outline + стрілка · уміє приймати іконку (мобайл)</div>
+        </div>
+        <div class="shot">
+          <img src="component-shots/home-controls/02-button-more-cars-hover.png" alt="Кнопка hover" />
+          <div class="cap">Скрін 2 · desktop hover: зміна кольору (темний fill / інверсія)</div>
+        </div>
+      </div>
+      <div class="box ok">
+        <h4>Button (з іконкою)</h4>
+        <p>Той самий сімейство Button: слот іконки праворуч. Mobile виглядає подібно — звірити в DevTools.</p>
+      </div>
+      <h3>6.2. TextLink «Більше про Grand Car»</h3>
+      <div class="grid-2">
+        <div class="shot">
+          <img src="component-shots/home-controls/03-link-default.png" alt="Лінк default" />
+          <div class="cap">Скрін 3 · варіант посилання + стрілка</div>
+        </div>
+        <div class="shot">
+          <img src="component-shots/home-controls/04-link-hover.png" alt="Лінк hover" />
+          <div class="cap">Скрін 4 · hover: underline / зміна стану</div>
+        </div>
+      </div>
+      <p class="lead" style="margin-top:8px;">На мобайлі схоже; точні відмінності — через DevTools.</p>
+      <h3>6.3. FeatureItem (іконка + title + текст)</h3>
+      <div class="shot">
+        <img src="component-shots/home-controls/05-feature-item.png" alt="Feature item Надійні" />
+        <div class="cap">Скрін 5 · іконка · заголовок · абзац (приклад: «Надійні»)</div>
+      </div>
+      <h3>6.4. Кнопка submit форми «Отримати підбір»</h3>
+      <div class="grid-2">
+        <div class="shot">
+          <img src="component-shots/home-controls/06-form-submit.png" alt="Submit default" />
+          <div class="cap">Скрін 6 · FormSubmit default (темна)</div>
+        </div>
+        <div class="shot">
+          <img src="component-shots/home-controls/07-form-submit-hover.png" alt="Submit hover" />
+          <div class="cap">Скрін 7 · hover: зміна стану (світла / outline)</div>
+        </div>
+      </div>
+      <h3>6.5. LeadForm — форма підбору</h3>
+      <div class="shot">
+        <img src="component-shots/home-controls/08-form.png" alt="Форма підбору" />
+        <div class="cap">Скрін 8 · компонента форми: поля + «Отримати підбір»</div>
+      </div>
+      <h3>6.6. Поля форми</h3>
+      <div class="shot">
+        <img src="component-shots/home-controls/09-fields.png" alt="Поля форми" />
+        <div class="cap">Скрін 9 · Input (number / text / phone) + Select · underline · *</div>
+      </div>
+      <div class="box">
+        <h4>Типи полів</h4>
+        <ul>
+          <li><strong>number</strong> — бюджет</li>
+          <li><strong>select</strong> — тип кузова (зараз <em>дефолтний</em> select; можна замінити на кастомний)</li>
+          <li><strong>text</strong> — рік, ім’я</li>
+          <li><strong>tel / PhoneInput</strong> — номер (як у модалці дзвінка)</li>
+        </ul>
+      </div>
+      <h3>6.7. Форма + валідація порожніх полів</h3>
+      <div class="shot">
+        <img src="component-shots/home-controls/10-form-validation.png" alt="Валідація форми" />
+        <div class="cap">Скрін 10 · повна форма · помилка «Це обов'язкове для заповнення поле.» · червона лінія</div>
+      </div>
+      <div class="box brand">
+        <h4>Валідація</h4>
+        <p>Той самий патерн Input error, що в CallbackModal (§3): * обов’язкове · червона підкреслення · текст помилки.</p>
+      </div>
+      <h3>Підсумок</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Стани</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Button + icon</td>
+            <td>default / hover</td>
+            <td>Слот іконки; mobile ≈ desktop (DevTools)</td>
+          </tr>
+          <tr>
+            <td>TextLink</td>
+            <td>default / hover</td>
+            <td>Стрілка; mobile звірити</td>
+          </tr>
+          <tr>
+            <td>FeatureItem</td>
+            <td>—</td>
+            <td>icon + title + body</td>
+          </tr>
+          <tr>
+            <td>FormSubmit</td>
+            <td>default / hover</td>
+            <td>«Отримати підбір»</td>
+          </tr>
+          <tr>
+            <td>LeadForm + fields</td>
+            <td>idle / error</td>
+            <td>Select native (swap → custom OK)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Етапи купівлі / IconText — <a href="#home-steps">§7</a>.</p>
+      </div>
+    </section>
+
+    <section id="home-steps">
+      <h2>7. Головна · IconText і етапи (Steps / Progress)</h2>
+      <p class="lead">
+        Іконка+текст і блок «Етапи купівлі…». Mobile: та сама поведінка, можлива різниця лише в розмірах.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: Home</span>
+        <span class="chip soft">Блок: IconText · Steps</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <h3>7.1. IconText</h3>
+      <div class="shot">
+        <img src="component-shots/home-steps/01-icon-text.png" alt="Іконка і текст" />
+        <div class="cap">Скрін 1 · іконка (червона outline) над текстом · mobile ≈ desktop (розміри)</div>
+      </div>
+      <h3>7.2. Блок етапів + Progress (desktop)</h3>
+      <div class="shot">
+        <img src="component-shots/home-steps/02-steps-block.png" alt="Етапи купівлі зі США" />
+        <div class="cap">Скрін 2 · секція: Progress зліва + список StepDescription · заголовок блоку</div>
+      </div>
+      <h3>7.3. Progress (лінія / маркери)</h3>
+      <div class="shot">
+        <img src="component-shots/home-steps/03-progress.png" alt="Progress rail" />
+        <div class="cap">Скрін 3 · Progress: заповнена частина + активний «бик’зай» · майбутні — світлі</div>
+      </div>
+      <div class="box brand">
+        <h4>Поведінка Steps / Progress</h4>
+        <ul>
+          <li>Активується при <strong>скролі</strong></li>
+          <li>Працює в <strong>обидві сторони</strong>: вниз і вгору</li>
+          <li>Mobile — те саме; відрізняються лише розміри</li>
+        </ul>
+      </div>
+      <h3>7.4. StepDescription</h3>
+      <div class="shot">
+        <img src="component-shots/home-steps/04-step-description.png" alt="Опис етапу" />
+        <div class="cap">Скрін 4 · цифра + title + текст · у тексті: лінк + Phone</div>
+      </div>
+      <div class="box ok">
+        <h4>Слоти StepDescription</h4>
+        <ul>
+          <li><strong>number</strong> — номер етапу</li>
+          <li><strong>title</strong></li>
+          <li><strong>text</strong> — rich: звичайний текст + <em>посилання</em> + компонента телефону (tel:)</li>
+        </ul>
+      </div>
+      <h3>Підсумок</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Desktop</th><th>Mobile</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>IconText</td>
+            <td>Іконка + текст</td>
+            <td>Ідентично</td>
+            <td>Можлива різниця розмірів</td>
+          </tr>
+          <tr>
+            <td>Progress</td>
+            <td>Вертикальна лінія</td>
+            <td>Те саме</td>
+            <td>Scroll ↑↓</td>
+          </tr>
+          <tr>
+            <td>Steps</td>
+            <td>Список етапів</td>
+            <td>Те саме</td>
+            <td>Активація з Progress</td>
+          </tr>
+          <tr>
+            <td>StepDescription</td>
+            <td>Картка етапу</td>
+            <td>Те саме</td>
+            <td>number · title · text(+link, Phone)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Картки відгуків — <a href="#reviews">§8</a>.</p>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <h2>8. Головна · картки відгуків (ReviewCard)</h2>
+      <p class="lead">
+        Картка з YouTube-відео: прев’ю → плеєр, fullscreen вбудований у плеєр.
+        Desktop-слайдер з кнопкою листання справа; mobile — той самий патерн слайдера, що CarCards (§5).
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: Home</span>
+        <span class="chip soft">Блок: Reviews</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <h3>8.1. ReviewCard — прев’ю</h3>
+      <div class="shot">
+        <img src="component-shots/reviews/01-card-thumb.png" alt="Картка відгуку прев’ю" />
+        <div class="cap">Скрін 1 · фото · «ВІДГУК» · YouTube play · авто · текст · ціна · CTA «Цікавить схоже авто»</div>
+      </div>
+      <h3>8.2. Плеєр (YouTube embed)</h3>
+      <div class="shot">
+        <img src="component-shots/reviews/02-card-player.png" alt="Картка з YouTube плеєром" />
+        <div class="cap">Скрін 2 · вбудований YouTube-плеєр у картці (play/pause, прогрес, controls)</div>
+      </div>
+      <div class="shot">
+        <img src="component-shots/reviews/03-player-fullscreen.jpg" alt="Повноекранний перегляд відео" />
+        <div class="cap">Скрін 3 · fullscreen через controls плеєра (вбудована можливість YouTube)</div>
+      </div>
+      <div class="box brand">
+        <h4>Відео</h4>
+        <ul>
+          <li>Картка <strong>приймає YouTube</strong> (id / url)</li>
+          <li>Повноекранний режим — <strong>з плеєра</strong> (не окремий кастомний оверлей)</li>
+        </ul>
+      </div>
+      <h3>8.3. Desktop — слайдер з кнопкою листання</h3>
+      <div class="shot">
+        <img src="component-shots/reviews/04-desktop-slider.jpg" alt="Слайдер відгуків десктоп" />
+        <div class="cap">Скрін 4 · ReviewsSlider desktop · ряд карток · <strong>стрілка → справа</strong> для листання</div>
+      </div>
+      <div class="box">
+        <h4>Відмінність від інших слайдерів</h4>
+        <p>
+          ClientCards / CarCards (§4–5): без dots, таймер, без стрілки.
+          Reviews desktop: <strong>є кнопка листання справа</strong>.
+        </p>
+      </div>
+      <h3>8.4. Мобайл — картка в слайдері</h3>
+      <div class="shot">
+        <img src="component-shots/reviews/05-mobile-card.png" alt="Картка відгуку мобайл" />
+        <div class="cap">Скрін 5 · ReviewCard mobile · у слайдері <strong>як CarCardsSlider</strong> (§5)</div>
+      </div>
+      <div class="box ok">
+        <h4>Mobile slider</h4>
+        <p>Той самий патерн, що картки авто / клієнтів на мобайлі (без dots, peek / таймер — як зафіксовано раніше).</p>
+      </div>
+      <h3>Підсумок</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Desktop</th><th>Mobile</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ReviewCard</td>
+            <td>У слайдері</td>
+            <td>У слайдері</td>
+            <td>YouTube + CTA primary</td>
+          </tr>
+          <tr>
+            <td>YouTube player</td>
+            <td>Embed у картці</td>
+            <td>Те саме</td>
+            <td>Fullscreen з controls плеєра</td>
+          </tr>
+          <tr>
+            <td>ReviewsSlider</td>
+            <td>Стрілка → справа</td>
+            <td>= CarCardsSlider</td>
+            <td>Desktop ≠ mobile nav</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Google-відгуки (текст) — <a href="#google-reviews">§9</a>. Не плутати з YouTube-картками вище.</p>
+      </div>
+    </section>
+
+    <section id="google-reviews">
+      <h2>9. Головна · Google-відгуки (текст)</h2>
+      <p class="lead">
+        Окремий від §8 блок: текстові відгуки (Google), слайдер з автопрокруткою,
+        режим повного перегляду історії (ReviewViewer).
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: Home</span>
+        <span class="chip soft">Блок: GoogleReviews</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <h3>9.1. Desktop — слайдер (новий)</h3>
+      <div class="shot">
+        <img src="component-shots/google-reviews/01-desktop-slider.png" alt="Слайдер Google-відгуків десктоп" />
+        <div class="cap">Скрін 1 · дві круглі кнопки по боках ← → · <strong>є автопрокрутка</strong></div>
+      </div>
+      <h3>9.2. ReviewViewer — повноекранний режим (desktop)</h3>
+      <div class="shot">
+        <img src="component-shots/google-reviews/02-fullscreen-mode.jpg" alt="Fullscreen перегляд відгуків" />
+        <div class="cap">Скрін 2 · оверлей · вертикальний скрол списку · × зверху справа · закриває режим</div>
+      </div>
+      <div class="box brand">
+        <h4>Компонент ReviewViewer</h4>
+        <p>
+          Окремий режим перегляду історії відгуків: backdrop + скрол + close.
+          Відкривається з «Читати далі» на картці в слайдері.
+        </p>
+      </div>
+      <h3>9.3. Картка у fullscreen (desktop)</h3>
+      <div class="shot">
+        <img src="component-shots/google-reviews/03-fullscreen-card.png" alt="Картка у fullscreen" />
+        <div class="cap">Скрін 3 · повний текст · avatar · зірки · verified · Google G</div>
+      </div>
+      <h3>9.4. Мобайл — відкритий режим перегляду</h3>
+      <div class="shot">
+        <img src="component-shots/google-reviews/04-mobile-fullscreen.jpg" alt="Мобайл fullscreen відгуків" />
+        <div class="cap">Скрін 4 · mobile Viewer · кнопка «Закрити» <strong>внизу з текстом + ×</strong> (не кут)</div>
+      </div>
+      <div class="shot">
+        <img src="component-shots/google-reviews/05-mobile-fullscreen-card.jpg" alt="Картка мобайл fullscreen" />
+        <div class="cap">Скрін 5 · картка для mobile Viewer (часто з фото + текст)</div>
+      </div>
+      <h3>9.5. Мобайл — слайдер (не fullscreen)</h3>
+      <div class="shot">
+        <img src="component-shots/google-reviews/06-mobile-slider.png" alt="Слайдер відгуків мобайл" />
+        <div class="cap">Скрін 6 · картки в слайдері · під ними bar-dots</div>
+      </div>
+      <div class="shot">
+        <img src="component-shots/google-reviews/07-mobile-dots.png" alt="Dots слайдера відгуків" />
+        <div class="cap">Скрін 7 · різновид dots: трек + повзунок (не кружечки · не 01—02—03)</div>
+      </div>
+      <h3>9.6. GoogleReviewCard у слайдері</h3>
+      <div class="grid-2">
+        <div class="shot">
+          <img src="component-shots/google-reviews/08-card-read-more.png" alt="Картка з Читати далі" />
+          <div class="cap">Скрін 8 · truncated текст · «Читати далі» → ReviewViewer</div>
+        </div>
+        <div class="shot">
+          <img src="component-shots/google-reviews/09-desktop-card.png" alt="Картка десктоп у слайдері" />
+          <div class="cap">Скрін 9 · desktop-картка в слайдері (peek сусідів)</div>
+        </div>
+      </div>
+      <div class="box ok">
+        <h4>Склад картки</h4>
+        <ul>
+          <li>Avatar (фото або літера) · ім’я · час · Google G</li>
+          <li>5 зірок + verified badge</li>
+          <li>Текст (обрізаний у слайдері) · опційно міні-фото</li>
+          <li>«Читати далі» відкриває ReviewViewer</li>
+        </ul>
+      </div>
+      <h3>Підсумок</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Desktop</th><th>Mobile</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GoogleReviewsSlider</td>
+            <td>← → + auto-scroll</td>
+            <td>Слайдер + bar-dots</td>
+            <td>Новий слайдер ≠ §8</td>
+          </tr>
+          <tr>
+            <td>GoogleReviewCard</td>
+            <td>У слайдері</td>
+            <td>У слайдері</td>
+            <td>«Читати далі»</td>
+          </tr>
+          <tr>
+            <td>ReviewViewer</td>
+            <td>Список · × top-right</td>
+            <td>Картка · «Закрити» bottom</td>
+            <td>Скрол історії</td>
+          </tr>
+          <tr>
+            <td>SliderDots (bar)</td>
+            <td>—</td>
+            <td>Трек + thumb</td>
+            <td>Ще один варіант dots</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Коротка форма / FAQ / інфоблок / новини — <a href="#home-more">§10</a>.</p>
+      </div>
+    </section>
+
+    <section id="home-more">
+      <h2>10. Головна · коротка форма, FAQ, інфоблок, новини</h2>
+      <p class="lead">
+        Ще один варіант форми (менше полів), акордеон FAQ, статичний інфоблок,
+        новини в слайдері (desktop з SlideCounter; mobile — як video-відгуки §8, без dots).
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: Home</span>
+        <span class="chip soft">Блок: Form · FAQ · Info · News</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <h3>10.1. ContactForm (коротка)</h3>
+      <div class="shot">
+        <img src="component-shots/home-more/01-form-short.png" alt="Коротка форма питання" />
+        <div class="cap">Скрін 1 · варіант форми з <strong>меншою кількістю полів</strong>: Ім’я · телефон · питання · «Надіслати запитання»</div>
+      </div>
+      <div class="box ok">
+        <h4>Vs LeadForm (§6)</h4>
+        <p>Ті самі Input / PhoneInput / FormSubmit · інший набір полів і CTA. Валідація — той самий патерн.</p>
+      </div>
+      <h3>10.2. Accordion (FAQ)</h3>
+      <div class="grid-2">
+        <div class="shot">
+          <img src="component-shots/home-more/02-accordion-desktop.png" alt="Акордеон FAQ десктоп" />
+          <div class="cap">Скрін 2 · desktop: питання + ▾ · collapsed</div>
+        </div>
+        <div class="shot">
+          <img src="component-shots/home-more/03-accordion-mobile.png" alt="Акордеон FAQ мобайл" />
+          <div class="cap">Скрін 3 · mobile: той самий Accordion (розміри)</div>
+        </div>
+      </div>
+      <div class="box">
+        <h4>AccordionItem</h4>
+        <p>Header (питання + chevron) · body (відповідь). Патерн близький до nav-акордеону в моб. меню (§2), інший UI.</p>
+      </div>
+      <h3>10.3. InfoBlock (інформативний)</h3>
+      <div class="shot">
+        <img src="component-shots/home-more/04-info-block.jpg" alt="Інформативний блок" />
+        <div class="cap">Скрін 4 · заголовок · primary Button · фото справа (статичний, не таймер-банер §3)</div>
+      </div>
+      <h3>10.4. NewsCard + NewsSlider (desktop)</h3>
+      <div class="shot">
+        <img src="component-shots/home-more/05-news-card.png" alt="Картка новини" />
+        <div class="cap">Скрін 5 · NewsCard desktop: фото зліва · дата · title · excerpt · у слайдері</div>
+      </div>
+      <div class="shot">
+        <img src="component-shots/home-more/06-news-slider.jpg" alt="Слайдер новин" />
+        <div class="cap">Скрін 6 · 2 картки в ряд · під ними SlideCounter</div>
+      </div>
+      <div class="shot">
+        <img src="component-shots/home-more/07-slide-counter.png" alt="Dots 01 02 03 04" />
+        <div class="cap">Скрін 7 · той самий тип dots, що банер (§3): 01—02—03—… · активний більший</div>
+      </div>
+      <h3>10.5. NewsCard mobile</h3>
+      <div class="shot">
+        <img src="component-shots/home-more/08-news-card-mobile.png" alt="Картка новини мобайл" />
+        <div class="cap">Скрін 8 · вертикальна картка · у слайдері <strong>без dots</strong> · патерн як video ReviewCard mobile (§8)</div>
+      </div>
+      <div class="box brand">
+        <h4>Слайдери новин</h4>
+        <ul>
+          <li><strong>Desktop:</strong> горизонтальні картки + SlideCounter (як hero)</li>
+          <li><strong>Mobile:</strong> без dots · той самий патерн, що слайдер відео-відгуків на мобайлі</li>
+        </ul>
+      </div>
+      <h3>Підсумок</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Desktop</th><th>Mobile</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ContactForm</td>
+            <td>3 поля + submit</td>
+            <td>Те саме</td>
+            <td>Коротший варіант LeadForm</td>
+          </tr>
+          <tr>
+            <td>Accordion / FAQ</td>
+            <td>Список</td>
+            <td>Список</td>
+            <td>▾ open/close</td>
+          </tr>
+          <tr>
+            <td>InfoBlock</td>
+            <td>Текст + CTA + image</td>
+            <td>—</td>
+            <td>≠ таймер InformativeBanner</td>
+          </tr>
+          <tr>
+            <td>NewsCard</td>
+            <td>Horizontal</td>
+            <td>Vertical</td>
+            <td>Дата · title · excerpt</td>
+          </tr>
+          <tr>
+            <td>NewsSlider</td>
+            <td>+ SlideCounter</td>
+            <td>Без dots (= §8 video)</td>
+            <td>Dots = той самий компонент що банер</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>ExpandText / банер бонусу — <a href="#home-bonus">§11</a>.</p>
+      </div>
+    </section>
+
+    <section id="home-bonus">
+      <h2>11. Головна · ExpandText і банер «отримати бонус»</h2>
+      <p class="lead">
+        Розгортання довгого тексту («Детальніше» / «Приховати») і ще один банер з лід-формою бонусу
+        (ім’я + email + checkbox згоди).
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: Home</span>
+        <span class="chip soft">Блок: ExpandText · BonusBanner</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <h3>11.1. ExpandText (Детальніше / Приховати)</h3>
+      <div class="grid-2">
+        <div class="shot">
+          <img src="component-shots/home-bonus/01-expand-collapsed.png" alt="ExpandText згорнуто" />
+          <div class="cap">Скрін 1 · collapsed: обрізаний текст · «Детальніше» ↓</div>
+        </div>
+        <div class="shot">
+          <img src="component-shots/home-bonus/02-expand-open.png" alt="ExpandText розгорнуто" />
+          <div class="cap">Скрін 2 · expanded: повний текст · «Приховати» ↑</div>
+        </div>
+      </div>
+      <div class="box ok">
+        <h4>Поведінка</h4>
+        <ul>
+          <li>Toggle expand / collapse довгого контенту (SEO / опис)</li>
+          <li>Mobile — <strong>та сама поведінка</strong>; стилізація трохи відрізняється</li>
+        </ul>
+      </div>
+      <h3>11.2. BonusBanner (desktop)</h3>
+      <div class="shot">
+        <img src="component-shots/home-bonus/03-bonus-banner.jpg" alt="Банер бонусу десктоп" />
+        <div class="cap">Скрін 3 · фон-фото · заголовок · підзаголовок · checklist · форма в картці</div>
+      </div>
+      <h3>11.3. Checkbox + label</h3>
+      <div class="shot">
+        <img src="component-shots/home-bonus/04-checkbox.png" alt="Чекбокс згоди" />
+        <div class="cap">Скрін 4 · Checkbox з лейблом згоди (checked / unchecked)</div>
+      </div>
+      <h3>11.4. BonusForm</h3>
+      <div class="shot">
+        <img src="component-shots/home-bonus/05-bonus-form.png" alt="Форма отримати бонус" />
+        <div class="cap">Скрін 5 · ім’я · <strong>email</strong> (новий тип поля) · Checkbox · «Отримати бонус»</div>
+      </div>
+      <div class="box brand">
+        <h4>Поля</h4>
+        <ul>
+          <li>Input text — ім’я</li>
+          <li>Input <strong>type=email</strong> — «Ваша пошта» (новий тип у каталозі)</li>
+          <li>Checkbox + label — згода</li>
+          <li>FormSubmit — «Отримати бонус»</li>
+        </ul>
+      </div>
+      <h3>11.5. Мобайл — усі елементи</h3>
+      <div class="shot">
+        <img src="component-shots/home-bonus/06-bonus-mobile.png" alt="Банер бонусу мобайл" />
+        <div class="cap">Скрін 6 · mobile: текст + checklist + ім’я + email + checkbox + кнопка — усе на місці</div>
+      </div>
+      <h3>Підсумок</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Desktop</th><th>Mobile</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ExpandText</td>
+            <td>Детальніше / Приховати</td>
+            <td>Те саме</td>
+            <td>Стилі трохи інші</td>
+          </tr>
+          <tr>
+            <td>BonusBanner</td>
+            <td>Фон + текст + форма</td>
+            <td>Стек усіх елементів</td>
+            <td>≠ InformativeBanner (§3)</td>
+          </tr>
+          <tr>
+            <td>BonusForm</td>
+            <td>2 колонки ім’я|email</td>
+            <td>Стек</td>
+            <td>+ email Input</td>
+          </tr>
+          <tr>
+            <td>Checkbox</td>
+            <td>З лейблом</td>
+            <td>Те саме</td>
+            <td>Згода на обробку / сповіщення</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Футер — <a href="#site-footer">§12</a>. Головна (блоки) майже зібрана; інші сторінки — далі.</p>
+      </div>
+    </section>
+
+    <section id="site-footer">
+      <h2>12. Футер (SiteFooter)</h2>
+      <p class="lead">
+        Спільний футер усіх сторінок: навігація, контакти, соцмережі, карта, теги марок/моделей/кузовів.
+      </p>
+      <div class="meta">
+        <span class="chip">Усі сторінки</span>
+        <span class="chip soft">Блок: Footer</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <h3>12.1. Desktop — основна частина</h3>
+      <div class="shot">
+        <img src="component-shots/footer/01-desktop-main.png" alt="Футер десктоп основний" />
+        <div class="cap">Скрін 1 · logo · колонки меню · соцмережі · телефон · email · години · адреса · Map</div>
+      </div>
+      <div class="box">
+        <h4>Підкомпоненти</h4>
+        <ul>
+          <li><strong>FooterNav</strong> — колонки (Авто з США/Кореї, Перевірка, Відгуки, Про нас, Блог)</li>
+          <li><strong>SocialLinks</strong> — Instagram, Facebook, YouTube, Telegram, TikTok</li>
+          <li><strong>Contacts</strong> — Phone · Email · години · адреса</li>
+          <li><strong>MapEmbed</strong> — карта + зелений overlay з адресою/телефоном</li>
+        </ul>
+      </div>
+      <h3>12.2. Desktop — теги (Марки / Моделі / Кузова)</h3>
+      <div class="shot">
+        <img src="component-shots/footer/02-desktop-tags.png" alt="Футер теги марок" />
+        <div class="cap">Скрін 2 · таби Марки|Моделі|Кузова · TagChip сітка · політика · кредит IST.Group</div>
+      </div>
+      <div class="box ok">
+        <h4>FooterTagTabs</h4>
+        <p>Таби перемикають набір TagChip (марки / моделі / кузова). Активний таб жирніший.</p>
+      </div>
+      <h3>12.3. Мобайл — верх (logo, contacts, map)</h3>
+      <div class="shot">
+        <img src="component-shots/footer/03-mobile-top.png" alt="Футер мобайл верх" />
+        <div class="cap">Скрін 3 · logo · social · contacts · MapEmbed · початок nav</div>
+      </div>
+      <h3>12.4. Мобайл — навігація</h3>
+      <div class="shot">
+        <img src="component-shots/footer/04-mobile-nav.png" alt="Футер мобайл меню" />
+        <div class="cap">Скрін 4 · FooterNav у 2 колонки (ті самі пункти, що desktop)</div>
+      </div>
+      <h3>12.5. Мобайл — теги</h3>
+      <div class="shot">
+        <img src="component-shots/footer/05-mobile-tags.png" alt="Футер мобайл теги" />
+        <div class="cap">Скрін 5 · FooterTagTabs + TagChip · політика · IST.Group</div>
+      </div>
+      <h3>Підсумок</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Desktop</th><th>Mobile</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SiteFooter</td>
+            <td>2 зони: nav+contacts · tags</td>
+            <td>Вертикальний стек</td>
+            <td>На всіх URL</td>
+          </tr>
+          <tr>
+            <td>FooterNav</td>
+            <td>Колонки</td>
+            <td>2-col grid</td>
+            <td>Дані ≈ header menu</td>
+          </tr>
+          <tr>
+            <td>SocialLinks / Contacts / Map</td>
+            <td>Низ футера</td>
+            <td>Під logo</td>
+            <td>Phone / Email / години</td>
+          </tr>
+          <tr>
+            <td>FooterTagTabs + TagChip</td>
+            <td>Марки|Моделі|Кузова</td>
+            <td>Те саме</td>
+            <td>SEO-лінки каталогу</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Наступні сторінки (не home) — новими секціями за скрінами.</p>
+      </div>
+    </section>
+
+    <footer>
+      <code>assets-from-production/FE-COMPONENTS-UA.html</code>
+      · <a href="FE-ROADMAP-UA.html">план робіт</a>
+    </footer>
+  </div>
+</body>
+</html>
