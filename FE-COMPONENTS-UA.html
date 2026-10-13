@@ -148,6 +148,7 @@
         <li><a href="#auctions-listing">Аукціони /auctions/</a> — datepicker · timer · Telegram CTA · reuse cards</li>
         <li><a href="#not-found-page">404 NotFound</a> — NotFoundContent · HomeButton · mobile</li>
         <li><a href="#auction-item">Лот /auctions/{id}/</a> — LotVin · AuctionData · LotDescription · ModelRange · PopularLots</li>
+        <li><a href="#korea-auctions">Корейські аукціони</a> — PriceTooltip · BodyCondition · History · Insurance · Owners/Mileage</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -2971,6 +2972,154 @@
             <td>SimilarCars / Reviews / Bonus / Footer</td>
             <td>Reuse</td>
             <td>§14 / §11 / §12</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Корейські аукціони — <a href="#korea-auctions">§18</a>. Калькулятор / VIN — далі за скрінами.</p>
+      </div>
+    </section>
+
+
+    <section id="korea-auctions">
+      <h2>18. Корейські аукціони · специфічні блоки</h2>
+      <p class="lead">
+        Компоненти, характерні для корейських лотів (Encar тощо): tooltip ціни, стан кузова,
+        історія, страхові випадки, власники / пробіг. Базовий layout сторінки лота — як §17.
+      </p>
+      <div class="meta">
+        <span class="chip">Контекст: Korea / Encar</span>
+        <span class="chip soft">Блок: KoreaAuctionExtras</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>18.1. PriceRelevanceTooltip</h3>
+      <div class="shot" style="max-width:420px">
+        <img src="component-shots/korea-auctions/01-price-tooltip.png" alt="Tooltip актуальності ціни" style="max-width:420px;max-height:360px" />
+        <div class="cap">Скрін 1 · info icon біля ціни · popover «Актуальність ціни уточнюйте у менеджера.»</div>
+      </div>
+      <div class="box ok">
+        <h4>PriceRelevanceTooltip</h4>
+        <ul>
+          <li>Trigger: круглий «i» біля ціни в картці/лістингу</li>
+          <li>Popover: shadow · caret вниз · icon + текст</li>
+        </ul>
+      </div>
+
+      <h3>18.2. BodyConditionReport — desktop</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/korea-auctions/02-body-condition-desktop.jpg" alt="Стан панелей desktop" style="max-width:640px;max-height:520px" />
+        <div class="cap">Скрін 2 · «Стан зовнішніх панелей і каркаса» · 4 схеми авто · легенда XX/W/P · R/M/X · статус Encar</div>
+      </div>
+      <div class="box ok">
+        <h4>BodyConditionReport</h4>
+        <p>Діаграми кузова + легенда ремонтів/пошкоджень + note (напр. «Encar не позначив…»).</p>
+      </div>
+
+      <h3>18.3. BodyConditionReport — mobile</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/korea-auctions/03-body-condition-mobile.png" alt="Стан панелей mobile" style="max-width:360px;max-height:560px" />
+        <div class="cap">Скрін 3 · ті самі схеми/легенда · вужча колонка · stack</div>
+      </div>
+
+      <h3>18.4. HistoryOverview — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/korea-auctions/04-history-overview-desktop.jpg" alt="Загальна інформація про історію" />
+        <div class="cap">Скрін 4 · title + divider · сітка HistoryStatusCard (4×2)</div>
+      </div>
+
+      <h3>18.5. HistoryStatusCard — clear</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/korea-auctions/05-history-status-clear.png" alt="Статус Не виявлено" style="max-width:360px" />
+        <div class="cap">Скрін 5 · diamond icon · title · статус <strong style="color:green">Не виявлено</strong> (green)</div>
+      </div>
+
+      <h3>18.6. HistoryStatusCard — detected</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/korea-auctions/06-history-status-detected.png" alt="Статус Виявлено" style="max-width:360px" />
+        <div class="cap">Скрін 6 · той самий card · статус <strong style="color:#b54739">Виявлено: N</strong> (red)</div>
+      </div>
+      <div class="box ok">
+        <h4>HistoryStatusCard</h4>
+        <ul>
+          <li>Стани: <code>clear</code> (green) · <code>detected</code> (red + count)</li>
+          <li>Наповнює HistoryOverview</li>
+        </ul>
+      </div>
+
+      <h3>18.7. HistoryOverview — mobile</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/korea-auctions/07-history-overview-mobile.png" alt="Історія mobile" style="max-width:360px;max-height:480px" />
+        <div class="cap">Скрін 7 · 2 колонки cards · той самий контент</div>
+      </div>
+
+      <h3>18.8. InsuranceHistory — empty (desktop)</h3>
+      <div class="shot">
+        <img src="component-shots/korea-auctions/08-insurance-history-desktop.jpg" alt="Страхові випадки desktop empty" />
+        <div class="cap">Скрін 8 · «Детальна історія страхових випадків» · dashed empty «Страхових випадків не знайдено»</div>
+      </div>
+      <div class="box brand">
+        <h4>InsuranceHistory</h4>
+        <p>Empty-state показаний; filled (таблиця подій) — коли з’являться скріни з даними.</p>
+      </div>
+
+      <h3>18.9. InsuranceHistory — mobile</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/korea-auctions/09-insurance-history-mobile.png" alt="Страхові випадки mobile" style="max-width:360px;max-height:280px" />
+        <div class="cap">Скрін 9 · той самий empty-state · вужча картка</div>
+      </div>
+
+      <h3>18.10. OwnersInfo + MileageInfo — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/korea-auctions/10-owners-mileage-desktop.jpg" alt="Власники і пробіг desktop" />
+        <div class="cap">Скрін 10 · дві таблиці: «Інформація про власників» · «Інформація про пробіг»</div>
+      </div>
+      <div class="box ok">
+        <h4>OwnersInfo / MileageInfo</h4>
+        <ul>
+          <li>OwnersInfo — № · дата зміни власника</li>
+          <li>MileageInfo — дата · пробіг · джерело (Encar тощо)</li>
+          <li>Dark header bar · light rows</li>
+        </ul>
+      </div>
+
+      <h3>18.11. MileageInfo — mobile (h-scroll)</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/korea-auctions/11-mileage-mobile.png" alt="Пробіг mobile scroll" style="max-width:360px;max-height:240px" />
+        <div class="cap">Скрін 11 · та сама таблиця · <strong>horizontal scroll</strong> для перегляду колонок</div>
+      </div>
+
+      <h3>Підсумок · Korea extras</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PriceRelevanceTooltip</td>
+            <td><strong>Нове</strong></td>
+            <td>info · popover біля ціни</td>
+          </tr>
+          <tr>
+            <td>BodyConditionReport</td>
+            <td><strong>Нове</strong></td>
+            <td>схеми · легенда · Encar note</td>
+          </tr>
+          <tr>
+            <td>HistoryOverview + HistoryStatusCard</td>
+            <td><strong>Нове</strong></td>
+            <td>clear / detected</td>
+          </tr>
+          <tr>
+            <td>InsuranceHistory</td>
+            <td><strong>Нове</strong></td>
+            <td>empty-state (поки)</td>
+          </tr>
+          <tr>
+            <td>OwnersInfo / MileageInfo</td>
+            <td><strong>Нове</strong></td>
+            <td>tables · mobile h-scroll</td>
           </tr>
         </tbody>
       </table>
