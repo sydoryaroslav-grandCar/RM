@@ -160,6 +160,7 @@
         <li><a href="#blog-page">Блог /blog/</a> — CategoryNav · ArticleCard · Pagination variant · ExpertCard/Slider</li>
         <li><a href="#expert-page">Експерт /experts/{slug}/</a> — Profile · Values · ArticleBody · Share · meta</li>
         <li><a href="#contacts-page">Контакти /contacts/</a> — OfficeMap · ContactsInfo</li>
+        <li><a href="#saved-page">Збережені авто</a> — PageLoader · SavedCarCard</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -4217,6 +4218,80 @@
             <td>ContactsInfo</td>
             <td><strong>Нове</strong></td>
             <td>grid desktop · stack mobile · SocialLinksRow</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Збережені авто / loader — <a href="#saved-page">§30</a>. Інші URL — далі за скрінами.</p>
+      </div>
+    </section>
+
+
+    <section id="saved-page">
+      <h2>30. Збережені авто · loader + SavedCarCard</h2>
+      <p class="lead">
+        Сторінка «Збережені авто»: PageLoader (3 dots overlay),
+        картка збереженого авто — horizontal desktop / vertical mobile · badge «Збережено».
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /zberezheni-avto/ (або еквівалент)</span>
+        <span class="chip soft">Блок: SavedCarsPage</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>30.1. PageLoader — dots</h3>
+      <div class="shot" style="max-width:280px">
+        <img src="component-shots/saved/01-loader-dots.png" alt="Лоадер три крапки" style="max-width:280px" />
+        <div class="cap">Скрін 1 · 3 white dots на dark grey · anim (bounce/opacity)</div>
+      </div>
+
+      <h3>30.2. PageLoader — page context</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/saved/02-loader-page.jpg" alt="Лоадер на сторінці збережених" style="max-width:640px;max-height:280px" />
+        <div class="cap">Скрін 2 · Breadcrumb · title «Збережені авто» · dimmed content · centered loader · Footer нижче</div>
+      </div>
+      <div class="box ok">
+        <h4>PageLoader</h4>
+        <p>Глобальний loading overlay · 3-dot indicator · reusable (не тільки saved). Breadcrumb / Header / Footer — reuse.</p>
+      </div>
+
+      <h3>30.3. SavedCarCard — desktop</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/saved/03-saved-car-card-desktop.jpg" alt="Картка збереженого авто desktop" style="max-width:640px;max-height:280px" />
+        <div class="cap">Скрін 3 · horizontal · photo + badge «Збережено» · title · ціна США · 4 specs · CTA «Дізнатися ціну під ключ» · «Детальніше»</div>
+      </div>
+      <div class="box brand">
+        <h4>Vs CarCard §5 / CatalogCarCard §13</h4>
+        <p>Той самий сімейний патерн (photo · specs · price · CTAs). Тут: <strong>saved state</strong> badge «Збережено» · listing horizontal layout. У реєстрі — CarCard / CatalogCarCard + variant <code>saved</code>, не з нуля.</p>
+      </div>
+
+      <h3>30.4. SavedCarCard — mobile</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/saved/04-saved-car-card-mobile.png" alt="Картка збереженого авто mobile" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 4 · vertical stack · badge на фото · specs · price · full-width primary + outline</div>
+      </div>
+
+      <h3>Підсумок · збережені / loader</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PageLoader</td>
+            <td><strong>Нове</strong> (global)</td>
+            <td>3 dots · overlay · desktop (mobile same pattern)</td>
+          </tr>
+          <tr>
+            <td>SavedCarCard</td>
+            <td>Варіант CarCard / CatalogCarCard</td>
+            <td>badge «Збережено» · desktop horizontal · mobile vertical</td>
+          </tr>
+          <tr>
+            <td>Breadcrumb / Footer</td>
+            <td>Reuse</td>
+            <td>§13 / §12</td>
           </tr>
         </tbody>
       </table>
