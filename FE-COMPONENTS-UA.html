@@ -147,6 +147,7 @@
         <li><a href="#car-item">Сторінка авто /cars/{slug}/</a> — gallery · rating · specs · комплектація · опис</li>
         <li><a href="#auctions-listing">Аукціони /auctions/</a> — datepicker · timer · Telegram CTA · reuse cards</li>
         <li><a href="#not-found-page">404 NotFound</a> — NotFoundContent · HomeButton · mobile</li>
+        <li><a href="#auction-item">Лот /auctions/{id}/</a> — LotVin · AuctionData · LotDescription · ModelRange · PopularLots</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -2802,6 +2803,174 @@
             <td>Header / Bonus / Footer</td>
             <td>Reuse</td>
             <td>§2 / §11 / §12</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Лот аукціону — <a href="#auction-item">§17</a>. Калькулятор / VIN — далі за скрінами.</p>
+      </div>
+    </section>
+
+
+    <section id="auction-item">
+      <h2>17. Лот аукціону · /auctions/{id}/</h2>
+      <p class="lead">
+        Сторінка лота (приклад
+        <a href="https://www.grandcar.ua/auctions/52582686/" target="_blank" rel="noopener noreferrer">/auctions/52582686/</a>).
+        Layout близький до /cars/{slug}/ (§14): gallery + info справа · нижче блоки опису / SEO / схожі · reviews · bonus · footer.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /auctions/{id}/</span>
+        <span class="chip soft">Блок: AuctionItem</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <div class="box brand">
+        <h4>Reuse з /cars/{slug}/ і shared</h4>
+        <ul>
+          <li><strong>OfferGallery</strong> — як §14.5+</li>
+          <li>Праві info / CTA preview-блоки — той самий патерн що §14</li>
+          <li><strong>SimilarCarsSlider</strong> — як §14 (AuctionCard + timer/inactive)</li>
+          <li><strong>ReviewsTeaser</strong> — §14.18+</li>
+          <li><strong>BonusLeadForm</strong> · <strong>Header / Footer</strong> — §11 / §2 / §12</li>
+        </ul>
+      </div>
+
+      <h3>17.1. LotBadge + VinCopy — default (masked)</h3>
+      <div class="shot">
+        <img src="component-shots/auction-item/01-lot-vin-badges.png" alt="Лот і VIN badges" />
+        <div class="cap">Скрін 1 · «Лот {id}» · VIN частково прихований (*****) · іконка copy</div>
+      </div>
+      <div class="box ok">
+        <h4>LotBadge / VinCopy</h4>
+        <ul>
+          <li><strong>LotBadge</strong> — outline box з номером лота</li>
+          <li><strong>VinCopy</strong> — masked VIN + copy icon · click → clipboard + feedback «лот скопійовано»</li>
+        </ul>
+      </div>
+
+      <h3>17.2. VinCopy — active / full</h3>
+      <div class="shot">
+        <img src="component-shots/auction-item/02-vin-copy-active.png" alt="VIN copy active" />
+        <div class="cap">Скрін 2 · filled red · повний VIN + copy · стан після/під час copy (feedback «лот скопійовано»)</div>
+      </div>
+
+      <h3>17.3. OfferGallery</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/auction-item/03-gallery.png" alt="Галерея лота" style="max-width:640px;max-height:480px" />
+        <div class="cap">Скрін 3 · main + thumbs · arrows · fullscreen · «+N» · як §14.5 · справа ті самі info-блоки</div>
+      </div>
+
+      <h3>17.4. AuctionData — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/auction-item/04-auction-data-desktop.jpg" alt="Дані аукціону desktop" />
+        <div class="cap">Скрін 4 · title + divider · 3-колонкова сітка icon+label:value</div>
+      </div>
+      <div class="box ok">
+        <h4>AuctionData</h4>
+        <p>Аукціон · локація · оновлено · стан · пошкодження · документи · час · ставка тощо.</p>
+      </div>
+
+      <h3>17.5. AuctionData — mobile</h3>
+      <div class="shot" style="max-width:420px">
+        <img src="component-shots/auction-item/05-auction-data-mobile.png" alt="Дані аукціону mobile" style="max-width:420px;max-height:400px" />
+        <div class="cap">Скрін 5 · ті самі поля · вертикальний список label | value</div>
+      </div>
+
+      <h3>17.6. LotDescription — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/auction-item/06-lot-description-desktop.jpg" alt="Опис лоту desktop" />
+        <div class="cap">Скрін 6 · «Опис лоту» · divider · текст із <strong>bold</strong> ключових слів (модель, пробіг, VIN, пошкодження)</div>
+      </div>
+
+      <h3>17.7. LotDescription — mobile</h3>
+      <div class="shot" style="max-width:480px">
+        <img src="component-shots/auction-item/07-lot-description-mobile.png" alt="Опис лоту mobile" style="max-width:480px;max-height:400px" />
+        <div class="cap">Скрін 7 · ідентичний контент · вужча колонка</div>
+      </div>
+      <div class="box brand">
+        <h4>LotDescription vs OfferDescription (§14)</h4>
+        <p>Окремий блок з title+divider і inline highlight ключів (не expand/collapse «Опис:» з /cars/).</p>
+      </div>
+
+      <h3>17.8. ModelRange — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/auction-item/08-model-range-desktop.jpg" alt="Модельний ряд desktop" />
+        <div class="cap">Скрін 8 · «Модельний ряд {BRAND}» · multi-col links · hover = red bg + white text</div>
+      </div>
+      <div class="box">
+        <h4>ModelRange · mobile</h4>
+        <p>Скрін 9 (за описом): та сама компонента, інша сітка/колонки. Окремий crop у цьому батчі не додавався — поведінка: fewer columns / wrap.</p>
+      </div>
+
+      <h3>17.9. PopularLots — default</h3>
+      <div class="shot">
+        <img src="component-shots/auction-item/09-popular-lots-default.jpg" alt="Популярно серед інших default" />
+        <div class="cap">Скрін 9–10 · 3 ряди chips (VIN/id) · horizontal scroll</div>
+      </div>
+
+      <h3>17.10. PopularLots — hover</h3>
+      <div class="shot">
+        <img src="component-shots/auction-item/10-popular-lots-hover.jpg" alt="Популярно серед інших hover" />
+        <div class="cap">Hover · chip red + white text · mobile scroll ідентичний</div>
+      </div>
+      <div class="box ok">
+        <h4>PopularLots</h4>
+        <p>Горизонтальний scroll · 3 rows · links на інші лоти · hover як ModelRange.</p>
+      </div>
+
+      <h3>17.11. SimilarCarsSlider</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/auction-item/11-similar-cars.jpg" alt="Схожі авто" style="max-width:640px;max-height:400px" />
+        <div class="cap">Скрін 11 · «Схожі авто» · carousel AuctionCard · timer inactive «Аукціон проведено» (§15.8)</div>
+      </div>
+
+      <h3>17.12. ReviewsTeaser + Bonus + Footer</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/auction-item/12-reviews-teaser.jpg" alt="Відгуки клієнтів" style="max-width:640px;max-height:400px" />
+        <div class="cap">Скрін 12 · ReviewsTeaser §14.18 · нижче BonusLeadForm (§11) · SiteFooter (§12)</div>
+      </div>
+
+      <h3>Підсумок · /auctions/{id}/</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>LotBadge / VinCopy</td>
+            <td><strong>Нове</strong></td>
+            <td>masked · full · copy feedback</td>
+          </tr>
+          <tr>
+            <td>OfferGallery + side info</td>
+            <td>Reuse §14</td>
+            <td>Той самий патерн</td>
+          </tr>
+          <tr>
+            <td>AuctionData</td>
+            <td><strong>Нове</strong></td>
+            <td>desktop 3-col · mobile list</td>
+          </tr>
+          <tr>
+            <td>LotDescription</td>
+            <td><strong>Нове</strong></td>
+            <td>title · divider · bold keys</td>
+          </tr>
+          <tr>
+            <td>ModelRange</td>
+            <td><strong>Нове</strong></td>
+            <td>link grid · hover red · mobile layout</td>
+          </tr>
+          <tr>
+            <td>PopularLots</td>
+            <td><strong>Нове</strong></td>
+            <td>3-row h-scroll · hover</td>
+          </tr>
+          <tr>
+            <td>SimilarCars / Reviews / Bonus / Footer</td>
+            <td>Reuse</td>
+            <td>§14 / §11 / §12</td>
           </tr>
         </tbody>
       </table>
