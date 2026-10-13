@@ -155,6 +155,7 @@
         <li><a href="#about-page">Про компанію /pro-kompaniyu/</a> — ValueCard · Departments · JoinTeam</li>
         <li><a href="#guarantees-page">Гарантії доставки</a> — GuaranteeFeatureCard</li>
         <li><a href="#delivery-page">Доставка авто</a> — DeliveryStep · AuctionPartners</li>
+        <li><a href="#payment-page">Оплата /oplata/</a> — PaymentTimeline (anim · vertical mobile)</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -3624,6 +3625,75 @@
             <td>AuctionPartnersCard</td>
             <td><strong>Нове</strong></td>
             <td>desktop · mobile</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Оплата — <a href="#payment-page">§25</a>. Інші URL — далі за скрінами.</p>
+      </div>
+    </section>
+
+
+    <section id="payment-page">
+      <h2>25. Оплата · /oplata/</h2>
+      <p class="lead">
+        Сторінка оплати: timeline «Як відбувається поетапна оплата» —
+        5 етапів з анімацією появи. Desktop горизонтальний zigzag · mobile вертикальний.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /oplata/</span>
+        <span class="chip soft">Блок: PaymentTimeline</span>
+        <span class="chip red">Desktop + Mobile · animation</span>
+      </div>
+
+      <h3>25.1. PaymentTimeline — full</h3>
+      <div class="shot">
+        <img src="component-shots/payment/01-payment-timeline-full.jpg" alt="Поетапна оплата full" />
+        <div class="cap">Скрін 1 · title · 5 етапів · axis + nodes · odd above / even below</div>
+      </div>
+
+      <h3>25.2. PaymentTimeline — complete (no title crop)</h3>
+      <div class="shot">
+        <img src="component-shots/payment/02-payment-timeline-complete.jpg" alt="Timeline complete" />
+        <div class="cap">Скрін 2 · усі 5 кроків · фінальний node виділений</div>
+      </div>
+
+      <h3>25.3. PaymentTimeline — animation mid</h3>
+      <div class="shot">
+        <img src="component-shots/payment/03-payment-timeline-anim-mid.jpg" alt="Анімація середина" />
+        <div class="cap">Скрін 3 · reveal progress · active ring на етапі 3 · 4–5 ще empty</div>
+      </div>
+
+      <h3>25.4. PaymentTimeline — animation early</h3>
+      <div class="shot">
+        <img src="component-shots/payment/04-payment-timeline-anim-early.jpg" alt="Анімація початок" />
+        <div class="cap">Скрін 4 · ранній кадр · active на етапі 2 · далі fade</div>
+      </div>
+      <div class="box ok">
+        <h4>PaymentTimeline</h4>
+        <ul>
+          <li>5 етапів: icon · «N етап» · опис</li>
+          <li><strong>Desktop:</strong> horizontal line · zigzag (1/3/5 up · 2/4 down)</li>
+          <li><strong>Mobile:</strong> vertical timeline (не горизонтально)</li>
+          <li><strong>Animation:</strong> поява по scroll / sequential reveal · active node ring</li>
+        </ul>
+      </div>
+      <div class="box brand">
+        <h4>Mobile</h4>
+        <p>Окремий crop vertical layout у батчі не додавався — поведінка: vertical stack уздовж осі.</p>
+      </div>
+
+      <h3>Підсумок · /oplata/</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PaymentTimeline</td>
+            <td><strong>Нове</strong></td>
+            <td>horizontal desktop · vertical mobile · appear anim</td>
           </tr>
         </tbody>
       </table>
