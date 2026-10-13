@@ -141,7 +141,7 @@
         <li><a href="#home-more">Головна · коротка форма · FAQ · інфоблок · новини</a></li>
         <li><a href="#home-bonus">Головна · ExpandText · банер бонусу</a></li>
         <li><a href="#site-footer">Футер</a> (desktop + mobile)</li>
-        <li><a href="#cars-listing">Каталог /cars/</a> — breadcrumb · селекти · картка · пагінація · фільтри · моб. модалка · чіпи</li>
+        <li><a href="#cars-listing">Каталог /cars/</a> — фільтри · пошук у фільтрі · range slider · модалка · чіпи</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -1777,7 +1777,71 @@
       </div>
       <div class="box">
         <h4>Стан у модалці</h4>
-        <p>Чіпи під «Фільтри» віддзеркалюють активні значення; зняття ✕ / чекбокса / range оновлює URL. Range-секції (рік, ціна) — dual-handle slider + підпис діапазону.</p>
+        <p>Чіпи під «Фільтри» віддзеркалюють активні значення; зняття ✕ / чекбокса / range оновлює URL. Range-секції (рік, ціна) — dual-handle slider + підпис діапазону (§13.28+).</p>
+      </div>
+
+      <h3>13.25. Пошук усередині фільтра — empty</h3>
+      <div class="shot">
+        <img src="component-shots/cars/25-filter-search-empty.png" alt="Пошук у фільтрі порожній" />
+        <div class="cap">Скрін 25 · Input «Пошук» · іконка лупи справа · без тексту</div>
+      </div>
+      <div class="box brand">
+        <h4>FilterSearchInput</h4>
+        <ul>
+          <li>Живий пошук опцій усередині відкритої секції акордеону (напр. Марка)</li>
+          <li>Підтягує знайдені пункти в список чекбоксів (§13.27)</li>
+          <li><strong>Desktop = Mobile</strong> — той самий вигляд і поведінка</li>
+        </ul>
+      </div>
+
+      <h3>13.26. Пошук — крестик скиду тексту</h3>
+      <div class="shot">
+        <img src="component-shots/cars/26-filter-search-clear.png" alt="Пошук у фільтрі з крестиком скиду" />
+        <div class="cap">Скрін 26 · є текст → зʼявляється синій ✕ · скидає лише рядок пошуку (не фільтри URL) · лупа лишається</div>
+      </div>
+      <div class="box ok">
+        <h4>Clear query</h4>
+        <p>✕ очищає value інпута й повертає повний список опцій секції. Ідентично на мобайлі.</p>
+      </div>
+
+      <h3>13.27. Пошук — знайдені опції в акордеоні</h3>
+      <div class="shot">
+        <img src="component-shots/cars/27-filter-search-results.png" alt="Результати пошуку у фільтрі" />
+        <div class="cap">Скрін 27 · query «bmw» · у списку лишається Checkbox BMW · «Показати більше» під списком</div>
+      </div>
+      <div class="box">
+        <h4>Filter of options</h4>
+        <p>Список опцій фільтрується за введенням; чекбокс і FilterOptionsExpand (§13.13) працюють як завжди.</p>
+      </div>
+
+      <h3>13.28. Range slider — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/cars/28-range-slider-desktop.png" alt="Range slider фільтра десктоп" />
+        <div class="cap">Скрін 28 · dual-handle track · підпис від—до («2017 — 2026»)</div>
+      </div>
+      <div class="box brand">
+        <h4>FilterRangeSlider</h4>
+        <ul>
+          <li>Два thumbs (min / max) · активний відрізок сірий</li>
+          <li>Під слайдером текст <strong>від — до</strong> (оновлюється при drag)</li>
+          <li>Використання: рік, ціна, пробіг тощо · sync з URL</li>
+        </ul>
+      </div>
+
+      <h3>13.29. Range slider — обидва напрямки</h3>
+      <div class="shot">
+        <img src="component-shots/cars/29-range-slider-both-handles.png" alt="Range slider обидва повзунки" />
+        <div class="cap">Скрін 29 · обидва повзунки рухаються · приклад «2017 — 2023»</div>
+      </div>
+      <div class="box ok">
+        <h4>Двосторонній діапазон</h4>
+        <p>Лівий thumb = від · правий = до · можна звужувати з обох боків; значення в підписі й у query.</p>
+      </div>
+
+      <h3>13.30. Range slider — mobile</h3>
+      <div class="shot">
+        <img src="component-shots/cars/30-range-slider-mobile.png" alt="Range slider фільтра мобайл" />
+        <div class="cap">Скрін 30 · <strong>ідентичний</strong> desktop · той самий FilterRangeSlider</div>
       </div>
 
       <h3>Підсумок</h3>
@@ -1839,6 +1903,18 @@
             <td>Ряд · першим «Скинути…»</td>
             <td>На сторінці + у модалці</td>
             <td>✕ знімає один фільтр</td>
+          </tr>
+          <tr>
+            <td>FilterSearchInput</td>
+            <td>У секції акордеону</td>
+            <td>= Desktop</td>
+            <td>✕ чистить лише query пошуку</td>
+          </tr>
+          <tr>
+            <td>FilterRangeSlider</td>
+            <td>Dual-handle + від—до</td>
+            <td>= Desktop</td>
+            <td>Обидва thumbs · URL sync</td>
           </tr>
         </tbody>
       </table>
