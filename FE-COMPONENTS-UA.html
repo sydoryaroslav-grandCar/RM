@@ -120,7 +120,7 @@
       <h1>Компоненти FE · grandcar.ua</h1>
       <p>
         Каталог блоків зі скрінами: мобайл / десктоп, де повторюється, на яких сторінках.
-        План робіт — <a href="FE-ROADMAP-UA.html">FE-ROADMAP-UA.html</a>.
+        План робіт — <a href="index.html">роадмап</a>.
         Скріни: <code>component-shots/</code>.
       </p>
     </header>
@@ -141,6 +141,7 @@
         <li><a href="#home-more">Головна · коротка форма · FAQ · інфоблок · новини</a></li>
         <li><a href="#home-bonus">Головна · ExpandText · банер бонусу</a></li>
         <li><a href="#site-footer">Футер</a> (desktop + mobile)</li>
+        <li><a href="#cars-listing">Каталог /cars/</a> — breadcrumb · селекти · картка · показати ще · пагінація</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -748,7 +749,7 @@
         На мобайлі — у слайдері <strong>того самого типу</strong>, що картки клієнтів (§4): без dots, таймер.
       </p>
       <div class="meta">
-        <span class="chip">Сторінка: Home (+ каталоги пізніше)</span>
+        <span class="chip">Сторінка: Home (+ /cars/ §13)</span>
         <span class="chip soft">Блок: CarCard</span>
         <span class="chip red">Desktop + Mobile</span>
       </div>
@@ -1420,7 +1421,7 @@
       </table>
       <div class="note">
         <div class="label">Далі</div>
-        <p>Футер — <a href="#site-footer">§12</a>. Головна (блоки) майже зібрана; інші сторінки — далі.</p>
+        <p>Футер — <a href="#site-footer">§12</a>. Каталог /cars/ — <a href="#cars-listing">§13</a>.</p>
       </div>
     </section>
 
@@ -1506,13 +1507,181 @@
       </table>
       <div class="note">
         <div class="label">Далі</div>
-        <p>Наступні сторінки (не home) — новими секціями за скрінами.</p>
+        <p>Каталог <a href="#cars-listing">/cars/</a> — <a href="#cars-listing">§13</a>.</p>
+      </div>
+    </section>
+
+    <section id="cars-listing">
+      <h2>13. Каталог · /cars/</h2>
+      <p class="lead">
+        Лістинг перевірених авто зі США:
+        <a href="https://www.grandcar.ua/cars/" target="_blank" rel="noopener noreferrer">grandcar.ua/cars/</a>.
+        Breadcrumb, селекти «на сторінці / сортування», картка лота (горизонтальна → вертикальна на мобайлі),
+        «Показати ще», пагінація.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /cars/</span>
+        <span class="chip soft">Блок: CatalogListing</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>13.1. Breadcrumb — desktop</h3>
+      <div class="shot">
+        <img src="component-shots/cars/01-breadcrumb-desktop.png" alt="Breadcrumb каталогу десктоп" />
+        <div class="cap">Скрін 1 · Головна / Каталог перевірених авто зі США · поточний пункт жирніший</div>
+      </div>
+      <div class="box ok">
+        <h4>Breadcrumb</h4>
+        <ul>
+          <li>Лінк «Головна» → / · роздільник «/» · поточна сторінка (не лінк)</li>
+          <li>Спільний компонент для внутрішніх сторінок (не лише /cars/)</li>
+        </ul>
+      </div>
+
+      <h3>13.2. Breadcrumb — mobile</h3>
+      <div class="shot">
+        <img src="component-shots/cars/02-breadcrumb-mobile.png" alt="Breadcrumb каталогу мобайл" />
+        <div class="cap">Скрін 2 · той самий Breadcrumb · довгий title може переноситись на 2 рядки</div>
+      </div>
+
+      <h3>13.3. Селекти «На сторінці» / сортування</h3>
+      <div class="shot">
+        <img src="component-shots/cars/03-page-size-sort-selects.png" alt="Селекти кількості та сортування" />
+        <div class="cap">Скрін 3 · лейбл «На сторінці:» · Select(12) · Select(Без сортування)</div>
+      </div>
+      <div class="box brand">
+        <h4>PageSizeSelect + SortSelect</h4>
+        <ul>
+          <li><strong>Desktop:</strong> кастомний вигляд тригера (border + chevron)</li>
+          <li><strong>Mobile:</strong> той самий тригер-UI, але відкриває <strong>нативний</strong> select ОС — без кастомного dropdown</li>
+          <li>Не плутати з повним фільтр-блоком каталогу (окремі скріни пізніше)</li>
+        </ul>
+      </div>
+
+      <h3>13.4. Картка авто — desktop (горизонтальна)</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/cars/04-car-card-horizontal.jpg" alt="Картка авто горизонтальна десктоп" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 4 · фото зліва · SaveButton «Зберегти» · title · ціна в США · 4 спеки · primary + outline</div>
+      </div>
+      <div class="box">
+        <h4>Vs CarCard на головній (§5)</h4>
+        <ul>
+          <li><strong>Layout:</strong> горизонтальний (фото | контент), не вертикальна картка слайдера</li>
+          <li><strong>SaveButton</strong> — той самий (§5.2): toggle обраного ↔ Favorites</li>
+          <li><strong>Hover на фото</strong> — змінює зображення (наступне фото лота), не лише visual hover картки</li>
+          <li>CTA ті самі: «Дізнатися ціну під ключ» · «Детальніше»</li>
+          <li>Порядок: title → ціна → спеки → кнопки (на home price була нижче спеків у слайдер-варіанті)</li>
+        </ul>
+      </div>
+
+      <h3>13.5. Картка авто — mobile (вертикальна)</h3>
+      <div class="shot">
+        <img src="component-shots/cars/05-car-card-vertical-mobile.jpg" alt="Картка авто вертикальна мобайл" />
+        <div class="cap">Скрін 5 · вертикальний стек: фото → title → спеки → ціна → primary → outline · SaveButton на фото</div>
+      </div>
+      <div class="box ok">
+        <h4>CatalogCarCard</h4>
+        <p>Один компонент, два layout: <code>horizontal</code> (desktop) / <code>vertical</code> (mobile). Не слайдер головної — у лістингу картки в сітці/списку.</p>
+      </div>
+
+      <h3>13.6. Кнопка «Показати ще» — default</h3>
+      <div class="shot">
+        <img src="component-shots/cars/06-show-more-default.png" alt="Кнопка Показати ще default" />
+        <div class="cap">Скрін 6 · outline: білий фон · чорна рамка · текст + іконка refresh</div>
+      </div>
+      <div class="box">
+        <h4>ShowMoreButton</h4>
+        <ul>
+          <li>Текст у коді: <strong>«Показати ще»</strong> (на скріні опечатка «Пказати» — не копіювати)</li>
+          <li>Довантажує наступну порцію лотів без зміни URL (або з sync query — уточнити з BE)</li>
+        </ul>
+      </div>
+
+      <h3>13.7. «Показати ще» — hover</h3>
+      <div class="shot">
+        <img src="component-shots/cars/07-show-more-hover.png" alt="Кнопка Показати ще hover" />
+        <div class="cap">Скрін 7 · hover: заливка brand-red · білий текст і іконка</div>
+      </div>
+
+      <h3>13.8. Пагінація — default / active</h3>
+      <div class="shot">
+        <img src="component-shots/cars/08-pagination-default.png" alt="Пагінація default" />
+        <div class="cap">Скрін 8 · 1 (active, чорна рамка) · 2 · 3 · … · 617</div>
+      </div>
+
+      <h3>13.9. Пагінація — hover</h3>
+      <div class="shot">
+        <img src="component-shots/cars/09-pagination-hover.png" alt="Пагінація hover" />
+        <div class="cap">Скрін 9 · hover на номері: чорна рамка (як active) · inactive лишаються сірі</div>
+      </div>
+      <div class="box brand">
+        <h4>Pagination</h4>
+        <ul>
+          <li>Квадратні кнопки з легким radius · active = чорна рамка + жирний номер</li>
+          <li>Hover на inactive → той самий акцент, що active</li>
+          <li>Ellipsis «…» між ближніми й останньою сторінкою</li>
+        </ul>
+      </div>
+
+      <h3>13.10. «Показати ще» — mobile</h3>
+      <div class="shot">
+        <img src="component-shots/cars/10-show-more-mobile.png" alt="Кнопка Показати ще мобайл" />
+        <div class="cap">Скрін 10 · <strong>ідентична</strong> до desktop default (скрін 6) · той самий ShowMoreButton</div>
+      </div>
+
+      <h3>13.11. Пагінація — mobile</h3>
+      <div class="shot">
+        <img src="component-shots/cars/11-pagination-mobile.png" alt="Пагінація мобайл" />
+        <div class="cap">Скрін 11 · <strong>ідентична</strong> до desktop (скріни 8–9) · той самий Pagination</div>
+      </div>
+
+      <h3>Підсумок</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Desktop</th><th>Mobile</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Breadcrumb</td>
+            <td>1 рядок</td>
+            <td>Може wrap</td>
+            <td>Спільний для внутрішніх URL</td>
+          </tr>
+          <tr>
+            <td>PageSizeSelect / SortSelect</td>
+            <td>Кастомний тригер</td>
+            <td>Тригер той самий · native menu</td>
+            <td>Частина фільтр-бару, не весь фільтр</td>
+          </tr>
+          <tr>
+            <td>CatalogCarCard</td>
+            <td>Horizontal</td>
+            <td>Vertical</td>
+            <td>SaveButton = §5 · hover фото = swap image</td>
+          </tr>
+          <tr>
+            <td>ShowMoreButton</td>
+            <td>Outline → brand hover</td>
+            <td>= Desktop</td>
+            <td>«Показати ще» + refresh icon</td>
+          </tr>
+          <tr>
+            <td>Pagination</td>
+            <td>1…N + ellipsis</td>
+            <td>= Desktop</td>
+            <td>Active / hover = чорна рамка</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Фільтри каталогу / інші URL (/lot/, калькулятор…) — наступними секціями за скрінами.</p>
       </div>
     </section>
 
     <footer>
       <code>assets-from-production/FE-COMPONENTS-UA.html</code>
-      · <a href="FE-ROADMAP-UA.html">план робіт</a>
+      · <a href="index.html">план робіт</a>
     </footer>
   </div>
 </body>
