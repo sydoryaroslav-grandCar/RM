@@ -146,6 +146,7 @@
         <li><a href="#cars-listing">Каталог /cars/</a> — фільтри · контент · форми · shared header/footer</li>
         <li><a href="#car-item">Сторінка авто /cars/{slug}/</a> — gallery · rating · specs · комплектація · опис</li>
         <li><a href="#auctions-listing">Аукціони /auctions/</a> — datepicker · timer · Telegram CTA · reuse cards</li>
+        <li><a href="#not-found-page">404 NotFound</a> — NotFoundContent · HomeButton · mobile</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -2641,11 +2642,18 @@
       <h3>15.8. AuctionTimer</h3>
       <div class="shot">
         <img src="component-shots/auctions/08-auction-timer.png" alt="Таймер аукціону" />
-        <div class="cap">Скрін 8 · іконка годинника · DD:HH:MM:SS countdown</div>
+        <div class="cap">Скрін 8 · active · іконка годинника · DD:HH:MM:SS countdown</div>
+      </div>
+      <div class="shot">
+        <img src="component-shots/auctions/12-timer-inactive.png" alt="Таймер неактивний" />
+        <div class="cap">Скрін 12 · inactive · той самий clock icon · текст «Аукціон проведено» (замість countdown)</div>
       </div>
       <div class="box ok">
         <h4>AuctionTimer</h4>
-        <p>Окремий компонент у картці; оновлює countdown до кінця лота.</p>
+        <ul>
+          <li><strong>active</strong> — countdown DD:HH:MM:SS до кінця лота</li>
+          <li><strong>inactive / ended</strong> — «Аукціон проведено» (лістинг і картка лота)</li>
+        </ul>
       </div>
 
       <h3>15.9. TurnkeyPriceModal</h3>
@@ -2700,12 +2708,100 @@
           <tr>
             <td>AuctionTimer</td>
             <td><strong>Нове</strong></td>
-            <td>DD:HH:MM:SS</td>
+            <td>active countdown · inactive «Аукціон проведено»</td>
           </tr>
           <tr>
             <td>TurnkeyPriceModal / Bonus / Header / Footer</td>
             <td>Reuse</td>
             <td>§13 / §11 / §2 / §12</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>404 — <a href="#not-found-page">§16</a>. Калькулятор / VIN — далі за скрінами.</p>
+      </div>
+    </section>
+
+
+    <section id="not-found-page">
+      <h2>16. 404 · NotFound</h2>
+      <p class="lead">
+        Сторінка помилки «не знайдено». Layout: Header → NotFoundContent → BonusLeadForm → Footer.
+        Desktop і mobile — однакова компоновка, менші розміри на мобільному.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: 404</span>
+        <span class="chip soft">Блок: NotFoundPage</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <div class="box brand">
+        <h4>Reuse</h4>
+        <ul>
+          <li><strong>SiteHeader</strong> — §2</li>
+          <li><strong>BonusLeadForm</strong> — §11</li>
+          <li><strong>SiteFooter</strong> — §12</li>
+        </ul>
+      </div>
+
+      <h3>16.1. NotFoundContent (desktop)</h3>
+      <div class="shot">
+        <img src="component-shots/404/01-not-found-content.jpg" alt="Контент 404 desktop" />
+        <div class="cap">Скрін 1 · «Ойй, халепа» · 4[X]4 · пояснення · HomeButton</div>
+      </div>
+      <div class="box ok">
+        <h4>NotFoundContent</h4>
+        <ul>
+          <li>Title · великий 404 з червоним X замість «0»</li>
+          <li>Опис (сторінки немає / видалена / помилка URL)</li>
+          <li>CTA → головна</li>
+        </ul>
+      </div>
+
+      <h3>16.2. HomeButton — default</h3>
+      <div class="shot">
+        <img src="component-shots/404/02-home-button-default.png" alt="Кнопка на головну default" />
+        <div class="cap">Скрін 2 · filled red · «Перейти на головну сторінку»</div>
+      </div>
+
+      <h3>16.3. HomeButton — hover</h3>
+      <div class="shot">
+        <img src="component-shots/404/03-home-button-hover.png" alt="Кнопка на головну hover" />
+        <div class="cap">Скрін 3 · outline red / світлий фон · той самий текст</div>
+      </div>
+
+      <h3>16.4. BonusLeadForm + Header / Footer</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/404/04-bonus-form.jpg" alt="Бонус-форма на 404" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 4 · знайомий BonusLeadForm (§11) · вище Header (§2) · нижче Footer (§12)</div>
+      </div>
+
+      <h3>16.5. Mobile</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/404/05-mobile.jpg" alt="404 mobile" style="max-width:360px;max-height:720px" />
+        <div class="cap">Скрін 5 · та сама компоновка · Header → 404 → Bonus → Footer · менші розміри</div>
+      </div>
+
+      <h3>Підсумок · 404</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>NotFoundContent</td>
+            <td><strong>Нове</strong></td>
+            <td>Title · 4[X]4 · текст · HomeButton</td>
+          </tr>
+          <tr>
+            <td>HomeButton</td>
+            <td><strong>Нове</strong> (або PrimaryButton variant)</td>
+            <td>default filled · hover outline</td>
+          </tr>
+          <tr>
+            <td>Header / Bonus / Footer</td>
+            <td>Reuse</td>
+            <td>§2 / §11 / §12</td>
           </tr>
         </tbody>
       </table>
