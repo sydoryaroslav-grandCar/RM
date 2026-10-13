@@ -158,6 +158,7 @@
         <li><a href="#payment-page">Оплата /oplata/</a> — PaymentTimeline (anim · vertical mobile)</li>
         <li><a href="#zsu-page">Допомога ЗСУ</a> — UnitsTicker · DonationStats · ThanksVideo · GalleryLightbox</li>
         <li><a href="#blog-page">Блог /blog/</a> — CategoryNav · ArticleCard · Pagination variant · ExpertCard/Slider</li>
+        <li><a href="#expert-page">Експерт /experts/{slug}/</a> — Profile · Values · ArticleBody · Share · meta</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -3948,6 +3949,205 @@
             <td>ExpertOpinionSlider</td>
             <td><strong>Нове</strong></td>
             <td>auto + swipe · no buttons/dots · desktop/mobile</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Експерт — <a href="#expert-page">§28</a>. Інші URL — далі за скрінами.</p>
+      </div>
+    </section>
+
+
+    <section id="expert-page">
+      <h2>28. Експерт · /experts/{slug}/</h2>
+      <p class="lead">
+        Профіль експерта (приклад: /experts/maksim-slisenko/): hero з цитатою й соцмережами,
+        «останні статті», список з red dots, цінності, title+description, варіанти ArticleCard,
+        ArticleBody (bold · date · images), share/copy, view count, reading time.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /experts/{slug}/</span>
+        <span class="chip soft">Блок: ExpertProfilePage</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>28.1. ExpertProfileHero — desktop</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/experts/01-expert-profile-desktop.jpg" alt="Профіль експерта desktop" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 1 · avatar + badge · name · role · quote · social icons (LinkedIn · IG · YT · TikTok)</div>
+      </div>
+      <div class="box brand">
+        <h4>Vs ExpertCard §27.4</h4>
+        <p>Інша компонента: тут hero профілю (quote + socials), на блозі — teaser картка (featured article + CTA).</p>
+      </div>
+
+      <h3>28.2. ExpertProfileHero — mobile</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/experts/02-expert-profile-mobile.png" alt="Профіль експерта mobile" style="max-width:360px;max-height:480px" />
+        <div class="cap">Скрін 2 · vertical stack · той самий ExpertProfileHero</div>
+      </div>
+
+      <h3>28.3. ArticleCard — text-only (останні статті)</h3>
+      <div class="shot" style="max-width:520px">
+        <img src="component-shots/experts/03-article-card-text-only.png" alt="Картка статті без фото" style="max-width:520px;max-height:280px" />
+        <div class="cap">Скрін 3 · блок останніх статей · title · date · #tag · <strong>без зображення</strong></div>
+      </div>
+      <div class="box ok">
+        <h4>ArticleCard variant</h4>
+        <p>Той самий ArticleCard (§27) · props: media optional · layout text-only.</p>
+      </div>
+
+      <h3>28.4. BulletListSection — desktop</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/experts/04-bullet-list-desktop.jpg" alt="Тайтл і список з dots" style="max-width:640px;max-height:280px" />
+        <div class="cap">Скрін 4 · title «Мій шлях:» · red circular bullets · paragraphs</div>
+      </div>
+
+      <h3>28.5. BulletListSection — mobile</h3>
+      <div class="shot" style="max-width:400px">
+        <img src="component-shots/experts/05-bullet-list-mobile.png" alt="Список mobile" style="max-width:400px;max-height:320px" />
+        <div class="cap">Скрін 5 · той самий BulletListSection</div>
+      </div>
+
+      <h3>28.6. ExpertValueItem — desktop</h3>
+      <div class="shot" style="max-width:560px">
+        <img src="component-shots/experts/06-expert-value-desktop.png" alt="Цінність експерта desktop" style="max-width:560px;max-height:360px" />
+        <div class="cap">Скрін 6 · icon · title · description · center stack</div>
+      </div>
+      <div class="box brand">
+        <h4>Vs ValueCard §22.1</h4>
+        <p>Схожий патерн icon+title+body; на about — card з тінню. Тут — centered item у сітці цінностей. У реєстрі можна злити як ValueItem + variant chrome.</p>
+      </div>
+
+      <h3>28.7. ExpertValueItem — mobile</h3>
+      <div class="shot" style="max-width:400px">
+        <img src="component-shots/experts/07-expert-value-mobile.png" alt="Цінність mobile" style="max-width:400px;max-height:240px" />
+        <div class="cap">Скрін 7 · той самий ExpertValueItem</div>
+      </div>
+
+      <h3>28.8. TitleDescription</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/experts/08-title-description.jpg" alt="Тайтл і опис" style="max-width:640px;max-height:160px" />
+        <div class="cap">Скрін 8 · «Візія компанії» · short supporting paragraph</div>
+      </div>
+
+      <h3>28.9. ArticleCard — author horizontal</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/experts/09-article-card-author.jpg" alt="Картка статті з автором" style="max-width:640px;max-height:240px" />
+        <div class="cap">Скрін 9 · image left · author (red) · title · excerpt · date + #tag</div>
+      </div>
+      <div class="box ok">
+        <h4>ArticleCard variant</h4>
+        <p>+ author line · ще один layout того ж ArticleCard (§27).</p>
+      </div>
+
+      <h3>28.10. ArticleBody — desktop</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/experts/10-article-body-desktop.jpg" alt="Тіло статті desktop" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 10 · H1 + date · paragraphs · <strong>inline bold</strong> · subheadings</div>
+      </div>
+
+      <h3>28.11. ArticleBody — mobile</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/experts/11-article-body-mobile.jpg" alt="Тіло статті mobile" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 11 · той самий ArticleBody · вужча колонка</div>
+      </div>
+
+      <h3>28.12. ShareCopyControl — desktop</h3>
+      <div class="shot" style="max-width:420px">
+        <img src="component-shots/experts/12-share-copy-desktop.png" alt="Поділитися / скопіювати" style="max-width:420px" />
+        <div class="cap">Скрін 12 · «Поділитися:» + share/copy control · споріднено з CopyLinkButton §14.10</div>
+      </div>
+
+      <h3>28.13. ViewCount</h3>
+      <div class="shot" style="max-width:200px">
+        <img src="component-shots/experts/13-view-count.png" alt="Лічильник переглядів" style="max-width:200px" />
+        <div class="cap">Скрін 13 · eye icon + count</div>
+      </div>
+
+      <h3>28.14. ReadingTime</h3>
+      <div class="shot" style="max-width:280px">
+        <img src="component-shots/experts/14-reading-time.png" alt="Час читання" style="max-width:280px" />
+        <div class="cap">Скрін 14 · clock badge + «N хв. на читання»</div>
+      </div>
+
+      <h3>28.15. ShareBar — mobile</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/experts/15-share-bar-mobile.png" alt="Шер на мобайлі" style="max-width:360px" />
+        <div class="cap">Скрін 15 · на mobile замість copy-link: «Поділитися:» + IG · FB · Telegram · Viber</div>
+      </div>
+
+      <h3>28.16. ArticleCard — CTA «Детальніше»</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/experts/16-article-card-cta.jpg" alt="Картка з кнопкою Детальніше" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 16 · vertical card · image · title · date · excerpt · button «Детальніше»</div>
+      </div>
+      <div class="box brand">
+        <h4>Скрін 17</h4>
+        <p>Окремий mobile crop цієї картки в батчі не прийшов — layout той самий (vertical). За потреби додамо пізніше.</p>
+      </div>
+
+      <h3>28.18. ArticleBody — with images</h3>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/experts/18-article-body-with-image.jpg" alt="Тіло статті з картинкою" style="max-width:360px;max-height:560px" />
+        <div class="cap">Скрін 18 · той самий ArticleBody · inline image між абзацами · bold · date · subheads</div>
+      </div>
+      <div class="box ok">
+        <h4>ArticleBody</h4>
+        <p>Rich text: title · date · paragraphs · bold · headings · <strong>embedded images</strong>. Одна компонента для статті/експертного матеріалу.</p>
+      </div>
+
+      <h3>Підсумок · /experts/{slug}/</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ExpertProfileHero</td>
+            <td><strong>Нове</strong> (≠ ExpertCard §27)</td>
+            <td>desktop · mobile · quote · socials</td>
+          </tr>
+          <tr>
+            <td>ArticleCard</td>
+            <td>Варіанти §27</td>
+            <td>text-only · author · CTA «Детальніше»</td>
+          </tr>
+          <tr>
+            <td>BulletListSection</td>
+            <td><strong>Нове</strong></td>
+            <td>title + red dots</td>
+          </tr>
+          <tr>
+            <td>ExpertValueItem</td>
+            <td>Близько до ValueCard §22</td>
+            <td>icon · title · body · centered</td>
+          </tr>
+          <tr>
+            <td>TitleDescription</td>
+            <td><strong>Нове</strong> (простий)</td>
+            <td>section intro</td>
+          </tr>
+          <tr>
+            <td>ArticleBody</td>
+            <td><strong>Нове</strong></td>
+            <td>bold · date · images · desktop/mobile</td>
+          </tr>
+          <tr>
+            <td>ShareCopyControl / ShareBar</td>
+            <td>Частково §14 CopyLink</td>
+            <td>desktop copy/share · mobile socials</td>
+          </tr>
+          <tr>
+            <td>ViewCount</td>
+            <td><strong>Нове</strong></td>
+            <td>eye + number</td>
+          </tr>
+          <tr>
+            <td>ReadingTime</td>
+            <td><strong>Нове</strong></td>
+            <td>clock + label</td>
           </tr>
         </tbody>
       </table>
