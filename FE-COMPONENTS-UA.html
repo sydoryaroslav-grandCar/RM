@@ -142,6 +142,7 @@
         <li><a href="#home-bonus">Головна · ExpandText · банер бонусу</a></li>
         <li><a href="#site-footer">Футер</a> (desktop + mobile)</li>
         <li><a href="#cars-listing">Каталог /cars/</a> — фільтри · контент · форми · shared header/footer</li>
+        <li><a href="#car-item">Сторінка авто /cars/{slug}/</a> — gallery · rating · specs · комплектація · опис</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -2170,7 +2171,236 @@
       </table>
       <div class="note">
         <div class="label">Далі</div>
-        <p>Сторінка /cars/ (блоки) майже зібрана. Інші URL (/lot/, калькулятор, VIN…) — наступними секціями за скрінами.</p>
+        <p>Сторінка айтема авто — <a href="#car-item">§14</a>. Інші URL (калькулятор, VIN…) — далі за скрінами.</p>
+      </div>
+    </section>
+
+    <section id="car-item">
+      <h2>14. Сторінка авто · /cars/{slug}/</h2>
+      <p class="lead">
+        Картка лота / «Детальніше» з каталогу (§13) або з головної (§5) ведуть сюди, напр.
+        <a href="https://www.grandcar.ua/cars/toyota-corolla-le-2025/" target="_blank" rel="noopener noreferrer">/cars/toyota-corolla-le-2025/</a>.
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: Offer / CarItem</span>
+        <span class="chip soft">Вхід: CarCard · Детальніше</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+      <div class="box brand">
+        <h4>Повторювані блоки (як на home /cars)</h4>
+        <ul>
+          <li><strong>Header</strong> — <a href="#home-header">§2</a></li>
+          <li><strong>Footer</strong> — <a href="#site-footer">§12</a></li>
+          <li><strong>BonusLeadForm</strong> «ТОП-5 найвигідніших авто…» — <a href="#home-bonus">§11</a> / <a href="#cars-listing">§13.44</a></li>
+        </ul>
+      </div>
+
+      <h3>14.1. Breadcrumb — глибокий шлях</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/car-item/01-breadcrumb-deep.png" alt="Breadcrumb сторінки авто" style="max-width:640px;max-height:120px" />
+        <div class="cap">Скрін 1 · Головна / Каталог / Марка / Модель / поточний лот · зʼявляються лінки, на яких user міг не бути</div>
+      </div>
+      <div class="box ok">
+        <h4>Breadcrumb (глибший за /cars/)</h4>
+        <ul>
+          <li>Той самий компонент, що §13.1–13.2, але з додатковими сегментами (make · model · offer title)</li>
+          <li>Поточний пункт — bold / не лінк; предки — сірі лінки</li>
+          <li><strong>Mobile = desktop</strong> (може wrap)</li>
+        </ul>
+      </div>
+
+      <h3>14.2. Rating — empty («Ваша оцінка»)</h3>
+      <div class="shot">
+        <img src="component-shots/car-item/02-rating-empty.png" alt="Оцінка порожня" />
+        <div class="cap">Скрін 2 · 5 outline-зірок · лейбл «Ваша оцінка» · ще не оцінено</div>
+      </div>
+
+      <h3>14.3. Rating — active (середнє + голоси)</h3>
+      <div class="shot">
+        <img src="component-shots/car-item/03-rating-active.png" alt="Оцінка активна з голосами" />
+        <div class="cap">Скрін 3 · filled stars · підпис «4/5 - (1 голос)»</div>
+      </div>
+
+      <h3>14.4. Rating — hover / вибір (якщо ще не оцінили)</h3>
+      <div class="shot">
+        <img src="component-shots/car-item/04-rating-hover.png" alt="Оцінка hover вибір зірок" />
+        <div class="cap">Скрін 4 · hover/preview заповнення зірок · «Ваша оцінка»</div>
+      </div>
+      <div class="box brand">
+        <h4>OfferRating</h4>
+        <p>Стани: empty · hover preview · user vote · aggregate (score + count). Pluralization «голос/голоси…».</p>
+      </div>
+
+      <h3>14.5. OfferGallery — preview</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/car-item/05-gallery-preview.jpg" alt="Галерея превʼю авто" style="max-width:640px;max-height:420px" />
+        <div class="cap">Скрін 5 · головне фото · стрілки · SaveButton · fullscreen icon · thumbs + «+N фото»</div>
+      </div>
+      <div class="box">
+        <h4>OfferGallery</h4>
+        <ul>
+          <li>Slider головне фото · prev/next</li>
+          <li><strong>SaveButton</strong> — той самий, що §5 / §13</li>
+          <li>Thumb strip · останній thumb з overlay лічильника</li>
+          <li>Fullscreen → §14.6 / §14.8</li>
+        </ul>
+      </div>
+
+      <h3>14.6. OfferGallery — fullscreen (desktop)</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/car-item/06-gallery-fullscreen.jpg" alt="Галерея fullscreen десктоп" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 6 · black overlay · counter «3 / 11» · close · expand · стрілки · zoom (див. mobile)</div>
+      </div>
+
+      <h3>14.7. TurnkeyPriceModal — з сторінки лота</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/car-item/07-turnkey-modal-reuse.png" alt="Модалка прорахунку зі сторінки авто" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 7 · CTA «Дізнатися ціну під ключ» → той самий TurnkeyPriceModal (§13.46+) · «Авто: {TITLE}»</div>
+      </div>
+      <div class="box ok">
+        <h4>Reuse</h4>
+        <p>Не новий компонент — той самий modal + FormValidationAlert (§13.46–13.49).</p>
+      </div>
+
+      <h3>14.8. OfferGallery — fullscreen mobile</h3>
+      <div class="shot">
+        <img src="component-shots/car-item/08-gallery-fullscreen-mobile.png" alt="Галерея fullscreen мобайл" />
+        <div class="cap">Скрін 8 · поведінка як desktop · counter · close · fullscreen · <strong>zoom +</strong> · стрілки</div>
+      </div>
+
+      <h3>14.9. OfferSummary — title / price / CTA / share</h3>
+      <div class="shot">
+        <img src="component-shots/car-item/09-offer-summary.png" alt="Інфоблок біля превʼю" />
+        <div class="cap">Скрін 9 · title · share · «Ціна в США» · primary «Дізнатися ціну під ключ»</div>
+      </div>
+
+      <h3>14.10. Copy link + tooltip</h3>
+      <div class="shot">
+        <img src="component-shots/car-item/10-share-copy-link.png" alt="Іконка скопіювати посилання" />
+        <div class="cap">Скрін 10 · іконка share/copy · після кліку tooltip/toast «Посилання скопійовано»</div>
+      </div>
+      <div class="box brand">
+        <h4>CopyLinkButton</h4>
+        <p>Копіює URL сторінки лота в clipboard · показує короткий feedback «Посилання скопійовано».</p>
+      </div>
+
+      <h3>14.11. SpecsList — характеристики</h3>
+      <div class="shot">
+        <img src="component-shots/car-item/11-specs-list.png" alt="Блок характеристик" />
+        <div class="cap">Скрін 11 · «Характеристики:» · стек SpecRow</div>
+      </div>
+
+      <h3>14.12. SpecRow — іконка · title · value</h3>
+      <div class="shot">
+        <img src="component-shots/car-item/12-spec-row.png" alt="Рядок характеристики" />
+        <div class="cap">Скрін 12 · flex: icon + label зліва · value справа · divider</div>
+      </div>
+      <div class="box ok">
+        <h4>SpecRow</h4>
+        <ul>
+          <li>Приймає: <code>icon</code> · <code>title</code> · <code>value</code></li>
+          <li>SpecsList = flex/stack з цих блочків</li>
+          <li>Mobile: той самий патерн · можливі інші font-size / розташування колонок</li>
+        </ul>
+      </div>
+
+      <h3>14.13. EquipmentBlock — комплектація</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/car-item/13-equipment-block.png" alt="Блок комплектації Комфорт" style="max-width:640px;max-height:280px" />
+        <div class="cap">Скрін 13 · title секції (напр. «Комфорт») · pipe-list опцій · desktop; mobile ≈ font-size</div>
+      </div>
+
+      <h3>14.14. EquipmentPipeList</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/car-item/14-equipment-pipe-list.png" alt="Список комплектації через слеш" style="max-width:640px;max-height:120px" />
+        <div class="cap">Скрін 14 · пункти через вертикальний «|» · wrap на кілька рядків</div>
+      </div>
+      <div class="box">
+        <h4>EquipmentBlock</h4>
+        <p>Приймає <code>title</code> + масив рядків → рендер через « | ». Desktop/mobile — той самий layout, можуть відрізнятись розміри шрифту.</p>
+      </div>
+
+      <h3>14.15. OfferDescription — collapsed (DetailsToggle)</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/car-item/15-description-collapsed.png" alt="Опис згорнутий" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 15 · «Опис:» · truncated text · «Детальніше ↓» (варіант DetailsToggle §13.35+)</div>
+      </div>
+
+      <h3>14.16. OfferDescription — expanded</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/car-item/16-description-expanded.png" alt="Опис розгорнутий" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 16 · повний текст · «Приховати ↑»</div>
+      </div>
+      <div class="box brand">
+        <h4>Vs TitleText / DetailsToggle</h4>
+        <p>Той самий патерн expand/collapse, що §13.35–13.38 / §13.39, у контексті «Опис» лота (truncated + toggle).</p>
+      </div>
+
+      <h3>Підсумок · сторінка авто</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Desktop</th><th>Mobile</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Breadcrumb (deep)</td>
+            <td>Make / model / lot</td>
+            <td>= Desktop</td>
+            <td>Додаткові SEO-лінки</td>
+          </tr>
+          <tr>
+            <td>OfferRating</td>
+            <td>Empty / hover / active</td>
+            <td>Те саме</td>
+            <td>«Ваша оцінка» · голоси</td>
+          </tr>
+          <tr>
+            <td>OfferGallery</td>
+            <td>Preview + fullscreen</td>
+            <td>+ zoom</td>
+            <td>SaveButton · counter</td>
+          </tr>
+          <tr>
+            <td>OfferSummary</td>
+            <td>Title · price · CTA · share</td>
+            <td>Те саме</td>
+            <td>CTA → TurnkeyPriceModal</td>
+          </tr>
+          <tr>
+            <td>CopyLinkButton</td>
+            <td>Icon + toast</td>
+            <td>Те саме</td>
+            <td>«Посилання скопійовано»</td>
+          </tr>
+          <tr>
+            <td>SpecRow / SpecsList</td>
+            <td>Icon · title · value</td>
+            <td>Font / layout tweaks</td>
+            <td>Flex рядки</td>
+          </tr>
+          <tr>
+            <td>EquipmentBlock</td>
+            <td>Title + pipe list</td>
+            <td>Font tweaks</td>
+            <td>Дані через «|»</td>
+          </tr>
+          <tr>
+            <td>OfferDescription</td>
+            <td>Truncate + DetailsToggle</td>
+            <td>Те саме</td>
+            <td>Детальніше ↔ Приховати</td>
+          </tr>
+          <tr>
+            <td>Shared chrome</td>
+            <td>Header · Footer · Bonus</td>
+            <td>§2 / §12 / §11</td>
+            <td>Як на /cars/</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Калькулятор / VIN / інші URL — наступними секціями за скрінами.</p>
       </div>
     </section>
 
