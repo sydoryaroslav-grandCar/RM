@@ -152,6 +152,7 @@
         <li><a href="#calculator-page">Калькулятор</a> — CustomsCalculator mobile/desktop</li>
         <li><a href="#vin-check-page">Перевірка VIN</a> — VinSearch · Status · SpecCards · SalesHistory</li>
         <li><a href="#history-report-page">Звіт перевірки /zvit…/</a> — ReportHero · BannerAnchor</li>
+        <li><a href="#about-page">Про компанію /pro-kompaniyu/</a> — ValueCard · Departments · JoinTeam</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -3407,7 +3408,105 @@
       </table>
       <div class="note">
         <div class="label">Далі</div>
-        <p>Інші блоки цієї сторінки / URL — наступними секціями за скрінами.</p>
+        <p>Про компанію — <a href="#about-page">§22</a>. Інші URL — далі за скрінами.</p>
+      </div>
+    </section>
+
+
+    <section id="about-page">
+      <h2>22. Про компанію · /pro-kompaniyu/</h2>
+      <p class="lead">
+        Сторінка про компанію: value-картки, блок відділів (tabs → accordion на mobile),
+        CTA «Переглянути вакансії».
+      </p>
+      <div class="meta">
+        <span class="chip">Сторінка: /pro-kompaniyu/</span>
+        <span class="chip soft">Блок: AboutPage</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>22.1. ValueCard</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/about/01-value-card.jpg" alt="Value card" style="max-width:640px;max-height:360px" />
+        <div class="cap">Скрін 1 · shadow card · icon + title + body</div>
+      </div>
+      <div class="box ok">
+        <h4>ValueCard</h4>
+        <p>Інформаційна картка цінності / місії (handshake icon у прикладі).</p>
+      </div>
+
+      <h3>22.2. DepartmentsSection — desktop</h3>
+      <div class="shot" style="max-width:720px">
+        <img src="component-shots/about/02-departments-desktop.jpg" alt="Відділи desktop" style="max-width:720px;max-height:400px" />
+        <div class="cap">Скрін 2 · title · vertical tabs · panel (icon+text) · photo</div>
+      </div>
+
+      <h3>22.3. DepartmentTabs</h3>
+      <div class="shot" style="max-width:320px">
+        <img src="component-shots/about/03-department-tabs.png" alt="Таби відділів" style="max-width:320px" />
+        <div class="cap">Скрін 3 · vertical list · active = red · divider справа</div>
+      </div>
+
+      <h3>22.4. DepartmentPanel</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/about/04-department-panel.jpg" alt="Панель відділу" style="max-width:640px;max-height:280px" />
+        <div class="cap">Скрін 4 · icon + title + text · photo (наповнення активного таба)</div>
+      </div>
+      <div class="box ok">
+        <h4>DepartmentsSection</h4>
+        <ul>
+          <li>Desktop: tabs зліва · content + image справа</li>
+          <li>Перемикає наповнення: іконка · текст · фото</li>
+        </ul>
+      </div>
+
+      <h3>22.5. DepartmentsSection — mobile (accordion)</h3>
+      <div class="shot" style="max-width:400px">
+        <img src="component-shots/about/05-departments-mobile-accordion.png" alt="Відділи accordion mobile" style="max-width:400px;max-height:640px" />
+        <div class="cap">Скрін 5 · tabs → accordion · chevron · expand: photo + icon + text</div>
+      </div>
+
+      <h3>22.6. JoinTeamCta</h3>
+      <div class="shot" style="max-width:720px">
+        <img src="component-shots/about/06-join-team-cta.jpg" alt="Переглянути вакансії" style="max-width:720px;max-height:360px" />
+        <div class="cap">Скрін 6 · title · text · «Переглянути вакансії» · photo справа · <strong>mobile: без фото</strong></div>
+      </div>
+      <div class="box brand">
+        <h4>JoinTeamCta</h4>
+        <p>Desktop 2-col (text+CTA | photo). Mobile — тільки текст і кнопка.</p>
+      </div>
+
+      <h3>Підсумок · /pro-kompaniyu/</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ValueCard</td>
+            <td><strong>Нове</strong></td>
+            <td>icon · title · body · shadow</td>
+          </tr>
+          <tr>
+            <td>DepartmentsSection</td>
+            <td><strong>Нове</strong></td>
+            <td>desktop tabs · mobile accordion</td>
+          </tr>
+          <tr>
+            <td>DepartmentTabs / DepartmentPanel</td>
+            <td><strong>Нове</strong></td>
+            <td>частини DepartmentsSection</td>
+          </tr>
+          <tr>
+            <td>JoinTeamCta</td>
+            <td><strong>Нове</strong></td>
+            <td>vacancies CTA · no photo on mobile</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Інші URL / блоки — наступними секціями за скрінами.</p>
       </div>
     </section>
 
