@@ -94,6 +94,41 @@
     tr[data-type="delta"] { background: #fffcf5; }
     footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 18px; }
     .legend { font-size: 13px; color: var(--muted); margin: 0 0 10px; }
+    button.thumb {
+      border: 0; padding: 0; background: transparent; cursor: zoom-in;
+      font: inherit; color: var(--muted); text-align: left;
+    }
+    button.thumb:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 8px; }
+    .thumb.empty {
+      cursor: default; flex-direction: column; gap: 2px; line-height: 1.25;
+    }
+    .thumb.empty .k { font-weight: 700; color: var(--ink); font-size: 11px; }
+    .thumb.empty .v { font-size: 10px; }
+    .lb {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(10,12,14,.78); align-items: center; justify-content: center;
+      padding: 24px; backdrop-filter: blur(2px);
+    }
+    .lb.open { display: flex; }
+    .lb-dialog {
+      position: relative; max-width: min(1100px, 96vw); max-height: 92vh;
+      background: #111; border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      padding: 12px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .lb-dialog img {
+      display: block; max-width: min(1060px, 94vw); max-height: calc(92vh - 56px);
+      width: auto; height: auto; object-fit: contain; border-radius: 8px; margin: 0 auto;
+    }
+    .lb-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      color: #ddd; font-size: 13px; padding: 0 4px;
+    }
+    .lb-close {
+      border: 0; background: #fff; color: #111; font-weight: 700;
+      width: 36px; height: 36px; border-radius: 999px; cursor: pointer; font-size: 18px; line-height: 1;
+    }
+    .lb-close:hover { background: var(--brand); color: #fff; }
+    body.lb-lock { overflow: hidden; }
   </style>
 </head>
 <body>
@@ -118,7 +153,7 @@
 
     <div class="banner">
       <strong>Як читати:</strong>
-      Preview D/M — канонічні скріни з <code>component-shots/</code> (якщо є).
+      Preview D/M — клік відкриває скрін у модалці (Esc / × / клік поза зображенням). Порожня клітинка: <em>зміни layout / розмірів</em> (адаптив без окремого скріна) або <em>відсутній скрін</em>.
       <em>base</em> = одиниця з registry; <em>delta</em> = надбавка за варіант (не повний дубль).
       Integration на інші URL (той самий Bonus ще раз) — не нова верстка.
     </div>
@@ -162,8 +197,8 @@
         <tbody>
 
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/header/01-desktop-header.png" target="_blank" rel="noopener"><img src="component-shots/header/01-desktop-header.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/header/05-mobile-header.png" target="_blank" rel="noopener"><img src="component-shots/header/05-mobile-header.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/header/01-desktop-header.png" aria-label="Відкрити preview (D)"><img src="component-shots/header/01-desktop-header.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/header/05-mobile-header.png" aria-label="Відкрити preview (M)"><img src="component-shots/header/05-mobile-header.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>SiteHeader</code><div class="scope">Шапка (logo · search · nav · lang · phone · social · favorites · CTA)</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop 2-row · mobile bar + drawer</td>
@@ -173,8 +208,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-header">home-header</a> · <a href="FE-COMPONENTS-UA.html#reuse">reuse</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/footer/01-desktop-main.png" target="_blank" rel="noopener"><img src="component-shots/footer/01-desktop-main.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/footer/03-mobile-top.png" target="_blank" rel="noopener"><img src="component-shots/footer/03-mobile-top.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/footer/01-desktop-main.png" aria-label="Відкрити preview (D)"><img src="component-shots/footer/01-desktop-main.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/footer/03-mobile-top.png" aria-label="Відкрити preview (M)"><img src="component-shots/footer/03-mobile-top.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>SiteFooter</code><div class="scope">Футер (nav · tags · contacts · map · social)</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop 2-zone · mobile stack</td>
@@ -184,8 +219,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#site-footer">site-footer</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/01-breadcrumb-desktop.png" target="_blank" rel="noopener"><img src="component-shots/cars/01-breadcrumb-desktop.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/cars/02-breadcrumb-mobile.png" target="_blank" rel="noopener"><img src="component-shots/cars/02-breadcrumb-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/01-breadcrumb-desktop.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/01-breadcrumb-desktop.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/02-breadcrumb-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/02-breadcrumb-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>Breadcrumb</code><div class="scope">Хлібні крихти</div></td>
           <td><span class="type base">base</span></td>
           <td>shallow · deep (make/model/lot)</td>
@@ -195,8 +230,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a> · <a href="FE-COMPONENTS-UA.html#car-item">car-item</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/saved/02-loader-page.jpg" target="_blank" rel="noopener"><img src="component-shots/saved/02-loader-page.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/saved/01-loader-dots.png" target="_blank" rel="noopener"><img src="component-shots/saved/01-loader-dots.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/saved/02-loader-page.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/saved/02-loader-page.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/saved/01-loader-dots.png" aria-label="Відкрити preview (M)"><img src="component-shots/saved/01-loader-dots.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>PageLoader</code><div class="scope">Глобальний loader overlay (3 dots)</div></td>
           <td><span class="type base">base</span></td>
           <td>page overlay</td>
@@ -230,8 +265,8 @@
         <tbody>
 
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-controls/01-button-more-cars.png" target="_blank" rel="noopener"><img src="component-shots/home-controls/01-button-more-cars.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/404/02-home-button-default.png" target="_blank" rel="noopener"><img src="component-shots/404/02-home-button-default.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-controls/01-button-more-cars.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-controls/01-button-more-cars.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/404/02-home-button-default.png" aria-label="Відкрити preview (M)"><img src="component-shots/404/02-home-button-default.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>Button</code><div class="scope">Primary / outline / icon / HomeButton</div></td>
           <td><span class="type base">base</span></td>
           <td>filled · outline · hover · +icon · HomeButton</td>
@@ -241,8 +276,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-controls">home-controls</a> · <a href="FE-COMPONENTS-UA.html#not-found-page">not-found-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-controls/03-link-default.png" target="_blank" rel="noopener"><img src="component-shots/home-controls/03-link-default.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-controls/03-link-default.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-controls/03-link-default.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>TextLink</code><div class="scope">Текстовий лінк зі стрілкою</div></td>
           <td><span class="type base">base</span></td>
           <td>default · hover</td>
@@ -252,8 +287,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-controls">home-controls</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-banner/06-input-validation.png" target="_blank" rel="noopener"><img src="component-shots/home-banner/06-input-validation.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-banner/06-input-validation.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-banner/06-input-validation.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>Input / PhoneInput</code><div class="scope">Текстові поля + phone</div></td>
           <td><span class="type base">base</span></td>
           <td>idle · error · required *</td>
@@ -263,8 +298,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-banner">home-banner</a> · <a href="FE-COMPONENTS-UA.html#home-controls">home-controls</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-bonus/04-checkbox.png" target="_blank" rel="noopener"><img src="component-shots/home-bonus/04-checkbox.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-bonus/04-checkbox.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-bonus/04-checkbox.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>Checkbox</code><div class="scope">Чекбокс з лейблом</div></td>
           <td><span class="type base">base</span></td>
           <td>checked · unchecked</td>
@@ -274,8 +309,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-bonus">home-bonus</a> · <a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/client-cards/03-badge.png" target="_blank" rel="noopener"><img src="component-shots/client-cards/03-badge.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/client-cards/03-badge.png" aria-label="Відкрити preview (D)"><img src="component-shots/client-cards/03-badge.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>Badge</code><div class="scope">Бейдж (БЛОГЕР · status · …)</div></td>
           <td><span class="type base">base</span></td>
           <td>на фото / inline</td>
@@ -285,8 +320,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#client-cards">client-cards</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/car-cards/02-save-button.png" target="_blank" rel="noopener"><img src="component-shots/car-cards/02-save-button.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-cards/02-save-button.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-cards/02-save-button.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>SaveButton</code><div class="scope">«Зберегти» / збережено</div></td>
           <td><span class="type base">base</span></td>
           <td>idle · saved («Збережено»)</td>
@@ -296,8 +331,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#car-cards">car-cards</a> · <a href="FE-COMPONENTS-UA.html#saved-page">saved-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-banner/04-favorites.png" target="_blank" rel="noopener"><img src="component-shots/home-banner/04-favorites.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-banner/04-favorites.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-banner/04-favorites.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>FavoritesCounter</code><div class="scope">Серце + лічильник у шапці</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop · mobile</td>
@@ -307,8 +342,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-header">home-header</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-steps/01-icon-text.png" target="_blank" rel="noopener"><img src="component-shots/home-steps/01-icon-text.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-steps/01-icon-text.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-steps/01-icon-text.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>IconText</code><div class="scope">Іконка + текст</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -318,8 +353,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-steps">home-steps</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-controls/05-feature-item.png" target="_blank" rel="noopener"><img src="component-shots/home-controls/05-feature-item.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-controls/05-feature-item.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-controls/05-feature-item.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>FeatureItem</code><div class="scope">icon + title + body</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -329,8 +364,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-controls">home-controls</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-banner/07-slide-counter.png" target="_blank" rel="noopener"><img src="component-shots/home-banner/07-slide-counter.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-banner/07-slide-counter.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-banner/07-slide-counter.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>SlideCounter</code><div class="scope">01—02—03</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -340,8 +375,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-banner">home-banner</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/google-reviews/07-mobile-dots.png" target="_blank" rel="noopener"><img src="component-shots/google-reviews/07-mobile-dots.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/google-reviews/07-mobile-dots.png" target="_blank" rel="noopener"><img src="component-shots/google-reviews/07-mobile-dots.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/google-reviews/07-mobile-dots.png" aria-label="Відкрити preview (D)"><img src="component-shots/google-reviews/07-mobile-dots.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/google-reviews/07-mobile-dots.png" aria-label="Відкрити preview (M)"><img src="component-shots/google-reviews/07-mobile-dots.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>SliderDots</code><div class="scope">Bar-dots / track thumb</div></td>
           <td><span class="type base">base</span></td>
           <td>bar style</td>
@@ -351,8 +386,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#google-reviews">google-reviews</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-banner/08-scroll-hint.png" target="_blank" rel="noopener"><img src="component-shots/home-banner/08-scroll-hint.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-banner/08-scroll-hint.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-banner/08-scroll-hint.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ScrollHint</code><div class="scope">Підказка скролу</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop only</td>
@@ -362,8 +397,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-banner">home-banner</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-bonus/01-expand-collapsed.png" target="_blank" rel="noopener"><img src="component-shots/home-bonus/01-expand-collapsed.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-bonus/01-expand-collapsed.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-bonus/01-expand-collapsed.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ExpandText / DetailsToggle</code><div class="scope">Детальніше ↔ Приховати</div></td>
           <td><span class="type base">base</span></td>
           <td>text / content block</td>
@@ -373,8 +408,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-bonus">home-bonus</a> · <a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/car-item/10-share-copy-link.png" target="_blank" rel="noopener"><img src="component-shots/car-item/10-share-copy-link.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/10-share-copy-link.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/10-share-copy-link.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>CopyLinkButton / ShareCopyControl</code><div class="scope">Копіювати / поділитися</div></td>
           <td><span class="type base">base</span></td>
           <td>icon+toast · labeled · mobile ShareBar</td>
@@ -384,8 +419,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#car-item">car-item</a> · <a href="FE-COMPONENTS-UA.html#expert-page">expert-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/experts/13-view-count.png" target="_blank" rel="noopener"><img src="component-shots/experts/13-view-count.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/13-view-count.png" aria-label="Відкрити preview (D)"><img src="component-shots/experts/13-view-count.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ViewCount</code><div class="scope">Перегляди</div></td>
           <td><span class="type base">base</span></td>
           <td>eye + number</td>
@@ -395,8 +430,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#expert-page">expert-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/experts/14-reading-time.png" target="_blank" rel="noopener"><img src="component-shots/experts/14-reading-time.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/14-reading-time.png" aria-label="Відкрити preview (D)"><img src="component-shots/experts/14-reading-time.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ReadingTime</code><div class="scope">Час читання</div></td>
           <td><span class="type base">base</span></td>
           <td>clock + label</td>
@@ -406,8 +441,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#expert-page">expert-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/vin-check/04-lot-status-auction.png" target="_blank" rel="noopener"><img src="component-shots/vin-check/04-lot-status-auction.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/vin-check/04-lot-status-auction.png" aria-label="Відкрити preview (D)"><img src="component-shots/vin-check/04-lot-status-auction.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>LotStatusBadge / AuctionBrand</code><div class="scope">Статус лота / бренд аукціону</div></td>
           <td><span class="type base">base</span></td>
           <td>active · inactive TBD</td>
@@ -441,8 +476,8 @@
         <tbody>
 
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/car-cards/01-desktop-card.png" target="_blank" rel="noopener"><img src="component-shots/car-cards/01-desktop-card.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/car-cards/03-mobile-card.png" target="_blank" rel="noopener"><img src="component-shots/car-cards/03-mobile-card.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-cards/01-desktop-card.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-cards/01-desktop-card.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-cards/03-mobile-card.png" aria-label="Відкрити preview (M)"><img src="component-shots/car-cards/03-mobile-card.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>CarCard</code><div class="scope">Картка авто / лота / збереженого</div></td>
           <td><span class="type base">base</span></td>
           <td>home · CatalogCarCard · AuctionCard(+timer) · Saved(+badge) · horizontal/vertical</td>
@@ -452,8 +487,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#car-cards">car-cards</a> · <a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a> · <a href="FE-COMPONENTS-UA.html#auctions-listing">auctions-listing</a> · <a href="FE-COMPONENTS-UA.html#saved-page">saved-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/client-cards/01-desktop-card.png" target="_blank" rel="noopener"><img src="component-shots/client-cards/01-desktop-card.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/client-cards/04-mobile-card.png" target="_blank" rel="noopener"><img src="component-shots/client-cards/04-mobile-card.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/client-cards/01-desktop-card.png" aria-label="Відкрити preview (D)"><img src="component-shots/client-cards/01-desktop-card.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/client-cards/04-mobile-card.png" aria-label="Відкрити preview (M)"><img src="component-shots/client-cards/04-mobile-card.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ClientCard</code><div class="scope">Картка клієнта</div></td>
           <td><span class="type base">base</span></td>
           <td>+ Badge · hover photo</td>
@@ -463,8 +498,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#client-cards">client-cards</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/reviews/01-card-thumb.png" target="_blank" rel="noopener"><img src="component-shots/reviews/01-card-thumb.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/reviews/05-mobile-card.png" target="_blank" rel="noopener"><img src="component-shots/reviews/05-mobile-card.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/reviews/01-card-thumb.png" aria-label="Відкрити preview (D)"><img src="component-shots/reviews/01-card-thumb.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/reviews/05-mobile-card.png" aria-label="Відкрити preview (M)"><img src="component-shots/reviews/05-mobile-card.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ReviewCard</code><div class="scope">YouTube-відгук</div></td>
           <td><span class="type base">base</span></td>
           <td>+ embed player</td>
@@ -474,8 +509,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#reviews">reviews</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/google-reviews/09-desktop-card.png" target="_blank" rel="noopener"><img src="component-shots/google-reviews/09-desktop-card.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/google-reviews/08-card-read-more.png" target="_blank" rel="noopener"><img src="component-shots/google-reviews/08-card-read-more.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/google-reviews/09-desktop-card.png" aria-label="Відкрити preview (D)"><img src="component-shots/google-reviews/09-desktop-card.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/google-reviews/08-card-read-more.png" aria-label="Відкрити preview (M)"><img src="component-shots/google-reviews/08-card-read-more.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>GoogleReviewCard</code><div class="scope">Текстовий Google-відгук</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -485,8 +520,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#google-reviews">google-reviews</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-more/05-news-card.png" target="_blank" rel="noopener"><img src="component-shots/home-more/05-news-card.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/home-more/08-news-card-mobile.png" target="_blank" rel="noopener"><img src="component-shots/home-more/08-news-card-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-more/05-news-card.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-more/05-news-card.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-more/08-news-card-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/home-more/08-news-card-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>NewsCard</code><div class="scope">Картка новини (home)</div></td>
           <td><span class="type base">base</span></td>
           <td>horizontal · vertical</td>
@@ -496,8 +531,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-more">home-more</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/blog/02-article-card-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/blog/02-article-card-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/blog/06-article-card-mobile.png" target="_blank" rel="noopener"><img src="component-shots/blog/06-article-card-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/blog/02-article-card-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/blog/02-article-card-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/blog/06-article-card-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/blog/06-article-card-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ArticleCard</code><div class="scope">Картка статті блогу</div></td>
           <td><span class="type base">base</span></td>
           <td>horizontal · vertical · text-only · +author · +CTA «Детальніше»</td>
@@ -507,8 +542,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#blog-page">blog-page</a> · <a href="FE-COMPONENTS-UA.html#expert-page">expert-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/blog/04-expert-card.jpg" target="_blank" rel="noopener"><img src="component-shots/blog/04-expert-card.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/blog/04-expert-card.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/blog/04-expert-card.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ExpertCard</code><div class="scope">Teaser експерта в слайдері блогу</div></td>
           <td><span class="type base">base</span></td>
           <td>avatar · badge · CTA articles</td>
@@ -518,8 +553,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#blog-page">blog-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/about/01-value-card.jpg" target="_blank" rel="noopener"><img src="component-shots/about/01-value-card.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/experts/07-expert-value-mobile.png" target="_blank" rel="noopener"><img src="component-shots/experts/07-expert-value-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/about/01-value-card.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/about/01-value-card.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/07-expert-value-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/experts/07-expert-value-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ValueCard / ExpertValueItem</code><div class="scope">Цінність / принцип</div></td>
           <td><span class="type base">base</span></td>
           <td>shadow card · centered item</td>
@@ -529,8 +564,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#about-page">about-page</a> · <a href="FE-COMPONENTS-UA.html#expert-page">expert-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/guarantees/01-feature-card.png" target="_blank" rel="noopener"><img src="component-shots/guarantees/01-feature-card.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/guarantees/01-feature-card.png" aria-label="Відкрити preview (D)"><img src="component-shots/guarantees/01-feature-card.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>GuaranteeFeatureCard</code><div class="scope">Картка гарантії</div></td>
           <td><span class="type base">base</span></td>
           <td>base · with link</td>
@@ -540,8 +575,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#guarantees-page">guarantees-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/vin-check/05-lot-summary-card.jpg" target="_blank" rel="noopener"><img src="component-shots/vin-check/05-lot-summary-card.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/vin-check/05-lot-summary-card.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/vin-check/05-lot-summary-card.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>VinSpecCard</code><div class="scope">Spec / summary / auction / accidents cards</div></td>
           <td><span class="type base">base</span></td>
           <td>4 layouts + shadow</td>
@@ -551,8 +586,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#vin-check-page">vin-check-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/korea-auctions/05-history-status-clear.png" target="_blank" rel="noopener"><img src="component-shots/korea-auctions/05-history-status-clear.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/korea-auctions/05-history-status-clear.png" aria-label="Відкрити preview (D)"><img src="component-shots/korea-auctions/05-history-status-clear.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>HistoryStatusCard</code><div class="scope">Статус історії (clear / detected)</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -562,8 +597,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#korea-auctions">korea-auctions</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><a class="thumb" href="component-shots/cars/04-car-card-horizontal.jpg" target="_blank" rel="noopener"><img src="component-shots/cars/04-car-card-horizontal.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/cars/05-car-card-vertical-mobile.jpg" target="_blank" rel="noopener"><img src="component-shots/cars/05-car-card-vertical-mobile.jpg" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/04-car-card-horizontal.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/cars/04-car-card-horizontal.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/05-car-card-vertical-mobile.jpg" aria-label="Відкрити preview (M)"><img src="component-shots/cars/05-car-card-vertical-mobile.jpg" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>CarCard · catalog</code> <code class="alias">CatalogCarCard</code><div class="scope">Horizontal listing layout (/cars/) — delta над base CarCard</div></td>
           <td><span class="type delta">delta</span></td>
           <td>horizontal desktop · vertical mobile</td>
@@ -573,8 +608,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><a class="thumb" href="component-shots/saved/03-saved-car-card-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/saved/03-saved-car-card-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/saved/04-saved-car-card-mobile.png" target="_blank" rel="noopener"><img src="component-shots/saved/04-saved-car-card-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/saved/03-saved-car-card-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/saved/03-saved-car-card-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/saved/04-saved-car-card-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/saved/04-saved-car-card-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>CarCard · saved</code> <code class="alias">SavedCarCard</code><div class="scope">Badge «Збережено» + listing states — delta над CarCard</div></td>
           <td><span class="type delta">delta</span></td>
           <td>saved badge · desktop horizontal · mobile vertical</td>
@@ -584,8 +619,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#saved-page">saved-page</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><a class="thumb" href="component-shots/auctions/07-auction-card.png" target="_blank" rel="noopener"><img src="component-shots/auctions/07-auction-card.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/auctions/07-auction-card.png" aria-label="Відкрити preview (D)"><img src="component-shots/auctions/07-auction-card.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>CarCard · auction</code> <code class="alias">AuctionCard</code><div class="scope">Slot під AuctionTimer на картці — delta (timer оцінюється окремо)</div></td>
           <td><span class="type delta">delta</span></td>
           <td>+ timer slot</td>
@@ -595,8 +630,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#auctions-listing">auctions-listing</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><a class="thumb" href="component-shots/experts/03-article-card-text-only.png" target="_blank" rel="noopener"><img src="component-shots/experts/03-article-card-text-only.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/03-article-card-text-only.png" aria-label="Відкрити preview (D)"><img src="component-shots/experts/03-article-card-text-only.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ArticleCard · text-only</code><div class="scope">Без зображення (останні статті експерта)</div></td>
           <td><span class="type delta">delta</span></td>
           <td>text-only</td>
@@ -606,8 +641,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#expert-page">expert-page</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><a class="thumb" href="component-shots/experts/09-article-card-author.jpg" target="_blank" rel="noopener"><img src="component-shots/experts/09-article-card-author.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/09-article-card-author.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/experts/09-article-card-author.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ArticleCard · author</code><div class="scope">+ author line у horizontal layout</div></td>
           <td><span class="type delta">delta</span></td>
           <td>author · horizontal</td>
@@ -617,8 +652,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#expert-page">expert-page</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><a class="thumb" href="component-shots/experts/16-article-card-cta.jpg" target="_blank" rel="noopener"><img src="component-shots/experts/16-article-card-cta.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/16-article-card-cta.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/experts/16-article-card-cta.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ArticleCard · CTA</code><div class="scope">Vertical card + кнопка «Детальніше»</div></td>
           <td><span class="type delta">delta</span></td>
           <td>CTA button</td>
@@ -652,8 +687,8 @@
         <tbody>
 
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/client-cards/02-desktop-slider.jpg" target="_blank" rel="noopener"><img src="component-shots/client-cards/02-desktop-slider.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/client-cards/05-mobile-slider.png" target="_blank" rel="noopener"><img src="component-shots/client-cards/05-mobile-slider.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/client-cards/02-desktop-slider.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/client-cards/02-desktop-slider.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/client-cards/05-mobile-slider.png" aria-label="Відкрити preview (M)"><img src="component-shots/client-cards/05-mobile-slider.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>SharedCardsSlider</code><div class="scope">Базовий слайдер карток</div></td>
           <td><span class="type base">base</span></td>
           <td>auto · no dots · ± arrow · mobile swipe</td>
@@ -663,8 +698,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#client-cards">client-cards</a> · <a href="FE-COMPONENTS-UA.html#car-cards">car-cards</a> · <a href="FE-COMPONENTS-UA.html#reviews">reviews</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/google-reviews/01-desktop-slider.png" target="_blank" rel="noopener"><img src="component-shots/google-reviews/01-desktop-slider.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/google-reviews/06-mobile-slider.png" target="_blank" rel="noopener"><img src="component-shots/google-reviews/06-mobile-slider.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/google-reviews/01-desktop-slider.png" aria-label="Відкрити preview (D)"><img src="component-shots/google-reviews/01-desktop-slider.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/google-reviews/06-mobile-slider.png" aria-label="Відкрити preview (M)"><img src="component-shots/google-reviews/06-mobile-slider.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>GoogleReviewsSlider</code><div class="scope">Слайдер Google + ReviewViewer</div></td>
           <td><span class="type base">base</span></td>
           <td>arrows · auto · bar-dots · fullscreen viewer</td>
@@ -674,8 +709,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#google-reviews">google-reviews</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-more/06-news-slider.jpg" target="_blank" rel="noopener"><img src="component-shots/home-more/06-news-slider.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-more/06-news-slider.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/home-more/06-news-slider.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>NewsSlider</code><div class="scope">Слайдер новин</div></td>
           <td><span class="type base">base</span></td>
           <td>+ SlideCounter desktop · no dots mobile</td>
@@ -685,8 +720,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-more">home-more</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/zsu/01-helped-units-ticker.jpg" target="_blank" rel="noopener"><img src="component-shots/zsu/01-helped-units-ticker.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/zsu/02-helped-units-ticker-close.png" target="_blank" rel="noopener"><img src="component-shots/zsu/02-helped-units-ticker-close.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/zsu/01-helped-units-ticker.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/zsu/01-helped-units-ticker.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/zsu/02-helped-units-ticker-close.png" aria-label="Відкрити preview (M)"><img src="component-shots/zsu/02-helped-units-ticker-close.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>HelpedUnitsTicker</code><div class="scope">Infinite auto ticker (logos)</div></td>
           <td><span class="type base">base</span></td>
           <td>no swipe · no buttons · edge fade</td>
@@ -696,8 +731,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#zsu-page">zsu-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/blog/05-expert-slider.jpg" target="_blank" rel="noopener"><img src="component-shots/blog/05-expert-slider.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/blog/07-expert-slider-mobile.png" target="_blank" rel="noopener"><img src="component-shots/blog/07-expert-slider-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/blog/05-expert-slider.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/blog/05-expert-slider.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/blog/07-expert-slider-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/blog/07-expert-slider-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ExpertOpinionSlider</code><div class="scope">Слайдер експертів</div></td>
           <td><span class="type base">base</span></td>
           <td>auto + swipe · no buttons/dots</td>
@@ -707,8 +742,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#blog-page">blog-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/zsu/07-thanks-gallery-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/zsu/07-thanks-gallery-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/zsu/08-thanks-gallery-mobile.png" target="_blank" rel="noopener"><img src="component-shots/zsu/08-thanks-gallery-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/zsu/07-thanks-gallery-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/zsu/07-thanks-gallery-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/zsu/08-thanks-gallery-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/zsu/08-thanks-gallery-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ThanksGallery / GalleryLightbox</code><div class="scope">Галерея подяк + lightbox</div></td>
           <td><span class="type base">base</span></td>
           <td>auto · arrows · zoom · share · counter</td>
@@ -718,8 +753,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#zsu-page">zsu-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/auction-item/09-popular-lots-default.jpg" target="_blank" rel="noopener"><img src="component-shots/auction-item/09-popular-lots-default.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/auction-item/09-popular-lots-default.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/auction-item/09-popular-lots-default.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>PopularLots</code><div class="scope">Горизонтальний ряд популярних лотів</div></td>
           <td><span class="type base">base</span></td>
           <td>3-row h-scroll · hover</td>
@@ -729,8 +764,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#auction-item">auction-item</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><a class="thumb" href="component-shots/car-item/17-related-cars-slider-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/car-item/17-related-cars-slider-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/17-related-cars-slider-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/17-related-cars-slider-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>RelatedCarsSlider</code><div class="scope">Reuse SharedCardsSlider + CarCard на item (стрілка desktop)</div></td>
           <td><span class="type delta">delta</span></td>
           <td>arrow desktop · no dots mobile</td>
@@ -764,8 +799,8 @@
         <tbody>
 
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-banner/05-modal-callback.png" target="_blank" rel="noopener"><img src="component-shots/home-banner/05-modal-callback.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-banner/05-modal-callback.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-banner/05-modal-callback.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>CallbackModal</code><div class="scope">Модалка «Замовити дзвінок»</div></td>
           <td><span class="type base">base</span></td>
           <td>validation · disclaimer</td>
@@ -775,8 +810,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-banner">home-banner</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/promo-modal/01-mobile.jpg" target="_blank" rel="noopener"><img src="component-shots/promo-modal/01-mobile.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/promo-modal/01-mobile.jpg" target="_blank" rel="noopener"><img src="component-shots/promo-modal/01-mobile.jpg" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/promo-modal/01-mobile.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/promo-modal/01-mobile.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/promo-modal/01-mobile.jpg" aria-label="Відкрити preview (M)"><img src="component-shots/promo-modal/01-mobile.jpg" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>PromoTelegramModal</code><div class="scope">Auto-попап → Telegram</div></td>
           <td><span class="type base">base</span></td>
           <td>≠ TelegramCta in-page</td>
@@ -786,8 +821,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#promo-telegram-modal">promo-telegram-modal</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-controls/08-form.png" target="_blank" rel="noopener"><img src="component-shots/home-controls/08-form.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-controls/08-form.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-controls/08-form.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>LeadForm / ContactForm</code><div class="scope">Форми підбору / контакту</div></td>
           <td><span class="type base">base</span></td>
           <td>full · short fields · validation</td>
@@ -797,8 +832,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-controls">home-controls</a> · <a href="FE-COMPONENTS-UA.html#home-more">home-more</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-bonus/03-bonus-banner.jpg" target="_blank" rel="noopener"><img src="component-shots/home-bonus/03-bonus-banner.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/home-bonus/06-bonus-mobile.png" target="_blank" rel="noopener"><img src="component-shots/home-bonus/06-bonus-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-bonus/03-bonus-banner.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/home-bonus/03-bonus-banner.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-bonus/06-bonus-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/home-bonus/06-bonus-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>BonusLeadForm</code><div class="scope">«Отримати бонус» / ТОП-5</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop · mobile · один на всіх сторінках</td>
@@ -808,8 +843,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-bonus">home-bonus</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/42-feedback-split-form.jpg" target="_blank" rel="noopener"><img src="component-shots/cars/42-feedback-split-form.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/42-feedback-split-form.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/cars/42-feedback-split-form.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>CatalogFeedbackForm</code><div class="scope">Форма фідбеку каталогу</div></td>
           <td><span class="type base">base</span></td>
           <td>split image + form</td>
@@ -819,8 +854,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/45-turnkey-price-modal-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/cars/45-turnkey-price-modal-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/cars/47-turnkey-price-modal-mobile.png" target="_blank" rel="noopener"><img src="component-shots/cars/47-turnkey-price-modal-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/45-turnkey-price-modal-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/cars/45-turnkey-price-modal-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/47-turnkey-price-modal-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/47-turnkey-price-modal-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>TurnkeyPriceModal</code><div class="scope">Модалка «ціна під ключ»</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop photo+form · mobile form-only</td>
@@ -830,8 +865,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/46-form-alert-desktop.png" target="_blank" rel="noopener"><img src="component-shots/cars/46-form-alert-desktop.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/cars/48-form-alert-mobile.png" target="_blank" rel="noopener"><img src="component-shots/cars/48-form-alert-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/46-form-alert-desktop.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/46-form-alert-desktop.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/48-form-alert-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/48-form-alert-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>FormValidationAlert</code><div class="scope">Алерт валідації у шапці форми</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -841,8 +876,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/auctions/05-telegram-cta.png" target="_blank" rel="noopener"><img src="component-shots/auctions/05-telegram-cta.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/auctions/05-telegram-cta.png" aria-label="Відкрити preview (D)"><img src="component-shots/auctions/05-telegram-cta.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>TelegramCta</code><div class="scope">In-page підписка Telegram</div></td>
           <td><span class="type base">base</span></td>
           <td>≠ auto PromoTelegramModal</td>
@@ -852,8 +887,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#auctions-listing">auctions-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/calculator/02-calculator-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/calculator/02-calculator-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/calculator/01-calculator-mobile.jpg" target="_blank" rel="noopener"><img src="component-shots/calculator/01-calculator-mobile.jpg" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/calculator/02-calculator-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/calculator/02-calculator-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/calculator/01-calculator-mobile.jpg" aria-label="Відкрити preview (M)"><img src="component-shots/calculator/01-calculator-mobile.jpg" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>CustomsCalculator</code><div class="scope">Калькулятор розмитнення</div></td>
           <td><span class="type base">base</span></td>
           <td>form + breakdown · desktop/mobile</td>
@@ -863,8 +898,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#calculator-page">calculator-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/vin-check/01-vin-search-default.jpg" target="_blank" rel="noopener"><img src="component-shots/vin-check/01-vin-search-default.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/vin-check/03-vin-search-mobile.png" target="_blank" rel="noopener"><img src="component-shots/vin-check/03-vin-search-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/vin-check/01-vin-search-default.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/vin-check/01-vin-search-default.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/vin-check/03-vin-search-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/vin-check/03-vin-search-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>VinSearch</code><div class="scope">Пошук по VIN</div></td>
           <td><span class="type base">base</span></td>
           <td>default · hover · mobile</td>
@@ -898,8 +933,8 @@
         <tbody>
 
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/12-filter-accordion-desktop.png" target="_blank" rel="noopener"><img src="component-shots/cars/12-filter-accordion-desktop.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/cars/15-filter-accordion-mobile.png" target="_blank" rel="noopener"><img src="component-shots/cars/15-filter-accordion-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/12-filter-accordion-desktop.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/12-filter-accordion-desktop.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/15-filter-accordion-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/15-filter-accordion-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>CatalogFilterAccordion</code><div class="scope">Фільтр-акордеон</div></td>
           <td><span class="type base">base</span></td>
           <td>sidebar · у MobileFiltersModal</td>
@@ -909,8 +944,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/25-filter-search-empty.png" target="_blank" rel="noopener"><img src="component-shots/cars/25-filter-search-empty.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/25-filter-search-empty.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/25-filter-search-empty.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>FilterSearchInput</code><div class="scope">Пошук у секції фільтра</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -920,8 +955,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/31-filter-checkbox-states.png" target="_blank" rel="noopener"><img src="component-shots/cars/31-filter-checkbox-states.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/31-filter-checkbox-states.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/31-filter-checkbox-states.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>FilterCheckbox</code><div class="scope">Чекбокс фільтра</div></td>
           <td><span class="type base">base</span></td>
           <td>checked · unchecked</td>
@@ -931,8 +966,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/28-range-slider-desktop.png" target="_blank" rel="noopener"><img src="component-shots/cars/28-range-slider-desktop.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/cars/30-range-slider-mobile.png" target="_blank" rel="noopener"><img src="component-shots/cars/30-range-slider-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/28-range-slider-desktop.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/28-range-slider-desktop.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/30-range-slider-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/30-range-slider-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>FilterRangeSlider</code><div class="scope">Dual-handle range</div></td>
           <td><span class="type base">base</span></td>
           <td>від—до</td>
@@ -942,8 +977,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/auctions/04-datepicker-open.png" target="_blank" rel="noopener"><img src="component-shots/auctions/04-datepicker-open.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/auctions/04-datepicker-open.png" aria-label="Відкрити preview (D)"><img src="component-shots/auctions/04-datepicker-open.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>FilterDatePicker</code><div class="scope">Datepicker у фільтрах</div></td>
           <td><span class="type base">base</span></td>
           <td>inputs + calendar</td>
@@ -953,8 +988,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#auctions-listing">auctions-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/23-filter-chips-desktop.png" target="_blank" rel="noopener"><img src="component-shots/cars/23-filter-chips-desktop.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/cars/22-filter-chips-mobile.png" target="_blank" rel="noopener"><img src="component-shots/cars/22-filter-chips-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/23-filter-chips-desktop.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/23-filter-chips-desktop.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/22-filter-chips-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/22-filter-chips-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>FilterChip</code><div class="scope">Чіп активного фільтра / tip</div></td>
           <td><span class="type base">base</span></td>
           <td>+ «Скинути…»</td>
@@ -964,8 +999,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/17-reset-filters-default.png" target="_blank" rel="noopener"><img src="component-shots/cars/17-reset-filters-default.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/17-reset-filters-default.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/17-reset-filters-default.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ResetFiltersButton</code><div class="scope">Скинути фільтри</div></td>
           <td><span class="type base">base</span></td>
           <td>sidebar · modal footer</td>
@@ -975,8 +1010,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/19-mobile-filters-trigger.png" target="_blank" rel="noopener"><img src="component-shots/cars/19-mobile-filters-trigger.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/cars/19-mobile-filters-trigger.png" target="_blank" rel="noopener"><img src="component-shots/cars/19-mobile-filters-trigger.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/19-mobile-filters-trigger.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/19-mobile-filters-trigger.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/19-mobile-filters-trigger.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/19-mobile-filters-trigger.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>MobileFiltersTrigger / Modal</code><div class="scope">Мобільні фільтри</div></td>
           <td><span class="type base">base</span></td>
           <td>slide-in left</td>
@@ -986,8 +1021,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/03-page-size-sort-selects.png" target="_blank" rel="noopener"><img src="component-shots/cars/03-page-size-sort-selects.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/03-page-size-sort-selects.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/03-page-size-sort-selects.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>PageSizeSelect / SortSelect</code><div class="scope">Селекти розміру/сорту</div></td>
           <td><span class="type base">base</span></td>
           <td>custom trigger</td>
@@ -997,8 +1032,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/06-show-more-default.png" target="_blank" rel="noopener"><img src="component-shots/cars/06-show-more-default.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/cars/10-show-more-mobile.png" target="_blank" rel="noopener"><img src="component-shots/cars/10-show-more-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/06-show-more-default.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/06-show-more-default.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/10-show-more-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/10-show-more-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ShowMoreButton</code><div class="scope">«Показати ще»</div></td>
           <td><span class="type base">base</span></td>
           <td>outline → brand hover</td>
@@ -1008,8 +1043,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/08-pagination-default.png" target="_blank" rel="noopener"><img src="component-shots/cars/08-pagination-default.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/cars/11-pagination-mobile.png" target="_blank" rel="noopener"><img src="component-shots/cars/11-pagination-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/08-pagination-default.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/08-pagination-default.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/11-pagination-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/11-pagination-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>Pagination</code><div class="scope">Пагінація</div></td>
           <td><span class="type base">base</span></td>
           <td>base · +first/last (blog)</td>
@@ -1019,8 +1054,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a> · <a href="FE-COMPONENTS-UA.html#blog-page">blog-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/32-content-accordion-collapsed.png" target="_blank" rel="noopener"><img src="component-shots/cars/32-content-accordion-collapsed.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/cars/34-content-accordion-mobile.png" target="_blank" rel="noopener"><img src="component-shots/cars/34-content-accordion-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/32-content-accordion-collapsed.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/32-content-accordion-collapsed.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/34-content-accordion-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/34-content-accordion-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ContentAccordion / FAQ</code><div class="scope">Акордеон контенту / FAQ</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -1030,8 +1065,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-more">home-more</a> · <a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/cars/39-title-text-paragraphs.png" target="_blank" rel="noopener"><img src="component-shots/cars/39-title-text-paragraphs.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/39-title-text-paragraphs.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/39-title-text-paragraphs.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>TitleText</code><div class="scope">Title + rich text (p/table/list)</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -1041,8 +1076,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#cars-listing">cars-listing</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><a class="thumb" href="component-shots/blog/03-pagination-blog.jpg" target="_blank" rel="noopener"><img src="component-shots/blog/03-pagination-blog.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/blog/03-pagination-blog.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/blog/03-pagination-blog.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>Pagination · blog</code><div class="scope">+ first/last chevrons («« / »») — delta над Pagination</div></td>
           <td><span class="type delta">delta</span></td>
           <td>first/last</td>
@@ -1076,8 +1111,8 @@
         <tbody>
 
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/car-item/05-gallery-preview.jpg" target="_blank" rel="noopener"><img src="component-shots/car-item/05-gallery-preview.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/car-item/08-gallery-fullscreen-mobile.png" target="_blank" rel="noopener"><img src="component-shots/car-item/08-gallery-fullscreen-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/05-gallery-preview.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/05-gallery-preview.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/08-gallery-fullscreen-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/car-item/08-gallery-fullscreen-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>OfferGallery</code><div class="scope">Галерея офера</div></td>
           <td><span class="type base">base</span></td>
           <td>preview · fullscreen · zoom</td>
@@ -1087,8 +1122,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#car-item">car-item</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/car-item/02-rating-empty.png" target="_blank" rel="noopener"><img src="component-shots/car-item/02-rating-empty.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/02-rating-empty.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/02-rating-empty.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>OfferRating</code><div class="scope">Рейтинг зірками</div></td>
           <td><span class="type base">base</span></td>
           <td>empty · hover · active</td>
@@ -1098,8 +1133,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#car-item">car-item</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/car-item/09-offer-summary.png" target="_blank" rel="noopener"><img src="component-shots/car-item/09-offer-summary.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/09-offer-summary.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/09-offer-summary.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>OfferSummary</code><div class="scope">Title · price · CTA · share</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -1109,8 +1144,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#car-item">car-item</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/car-item/11-specs-list.png" target="_blank" rel="noopener"><img src="component-shots/car-item/11-specs-list.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/11-specs-list.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/11-specs-list.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>SpecsList / SpecRow</code><div class="scope">Характеристики</div></td>
           <td><span class="type base">base</span></td>
           <td>icon · title · value</td>
@@ -1120,8 +1155,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#car-item">car-item</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/car-item/13-equipment-block.png" target="_blank" rel="noopener"><img src="component-shots/car-item/13-equipment-block.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/13-equipment-block.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/13-equipment-block.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>EquipmentBlock</code><div class="scope">Комплектація</div></td>
           <td><span class="type base">base</span></td>
           <td>pipe list</td>
@@ -1131,8 +1166,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#car-item">car-item</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/car-item/15-description-collapsed.png" target="_blank" rel="noopener"><img src="component-shots/car-item/15-description-collapsed.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/15-description-collapsed.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/15-description-collapsed.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>OfferDescription</code><div class="scope">Опис + truncate</div></td>
           <td><span class="type base">base</span></td>
           <td>+ DetailsToggle</td>
@@ -1142,8 +1177,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#car-item">car-item</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/car-item/18-reviews-teaser-desktop.png" target="_blank" rel="noopener"><img src="component-shots/car-item/18-reviews-teaser-desktop.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/18-reviews-teaser-desktop.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/18-reviews-teaser-desktop.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ReviewsTeaser</code><div class="scope">Тизер відгуків на item</div></td>
           <td><span class="type base">base</span></td>
           <td>grid · text+CTA</td>
@@ -1153,8 +1188,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#car-item">car-item</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/auctions/08-auction-timer.png" target="_blank" rel="noopener"><img src="component-shots/auctions/08-auction-timer.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/auctions/08-auction-timer.png" aria-label="Відкрити preview (D)"><img src="component-shots/auctions/08-auction-timer.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>AuctionTimer</code><div class="scope">Таймер аукціону</div></td>
           <td><span class="type base">base</span></td>
           <td>active countdown · inactive «проведено»</td>
@@ -1164,8 +1199,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#auctions-listing">auctions-listing</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/auction-item/01-lot-vin-badges.png" target="_blank" rel="noopener"><img src="component-shots/auction-item/01-lot-vin-badges.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/auction-item/01-lot-vin-badges.png" aria-label="Відкрити preview (D)"><img src="component-shots/auction-item/01-lot-vin-badges.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>LotBadge / VinCopy</code><div class="scope">Бейдж лота + VIN copy</div></td>
           <td><span class="type base">base</span></td>
           <td>masked · full · copy feedback</td>
@@ -1175,8 +1210,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#auction-item">auction-item</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/auction-item/04-auction-data-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/auction-item/04-auction-data-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/auction-item/05-auction-data-mobile.png" target="_blank" rel="noopener"><img src="component-shots/auction-item/05-auction-data-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/auction-item/04-auction-data-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/auction-item/04-auction-data-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/auction-item/05-auction-data-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/auction-item/05-auction-data-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>AuctionData</code><div class="scope">Дані аукціону</div></td>
           <td><span class="type base">base</span></td>
           <td>3-col desktop · list mobile</td>
@@ -1186,8 +1221,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#auction-item">auction-item</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/auction-item/06-lot-description-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/auction-item/06-lot-description-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/auction-item/07-lot-description-mobile.png" target="_blank" rel="noopener"><img src="component-shots/auction-item/07-lot-description-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/auction-item/06-lot-description-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/auction-item/06-lot-description-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/auction-item/07-lot-description-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/auction-item/07-lot-description-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>LotDescription</code><div class="scope">Опис лота</div></td>
           <td><span class="type base">base</span></td>
           <td>title · divider · bold keys</td>
@@ -1197,8 +1232,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#auction-item">auction-item</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/auction-item/08-model-range-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/auction-item/08-model-range-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/auction-item/08-model-range-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/auction-item/08-model-range-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ModelRange</code><div class="scope">Сітка посилань модельний ряд</div></td>
           <td><span class="type base">base</span></td>
           <td>hover red · mobile</td>
@@ -1208,8 +1243,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#auction-item">auction-item</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/korea-auctions/01-price-tooltip.png" target="_blank" rel="noopener"><img src="component-shots/korea-auctions/01-price-tooltip.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/korea-auctions/01-price-tooltip.png" aria-label="Відкрити preview (D)"><img src="component-shots/korea-auctions/01-price-tooltip.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>PriceRelevanceTooltip</code><div class="scope">Tooltip біля ціни (Korea)</div></td>
           <td><span class="type base">base</span></td>
           <td>info popover</td>
@@ -1219,8 +1254,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#korea-auctions">korea-auctions</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/korea-auctions/02-body-condition-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/korea-auctions/02-body-condition-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/korea-auctions/03-body-condition-mobile.png" target="_blank" rel="noopener"><img src="component-shots/korea-auctions/03-body-condition-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/korea-auctions/02-body-condition-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/korea-auctions/02-body-condition-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/korea-auctions/03-body-condition-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/korea-auctions/03-body-condition-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>BodyConditionReport</code><div class="scope">Схема стану кузова</div></td>
           <td><span class="type base">base</span></td>
           <td>легенда · Encar note</td>
@@ -1230,8 +1265,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#korea-auctions">korea-auctions</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/korea-auctions/04-history-overview-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/korea-auctions/04-history-overview-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/korea-auctions/07-history-overview-mobile.png" target="_blank" rel="noopener"><img src="component-shots/korea-auctions/07-history-overview-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/korea-auctions/04-history-overview-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/korea-auctions/04-history-overview-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/korea-auctions/07-history-overview-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/korea-auctions/07-history-overview-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>HistoryOverview</code><div class="scope">Огляд історії</div></td>
           <td><span class="type base">base</span></td>
           <td>+ StatusCard</td>
@@ -1241,8 +1276,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#korea-auctions">korea-auctions</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/korea-auctions/08-insurance-history-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/korea-auctions/08-insurance-history-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/korea-auctions/09-insurance-history-mobile.png" target="_blank" rel="noopener"><img src="component-shots/korea-auctions/09-insurance-history-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/korea-auctions/08-insurance-history-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/korea-auctions/08-insurance-history-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/korea-auctions/09-insurance-history-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/korea-auctions/09-insurance-history-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>InsuranceHistory</code><div class="scope">Таблиця страхування</div></td>
           <td><span class="type base">base</span></td>
           <td>empty · filled · mobile h-scroll</td>
@@ -1252,8 +1287,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#korea-auctions">korea-auctions</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/korea-auctions/10-owners-mileage-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/korea-auctions/10-owners-mileage-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/korea-auctions/11-mileage-mobile.png" target="_blank" rel="noopener"><img src="component-shots/korea-auctions/11-mileage-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/korea-auctions/10-owners-mileage-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/korea-auctions/10-owners-mileage-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/korea-auctions/11-mileage-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/korea-auctions/11-mileage-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>OwnersInfo / MileageInfo</code><div class="scope">Власники / пробіг</div></td>
           <td><span class="type base">base</span></td>
           <td>tables · mobile h-scroll</td>
@@ -1263,8 +1298,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#korea-auctions">korea-auctions</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/vin-check/09-sales-history-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/vin-check/09-sales-history-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/vin-check/10-sales-history-mobile.png" target="_blank" rel="noopener"><img src="component-shots/vin-check/10-sales-history-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/vin-check/09-sales-history-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/vin-check/09-sales-history-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/vin-check/10-sales-history-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/vin-check/10-sales-history-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>SalesHistory</code><div class="scope">Історія продажів</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop · mobile h-scroll</td>
@@ -1298,8 +1333,8 @@
         <tbody>
 
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/blog/01-category-nav-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/blog/01-category-nav-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/blog/08-category-nav-mobile.png" target="_blank" rel="noopener"><img src="component-shots/blog/08-category-nav-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/blog/01-category-nav-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/blog/01-category-nav-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/blog/08-category-nav-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/blog/08-category-nav-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>BlogCategoryNav</code><div class="scope">Навігація категорій блогу</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop row · mobile wrap · active red</td>
@@ -1309,8 +1344,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#blog-page">blog-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/experts/01-expert-profile-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/experts/01-expert-profile-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/experts/02-expert-profile-mobile.png" target="_blank" rel="noopener"><img src="component-shots/experts/02-expert-profile-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/01-expert-profile-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/experts/01-expert-profile-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/02-expert-profile-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/experts/02-expert-profile-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ExpertProfileHero</code><div class="scope">Hero профілю експерта</div></td>
           <td><span class="type base">base</span></td>
           <td>≠ ExpertCard · quote · socials</td>
@@ -1320,8 +1355,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#expert-page">expert-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/experts/10-article-body-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/experts/10-article-body-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/experts/11-article-body-mobile.jpg" target="_blank" rel="noopener"><img src="component-shots/experts/11-article-body-mobile.jpg" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/10-article-body-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/experts/10-article-body-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/11-article-body-mobile.jpg" aria-label="Відкрити preview (M)"><img src="component-shots/experts/11-article-body-mobile.jpg" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ArticleBody</code><div class="scope">Rich text статті</div></td>
           <td><span class="type base">base</span></td>
           <td>title · date · bold · subheads · images</td>
@@ -1331,8 +1366,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#expert-page">expert-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/experts/04-bullet-list-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/experts/04-bullet-list-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/experts/05-bullet-list-mobile.png" target="_blank" rel="noopener"><img src="component-shots/experts/05-bullet-list-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/04-bullet-list-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/experts/04-bullet-list-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/05-bullet-list-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/experts/05-bullet-list-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>BulletListSection</code><div class="scope">Title + red-dot list</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -1342,8 +1377,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#expert-page">expert-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/experts/08-title-description.jpg" target="_blank" rel="noopener"><img src="component-shots/experts/08-title-description.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/08-title-description.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/experts/08-title-description.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>TitleDescription</code><div class="scope">Section intro title + text</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -1353,8 +1388,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#expert-page">expert-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><div class="thumb empty"><span>немає D</span></div></td>
-          <td class="prev"><a class="thumb" href="component-shots/experts/15-share-bar-mobile.png" target="_blank" rel="noopener"><img src="component-shots/experts/15-share-bar-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий D-скрін не зібраний</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/15-share-bar-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/experts/15-share-bar-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ShareBar</code><div class="scope">Mobile social share row</div></td>
           <td><span class="type base">base</span></td>
           <td>IG · FB · TG · Viber</td>
@@ -1364,8 +1399,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#expert-page">expert-page</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><a class="thumb" href="component-shots/experts/18-article-body-with-image.jpg" target="_blank" rel="noopener"><img src="component-shots/experts/18-article-body-with-image.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/experts/18-article-body-with-image.jpg" target="_blank" rel="noopener"><img src="component-shots/experts/18-article-body-with-image.jpg" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/18-article-body-with-image.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/experts/18-article-body-with-image.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/18-article-body-with-image.jpg" aria-label="Відкрити preview (M)"><img src="component-shots/experts/18-article-body-with-image.jpg" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ArticleBody · images</code><div class="scope">Embedded images у rich text — delta над ArticleBody</div></td>
           <td><span class="type delta">delta</span></td>
           <td>inline image</td>
@@ -1399,8 +1434,8 @@
         <tbody>
 
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-banner/01-desktop-banner.jpg" target="_blank" rel="noopener"><img src="component-shots/home-banner/01-desktop-banner.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/home-banner/09-mobile-banner.png" target="_blank" rel="noopener"><img src="component-shots/home-banner/09-mobile-banner.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-banner/01-desktop-banner.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/home-banner/01-desktop-banner.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-banner/09-mobile-banner.png" aria-label="Відкрити preview (M)"><img src="component-shots/home-banner/09-mobile-banner.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>InformativeBanner</code><div class="scope">Hero / info banner slider</div></td>
           <td><span class="type base">base</span></td>
           <td>home · report hero variant</td>
@@ -1410,8 +1445,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-banner">home-banner</a> · <a href="FE-COMPONENTS-UA.html#history-report-page">history-report-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-catalog-promo/01-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/home-catalog-promo/01-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/home-catalog-promo/02-mobile.png" target="_blank" rel="noopener"><img src="component-shots/home-catalog-promo/02-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-catalog-promo/01-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/home-catalog-promo/01-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-catalog-promo/02-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/home-catalog-promo/02-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>CatalogPromo</code><div class="scope">Промо каталогу (фото+title+CTA)</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop · mobile</td>
@@ -1421,8 +1456,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-catalog-promo">home-catalog-promo</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-steps/02-steps-block.png" target="_blank" rel="noopener"><img src="component-shots/home-steps/02-steps-block.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-steps/02-steps-block.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-steps/02-steps-block.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>StepsProgress</code><div class="scope">Етапи купівлі + progress rail</div></td>
           <td><span class="type base">base</span></td>
           <td>+ StepDescription</td>
@@ -1432,8 +1467,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-steps">home-steps</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/home-more/04-info-block.jpg" target="_blank" rel="noopener"><img src="component-shots/home-more/04-info-block.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-more/04-info-block.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/home-more/04-info-block.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>InfoBlock</code><div class="scope">Текст + CTA + image</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -1443,8 +1478,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-more">home-more</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/404/01-not-found-content.jpg" target="_blank" rel="noopener"><img src="component-shots/404/01-not-found-content.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/404/05-mobile.jpg" target="_blank" rel="noopener"><img src="component-shots/404/05-mobile.jpg" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/404/01-not-found-content.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/404/01-not-found-content.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/404/05-mobile.jpg" aria-label="Відкрити preview (M)"><img src="component-shots/404/05-mobile.jpg" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>NotFoundContent</code><div class="scope">404 контент</div></td>
           <td><span class="type base">base</span></td>
           <td>+ HomeButton</td>
@@ -1454,8 +1489,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#not-found-page">not-found-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/history-report/01-banner-anchor.png" target="_blank" rel="noopener"><img src="component-shots/history-report/01-banner-anchor.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/history-report/01-banner-anchor.png" aria-label="Відкрити preview (D)"><img src="component-shots/history-report/01-banner-anchor.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>BannerAnchor</code><div class="scope">Scroll-down anchor на hero</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
@@ -1465,8 +1500,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#history-report-page">history-report-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/about/02-departments-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/about/02-departments-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/about/05-departments-mobile-accordion.png" target="_blank" rel="noopener"><img src="component-shots/about/05-departments-mobile-accordion.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/about/02-departments-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/about/02-departments-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/about/05-departments-mobile-accordion.png" aria-label="Відкрити preview (M)"><img src="component-shots/about/05-departments-mobile-accordion.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>DepartmentsSection</code><div class="scope">Відділи компанії</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop tabs · mobile accordion</td>
@@ -1476,8 +1511,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#about-page">about-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/about/06-join-team-cta.jpg" target="_blank" rel="noopener"><img src="component-shots/about/06-join-team-cta.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/about/06-join-team-cta.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/about/06-join-team-cta.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>JoinTeamCta</code><div class="scope">CTA вакансій</div></td>
           <td><span class="type base">base</span></td>
           <td>no photo on mobile</td>
@@ -1487,8 +1522,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#about-page">about-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/delivery/01-step-text.png" target="_blank" rel="noopener"><img src="component-shots/delivery/01-step-text.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/delivery/01-step-text.png" aria-label="Відкрити preview (D)"><img src="component-shots/delivery/01-step-text.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>DeliveryStep</code><div class="scope">Крок доставки</div></td>
           <td><span class="type base">base</span></td>
           <td>text · with image</td>
@@ -1498,8 +1533,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#delivery-page">delivery-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/delivery/03-partners-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/delivery/03-partners-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/delivery/04-partners-mobile.png" target="_blank" rel="noopener"><img src="component-shots/delivery/04-partners-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/delivery/03-partners-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/delivery/03-partners-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/delivery/04-partners-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/delivery/04-partners-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>AuctionPartnersCard</code><div class="scope">Партнери аукціонів</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop · mobile</td>
@@ -1509,8 +1544,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#delivery-page">delivery-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/payment/01-payment-timeline-full.jpg" target="_blank" rel="noopener"><img src="component-shots/payment/01-payment-timeline-full.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/payment/01-payment-timeline-full.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/payment/01-payment-timeline-full.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>PaymentTimeline</code><div class="scope">Таймлайн оплати</div></td>
           <td><span class="type base">base</span></td>
           <td>horizontal · vertical · appear anim</td>
@@ -1520,8 +1555,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#payment-page">payment-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/zsu/03-donation-stats-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/zsu/03-donation-stats-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/zsu/04-donation-stats-mobile.png" target="_blank" rel="noopener"><img src="component-shots/zsu/04-donation-stats-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/zsu/03-donation-stats-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/zsu/03-donation-stats-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/zsu/04-donation-stats-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/zsu/04-donation-stats-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>DonationStats</code><div class="scope">Статистика донатів ЗСУ</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop · mobile</td>
@@ -1531,8 +1566,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#zsu-page">zsu-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/zsu/05-thanks-video-card.png" target="_blank" rel="noopener"><img src="component-shots/zsu/05-thanks-video-card.png" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/zsu/05-thanks-video-card.png" aria-label="Відкрити preview (D)"><img src="component-shots/zsu/05-thanks-video-card.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ThanksVideoCard</code><div class="scope">Відео-подяка (≠ home player)</div></td>
           <td><span class="type base">base</span></td>
           <td>idle · playing</td>
@@ -1542,8 +1577,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#zsu-page">zsu-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/contacts/01-map-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/contacts/01-map-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/contacts/03-map-mobile.png" target="_blank" rel="noopener"><img src="component-shots/contacts/03-map-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/contacts/01-map-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/contacts/01-map-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/contacts/03-map-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/contacts/03-map-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>OfficeMap</code><div class="scope">Google Maps embed + info card</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop · mobile</td>
@@ -1553,8 +1588,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#contacts-page">contacts-page</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><a class="thumb" href="component-shots/contacts/02-contacts-desktop.jpg" target="_blank" rel="noopener"><img src="component-shots/contacts/02-contacts-desktop.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><a class="thumb" href="component-shots/contacts/04-contacts-mobile.png" target="_blank" rel="noopener"><img src="component-shots/contacts/04-contacts-mobile.png" alt="M" loading="lazy" /><span>M</span></a></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/contacts/02-contacts-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/contacts/02-contacts-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/contacts/04-contacts-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/contacts/04-contacts-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
           <td><code>ContactsInfo</code><div class="scope">«Наші контакти»</div></td>
           <td><span class="type base">base</span></td>
           <td>2×2 grid · mobile stack · socials</td>
@@ -1564,8 +1599,8 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#contacts-page">contacts-page</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><a class="thumb" href="component-shots/history-report/02-report-hero.jpg" target="_blank" rel="noopener"><img src="component-shots/history-report/02-report-hero.jpg" alt="D" loading="lazy" /><span>D</span></a></td>
-          <td class="prev"><div class="thumb empty"><span>немає M</span></div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/history-report/02-report-hero.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/history-report/02-report-hero.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
           <td><code>ReportHero</code><div class="scope">Variant InformativeBanner для /zvit…/</div></td>
           <td><span class="type delta">delta</span></td>
           <td>report hero</td>
@@ -1598,5 +1633,56 @@
       · <a href="FE-COMPONENTS-UA.html">inventory</a>
     </footer>
   </div>
+
+  <div id="lb" class="lb" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Перегляд скріна">
+    <div class="lb-dialog">
+      <div class="lb-bar">
+        <span id="lb-caption">Preview</span>
+        <button type="button" class="lb-close" id="lb-close" aria-label="Закрити">×</button>
+      </div>
+      <img id="lb-img" alt="" />
+    </div>
+  </div>
+  <script>
+  (function () {
+    var lb = document.getElementById('lb');
+    var img = document.getElementById('lb-img');
+    var cap = document.getElementById('lb-caption');
+    var closeBtn = document.getElementById('lb-close');
+    if (!lb || !img) return;
+
+    function openLb(src, label) {
+      img.src = src;
+      img.alt = label || 'preview';
+      cap.textContent = label || src.split('/').pop();
+      lb.hidden = false;
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('lb-lock');
+      closeBtn.focus();
+    }
+    function closeLb() {
+      lb.classList.remove('open');
+      lb.hidden = true;
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('lb-lock');
+      img.removeAttribute('src');
+    }
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('button.thumb[data-full]');
+      if (btn) {
+        e.preventDefault();
+        var labelEl = btn.querySelector('span');
+        openLb(btn.getAttribute('data-full'), labelEl ? labelEl.textContent : 'Preview');
+        return;
+      }
+      if (e.target === lb) closeLb();
+    });
+    closeBtn.addEventListener('click', closeLb);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lb.classList.contains('open')) closeLb();
+    });
+  })();
+  </script>
 </body>
-</html>
