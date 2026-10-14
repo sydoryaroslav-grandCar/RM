@@ -320,7 +320,7 @@
         <tr data-type="base">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/saved/02-loader-page.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/saved/02-loader-page.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/saved/01-loader-dots.png" aria-label="Відкрити preview (M)"><img src="component-shots/saved/01-loader-dots.png" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>PageLoader</code><div class="scope">Глобальний loader overlay (3 dots)</div></td>
+          <td><code>PageLoader</code><div class="scope">D: page overlay · M: dots atom — два стани PageLoader (не обовʼязково viewport)</div></td>
           <td><span class="type base">base</span></td>
           <td>page overlay</td>
           <td>saved · будь-який fetch</td>
@@ -354,8 +354,8 @@
 
         <tr data-type="base">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/home-controls/01-button-more-cars.png" aria-label="Відкрити preview (D)"><img src="component-shots/home-controls/01-button-more-cars.png" alt="D" loading="lazy" /><span>D</span></button></td>
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/404/02-home-button-default.png" aria-label="Відкрити preview (M)"><img src="component-shots/404/02-home-button-default.png" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>Button</code><div class="scope">Primary / outline / icon / HomeButton</div></td>
+          <td class="prev"><div class="thumb empty" title="немає пари viewport"><span class="k">немає пари viewport</span><span class="v">M тієї ж кнопки не зібраний (не HomeButton)</span></div></td>
+          <td><code>Button</code><div class="scope">Primary / outline / hover — атом кнопки (HomeButton — окремий delta)</div></td>
           <td><span class="type base">base</span></td>
           <td>filled · outline · hover · +icon · HomeButton</td>
           <td>Усі CTA</td>
@@ -366,7 +366,7 @@
         <tr data-type="delta">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/404/02-home-button-default.png" aria-label="Відкрити preview (D)"><img src="component-shots/404/02-home-button-default.png" alt="D" loading="lazy" /><span>D</span></button></td>
           <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
-          <td><code>HomeButton</code><div class="scope">CTA «На головну» на 404 — variant Button</div></td>
+          <td><code>HomeButton</code><div class="scope">CTA «На головну» на 404 — variant Button (hover: 03-home-button-hover)</div></td>
           <td><span class="type delta">delta</span></td>
           <td>default filled · hover outline</td>
           <td>404</td>
@@ -441,9 +441,9 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#car-cards">car-cards</a> · <a href="FE-COMPONENTS-UA.html#saved-page">saved-page</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-cards/02-save-button.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-cards/02-save-button.png" alt="D" loading="lazy" /><span>D</span></button></td>
-          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
-          <td><code>SaveButton · states</code><div class="scope">Стани «Зберегти» / збережено — delta над SaveButton</div></td>
+          <td class="prev"><div class="thumb empty" title="див. base SaveButton"><span class="k">див. base SaveButton</span><span class="v">обидва стани вже на одному кадрі base</span></div></td>
+          <td class="prev"><div class="thumb empty" title="немає пари viewport"><span class="k">немає пари viewport</span><span class="v">окремий M-скрін не зібраний</span></div></td>
+          <td><code>SaveButton · states</code><div class="scope">Надбавка за стани idle/saved — скрін той самий, що в base (не дубль верстки)</div></td>
           <td><span class="type delta">delta</span></td>
           <td>default · saved</td>
           <td>картки · item</td>
@@ -496,9 +496,9 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-banner">home-banner</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/google-reviews/07-mobile-dots.png" aria-label="Відкрити preview (D)"><img src="component-shots/google-reviews/07-mobile-dots.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="немає пари viewport"><span class="k">немає пари viewport</span><span class="v">окремий D-скрін dots не зібраний</span></div></td>
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/google-reviews/07-mobile-dots.png" aria-label="Відкрити preview (M)"><img src="component-shots/google-reviews/07-mobile-dots.png" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>SliderDots</code><div class="scope">Bar-dots / track thumb</div></td>
+          <td><code>SliderDots</code><div class="scope">Dots пагінації слайдера (скрін з mobile Google reviews)</div></td>
           <td><span class="type base">base</span></td>
           <td>bar style</td>
           <td>Google reviews</td>
@@ -630,9 +630,9 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#client-cards">client-cards</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/client-cards/03-badge.png" aria-label="Відкрити preview (D)"><img src="component-shots/client-cards/03-badge.png" alt="D" loading="lazy" /><span>D</span></button></td>
-          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
-          <td><code>ClientCard · badge</code><div class="scope">Badge на фото клієнта — delta над ClientCard</div></td>
+          <td class="prev"><div class="thumb empty" title="див. atom Badge"><span class="k">див. atom Badge</span><span class="v">той самий badge на ClientCard — скрін у Badge</span></div></td>
+          <td class="prev"><div class="thumb empty" title="немає пари viewport"><span class="k">немає пари viewport</span><span class="v">окремий M-скрін не зібраний</span></div></td>
+          <td><code>ClientCard · badge</code><div class="scope">Розміщення Badge на ClientCard — delta над ClientCard (превʼю в Badge)</div></td>
           <td><span class="type delta">delta</span></td>
           <td>corner badge</td>
           <td>home clients</td>
@@ -665,7 +665,7 @@
         <tr data-type="base">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/google-reviews/09-desktop-card.png" aria-label="Відкрити preview (D)"><img src="component-shots/google-reviews/09-desktop-card.png" alt="D" loading="lazy" /><span>D</span></button></td>
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/google-reviews/08-card-read-more.png" aria-label="Відкрити preview (M)"><img src="component-shots/google-reviews/08-card-read-more.png" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>GoogleReviewCard</code><div class="scope">Текстовий Google-відгук</div></td>
+          <td><code>GoogleReviewCard</code><div class="scope">Картка Google-відгуку; M-клітинка=read-more expand (стан, не окремий mobile layout)</div></td>
           <td><span class="type base">base</span></td>
           <td>—</td>
           <td>home</td>
@@ -709,7 +709,7 @@
         <tr data-type="base">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/about/01-value-card.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/about/01-value-card.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/07-expert-value-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/experts/07-expert-value-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>ValueCard / ExpertValueItem</code><div class="scope">Цінність / принцип</div></td>
+          <td><code>ValueCard / ExpertValueItem</code><div class="scope">Merged family: D=ValueCard (about) · M=ExpertValueItem mobile (experts) — не один viewport</div></td>
           <td><span class="type base">base</span></td>
           <td>shadow card · centered item</td>
           <td>about · expert</td>
@@ -751,9 +751,9 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#vin-check-page">vin-check-page</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/vin-check/05-lot-summary-card.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/vin-check/05-lot-summary-card.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
-          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
-          <td><code>VinSpecCard · variants</code><div class="scope">Варіанти SpecCard (Lot / Auction / Accidents / Specs) — delta</div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/vin-check/06-auction-card.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/vin-check/06-auction-card.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="інші варіанти в inventory"><span class="k">інші варіанти в inventory</span><span class="v">07 accidents · 08 vehicle-specs</span></div></td>
+          <td><code>VinSpecCard · variants</code><div class="scope">Інші SpecCard layouts (Auction / Accidents / Specs) — delta над LotSummary base</div></td>
           <td><span class="type delta">delta</span></td>
           <td>4 content layouts</td>
           <td>VIN check</td>
@@ -920,7 +920,7 @@
         <tr data-type="base">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/zsu/01-helped-units-ticker.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/zsu/01-helped-units-ticker.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/zsu/02-helped-units-ticker-close.png" aria-label="Відкрити preview (M)"><img src="component-shots/zsu/02-helped-units-ticker-close.png" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>HelpedUnitsTicker</code><div class="scope">Infinite auto ticker (logos)</div></td>
+          <td><code>HelpedUnitsTicker</code><div class="scope">Ticker; M=close/crop того ж блоку (inventory: mobile same pattern)</div></td>
           <td><span class="type base">base</span></td>
           <td>no swipe · no buttons · edge fade</td>
           <td>ZSU</td>
@@ -1041,9 +1041,9 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#home-banner">home-banner</a></td>
         </tr>
         <tr data-type="base">
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/promo-modal/01-mobile.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/promo-modal/01-mobile.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="немає пари viewport"><span class="k">немає пари viewport</span><span class="v">desktop скрін не зібраний</span></div></td>
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/promo-modal/01-mobile.jpg" aria-label="Відкрити preview (M)"><img src="component-shots/promo-modal/01-mobile.jpg" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>PromoTelegramModal</code><div class="scope">Auto-попап → Telegram</div></td>
+          <td><code>PromoTelegramModal</code><div class="scope">Промо-модалка Telegram (є mobile-скрін)</div></td>
           <td><span class="type base">base</span></td>
           <td>≠ TelegramCta in-page</td>
           <td>багато URL</td>
@@ -1253,8 +1253,8 @@
         </tr>
         <tr data-type="delta">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/auctions/02-filter-tips.png" aria-label="Відкрити preview (D)"><img src="component-shots/auctions/02-filter-tips.png" alt="D" loading="lazy" /><span>D</span></button></td>
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/22-filter-chips-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/22-filter-chips-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>FilterTips</code><div class="scope">Ряд tip-chips / швидкі фільтри (auctions + catalog)</div></td>
+          <td class="prev"><div class="thumb empty" title="немає пари viewport"><span class="k">немає пари viewport</span><span class="v">M tips не зібраний (не FilterChip)</span></div></td>
+          <td><code>FilterTips</code><div class="scope">Tip-chips / швидкі фільтри (auctions) — delta; M окремо від FilterChip</div></td>
           <td><span class="type delta">delta</span></td>
           <td>tips row · з Reset</td>
           <td>/auctions/ · /cars/</td>
@@ -1275,8 +1275,8 @@
         </tr>
         <tr data-type="base">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/19-mobile-filters-trigger.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/19-mobile-filters-trigger.png" alt="D" loading="lazy" /><span>D</span></button></td>
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/19-mobile-filters-trigger.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/19-mobile-filters-trigger.png" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>MobileFiltersTrigger / Modal</code><div class="scope">Мобільні фільтри</div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/20-mobile-filters-modal.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/20-mobile-filters-modal.png" alt="M" loading="lazy" /><span>M</span></button></td>
+          <td><code>MobileFiltersTrigger / Modal</code><div class="scope">M-only UI: D-клітинка=trigger · M-клітинка=open modal (не desktop/mobile пара)</div></td>
           <td><span class="type base">base</span></td>
           <td>slide-in left</td>
           <td>/cars/</td>
@@ -1330,7 +1330,7 @@
         </tr>
         <tr data-type="delta">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/33-content-accordion-expanded.png" aria-label="Відкрити preview (D)"><img src="component-shots/cars/33-content-accordion-expanded.png" alt="D" loading="lazy" /><span>D</span></button></td>
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/cars/34-content-accordion-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/cars/34-content-accordion-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
+          <td class="prev"><div class="thumb empty" title="немає пари viewport"><span class="k">немає пари viewport</span><span class="v">expanded M не зібраний (34 — у base)</span></div></td>
           <td><code>ContentAccordion · expanded</code><div class="scope">Розгорнутий SEO/FAQ акордеон — delta над collapsed</div></td>
           <td><span class="type delta">delta</span></td>
           <td>collapsed · expanded</td>
@@ -1398,8 +1398,8 @@
 
         <tr data-type="base">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/05-gallery-preview.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/05-gallery-preview.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/08-gallery-fullscreen-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/car-item/08-gallery-fullscreen-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>OfferGallery</code><div class="scope">Галерея офера</div></td>
+          <td class="prev"><div class="thumb empty" title="немає пари viewport"><span class="k">немає пари viewport</span><span class="v">preview M не зібраний (fullscreen — у delta)</span></div></td>
+          <td><code>OfferGallery</code><div class="scope">Gallery preview на лоті (fullscreen — окремий delta)</div></td>
           <td><span class="type base">base</span></td>
           <td>preview · fullscreen · zoom</td>
           <td>car item · auction item</td>
@@ -1432,7 +1432,7 @@
         <tr data-type="delta">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/03-rating-active.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/03-rating-active.png" alt="D" loading="lazy" /><span>D</span></button></td>
           <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
-          <td><code>OfferRating · active</code><div class="scope">Середнє + голоси (вже оцінено) — delta над empty</div></td>
+          <td><code>OfferRating · active</code><div class="scope">Середнє + голоси (оцінено) — delta над empty; окремо від hover states</div></td>
           <td><span class="type delta">delta</span></td>
           <td>empty · active average</td>
           <td>car item</td>
@@ -1441,9 +1441,9 @@
           <td class="inv"><a href="FE-COMPONENTS-UA.html#car-item">car-item</a></td>
         </tr>
         <tr data-type="delta">
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/03-rating-active.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/03-rating-active.png" alt="D" loading="lazy" /><span>D</span></button></td>
-          <td class="prev"><div class="thumb empty" title="зміни layout / розмірів"><span class="k">зміни layout / розмірів</span><span class="v">окремий M-скрін не зібраний</span></div></td>
-          <td><code>OfferRating · states</code><div class="scope">Hover / active зірки — delta над empty</div></td>
+          <td class="prev"><button type="button" class="thumb" data-full="component-shots/car-item/04-rating-hover.png" aria-label="Відкрити preview (D)"><img src="component-shots/car-item/04-rating-hover.png" alt="D" loading="lazy" /><span>D</span></button></td>
+          <td class="prev"><div class="thumb empty" title="немає пари viewport"><span class="k">немає пари viewport</span><span class="v">окремий M-скрін не зібраний</span></div></td>
+          <td><code>OfferRating · states</code><div class="scope">Hover / вибір зірок — delta над empty/active</div></td>
           <td><span class="type delta">delta</span></td>
           <td>hover · active</td>
           <td>car item</td>
@@ -1662,8 +1662,8 @@
         </tr>
         <tr data-type="base">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/korea-auctions/10-owners-mileage-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/korea-auctions/10-owners-mileage-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/korea-auctions/11-mileage-mobile.png" aria-label="Відкрити preview (M)"><img src="component-shots/korea-auctions/11-mileage-mobile.png" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>OwnersInfo / MileageInfo</code><div class="scope">Власники / пробіг</div></td>
+          <td class="prev"><div class="thumb empty" title="див. delta mobile"><span class="k">див. delta mobile</span><span class="v">h-scroll mileage — у MileageInfo · mobile</span></div></td>
+          <td><code>OwnersInfo / MileageInfo</code><div class="scope">Owners + mileage desktop; mobile h-scroll — delta</div></td>
           <td><span class="type base">base</span></td>
           <td>tables · mobile h-scroll</td>
           <td>Korea</td>
@@ -1785,8 +1785,8 @@
         </tr>
         <tr data-type="delta">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/18-article-body-with-image.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/experts/18-article-body-with-image.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/experts/18-article-body-with-image.jpg" aria-label="Відкрити preview (M)"><img src="component-shots/experts/18-article-body-with-image.jpg" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>ArticleBody · images</code><div class="scope">Embedded images у rich text — delta над ArticleBody</div></td>
+          <td class="prev"><div class="thumb empty" title="немає пари viewport"><span class="k">немає пари viewport</span><span class="v">окремий M з images не зібраний</span></div></td>
+          <td><code>ArticleBody · images</code><div class="scope">Embedded images у ArticleBody — delta</div></td>
           <td><span class="type delta">delta</span></td>
           <td>inline image</td>
           <td>article / expert</td>
@@ -1886,8 +1886,8 @@
         </tr>
         <tr data-type="base">
           <td class="prev"><button type="button" class="thumb" data-full="component-shots/about/02-departments-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/about/02-departments-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td>
-          <td class="prev"><button type="button" class="thumb" data-full="component-shots/about/05-departments-mobile-accordion.png" aria-label="Відкрити preview (M)"><img src="component-shots/about/05-departments-mobile-accordion.png" alt="M" loading="lazy" /><span>M</span></button></td>
-          <td><code>DepartmentsSection</code><div class="scope">Відділи компанії</div></td>
+          <td class="prev"><div class="thumb empty" title="див. delta mobile"><span class="k">див. delta mobile</span><span class="v">mobile accordion винесено в DepartmentsSection · mobile</span></div></td>
+          <td><code>DepartmentsSection</code><div class="scope">Departments desktop (tabs+panel); mobile accordion — delta</div></td>
           <td><span class="type base">base</span></td>
           <td>desktop tabs · mobile accordion</td>
           <td>about</td>
