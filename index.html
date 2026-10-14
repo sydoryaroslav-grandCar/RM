@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Роадмап фронтенду — grandcar.ua</title>
+  <title>Роадмап до MVP: фронтенд — grandcar.ua</title>
   <style>
     :root {
       --bg: #f7f4ef;
@@ -33,7 +33,7 @@
       line-height: 1.55;
     }
     a { color: var(--brand); }
-    .wrap { max-width: 1000px; margin: 0 auto; padding: 28px 20px 80px; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 20px 80px; }
 
     .hero {
       background: linear-gradient(145deg, #1a1c1e 0%, #2c3035 55%, #3a2226 100%);
@@ -52,7 +52,7 @@
       font-size: clamp(1.45rem, 3vw, 2.05rem);
       line-height: 1.2;
     }
-    .hero p { margin: 0; max-width: 48rem; color: #d7d2cb; }
+    .hero p { margin: 0; max-width: 52rem; color: #d7d2cb; }
     .hero .meta { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
       display: inline-flex; padding: 6px 12px; border-radius: 999px; font-size: 13px;
@@ -67,8 +67,9 @@
       padding: 16px 18px; margin-bottom: 18px; box-shadow: var(--shadow);
     }
     nav.toc strong { display: block; margin-bottom: 8px; }
-    nav.toc ol { margin: 0; padding-left: 1.2rem; }
-    nav.toc li { margin: 4px 0; }
+    nav.toc ol { margin: 0; padding-left: 1.2rem; columns: 2; gap: 24px; }
+    @media (max-width: 720px) { nav.toc ol { columns: 1; } }
+    nav.toc li { margin: 4px 0; break-inside: avoid; }
 
     section {
       background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
@@ -115,6 +116,7 @@
     .badge.todo { background: #8a6d1d; }
     .badge.done { background: #1f6b45; }
     .badge.rule { background: var(--brand); }
+    .badge.warn { background: #9a3412; }
     .card h3 { margin: 0; font-size: 1.05rem; }
     .why {
       margin: 10px 0 0; padding: 10px 12px; background: var(--bg2);
@@ -133,7 +135,7 @@
     }
     .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
     .node {
-      min-width: 110px; max-width: 170px; text-align: center; padding: 10px 12px;
+      min-width: 100px; max-width: 160px; text-align: center; padding: 10px 12px;
       border-radius: 12px; border: 1px solid var(--line); background: #fff;
       font-size: 13px; font-weight: 600; line-height: 1.3;
     }
@@ -146,14 +148,27 @@
     .node.red small { color: #ffe4e8; }
     .node.green { background: var(--ok-soft); border-color: #9ecbb0; }
     .node.amber { background: var(--wait-soft); border-color: #e0cc8f; }
-    .node.soft { background: #eef1f4; }
     .arrow { color: var(--muted); font-size: 18px; font-weight: 700; align-self: center; }
 
-    table.simple { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .table-wrap { overflow-x: auto; }
+    table.simple { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 640px; }
     table.simple th, table.simple td {
       border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top;
     }
     table.simple th { background: #f3efe8; }
+    .est { font-weight: 700; white-space: nowrap; }
+    .be { font-size: 12px; color: var(--muted); }
+
+    .verdict {
+      background: #1a1c1e; color: #f5f2ec; border-radius: 12px;
+      padding: 14px 16px; margin-top: 14px; font-size: .95rem;
+    }
+    .verdict strong { color: #ffb3bf; }
+    .banner {
+      background: var(--ok-soft); border: 1px solid #b7d8c5; border-radius: 12px;
+      padding: 12px 14px; margin-bottom: 14px; font-size: .95rem;
+    }
+    .banner.warn { background: var(--wait-soft); border-color: #e0c36a; }
 
     ul.plain { color: var(--muted); }
     ul.plain li { margin: 6px 0; }
@@ -171,111 +186,374 @@
 <body>
   <div class="wrap">
     <header class="hero">
-      <div class="eyebrow">GrandCar · фронтенд · лише сайт України</div>
-      <h1>План робіт фронтенду<br />grandcar.ua</h1>
+      <div class="eyebrow">GrandCar · фронтенд · лише сайт України · версія 0.1</div>
+      <h1>Роадмап до MVP:<br />фронтенд grandcar.ua</h1>
       <p>
-        Що робимо на фронтенді й у якому порядку. Казахстан не входить.
-        Каталог + оцінка — <a href="COMPONENT-ESTIMATE-UA.html" style="color:#ffb3bf;">COMPONENT-ESTIMATE-UA.html</a>
-        · сторінки+API — <a href="PAGE-API-ESTIMATE-UA.html" style="color:#ffb3bf;">PAGE-API-ESTIMATE-UA.html</a>
-        · скріни по сторінках — <a href="FE-COMPONENTS-UA.html" style="color:#ffb3bf;">FE-COMPONENTS-UA.html</a>.
-        Узгодження UX — <strong>Telegram</strong> (уся команда міграції).
+        Версія 0.1 · 14.10.2026 · чернетка на погодження.
+        Старт робіт: <strong style="color:#fff;">понеділок 19.10.2026</strong>.
+        Терміни для <strong style="color:#fff;">одного FE</strong> ≈ 40 год/тиждень (пн–пт × 8).
+        Це оцінка, не погоджений план: інше навантаження зсуває дати пропорційно.
+      </p>
+      <p style="margin-top:10px;">
+        Години —
+        <a href="COMPONENT-ESTIMATE-UA.html" style="color:#ffb3bf;">каталог компонентів</a>
+        · <a href="PAGE-API-ESTIMATE-UA.html" style="color:#ffb3bf;">сторінки + API</a>
+        · скріни — <a href="FE-COMPONENTS-UA.html" style="color:#ffb3bf;">FE-COMPONENTS-UA.html</a>.
+        Бекенд веде окремий роадмап (віхи Б0–Б9); тут FE — споживач Public API.
+        UX — <strong style="color:#fff;">Telegram</strong>.
       </p>
       <div class="meta">
-        <span class="chip">uk + ru</span>
-        <span class="chip">паритет зі старим виглядом</span>
-        <span class="chip">Telegram</span>
-        <span class="chip red">оновлено 12.10.2026</span>
+        <span class="chip">uk + /ru/</span>
+        <span class="chip">AI-first</span>
+        <span class="chip">повний цикл ≈ 3.4–5.3 міс</span>
+        <span class="chip red">старт 19.10.2026</span>
       </div>
     </header>
 
-    <p class="hint">Відкрити подвійним кліком у браузері. PDF: Друкувати → «Зберегти як PDF».</p>
+    <p class="hint">Відкрити у браузері. PDF: Друкувати → «Зберегти як PDF». Hard refresh, якщо бачите стару версію.</p>
 
     <nav class="toc">
       <strong>Зміст</strong>
       <ol>
+        <li><a href="#short">Коротко</a></li>
+        <li><a href="#checkpoints">Контрольні дати</a></li>
+        <li><a href="#scope">Обсяг MVP</a></li>
+        <li><a href="#estimate">Естімейт (A / B+C / D)</a></li>
+        <li><a href="#milestones">Віхи Ф0–Ф6</a></li>
         <li><a href="#status">Статус зараз</a></li>
-        <li><a href="#principles">Принципи та до обговорення</a></li>
+        <li><a href="#principles">Принципи</a></li>
         <li><a href="#backend-req">Що потрібно від бекенду</a></li>
-        <li><a href="#schema">Схема робіт</a></li>
-        <li><a href="#steps">Етапи 1–5</a></li>
-        <li><a href="#env">Середовище для перевірки</a></li>
+        <li><a href="#env">Середовище</a></li>
         <li><a href="#seo">SEO у верстці</a></li>
-        <li><a href="#gsc">Паралельно: Google Search Console</a></li>
+        <li><a href="#gsc">Google Search Console</a></li>
+        <li><a href="#risks">Ризики</a></li>
         <li><a href="#known">Уже відомо</a></li>
+        <li><a href="#questions">Питання на погодження</a></li>
       </ol>
     </nav>
 
+    <section id="short">
+      <h2>1. Коротко</h2>
+      <p class="lead">
+        MVP фронтенду — новий <code>web-ua</code>, який замінює WordPress на grandcar.ua:
+        усі основні сторінки, бойові дані з Public API, заявки, SEO shell, потім cutover.
+        Казахстан і seller portal не входять.
+      </p>
+      <div class="grid-2">
+        <div class="box ok">
+          <h4>Робимо</h4>
+          <ul>
+            <li>Бібліотеку UI + збірку всіх ключових URL</li>
+            <li>Підключення каталогу, контенту, форм до API</li>
+            <li>uk у корені + <code>/ru/</code></li>
+            <li>Staging FE → cutover разом із бекендом</li>
+          </ul>
+        </div>
+        <div class="box wait">
+          <h4>Не блокує старт</h4>
+          <ul>
+            <li>До Б1 (01.11) — верстка й сторінки на моках</li>
+            <li>Бойовий каталог — після Public API</li>
+            <li>Дата go-live сайту = max(FE, BE gate 12.04.2027, ролі)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="banner" style="margin-top:14px;margin-bottom:0;">
+        Калькулятор: <strong>UI в першій хвилі FE</strong>; суми лише з бекенд API.
+        У бекенд-роадмапі calc після MVP — узгодити з PO, коли з’явиться endpoint (або мок до нього).
+      </div>
+    </section>
+
+    <section id="checkpoints">
+      <h2>2. Контрольні дати</h2>
+      <p class="lead">Старт FE: <strong>19.10.2026</strong>. Дати орієнтирні (низ–середина естімейту); ⛔ — залежать від даних/BE.</p>
+      <div class="table-wrap">
+        <table class="simple">
+          <thead>
+            <tr><th>Контрольна точка</th><th>Дата</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Старт FE · каркас + API-клієнт на контракті (моки)</td>
+              <td class="est">19.10.2026</td>
+            </tr>
+            <tr>
+              <td>Public API каталогу з бекенду (Б1) — можна бойовий listing</td>
+              <td class="est">01.11.2026</td>
+            </tr>
+            <tr>
+              <td>Каталог + основні сторінки на стенді (моки / API)</td>
+              <td class="est">~13.12.2026</td>
+            </tr>
+            <tr>
+              <td>Усі основні URL FE на стенді</td>
+              <td class="est">~24.01.2027</td>
+            </tr>
+            <tr>
+              <td>FE готовий до cutover rehearsal ⛔</td>
+              <td class="est">~14.02–20.03.2027</td>
+            </tr>
+            <tr>
+              <td>Бекенд gate (довідково)</td>
+              <td>12.04.2027</td>
+            </tr>
+            <tr>
+              <td>Go-live сайту</td>
+              <td><em>не фіксуємо тут</em> — max(FE, BE, ролі §38.10)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="scope">
+      <h2>3. Обсяг MVP</h2>
+      <div class="grid-2">
+        <div class="box ok">
+          <h4>Входить</h4>
+          <ul>
+            <li>Усі основні шаблони з продакшену (Home, /cars/, лоти, korea, VIN, CMS, blog, favorites, sitemap…)</li>
+            <li>Компоненти UI + сторінки + Public API wiring</li>
+            <li>Форми заявок, пошук у шапці, SEO-теги</li>
+            <li>Посадкові з фільтрами = той самий /cars/ + фільтр у URL</li>
+            <li>QA / polish / участь у cutover</li>
+          </ul>
+        </div>
+        <div class="box wait">
+          <h4>Не входить (пізніше)</h4>
+          <ul>
+            <li>grandcar.kz, marketplace, seller portal</li>
+            <li>en-UA як активна локаль</li>
+            <li>Кампанії / A/B (ADR-030)</li>
+            <li>Повна SEO-матриця legacy-URL (власник SEO + BE)</li>
+            <li>GSC-аналітика як задача верстки</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="estimate">
+      <h2>4. Естімейт (зведена)</h2>
+      <p class="lead">
+        Деталі: <a href="COMPONENT-ESTIMATE-UA.html">компоненти (A)</a>
+        · <a href="PAGE-API-ESTIMATE-UA.html">сторінки + API (B+C)</a>.
+        1 міс ≈ 21 роб. день ≈ 168 год.
+      </p>
+      <div class="table-wrap">
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>Шар</th>
+              <th>Зміст</th>
+              <th>Години</th>
+              <th>Роб. дні</th>
+              <th>Місяці</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>A</strong></td>
+              <td>Компоненти UI</td>
+              <td class="est">226.5–357.5</td>
+              <td>~28–45</td>
+              <td class="est">1.3–2.1</td>
+            </tr>
+            <tr>
+              <td><strong>B+C</strong></td>
+              <td>Каркас + сторінки + бойові API</td>
+              <td class="est">264–388</td>
+              <td>~33–49</td>
+              <td class="est">1.6–2.3</td>
+            </tr>
+            <tr>
+              <td><strong>A+B+C</strong></td>
+              <td>Розробка</td>
+              <td class="est">490.5–745.5</td>
+              <td>~61–93</td>
+              <td class="est">2.9–4.4</td>
+            </tr>
+            <tr>
+              <td><strong>D</strong></td>
+              <td>QA · polish · cutover FE (+15–20%)</td>
+              <td class="est">75–150</td>
+              <td>~10–19</td>
+              <td class="est">0.4–0.9</td>
+            </tr>
+            <tr>
+              <td><strong>Повний FE</strong></td>
+              <td>A+B+C+D</td>
+              <td class="est">565.5–895.5</td>
+              <td>~71–112</td>
+              <td class="est">3.4–5.3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="verdict">
+        <strong>Висновок:</strong>
+        від старту 19.10 орієнтир готовності FE до cutover —
+        <strong>≈ сер. лютого – березень 2027</strong> (низ–верх).
+        За 4 міс календаря (до ~19.02) — лише по низу й при вчасному Public API.
+      </div>
+    </section>
+
+    <section id="milestones">
+      <h2>5. Віхи Ф0–Ф6</h2>
+      <p class="lead">
+        Один FE ≈ 40 год/тиж. Після кожної віхи — показ на стенді.
+        Критерії віхи фіксуємо перед стартом робіт над нею.
+      </p>
+
+      <div class="diagram">
+        <div class="caption">Потік від 19.10.2026</div>
+        <div class="flow" style="flex-wrap:nowrap; justify-content:flex-start;">
+          <div class="node dark" style="min-width:0;max-width:none;flex:1 1 0;">Ф0<small>каркас</small></div>
+          <div class="arrow">→</div>
+          <div class="node red" style="min-width:0;max-width:none;flex:1 1 0;">Ф1<small>компоненти</small></div>
+          <div class="arrow">→</div>
+          <div class="node green" style="min-width:0;max-width:none;flex:1 1 0;">Ф2<small>сторінки моки</small></div>
+          <div class="arrow">→</div>
+          <div class="node amber" style="min-width:0;max-width:none;flex:1 1 0;">Ф3<small>каталог API</small></div>
+          <div class="arrow">→</div>
+          <div class="node green" style="min-width:0;max-width:none;flex:1 1 0;">Ф4–Ф5<small>решта + polish</small></div>
+          <div class="arrow">→</div>
+          <div class="node dark" style="min-width:0;max-width:none;flex:1 1 0;">Ф6<small>cutover</small></div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>Віха</th>
+              <th>Дати</th>
+              <th>Зміст</th>
+              <th>Готово, коли</th>
+              <th>Бекенд</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Ф0</strong></td>
+              <td class="est">19.10 – 25.10</td>
+              <td>Погодження обсягу (за потреби). Каркас uk/<code>/ru/</code>, layout, API-клієнт з контракту (моки).</td>
+              <td>Проєкт стартує; клієнт збирається з OpenAPI / прикладів</td>
+              <td class="be">Б0 / контракт Б1</td>
+            </tr>
+            <tr>
+              <td><strong>Ф1</strong></td>
+              <td class="est">26.10 – 22.11</td>
+              <td>Бібліотека компонентів (шар A). Деталі — <a href="COMPONENT-ESTIMATE-UA.html">каталог</a>.</td>
+              <td>Ключові UI-одиниці готові до збірки сторінок</td>
+              <td class="be">—</td>
+            </tr>
+            <tr>
+              <td><strong>Ф2</strong></td>
+              <td class="est">09.11 – 13.12</td>
+              <td>Збірка сторінок на моках: Home, /cars/, item, shell, 404… Паралельно з Ф1 у другій половині.</td>
+              <td>Вертикальний показ без бойових даних</td>
+              <td class="be">—</td>
+            </tr>
+            <tr>
+              <td><strong>Ф3</strong></td>
+              <td class="est">01.11 – 13.12</td>
+              <td>Бойовий каталог + фільтри + картка на Public API. Посадкові з фільтрами = той самий /cars/.</td>
+              <td>Listing і картка з API; host UA не змішує сайти/локалі</td>
+              <td class="be"><strong>Б1 до 01.11</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Ф4</strong></td>
+              <td class="est">14.12 – 24.01</td>
+              <td>Решта сторінок + форми заявок + пошук у шапці. UI калькулятора. Години — <a href="PAGE-API-ESTIMATE-UA.html">PAGE-API</a>.</td>
+              <td>Усі основні URL на стенді; заявки доходять (або узгоджений мок)</td>
+              <td class="be">Б5 заявки · Б6 контент</td>
+            </tr>
+            <tr>
+              <td><strong>Ф5</strong></td>
+              <td class="est">25.01 – 14.02</td>
+              <td>SEO shell, facet-URL polish, a11y/візуальна підчистка, staging FE.</td>
+              <td>Чекліст SEO у верстці; стабільний staging URL для команди</td>
+              <td class="be">Б6 редіректи (паралельно)</td>
+            </tr>
+            <tr>
+              <td><strong>Ф6</strong> ⛔</td>
+              <td class="est">з BE Б7–Б9</td>
+              <td>Cutover rehearsal: smoke на staging, участь у перемиканні з WP, hypercare FE.</td>
+              <td>Репетиція без критичних дір на ключових URL; план hypercare</td>
+              <td class="be"><strong>Б7–Б9</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="banner warn" style="margin-bottom:0;">
+        ⛔ Ф6 тримають міграція даних і cutover бекенду. Ф0–Ф5 від завантаження uploads не залежать.
+        Ф1 і Ф2 можна частково накладати; Ф3 по-справжньому — після зеленого Б1.
+      </div>
+    </section>
+
     <section id="status">
-      <h2>1. Статус зараз</h2>
+      <h2>6. Статус зараз</h2>
       <div class="grid-2">
         <div class="box ok">
           <h4><span class="badge done">Є</span></h4>
           <ul>
             <li>Скелет <code>web-ua</code> у репозиторії</li>
-            <li>Дослідження старого сайту</li>
-            <li>Цей план + список компонентів</li>
+            <li>Дослідження старого сайту + скріни</li>
+            <li>Естімейти A і B+C на RM</li>
+            <li>Цей роадмап (чернетка)</li>
           </ul>
         </div>
         <div class="box wait">
-          <h4><span class="badge todo">Ще треба</span></h4>
+          <h4><span class="badge todo">З 19.10</span></h4>
           <ul>
-            <li>Робочі мови, рамка, клієнт API</li>
-            <li>Компоненти й сторінки</li>
-            <li>Підключення даних і перевірка зв’язки</li>
-            <li>Зручний перегляд зібраних частин (локально / dev)</li>
+            <li>Ф0: мови, рамка, клієнт API</li>
+            <li>Далі Ф1–Ф5 за таблицею віх</li>
+            <li>Спільний staging URL для показів</li>
           </ul>
         </div>
       </div>
     </section>
 
     <section id="principles">
-      <h2>2. Принципи та до обговорення</h2>
+      <h2>7. Принципи</h2>
 
       <div class="card">
         <div class="card-head"><span class="badge rule">Принцип</span><h3>Єдина бібліотека компонентів</h3></div>
         <p style="margin:0;color:var(--muted);">
-          Одна кнопка, одне модальне вікно, спільні фільтри на каталогах і відгуках,
-          кастомні списки вибору. Повний перелік —
-          <a href="COMPONENT-ESTIMATE-UA.html">каталог компонентів і оцінка</a>
+          Одна кнопка, одне модальне вікно, спільні фільтри.
+          Перелік і години —
+          <a href="COMPONENT-ESTIMATE-UA.html">каталог</a>
           · <a href="PAGE-API-ESTIMATE-UA.html">сторінки + API</a>
-          · <a href="FE-COMPONENTS-UA.html">скріни по сторінках</a>.
+          · <a href="FE-COMPONENTS-UA.html">скріни</a>.
         </p>
       </div>
 
       <div class="card">
         <div class="card-head"><span class="badge rule">Принцип</span><h3>Мобільний у пікселях · десктоп у rem</h3></div>
         <p style="margin:0;color:var(--muted);">
-          <strong>Навіщо:</strong> якщо все верстати лише «сирими» пікселями під один екран,
-          на інших моніторах (1280, 1440, 1920…) текст і відступи часто виїжджають з блоків —
-          доводиться вручну ловити кожну ширину.
+          <strong>Навіщо:</strong> сирі px лише під один монітор ламають інші ширини.
         </p>
         <ul class="do-list">
-          <li><strong>Телефон</strong> — своя композиція в <strong>px</strong> (зручно для тачу).</li>
+          <li><strong>Телефон</strong> — композиція в <strong>px</strong>.</li>
           <li><strong>Планшет</strong> до редизайну — як телефон.</li>
-          <li><strong>Комп’ютер</strong> — відступи, шрифти, радіуси в <strong>rem</strong> від однієї базової шкали:
-            змінили корінь — пропорції тримаються на різних ширинах краще.</li>
+          <li><strong>Комп’ютер</strong> — відступи/шрифти/радіуси в <strong>rem</strong> від однієї шкали.</li>
         </ul>
-        <div class="why">
-          Це рішення про якість верстки (один ритм UI), не про SEO.
-          Сайт один, HTML один.
-        </div>
+        <div class="why">Рішення про якість верстки, не про SEO. Сайт один, HTML один.</div>
       </div>
 
       <div class="card">
-        <div class="card-head"><span class="badge rule">Принцип</span><h3>Калькулятор у першій хвилі</h3></div>
+        <div class="card-head"><span class="badge rule">Принцип</span><h3>Калькулятор у першій хвилі FE</h3></div>
         <p style="margin:0;color:var(--muted);">
-          Екран і форма на фронті вже в першій хвилі. Суми рахує <strong>бекенд</strong> через API;
-          у браузері формули не дублюємо (на старому сайті частина логіки була лише в JS — важко підтримувати).
+          Екран і форма на фронті в MVP. Суми рахує <strong>бекенд</strong> через API;
+          у браузері формули не дублюємо.
         </p>
       </div>
 
       <div class="card">
         <div class="card-head"><span class="badge rule">Факт</span><h3>Переходи між сторінками</h3></div>
         <p style="margin:0;color:var(--muted);">
-          На Next (App Router) переходи вже швидші за повне перезавантаження WordPress:
-          лишається оболонка сайту, підвантажується потрібний шмат сторінки.
-          Додатково не робимо зайвих повних reload і важких клієнтських «перемальовувань» усієї сторінки.
-          Окремо це не обговорюємо — це нормальна робота стеку.
+          Next App Router: оболонка лишається, підвантажується потрібний шмат сторінки.
+          Окремо не обговорюємо — нормальна робота стеку.
         </p>
       </div>
 
@@ -288,151 +566,110 @@
     </section>
 
     <section id="backend-req">
-      <h2>3. Що потрібно від бекенду</h2>
-      <p class="lead">Не питання «чи буде», а умова роботи фронту.</p>
+      <h2>8. Що потрібно від бекенду</h2>
+      <p class="lead">Умова роботи фронту (синхрон з віхами Б*).</p>
       <div class="box brand">
         <ul>
-          <li>Опис ендпоінтів (OpenAPI / Swagger) і полів JSON для TypeScript</li>
+          <li>Опис ендпоінтів (OpenAPI) і полів JSON для TypeScript — <strong>Б0/Б1</strong></li>
           <li>Приклади відповідей (успіх / порожньо / помилка)</li>
-          <li>Endpoint розрахунку калькулятора</li>
-          <li>У відповідях — готові URL картинок для карток і галерей</li>
+          <li>Public API каталогу — <strong>Б1 до 01.11</strong></li>
+          <li>Готові URL картинок у відповідях</li>
+          <li>Прийом заявок / контент API — <strong>Б5/Б6</strong></li>
+          <li>Endpoint розрахунку калькулятора — узгодити строк (у BE calc після MVP)</li>
         </ul>
       </div>
     </section>
 
-    <section id="schema">
-      <h2>4. Схема робіт</h2>
-      <div class="diagram">
-        <div class="caption">Що зробити</div>
-        <div class="flow" style="flex-wrap:nowrap; justify-content:flex-start;">
-          <div class="node dark" style="min-width:0;max-width:none;flex:1 1 0;">1. Підготовка<small>мови, рамка, API-клієнт</small></div>
-          <div class="arrow">→</div>
-          <div class="node red" style="min-width:0;max-width:none;flex:1 1 0;">2. Компоненти</div>
-          <div class="arrow">→</div>
-          <div class="node green" style="min-width:0;max-width:none;flex:1 1 0;">3. Сторінки</div>
-          <div class="arrow">→</div>
-          <div class="node amber" style="min-width:0;max-width:none;flex:1 1 0;">4. Дані з API<small>+ перевірка зв’язки</small></div>
-          <div class="arrow">→</div>
-          <div class="node green" style="min-width:0;max-width:none;flex:1 1 0;">5. Калькулятор</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="steps">
-      <h2>5. Етапи 1–5</h2>
-
-      <div class="card">
-        <div class="card-head">
-          <span class="badge step">Етап 1</span>
-          <span class="badge todo">ще треба</span>
-          <h3>Підготовка проєкту</h3>
-        </div>
-        <p style="margin:0;color:var(--muted);">
-          Мови (uk у корені, <code>/ru/</code>), рамка сторінки, ключі перекладу, клієнт API.
-          App Router — без зайвих повних перезавантажень при навігації.
-        </p>
-        <div class="why">
-          <strong>Результат:</strong> можна запускати проєкт і одразу вішати на нього компоненти з етапу 2.
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-head"><span class="badge step">Етап 2</span><h3>Бібліотека компонентів</h3></div>
-        <p style="margin:0;color:var(--muted);">
-          Фільтри, плашки обраних умов, пагінація, довантаження, хлібні крихти, картки,
-          hero, слайдери, відео, модалки (у т.ч. FirstPay ~60 с), loader, empty, нотифікації, 404, шапка/підвал.
-          Деталі — <a href="COMPONENT-ESTIMATE-UA.html">каталог + оцінка</a>
-          · <a href="FE-COMPONENTS-UA.html">скріни по сторінках</a>.
-        </p>
-        <div class="note">
-          <div class="label">Замітка</div>
-          <p>FirstPay (попап ~60 с) ≠ таймер зворотного відліку на лоті — різні компоненти.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-head"><span class="badge step">Етап 3–4</span><h3>Сторінки + бойові API</h3></div>
-        <p style="margin:0;color:var(--muted);">
-          Збірка шаблонів і wiring Public API (переходи, empty/error, форми, SEO).
-          У т.ч. <code>/favorites/</code>, <code>/auctions-korea/{id}/</code>,
-          <code>/avto-pislya-remontu/</code>, <code>/pryvezeni-v-ukrayinu-avto/</code>, <code>/sitemap/</code>.
-          Години — <a href="PAGE-API-ESTIMATE-UA.html">PAGE-API-ESTIMATE-UA.html</a>.
-          Меню на старті — тимчасовий список у коді, далі з API.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-head"><span class="badge step">Етап 5</span><h3>Калькулятор</h3></div>
-        <p style="margin:0;color:var(--muted);">
-          UI + виклик API розрахунку: показ результату або зрозумілої помилки.
-        </p>
-      </div>
-    </section>
-
     <section id="env">
-      <h2>6. Середовище для перевірки готових частин</h2>
-      <p class="lead">
-        Потрібно зручно відкривати вже зібране (локально або спільний dev/preview), а не «порожній каркас для галочки».
-      </p>
+      <h2>9. Середовище для перевірки</h2>
       <ul class="plain">
-        <li>Спочатку — локальний запуск + preview гілки за потреби</li>
-        <li>Коли є перші екрани — спільний URL для команди</li>
+        <li>Спочатку — локальний запуск + preview гілки</li>
+        <li>Коли є перші екрани — спільний staging URL для команди</li>
         <li>CI на pull request — разом із регулярними збірками</li>
       </ul>
     </section>
 
     <section id="seo">
-      <h2>7. SEO у верстці</h2>
+      <h2>10. SEO у верстці</h2>
       <p class="lead">
-        Опираємось на SEO-аналітику аудиту сайту (жовтень 2026) і вимоги з неї для шаблонів сторінок.
+        Опираємось на SEO-аудит (жовтень 2026).
         Джерело:
-        <a href="https://docs.google.com/document/d/1u_NI-n6z6dHo7C8y2VkTNmECz7fa8h2o7WIgM3mtgqI/edit?hl=uk&amp;tab=t.0" target="_blank" rel="noopener noreferrer">Google Doc — SEO-аудит / аналітика</a>
-        (локальна копія також у <code>assets-from-production/</code> як файл аудиту .docx).
+        <a href="https://docs.google.com/document/d/1u_NI-n6z6dHo7C8y2VkTNmECz7fa8h2o7WIgM3mtgqI/edit?hl=uk&amp;tab=t.0" target="_blank" rel="noopener noreferrer">Google Doc</a>
+        (копія також у <code>assets-from-production/</code>).
       </p>
       <ul class="plain">
         <li>Один H1; title / description з даних API</li>
-        <li>Один canonical; hreflang uk ↔ ru у шапці HTML</li>
+        <li>Один canonical; hreflang uk ↔ ru</li>
         <li>Розміри картинок, lazy, пріоритет головного фото</li>
         <li>Schema з полів API — за шаблоном з бекенду</li>
       </ul>
     </section>
 
     <section id="gsc">
-      <h2>8. Паралельно: Google Search Console (не етап фронтенду)</h2>
+      <h2>11. Паралельно: Google Search Console</h2>
       <p class="lead">
-        Карта сайту (sitemap) уже зібрана з продакшену (~1.4M URL).
-        Чого ще немає — картина <strong>індексації в Google</strong>. Без цього важко безпечно вимкнути WordPress.
-        Фронт цим не верстає й не чекає на етапи 1–3.
+        Sitemap з продакшену (~1.4M URL) уже є. Бракує картини <strong>індексації</strong>.
+        Фронт цим не верстає; потрібно до cutover (SEO + бекенд).
       </p>
       <div class="box brand">
-        <h4>Запит до команди (достатньо файлів, постійний доступ у акаунт не обов’язковий)</h4>
+        <h4>Запит до команди</h4>
         <ul>
-          <li><strong>Індексація → Сторінки</strong> — повний експорт (що Google бачить / виключає)</li>
-          <li><strong>Ефективність → Сторінки</strong> — кліки, покази, CTR, позиція (максимальний період)</li>
-          <li><strong>Карти сайту</strong> — статус підключених sitemap (скрін або список)</li>
+          <li><strong>Індексація → Сторінки</strong> — повний експорт</li>
+          <li><strong>Ефективність → Сторінки</strong> — кліки, покази, CTR, позиція</li>
+          <li><strong>Карти сайту</strong> — статус підключених sitemap</li>
         </ul>
       </div>
       <p style="margin:12px 0 0;color:var(--muted);font-size:0.95rem;">
-        Куди покласти: <code>assets-from-production/gsc/</code>.
-        Далі SEO + бекенд будують матрицю URL (залишити / редирект / прибрати) перед перемиканням домену.
+        Куди: <code>assets-from-production/gsc/</code>. Далі матриця URL перед перемиканням домену.
       </p>
-      <div class="note">
-        <div class="label">Замітка</div>
-        <p>
-          Це паралельний запит до cutover, не задача збірки компонентів.
-          Збірка UI йде незалежно; експорт GSC потрібен до дня переїзду.
-        </p>
+    </section>
+
+    <section id="risks">
+      <h2>12. Ризики для термінів</h2>
+      <div class="table-wrap">
+        <table class="simple">
+          <thead>
+            <tr><th>Ризик</th><th>Наслідок</th><th>Що робимо</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Public API (Б1) пізно або ламає контракт</td>
+              <td>Зсув Ф3–Ф4</td>
+              <td>Моки до Б1; зміни API лише сумісні в межах v1</td>
+            </tr>
+            <tr>
+              <td>Немає endpoint калькулятора в MVP BE</td>
+              <td>UI є, бойовий розрахунок ні</td>
+              <td>Узгодити з PO дату API або тимчасовий мок</td>
+            </tr>
+            <tr>
+              <td>Legacy-редиректи / GSC не готові</td>
+              <td>Ризик SEO на cutover</td>
+              <td>Паралельний трек SEO+BE; FE не блокує верстку</td>
+            </tr>
+            <tr>
+              <td>Один FE · хвороба / блокери</td>
+              <td>Усі дати зсуваються</td>
+              <td>Показ після віхи; діапазон годин, не одна цифра</td>
+            </tr>
+            <tr>
+              <td>Cutover BE (Б7–Б9) стоїть на даних</td>
+              <td>Ф6 чекає</td>
+              <td>Ф0–Ф5 закриваємо незалежно</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
     <section id="known">
-      <h2>9. Уже відомо</h2>
+      <h2>13. Уже відомо</h2>
       <table class="simple">
         <thead><tr><th>Тема</th><th>Висновок</th></tr></thead>
         <tbody>
           <tr>
             <td>Збережені авто</td>
-            <td>На поточному сайті — <strong>localStorage</strong> (масив id). Так само орієнтуємось на новому фронті.</td>
+            <td>Route <code>/favorites/</code>. На проді — <strong>localStorage</strong> (масив id). Так само на новому FE.</td>
           </tr>
           <tr>
             <td>Чат</td>
@@ -444,14 +681,29 @@
           </tr>
           <tr>
             <td>Картинки</td>
-            <td>URL приходять у JSON від бекенду; фронт показує.</td>
+            <td>URL у JSON від бекенду; фронт показує.</td>
+          </tr>
+          <tr>
+            <td>Локалі</td>
+            <td>uk корінь + <code>/ru/</code> (як у бекенд ADR-038 на запуску).</td>
           </tr>
         </tbody>
       </table>
     </section>
 
+    <section id="questions">
+      <h2>14. Питання на погодження</h2>
+      <ol class="plain">
+        <li>Чи підтверджуєте старт FE <strong>19.10.2026</strong> і віхи Ф0–Ф6?</li>
+        <li>Чи прийнятний орієнтир готовності FE до cutover <strong>лютий–березень 2027</strong> (1 FE)?</li>
+        <li>Калькулятор: коли буде бойовий API — у MVP бекенду чи пізніше (мок на FE)?</li>
+        <li>Чи всі URL з PAGE-API (career, bot, repaired, delivered…) точно в першій хвилі?</li>
+        <li>На якому staging показуємо віхи FE до вибору прод-провайдера?</li>
+      </ol>
+    </section>
+
     <footer class="foot">
-      <code>assets-from-production/FE-ROADMAP-UA.html</code>
+      <code>assets-from-production/roadmap/index.html</code>
       · <a href="COMPONENT-ESTIMATE-UA.html">каталог + оцінка</a>
       · <a href="PAGE-API-ESTIMATE-UA.html">сторінки + API</a>
       · <a href="FE-COMPONENTS-UA.html">скріни по сторінках</a>
