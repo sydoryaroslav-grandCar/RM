@@ -251,6 +251,16 @@
     .gantt-fig {
       margin: 10px 0 0; font-size: 12px; color: var(--muted); font-style: italic;
     }
+    .gantt-title {
+      margin: 0 0 10px; font-size: 1.02rem; font-weight: 700;
+    }
+    .gantt-title span {
+      display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 10px;
+      border-radius: 999px; margin-right: 8px; vertical-align: middle;
+    }
+    .gantt-title span.low { background: var(--ok-soft); color: #1f6b45; }
+    .gantt-title span.high { background: var(--wait-soft); color: #8a6d1d; }
+    .gantt.high { margin-top: 18px; }
 
     footer.foot {
       margin-top: 24px; color: var(--muted); font-size: 13px; text-align: center;
@@ -485,11 +495,12 @@
       <p class="lead">
         Один фронтендер ≈ 40 год/тиждень. Після кожного етапу — показ на стенді.
         Колонка «Чекаємо від беку» — <strong>не задача FE</strong>, а залежність від їхнього роадмапу (Б0, Б1…).
+        Нижче <strong>два графіки</strong> з однієї вілки годин: по низу й по верху (§4).
       </p>
 
       <div class="gantt" id="gantt">
+        <div class="gantt-title"><span class="low">По низу</span> Оптимістичний сценарій (~4 міс від 19.10)</div>
         <div class="gantt-inner">
-          <!-- вісь як у бека: 13.10.2026 → 12.04.2027 -->
           <div class="gantt-months">
             <span></span>
             <span>жов 2026</span>
@@ -556,12 +567,11 @@
             </div>
           </div>
 
-          <!-- left ≈ 200/820 колонки імен + частка треку (вісь 13.10→12.04) -->
           <div class="gantt-vline api" style="left:32.5%;top:40px;bottom:4px">
             <div class="tip">Public API · 01.11</div>
           </div>
           <div class="gantt-vline" style="left:76.5%;top:40px;bottom:4px">
-            <div class="tip">FE готовий до репетиції · ~14.02.2027</div>
+            <div class="tip">FE готовий · ~14.02.2027</div>
           </div>
         </div>
 
@@ -571,18 +581,107 @@
           <span><i class="launch"></i>Залежить від даних / бекенду (⛔)</span>
         </div>
         <p class="gantt-fig">
-          Рис. 2. Графік роботи фронтенду (один FE, близько 40 годин на тиждень).
-          Вісь дат узгоджена з бекенд-роадмапом (13.10.2026 → 12.04.2027), але смуги — лише задачі FE.
-          Ф2 і Ф3 накладаються: сторінки можна збирати на моках, поки чіпляємо бойовий каталог після API 01.11.
+          Рис. 2a. По <strong>низу</strong> вілки годин (мінімум з §4). Готовність FE до репетиції ≈ 14.02.2027 (~4 міс від 19.10).
         </p>
       </div>
 
+      <div class="gantt high" id="gantt-high">
+        <div class="gantt-title"><span class="high">По верху</span> Неоптимістичний сценарій (~5–5.5 міс від 19.10)</div>
+        <div class="gantt-inner">
+          <div class="gantt-months">
+            <span></span>
+            <span>жов 2026</span>
+            <span>лис</span>
+            <span>гру</span>
+            <span>січ 2027</span>
+            <span>лют</span>
+            <span>бер</span>
+            <span>кві</span>
+          </div>
+
+          <div class="gantt-phase">Підготовка</div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф0. Каркас і старт</div>
+            <div class="gantt-track">
+              <div class="gantt-bar prep" style="left:3.3%;width:7.2%"></div>
+              <span class="gantt-dates" style="left:11%">19.10 – 01.11</span>
+            </div>
+          </div>
+
+          <div class="gantt-phase">Розробка (робота фронта)</div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф1. UI-компоненти</div>
+            <div class="gantt-track">
+              <div class="gantt-bar dev" style="left:7.7%;width:29.8%"></div>
+              <span class="gantt-dates" style="left:38.2%">27.10 – 20.12</span>
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф2. Сторінки на моках</div>
+            <div class="gantt-track">
+              <div class="gantt-bar dev" style="left:19.3%;width:41.4%"></div>
+              <span class="gantt-dates" style="left:61.3%">17.11 – 31.01</span>
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф3. Бойовий каталог</div>
+            <div class="gantt-track">
+              <div class="gantt-bar dev" style="left:10.5%;width:50.3%"></div>
+              <span class="gantt-dates" style="left:61.3%">01.11 – 31.01</span>
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф4. Решта сторінок і форми</div>
+            <div class="gantt-track">
+              <div class="gantt-bar dev" style="left:61.3%;width:18.8%"></div>
+              <span class="gantt-dates" style="left:80.7%">01.02 – 07.03</span>
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф5. Підчистка під запуск</div>
+            <div class="gantt-track">
+              <div class="gantt-bar dev" style="left:80.7%;width:6.6%"></div>
+              <span class="gantt-dates" style="left:88%">08.03 – 20.03</span>
+            </div>
+          </div>
+
+          <div class="gantt-phase">Запуск</div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф6. Репетиція переїзду ⛔</div>
+            <div class="gantt-track">
+              <div class="gantt-bar launch" style="left:87.3%;width:12.7%"></div>
+              <span class="gantt-dates" style="left:70%;color:#2f6b4f">~20.03 → разом з беком</span>
+            </div>
+          </div>
+
+          <div class="gantt-vline api" style="left:32.5%;top:40px;bottom:4px">
+            <div class="tip">Public API · 01.11</div>
+          </div>
+          <div class="gantt-vline" style="left:90.4%;top:40px;bottom:4px">
+            <div class="tip">FE готовий · ~20.03.2027</div>
+          </div>
+        </div>
+
+        <div class="gantt-legend">
+          <span><i class="prep"></i>Підготовка</span>
+          <span><i class="dev"></i>Розробка</span>
+          <span><i class="launch"></i>Залежить від даних / бекенду (⛔)</span>
+        </div>
+        <p class="gantt-fig">
+          Рис. 2b. По <strong>верху</strong> вілки годин (максимум з §4). Готовність FE до репетиції ≈ 20.03.2027 (~5–5.5 міс від 19.10).
+          Обидва сценарії вкладаються в дедлайн <strong>4–6 місяців</strong>; відкриття сайту далі синхронне з беком (~12.04).
+        </p>
+      </div>
+
+      <p class="lead" style="margin-top:8px">
+        Таблиця дат нижче — <strong>по низу</strong> (як рис. 2a). Дати по верху — на рис. 2b.
+      </p>
       <div class="table-wrap">
         <table class="simple">
           <thead>
             <tr>
               <th>Етап</th>
-              <th>Дати</th>
+              <th>Дати (низ)</th>
               <th>Що робимо</th>
               <th>Готово, коли</th>
               <th>Чекаємо від беку</th>
