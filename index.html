@@ -217,9 +217,9 @@
       <ol>
         <li><a href="#short">Коротко</a></li>
         <li><a href="#checkpoints">Контрольні дати</a></li>
-        <li><a href="#scope">Обсяг MVP</a></li>
+        <li><a href="#scope">Що входить у бойовий сайт</a></li>
         <li><a href="#estimate">Естімейт (A / B+C / D)</a></li>
-        <li><a href="#milestones">Віхи Ф0–Ф6</a></li>
+        <li><a href="#milestones">Етапи Ф0–Ф6</a></li>
         <li><a href="#status">Статус зараз</a></li>
         <li><a href="#principles">Принципи</a></li>
         <li><a href="#backend-req">Що потрібно від бекенду</a></li>
@@ -228,7 +228,6 @@
         <li><a href="#gsc">Google Search Console</a></li>
         <li><a href="#risks">Ризики</a></li>
         <li><a href="#known">Уже відомо</a></li>
-        <li><a href="#questions">Питання на погодження</a></li>
       </ol>
     </nav>
 
@@ -236,70 +235,73 @@
       <h2>1. Коротко</h2>
       <p class="lead">
         Це план <strong>бойового</strong> сайту grandcar.ua: новий <code>web-ua</code> замість WordPress —
-        усі основні сторінки, дані з Public API, заявки, SEO shell, потім cutover на прод.
-        Казахстан і seller portal не входять.
+        усі основні сторінки, дані з Public API, заявки, SEO-теги, потім перемикання на прод.
+        Казахстан і кабінет продавця не входять.
       </p>
       <div class="grid-2">
         <div class="box ok">
           <h4>Робимо</h4>
           <ul>
-            <li>Бібліотеку UI + збірку всіх ключових URL</li>
-            <li>Підключення каталогу, контенту, форм до API</li>
-            <li>uk у корені + <code>/ru/</code></li>
-            <li>Staging FE → cutover разом із бекендом</li>
+            <li>Кнопки й блоки UI + усі ключові сторінки</li>
+            <li>Підключення каталогу, контенту й форм до API</li>
+            <li>Українська в корені + російська на <code>/ru/</code></li>
+            <li>Тестовий стенд → переїзд разом із бекендом</li>
           </ul>
         </div>
         <div class="box wait">
-          <h4>Не блокує старт</h4>
+          <h4>Не зупиняє старт FE</h4>
           <ul>
-            <li>До Б1 (01.11) — верстка й сторінки на моках</li>
-            <li>Бойовий каталог — після Public API</li>
-            <li>Дата go-live сайту = max(FE, BE gate 12.04.2027, ролі)</li>
+            <li>До 01.11 — малюємо й збираємо сторінки на фейкових даних</li>
+            <li>Живі оголошення — коли бек віддасть каталог по API</li>
+            <li>День відкриття сайту тут не ставимо (чекає і FE, і бек)</li>
           </ul>
         </div>
       </div>
       <div class="banner" style="margin-top:14px;margin-bottom:0;">
-        Калькулятор: <strong>UI в першій хвилі FE</strong>; суми лише з бекенд API.
-        У бекенд-роадмапі calc після MVP — узгодити з PO, коли з’явиться endpoint (або мок до нього).
+        Калькулятор: <strong>екран і форма — у першій хвилі FE</strong>; суми рахує лише бекенд.
+        Коли з’явиться бойовий endpoint — узгоджуємо окремо (або тимчасовий мок).
       </div>
     </section>
 
     <section id="checkpoints">
       <h2>2. Контрольні дати</h2>
-      <p class="lead">Старт FE: <strong>19.10.2026</strong>. Дати орієнтирні (низ–середина естімейту); ⛔ — залежать від даних/BE.</p>
+      <p class="lead">
+        Старт FE: <strong>19.10.2026</strong>. Дати орієнтирні.
+        ⛔ — залежить від бекенду або даних. Дата відкриття сайту в цьому документі <strong>не фіксується</strong>.
+      </p>
       <div class="table-wrap">
         <table class="simple">
           <thead>
-            <tr><th>Контрольна точка</th><th>Дата</th></tr>
+            <tr><th>Коли</th><th>Що це означає</th></tr>
           </thead>
           <tbody>
             <tr>
-              <td>Старт FE · каркас + API-клієнт на контракті (моки)</td>
               <td class="est">19.10.2026</td>
+              <td>FE стартує: каркас сайту + клієнт API на фейкових даних</td>
             </tr>
             <tr>
-              <td>Public API каталогу з бекенду (Б1) — можна бойовий listing</td>
               <td class="est">01.11.2026</td>
+              <td>Бекенд віддає каталог по API → можна показувати бойові оголошення</td>
             </tr>
             <tr>
-              <td>Каталог + основні сторінки на стенді (моки / API)</td>
               <td class="est">~13.12.2026</td>
+              <td>На тестовому стенді вже каталог і головні сторінки</td>
             </tr>
             <tr>
-              <td>Усі основні URL FE на стенді</td>
               <td class="est">~24.01.2027</td>
+              <td>На стенді майже всі сторінки з плану</td>
             </tr>
             <tr>
-              <td>FE готовий до cutover rehearsal ⛔</td>
-              <td class="est">~14.02–20.03.2027</td>
+              <td class="est">лютий – березень 2027 ⛔</td>
+              <td>FE готовий репетирувати переїзд з WordPress (дата плаває, якщо бек/дані затримуються)</td>
             </tr>
             <tr>
-              <td>Бекенд gate (довідково)</td>
               <td>12.04.2027</td>
+              <td>Орієнтир готовності <strong>бекенду</strong> (~6 міс з їхнього плану) — не дата відкриття сайту</td>
             </tr>
             <tr>
-              <td>Go-live сайту</td>
-              <td><em>не фіксуємо тут</em> — max(FE, BE, ролі §38.10)</td>
+              <td><em>не ставимо тут</em></td>
+              <td>Відкриття grandcar.ua: коли готові і фронт, і бек, і підписи команд</td>
             </tr>
           </tbody>
         </table>
@@ -307,26 +309,27 @@
     </section>
 
     <section id="scope">
-      <h2>3. Обсяг MVP</h2>
+      <h2>3. Що входить у бойовий сайт</h2>
+      <p class="lead">Простими словами: що робимо в цій хвилі і що свідомо лишаємо на потім.</p>
       <div class="grid-2">
         <div class="box ok">
-          <h4>Входить</h4>
+          <h4>Робимо зараз</h4>
           <ul>
-            <li>Усі основні шаблони з продакшену (Home, /cars/, лоти, korea, VIN, CMS, blog, favorites, sitemap…)</li>
-            <li>Компоненти UI + сторінки + Public API wiring</li>
-            <li>Форми заявок, пошук у шапці, SEO-теги</li>
-            <li>Посадкові з фільтрами = той самий /cars/ + фільтр у URL</li>
-            <li>QA / polish / участь у cutover</li>
+            <li>Усі головні сторінки як на проді: головна, каталог, лоти, Корея, VIN, статті, обране, sitemap…</li>
+            <li>Кнопки/фільтри + самі сторінки + підключення до API</li>
+            <li>Форми заявок, пошук у шапці, SEO-теги (title, description…)</li>
+            <li>Посадкові з фільтром — той самий <code>/cars/</code> з фільтром у адресі (не окремі сайти)</li>
+            <li>Перевірка, підчистка, участь у переїзді з WordPress</li>
           </ul>
         </div>
         <div class="box wait">
-          <h4>Не входить (пізніше)</h4>
+          <h4>Не зараз (пізніше)</h4>
           <ul>
-            <li>grandcar.kz, marketplace, seller portal</li>
-            <li>en-UA як активна локаль</li>
-            <li>Кампанії / A/B (ADR-030)</li>
-            <li>Повна SEO-матриця legacy-URL (власник SEO + BE)</li>
-            <li>GSC-аналітика як задача верстки</li>
+            <li>Казахстан, маркетплейс, кабінет продавця</li>
+            <li>Англійська як робоча мова на сайті</li>
+            <li>Рекламні кампанії й A/B-тести</li>
+            <li>Повна таблиця старих URL → куди редіректити (роблять SEO + бекенд)</li>
+            <li>Розбір Google Search Console — не задача верстки</li>
           </ul>
         </div>
       </div>
@@ -398,26 +401,26 @@
     </section>
 
     <section id="milestones">
-      <h2>5. Віхи Ф0–Ф6</h2>
+      <h2>5. Етапи Ф0–Ф6</h2>
       <p class="lead">
-        Один FE ≈ 40 год/тиж. Після кожної віхи — показ на стенді.
-        Критерії віхи фіксуємо перед стартом робіт над нею.
+        Один фронтендер ≈ 40 год/тиждень. Після кожного етапу — показ на стенді.
+        Колонка «Чекаємо від беку» — <strong>не задача FE</strong>, а залежність від їхнього роадмапу (Б0, Б1…).
       </p>
 
       <div class="diagram">
         <div class="caption">Потік від 19.10.2026</div>
         <div class="flow" style="flex-wrap:nowrap; justify-content:flex-start;">
-          <div class="node dark" style="min-width:0;max-width:none;flex:1 1 0;">Ф0<small>каркас</small></div>
+          <div class="node dark" style="min-width:0;max-width:none;flex:1 1 0;">Ф0<small>старт проєкту</small></div>
           <div class="arrow">→</div>
-          <div class="node red" style="min-width:0;max-width:none;flex:1 1 0;">Ф1<small>компоненти</small></div>
+          <div class="node red" style="min-width:0;max-width:none;flex:1 1 0;">Ф1<small>кнопки й блоки</small></div>
           <div class="arrow">→</div>
-          <div class="node green" style="min-width:0;max-width:none;flex:1 1 0;">Ф2<small>сторінки моки</small></div>
+          <div class="node green" style="min-width:0;max-width:none;flex:1 1 0;">Ф2<small>сторінки (фейк)</small></div>
           <div class="arrow">→</div>
-          <div class="node amber" style="min-width:0;max-width:none;flex:1 1 0;">Ф3<small>каталог API</small></div>
+          <div class="node amber" style="min-width:0;max-width:none;flex:1 1 0;">Ф3<small>каталог (живі)</small></div>
           <div class="arrow">→</div>
-          <div class="node green" style="min-width:0;max-width:none;flex:1 1 0;">Ф4–Ф5<small>решта + polish</small></div>
+          <div class="node green" style="min-width:0;max-width:none;flex:1 1 0;">Ф4–Ф5<small>решта + підчистка</small></div>
           <div class="arrow">→</div>
-          <div class="node dark" style="min-width:0;max-width:none;flex:1 1 0;">Ф6<small>cutover</small></div>
+          <div class="node dark" style="min-width:0;max-width:none;flex:1 1 0;">Ф6<small>переїзд</small></div>
         </div>
       </div>
 
@@ -425,69 +428,69 @@
         <table class="simple">
           <thead>
             <tr>
-              <th>Віха</th>
+              <th>Етап</th>
               <th>Дати</th>
-              <th>Зміст</th>
+              <th>Що робимо</th>
               <th>Готово, коли</th>
-              <th>Бекенд</th>
+              <th>Чекаємо від беку</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>Ф0</strong></td>
+              <td><strong>Ф0 · Старт</strong></td>
               <td class="est">19.10 – 25.10</td>
-              <td>Погодження обсягу (за потреби). Каркас uk/<code>/ru/</code>, layout, API-клієнт з контракту (моки).</td>
-              <td>Проєкт стартує; клієнт збирається з OpenAPI / прикладів</td>
-              <td class="be">Б0 / контракт Б1</td>
+              <td>Мови uk + <code>/ru/</code>, рамка сторінки (шапка/підвал), клієнт API на фейкових даних.</td>
+              <td>Проєкт запускається локально; можна чіпляти екрани</td>
+              <td class="be">Опис API (їхній Б0) — щоб клієнт збігався з контрактом</td>
             </tr>
             <tr>
-              <td><strong>Ф1</strong></td>
+              <td><strong>Ф1 · Кнопки й блоки</strong></td>
               <td class="est">26.10 – 22.11</td>
-              <td>Бібліотека компонентів (шар A). Деталі — <a href="COMPONENT-ESTIMATE-UA.html">каталог</a>.</td>
-              <td>Ключові UI-одиниці готові до збірки сторінок</td>
+              <td>Бібліотека UI: фільтри, картки, модалки… Деталі — <a href="COMPONENT-ESTIMATE-UA.html">каталог</a>.</td>
+              <td>Є деталі, з яких збираємо сторінки</td>
               <td class="be">—</td>
             </tr>
             <tr>
-              <td><strong>Ф2</strong></td>
+              <td><strong>Ф2 · Сторінки на фейку</strong></td>
               <td class="est">09.11 – 13.12</td>
-              <td>Збірка сторінок на моках: Home, /cars/, item, shell, 404… Паралельно з Ф1 у другій половині.</td>
-              <td>Вертикальний показ без бойових даних</td>
+              <td>Збираємо головну, каталог, картку авто, 404… без бойової БД. Частково паралельно з Ф1.</td>
+              <td>Команда бачить «як виглядатиме», навіть без живих даних</td>
               <td class="be">—</td>
             </tr>
             <tr>
-              <td><strong>Ф3</strong></td>
+              <td><strong>Ф3 · Каталог живий</strong></td>
               <td class="est">01.11 – 13.12</td>
-              <td>Бойовий каталог + фільтри + картка на Public API. Посадкові з фільтрами = той самий /cars/.</td>
-              <td>Listing і картка з API; host UA не змішує сайти/локалі</td>
-              <td class="be"><strong>Б1 до 01.11</strong></td>
+              <td>Список авто + фільтри + картка з реального API. Посадкові з фільтром = той самий <code>/cars/</code>.</td>
+              <td>На стенді вже бойові оголошення</td>
+              <td class="be"><strong>Каталог API до 01.11</strong> (їхній Б1)</td>
             </tr>
             <tr>
-              <td><strong>Ф4</strong></td>
+              <td><strong>Ф4 · Решта сторінок</strong></td>
               <td class="est">14.12 – 24.01</td>
-              <td>Решта сторінок + форми заявок + пошук у шапці. UI калькулятора. Години — <a href="PAGE-API-ESTIMATE-UA.html">PAGE-API</a>.</td>
-              <td>Усі основні URL на стенді; заявки доходять (або узгоджений мок)</td>
-              <td class="be">Б5 заявки · Б6 контент</td>
+              <td>Решта URL, форми заявок, пошук у шапці, екран калькулятора. Години — <a href="PAGE-API-ESTIMATE-UA.html">PAGE-API</a>.</td>
+              <td>Усі основні сторінки на стенді; заявки доходять (або узгоджений мок)</td>
+              <td class="be">Прийом заявок і контент API (їхні Б5 / Б6)</td>
             </tr>
             <tr>
-              <td><strong>Ф5</strong></td>
+              <td><strong>Ф5 · Підчистка</strong></td>
               <td class="est">25.01 – 14.02</td>
-              <td>SEO shell, facet-URL polish, a11y/візуальна підчистка, staging FE.</td>
-              <td>Чекліст SEO у верстці; стабільний staging URL для команди</td>
-              <td class="be">Б6 редіректи (паралельно)</td>
+              <td>SEO-теги, дрібні баги, зручний тестовий URL для команди.</td>
+              <td>Чекліст SEO у верстці; стабільне посилання на стенд</td>
+              <td class="be">Редиректи старих адрес — паралельно (бек + SEO)</td>
             </tr>
             <tr>
-              <td><strong>Ф6</strong> ⛔</td>
-              <td class="est">з BE Б7–Б9</td>
-              <td>Cutover rehearsal: smoke на staging, участь у перемиканні з WP, hypercare FE.</td>
-              <td>Репетиція без критичних дір на ключових URL; план hypercare</td>
-              <td class="be"><strong>Б7–Б9</strong></td>
+              <td><strong>Ф6 · Переїзд</strong> ⛔</td>
+              <td class="est">разом з беком</td>
+              <td>Репетиція: перевірка ключових сторінок, участь у вимкненні WordPress, підтримка після перемикання.</td>
+              <td>Репетиція без критичних дір; план підтримки після запуску</td>
+              <td class="be"><strong>Міграція даних і cutover</strong> (їхні Б7–Б9)</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="banner warn" style="margin-bottom:0;">
-        ⛔ Ф6 тримають міграція даних і cutover бекенду. Ф0–Ф5 від завантаження uploads не залежать.
-        Ф1 і Ф2 можна частково накладати; Ф3 по-справжньому — після зеленого Б1.
+        ⛔ Переїзд (Ф6) чекає бекенд і дані. Етапи Ф0–Ф5 можна закривати без завантаження всіх uploads.
+        Ф1 і Ф2 можна частково накладати; живий каталог (Ф3) — після того як бек віддасть API.
       </div>
     </section>
 
@@ -495,20 +498,20 @@
       <h2>6. Статус зараз</h2>
       <div class="grid-2">
         <div class="box ok">
-          <h4><span class="badge done">Є</span></h4>
+          <h4><span class="badge done">Уже є</span></h4>
           <ul>
-            <li>Скелет <code>web-ua</code> у репозиторії</li>
-            <li>Дослідження старого сайту + скріни</li>
-            <li>Естімейти A і B+C на RM</li>
-            <li>Цей роадмап (чернетка)</li>
+            <li>Каркас <code>web-ua</code> у репозиторії (порожній каркас, не бойовий сайт)</li>
+            <li>Розібраний старий сайт + скріни сторінок</li>
+            <li>Оцінки годин: компоненти + сторінки/API (на цій RM-сторінці)</li>
+            <li>Цей роадмап — чернетка плану бойового FE</li>
           </ul>
         </div>
         <div class="box wait">
-          <h4><span class="badge todo">З 19.10</span></h4>
+          <h4><span class="badge todo">З 19.10 робимо</span></h4>
           <ul>
-            <li>Ф0: мови, рамка, клієнт API</li>
-            <li>Далі Ф1–Ф5 за таблицею віх</li>
-            <li>Спільний staging URL для показів</li>
+            <li><strong>Ф0:</strong> мови, рамка сторінки, клієнт API</li>
+            <li>Далі за етапами Ф1–Ф5 (кнопки → сторінки → живий каталог → решта → підчистка)</li>
+            <li>Спільне посилання на стенд, щоб команда дивилась прогрес</li>
           </ul>
         </div>
       </div>
@@ -567,15 +570,18 @@
 
     <section id="backend-req">
       <h2>8. Що потрібно від бекенду</h2>
-      <p class="lead">Умова роботи фронту (синхрон з віхами Б*).</p>
+      <p class="lead">
+        Без цього фронт або стоїть на фейкових даних, або не може показати бойове.
+        Коди <strong>Б0, Б1…</strong> — етапи з роадмапу бекенду (не наші задачі).
+      </p>
       <div class="box brand">
         <ul>
-          <li>Опис ендпоінтів (OpenAPI) і полів JSON для TypeScript — <strong>Б0/Б1</strong></li>
-          <li>Приклади відповідей (успіх / порожньо / помилка)</li>
-          <li>Public API каталогу — <strong>Б1 до 01.11</strong></li>
-          <li>Готові URL картинок у відповідях</li>
-          <li>Прийом заявок / контент API — <strong>Б5/Б6</strong></li>
-          <li>Endpoint розрахунку калькулятора — узгодити строк (у BE calc після MVP)</li>
+          <li><strong>Опис API</strong> (які запити й поля) — їхній Б0 / контракт до Б1</li>
+          <li>Приклади відповідей: успіх / порожньо / помилка</li>
+          <li><strong>Каталог по API до 01.11</strong> — їхній Б1 (живі оголошення)</li>
+          <li>У відповідях — готові посилання на картинки</li>
+          <li>Прийом заявок і контент — їхні Б5 / Б6</li>
+          <li>Розрахунок калькулятора — узгодити дату (у беку calc може бути пізніше)</li>
         </ul>
       </div>
     </section>
@@ -626,36 +632,37 @@
 
     <section id="risks">
       <h2>12. Ризики для термінів</h2>
+      <p class="lead">Що може зсунути дати і як ми на це реагуємо.</p>
       <div class="table-wrap">
         <table class="simple">
           <thead>
-            <tr><th>Ризик</th><th>Наслідок</th><th>Що робимо</th></tr>
+            <tr><th>Ризик</th><th>Що буде</th><th>Що робимо</th></tr>
           </thead>
           <tbody>
             <tr>
-              <td>Public API (Б1) пізно або ламає контракт</td>
-              <td>Зсув Ф3–Ф4</td>
-              <td>Моки до Б1; зміни API лише сумісні в межах v1</td>
+              <td>Бек запізнив каталог-API або змінив формат відповідей</td>
+              <td>Живий каталог (Ф3) і далі зсуваються</td>
+              <td>До того працюємо на фейкових даних; бек не ламає старий контракт без версії</td>
             </tr>
             <tr>
-              <td>Немає endpoint калькулятора в MVP BE</td>
-              <td>UI є, бойовий розрахунок ні</td>
-              <td>Узгодити з PO дату API або тимчасовий мок</td>
+              <td>Немає API калькулятора</td>
+              <td>Форма на сайті є, суми «по-справжньому» — ні</td>
+              <td>Узгоджуємо дату API з PO або тимчасовий мок</td>
             </tr>
             <tr>
-              <td>Legacy-редиректи / GSC не готові</td>
-              <td>Ризик SEO на cutover</td>
-              <td>Паралельний трек SEO+BE; FE не блокує верстку</td>
+              <td>Не готові редіректи старих URL / дані з Google</td>
+              <td>На день переїзду ризик втратити SEO</td>
+              <td>Робить SEO + бек окремо; верстку FE не зупиняємо</td>
             </tr>
             <tr>
-              <td>Один FE · хвороба / блокери</td>
-              <td>Усі дати зсуваються</td>
-              <td>Показ після віхи; діапазон годин, не одна цифра</td>
+              <td>Один фронтендер випадає (хвороба, блокери)</td>
+              <td>Усі дати їдуть</td>
+              <td>Показ після кожного етапу; беремо діапазон дат, не одну цифру</td>
             </tr>
             <tr>
-              <td>Cutover BE (Б7–Б9) стоїть на даних</td>
-              <td>Ф6 чекає</td>
-              <td>Ф0–Ф5 закриваємо незалежно</td>
+              <td>Бек не готовий до перемикання (дані / cutover)</td>
+              <td>Репетицію переїзду (Ф6) чекаємо</td>
+              <td>Етапи Ф0–Ф5 все одно закриваємо</td>
             </tr>
           </tbody>
         </table>
@@ -689,17 +696,6 @@
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <section id="questions">
-      <h2>14. Питання на погодження</h2>
-      <ol class="plain">
-        <li>Чи підтверджуєте старт FE <strong>19.10.2026</strong> і віхи Ф0–Ф6?</li>
-        <li>Чи прийнятний орієнтир готовності FE до cutover <strong>лютий–березень 2027</strong> (1 FE)?</li>
-        <li>Калькулятор: коли буде бойовий API — у MVP бекенду чи пізніше (мок на FE)?</li>
-        <li>Чи всі URL з PAGE-API (career, bot, repaired, delivered…) точно в першій хвилі?</li>
-        <li>На якому staging показуємо віхи FE до вибору прод-провайдера?</li>
-      </ol>
     </section>
 
     <footer class="foot">
