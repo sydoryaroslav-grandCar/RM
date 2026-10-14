@@ -173,54 +173,84 @@
     ul.plain { color: var(--muted); }
     ul.plain li { margin: 6px 0; }
 
-    /* Gantt: етапи Ф0–Ф6 (19.10.2026 → 12.04.2027 ≈ 175 днів) */
+    /* Gantt у стилі бекенд-роадмапу (вісь: 13.10.2026 → 12.04.2027 ≈ 181 день) */
     .gantt {
-      margin: 16px 0 4px; padding: 14px 16px 16px;
-      border: 1px dashed var(--line); border-radius: 12px; background: #faf8f4;
-      overflow-x: auto;
+      margin: 16px 0 8px; padding: 18px 18px 14px;
+      border: 1px solid var(--line); border-radius: 12px; background: #fff;
+      overflow-x: auto; box-shadow: inset 0 0 0 1px #f3efe8;
     }
-    .gantt .caption {
-      font-size: 12px; color: var(--muted); margin-bottom: 10px;
-      text-transform: uppercase; letter-spacing: 0.05em;
+    .gantt-inner { min-width: 780px; position: relative; padding-top: 28px; }
+    .gantt-months {
+      display: grid; grid-template-columns: 168px repeat(7, 1fr);
+      font-size: 12px; color: var(--muted); font-weight: 600;
+      margin-bottom: 6px; padding-bottom: 8px; border-bottom: 1px solid var(--line);
     }
-    .gantt-axis {
-      display: flex; justify-content: space-between; margin: 0 0 8px 140px;
-      font-size: 11px; color: var(--muted); min-width: 520px;
+    .gantt-months span { text-align: center; }
+    .gantt-months span:first-child { text-align: left; }
+    .gantt-phase {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted);
+      margin: 14px 0 6px; padding-left: 2px;
     }
+    .gantt-phase:first-of-type { margin-top: 4px; }
     .gantt-row {
-      display: grid; grid-template-columns: 140px 1fr; gap: 8px;
-      align-items: center; margin: 6px 0; min-width: 660px;
+      display: grid; grid-template-columns: 168px 1fr;
+      align-items: center; min-height: 36px; margin: 4px 0;
     }
-    .gantt-label { font-size: 12px; font-weight: 600; line-height: 1.25; }
-    .gantt-label small { display: block; font-weight: 400; color: var(--muted); }
+    .gantt-name { font-size: 13px; font-weight: 600; line-height: 1.25; padding-right: 8px; }
     .gantt-track {
-      position: relative; height: 28px; background: #efeae3;
-      border-radius: 8px; border: 1px solid var(--line);
+      position: relative; height: 32px;
+      background: linear-gradient(90deg, #f7f4ef 0%, #faf8f4 100%);
+      border-radius: 4px;
     }
     .gantt-bar {
-      position: absolute; top: 3px; bottom: 3px; border-radius: 6px;
-      font-size: 10px; color: #fff; display: flex; align-items: center;
-      justify-content: center; padding: 0 6px; white-space: nowrap;
-      overflow: hidden;
+      position: absolute; top: 6px; height: 20px; border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(26,28,30,0.12);
     }
-    .gantt-bar.dark { background: #1a1c1e; }
-    .gantt-bar.red { background: var(--brand); }
-    .gantt-bar.green { background: #2f6b4f; }
-    .gantt-bar.amber { background: #a67c16; }
-    .gantt-bar.warn {
+    .gantt-bar.prep { background: #4a7eb5; }
+    .gantt-bar.dev { background: #e8913a; }
+    .gantt-bar.launch {
       background: repeating-linear-gradient(
-        -45deg, #1a1c1e, #1a1c1e 6px, #3a3e44 6px, #3a3e44 12px
+        -45deg, #3d8f5a, #3d8f5a 5px, #5aad74 5px, #5aad74 10px
       );
     }
-    .gantt-mark {
-      position: absolute; top: -2px; bottom: -2px; width: 2px;
-      background: var(--brand); opacity: 0.55;
+    .gantt-dates {
+      position: absolute; top: 7px; font-size: 11px; color: var(--ink);
+      font-weight: 600; white-space: nowrap; padding-left: 8px;
     }
-    .gantt-mark span {
-      position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
-      font-size: 9px; color: var(--brand); white-space: nowrap; font-weight: 700;
+    .gantt-vline {
+      position: absolute; top: 0; bottom: 0; width: 0;
+      border-left: 2px dotted #1a1c1e; z-index: 2; pointer-events: none;
     }
-    .gantt-note { margin: 10px 0 0; font-size: 12px; color: var(--muted); }
+    .gantt-vline .tip {
+      position: absolute; top: -2px; left: 8px; font-size: 11px; font-weight: 700;
+      color: #1a1c1e; white-space: nowrap; background: #fff; padding: 2px 8px;
+      border: 1px solid var(--line); border-radius: 6px;
+    }
+    .gantt-vline .tip::before {
+      content: "◆ "; font-size: 10px;
+    }
+    .gantt-vline.api { border-left-color: var(--brand); border-left-style: solid; }
+    .gantt-vline.api .tip { color: var(--brand); border-color: #ecc0c8; }
+    .gantt-legend {
+      display: flex; flex-wrap: wrap; gap: 14px 20px; margin-top: 14px;
+      padding-top: 12px; border-top: 1px solid var(--line);
+      font-size: 12px; color: var(--muted);
+    }
+    .gantt-legend i {
+      display: inline-block; width: 22px; height: 10px; border-radius: 2px;
+      margin-right: 6px; vertical-align: middle;
+    }
+    .gantt-legend i.prep { background: #4a7eb5; }
+    .gantt-legend i.dev { background: #e8913a; }
+    .gantt-legend i.launch {
+      background: repeating-linear-gradient(
+        -45deg, #3d8f5a, #3d8f5a 4px, #5aad74 4px, #5aad74 8px
+      );
+    }
+    .gantt-fig {
+      margin: 10px 0 0; font-size: 12px; color: var(--muted); font-style: italic;
+    }
 
     footer.foot {
       margin-top: 24px; color: var(--muted); font-size: 13px; text-align: center;
@@ -438,68 +468,15 @@
         </table>
       </div>
 
-      <div class="gantt">
-        <div class="caption">Рис. Графік етапів (один FE ≈ 40 год/тиж · 19.10.2026 → орієнтир 12.04.2027)</div>
-        <div class="gantt-axis">
-          <span>жов 26</span><span>лис</span><span>гру</span><span>січ 27</span><span>лют</span><span>бер</span><span>кві</span>
-        </div>
-        <div class="gantt-row">
-          <div class="gantt-label">Ф0 · Старт<small>19–25.10</small></div>
-          <div class="gantt-track">
-            <div class="gantt-mark" style="left:7.4%"><span>API 01.11</span></div>
-            <div class="gantt-bar dark" style="left:0%;width:4%">Ф0</div>
-          </div>
-        </div>
-        <div class="gantt-row">
-          <div class="gantt-label">Ф1 · Кнопки<small>26.10–22.11</small></div>
-          <div class="gantt-track">
-            <div class="gantt-mark" style="left:7.4%"></div>
-            <div class="gantt-bar red" style="left:4%;width:16%">Ф1</div>
-          </div>
-        </div>
-        <div class="gantt-row">
-          <div class="gantt-label">Ф2 · Сторінки<small>09.11–13.12</small></div>
-          <div class="gantt-track">
-            <div class="gantt-mark" style="left:7.4%"></div>
-            <div class="gantt-bar green" style="left:12%;width:19.5%">Ф2 · фейк</div>
-          </div>
-        </div>
-        <div class="gantt-row">
-          <div class="gantt-label">Ф3 · Каталог<small>01.11–13.12</small></div>
-          <div class="gantt-track">
-            <div class="gantt-mark" style="left:7.4%"></div>
-            <div class="gantt-bar amber" style="left:7.4%;width:24%">Ф3 · живі</div>
-          </div>
-        </div>
-        <div class="gantt-row">
-          <div class="gantt-label">Ф4 · Решта<small>14.12–24.01</small></div>
-          <div class="gantt-track">
-            <div class="gantt-bar green" style="left:32%;width:23.5%">Ф4</div>
-          </div>
-        </div>
-        <div class="gantt-row">
-          <div class="gantt-label">Ф5 · Підчистка<small>25.01–14.02</small></div>
-          <div class="gantt-track">
-            <div class="gantt-bar dark" style="left:56%;width:11.5%">Ф5</div>
-          </div>
-        </div>
-        <div class="gantt-row">
-          <div class="gantt-label">Ф6 · Переїзд ⛔<small>з беком</small></div>
-          <div class="gantt-track">
-            <div class="gantt-bar warn" style="left:68%;width:32%">Ф6 · чекає BE</div>
-          </div>
-        </div>
-        <p class="gantt-note">
-          Червона риска — каталог API бекенду (01.11). Смуга Ф6 штрихована: дата залежить від міграції/cutover беку.
-          Деталі етапів — у розділі 5.
-        </p>
-      </div>
+      <p style="margin:12px 0 0;color:var(--muted);font-size:0.95rem;">
+        Графік етапів по місяцях — у <a href="#milestones">розділі 5</a> (як у бекенд-роадмапі).
+      </p>
 
       <div class="verdict">
         <strong>Висновок:</strong>
-        від старту 19.10 орієнтир готовності FE до cutover —
+        від старту 19.10 орієнтир готовності FE до репетиції переїзду —
         <strong>≈ сер. лютого – березень 2027</strong> (низ–верх).
-        За 4 міс календаря (до ~19.02) — лише по низу й при вчасному Public API.
+        У вікно <strong>4–6 міс</strong> по праці FE вкладаємось; відкриття сайту ще чекає бек (~12.04) і підписи.
       </div>
     </section>
 
@@ -510,21 +487,93 @@
         Колонка «Чекаємо від беку» — <strong>не задача FE</strong>, а залежність від їхнього роадмапу (Б0, Б1…).
       </p>
 
-      <div class="diagram">
-        <div class="caption">Потік від 19.10.2026</div>
-        <div class="flow" style="flex-wrap:nowrap; justify-content:flex-start;">
-          <div class="node dark" style="min-width:0;max-width:none;flex:1 1 0;">Ф0<small>старт проєкту</small></div>
-          <div class="arrow">→</div>
-          <div class="node red" style="min-width:0;max-width:none;flex:1 1 0;">Ф1<small>кнопки й блоки</small></div>
-          <div class="arrow">→</div>
-          <div class="node green" style="min-width:0;max-width:none;flex:1 1 0;">Ф2<small>сторінки (фейк)</small></div>
-          <div class="arrow">→</div>
-          <div class="node amber" style="min-width:0;max-width:none;flex:1 1 0;">Ф3<small>каталог (живі)</small></div>
-          <div class="arrow">→</div>
-          <div class="node green" style="min-width:0;max-width:none;flex:1 1 0;">Ф4–Ф5<small>решта + підчистка</small></div>
-          <div class="arrow">→</div>
-          <div class="node dark" style="min-width:0;max-width:none;flex:1 1 0;">Ф6<small>переїзд</small></div>
+      <div class="gantt" id="gantt">
+        <div class="gantt-inner">
+          <!-- вісь як у бека: 13.10.2026 → 12.04.2027 -->
+          <div class="gantt-months">
+            <span></span>
+            <span>жов 2026</span>
+            <span>лис</span>
+            <span>гру</span>
+            <span>січ 2027</span>
+            <span>лют</span>
+            <span>бер</span>
+            <span>кві</span>
+          </div>
+
+          <div class="gantt-phase">Підготовка</div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф0. Старт проєкту</div>
+            <div class="gantt-track">
+              <div class="gantt-bar prep" style="left:3.3%;width:3.3%"></div>
+              <span class="gantt-dates" style="left:7.2%">19.10 – 25.10</span>
+            </div>
+          </div>
+
+          <div class="gantt-phase">Розробка</div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф1. Кнопки й блоки</div>
+            <div class="gantt-track">
+              <div class="gantt-bar dev" style="left:7.2%;width:14.9%"></div>
+              <span class="gantt-dates" style="left:22.8%">26.10 – 22.11</span>
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф2. Сторінки (фейк)</div>
+            <div class="gantt-track">
+              <div class="gantt-bar dev" style="left:14.9%;width:18.8%"></div>
+              <span class="gantt-dates" style="left:34.3%">09.11 – 13.12</span>
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф3. Каталог (живі)</div>
+            <div class="gantt-track">
+              <div class="gantt-bar dev" style="left:10.5%;width:23.2%"></div>
+              <span class="gantt-dates" style="left:34.3%">01.11 – 13.12</span>
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф4. Решта сторінок</div>
+            <div class="gantt-track">
+              <div class="gantt-bar dev" style="left:34.3%;width:22.6%"></div>
+              <span class="gantt-dates" style="left:57.5%">14.12 – 24.01</span>
+            </div>
+          </div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф5. Підчистка</div>
+            <div class="gantt-track">
+              <div class="gantt-bar dev" style="left:57.5%;width:11%"></div>
+              <span class="gantt-dates" style="left:69.2%">25.01 – 14.02</span>
+            </div>
+          </div>
+
+          <div class="gantt-phase">Запуск</div>
+          <div class="gantt-row">
+            <div class="gantt-name">Ф6. Переїзд ⛔</div>
+            <div class="gantt-track">
+              <div class="gantt-bar launch" style="left:69.1%;width:30.9%"></div>
+              <span class="gantt-dates" style="left:50%;color:#2f6b4f">~14.02 → з беком</span>
+            </div>
+          </div>
+
+          <!-- left ≈ 168/780 колонки імен + частка треку (вісь 13.10→12.04) -->
+          <div class="gantt-vline api" style="left:29.7%;top:40px;bottom:4px">
+            <div class="tip">Public API · 01.11</div>
+          </div>
+          <div class="gantt-vline" style="left:75.3%;top:40px;bottom:4px">
+            <div class="tip">FE готовий до репетиції · ~14.02.2027</div>
+          </div>
         </div>
+
+        <div class="gantt-legend">
+          <span><i class="prep"></i>Підготовка</span>
+          <span><i class="dev"></i>Розробка</span>
+          <span><i class="launch"></i>Залежить від даних / бекенду (⛔)</span>
+        </div>
+        <p class="gantt-fig">
+          Рис. 2. Графік етапів (один FE, близько 40 годин на тиждень).
+          Вісь як у бекенд-роадмапі: 13.10.2026 → 12.04.2027. Ф2 і Ф3 частково паралельні.
+        </p>
       </div>
 
       <div class="table-wrap">
