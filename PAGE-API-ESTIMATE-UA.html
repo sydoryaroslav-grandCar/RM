@@ -88,8 +88,9 @@
       <strong>Як читати:</strong>
       Est.h = збірка сторінки + wiring API (loading / empty / error / URL sync / submit).
       Компоненти вже в <a href="COMPONENT-ESTIMATE-UA.html">COMPONENT-ESTIMATE-UA.html</a> (~227–358 год).
-      <code>/favorites/</code> = колишній saved. Лот Кореї = <code>/auctions-korea/{id}/</code>.
-      SEO facet-URL (марка/модель/рік) = той самий listing-шаблон + query/path filters, не окремі сторінки.
+      Лот Кореї = <code>/auctions-korea/{id}/</code>.
+      Посадкові з фільтрами (напр. «BMW зі США», «Acura 2.0») — <strong>не окремі сторінки з нуля</strong>:
+      той самий шаблон <code>/cars/</code> + фільтр у URL (ряд. 20).
     </div>
 
     <div class="stats">
@@ -316,8 +317,11 @@
             </tr>
             <tr>
               <td>20</td>
-              <td>SEO facet landings<br><span class="be">(марка / кузов / паливо… — один listing-шаблон)</span></td>
-              <td>reuse <code>/cars/</code> + path/query filters</td>
+              <td>Посадкові з фільтрами (SEO)<br>
+                <span class="be">Тисячі URL на кшталт «BMW зі США» / «Acura кросовер» / «дизель» —
+                це не нові екрани: один шаблон каталогу + активний фільтр у адресі</span>
+              </td>
+              <td>reuse <code>/cars/</code> · path/query · title/hreflang</td>
               <td class="mvp">MVP</td>
               <td class="est">4–8</td>
             </tr>
