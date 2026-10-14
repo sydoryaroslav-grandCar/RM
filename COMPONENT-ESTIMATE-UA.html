@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Оцінка компонентів FE — grandcar.ua</title>
+  <title>Каталог компонентів і оцінка — grandcar.ua</title>
   <style>
     :root {
       --bg: #f7f4ef; --bg2: #fffdf9; --ink: #1a1c1e; --muted: #5c636a;
@@ -47,8 +47,23 @@
       background: var(--card); border: 1px solid var(--line); border-radius: 14px;
       padding: 14px 16px; margin-bottom: 14px; box-shadow: var(--shadow);
     }
-    nav.toc ol { margin: 0; padding-left: 1.2rem; columns: 2; }
-    @media (max-width: 800px) { nav.toc ol { columns: 1; } }
+    nav.toc .toc-grid {
+      list-style: none; margin: 12px 0 0; padding: 0;
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px 14px;
+    }
+    @media (min-width: 1100px) {
+      nav.toc .toc-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    @media (max-width: 720px) {
+      nav.toc .toc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    nav.toc .toc-grid li {
+      margin: 0; padding: 8px 10px; background: var(--bg2);
+      border: 1px solid var(--line); border-radius: 10px;
+    }
+    nav.toc .toc-grid a { text-decoration: none; font-weight: 600; color: var(--ink); }
+    nav.toc .toc-grid a:hover { color: var(--brand); }
     section {
       background: var(--card); border: 1px solid var(--line); border-radius: 14px;
       padding: 16px 16px 10px; margin-bottom: 14px; box-shadow: var(--shadow);
@@ -157,18 +172,16 @@
 <body>
   <div class="wrap">
     <header class="hero">
-      <h1>Оцінка компонентів · Desktop / Mobile preview</h1>
+      <h1>Каталог компонентів і оцінка · grandcar.ua</h1>
       <p>
-        Чернетка для естімейту верстки. Старі сторінки не змінювались:
-        <a href="FE-COMPONENTS-UA.html">inventory</a> ·
-        <a href="COMPONENT-REGISTRY-UA.html">registry</a> ·
-        <a href="index.html">роадмап</a>.
-        Кожен рядок registry покритий (type <strong>base</strong>);
-        додаткові <strong>delta</strong> — варіанти для точнішої оцінки.
+        Унікальні UI-одиниці з Desktop/Mobile preview і годинами (чернетка).
+        Скріни по сторінках — <a href="FE-COMPONENTS-UA.html">FE-COMPONENTS-UA.html</a> ·
+        план — <a href="index.html">роадмап</a>.
+        <strong>base</strong> = унікальний компонент; <strong>delta</strong> = надбавка з окремим прев’ю.
       </p>
       <div class="meta">
-        <span class="chip red">draft · estimate layer</span>
-        <span class="chip">registry rows: 101</span>
+        <span class="chip red">draft · catalog + estimate</span>
+        <span class="chip">base: 101</span>
         <span class="chip">estimate units: 123</span>
         <span class="chip">історія A/B збережена</span>
         <span class="chip">+ states preview (no dup deltas)</span>
@@ -180,19 +193,19 @@
       Preview D/M — основний вигляд. <em>States</em> — інші стани UI (hover/filled/…). Reuse на інших URL — лише в <em>Used on</em>, без повторних прев’ю.
       <em>Type:</em> <strong>base</strong> = основа; <strong>delta</strong> = надбавка з власним унікальним прев’ю.
       <em>Est.h</em> вже включає злиті стани (filled / hover / mobile accordion…). Колонки Int.h немає.
-      SpecRow · EquipmentPipeList · SimilarCars — у States. Inventory/registry не змінювались.
+      SpecRow · EquipmentPipeList · SimilarCars — у States. Скріни по сторінках — окремий архів.
     </div>
 
     <div class="stats">
-      <div class="stat"><div class="n">101</div><div class="l">рядків registry</div></div>
+      <div class="stat"><div class="n">101</div><div class="l">унікальних base</div></div>
       <div class="stat"><div class="n">123</div><div class="l">одиниць оцінки</div></div>
       <div class="stat"><div class="n">22</div><div class="l">delta-варіантів</div></div>
       <div class="stat"><div class="n">548–783</div><div class="l">≈ год (чернетка)</div></div>
     </div>
 
     <nav class="toc">
-      <strong>Групи</strong>
-      <ol><li><a href="#g-shell">1. Shell / chrome</a> (9)</li><li><a href="#g-atoms">2. Atoms / controls</a> (19)</li><li><a href="#g-cards">3. Cards</a> (17)</li><li><a href="#g-sliders">4. Sliders / carousels</a> (9)</li><li><a href="#g-forms">5. Forms / modals</a> (10)</li><li><a href="#g-catalog">6. Catalog / filters</a> (17)</li><li><a href="#g-offer">7. Offer / lot / auction</a> (18)</li><li><a href="#g-content">8. Content / blog / expert</a> (6)</li><li><a href="#g-pages">9. Page sections</a> (18)</li></ol>
+      <strong>Групи компонентів</strong>
+      <ul class="toc-grid"><li><a href="#g-shell">1. Shell / chrome</a> (9)</li><li><a href="#g-atoms">2. Atoms / controls</a> (19)</li><li><a href="#g-cards">3. Cards</a> (17)</li><li><a href="#g-sliders">4. Sliders / carousels</a> (9)</li><li><a href="#g-forms">5. Forms / modals</a> (10)</li><li><a href="#g-catalog">6. Catalog / filters</a> (17)</li><li><a href="#g-offer">7. Offer / lot / auction</a> (18)</li><li><a href="#g-content">8. Content / blog / expert</a> (6)</li><li><a href="#g-pages">9. Page sections</a> (18)</li></ul>
     </nav>
 
     <p class="legend">
@@ -211,7 +224,7 @@
 
     <section id="g-shell">
       <h2>1. Shell / chrome</h2>
-      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = з registry · delta = варіант поверх base.</p>
+      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = унікальний компонент · delta = надбавка поверх base.</p>
       <div class="table-wrap">
       <table>
         <thead>
@@ -248,7 +261,7 @@
     </section>
     <section id="g-atoms">
       <h2>2. Atoms / controls</h2>
-      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = з registry · delta = варіант поверх base.</p>
+      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = унікальний компонент · delta = надбавка поверх base.</p>
       <div class="table-wrap">
       <table>
         <thead>
@@ -294,7 +307,7 @@
     </section>
     <section id="g-cards">
       <h2>3. Cards</h2>
-      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = з registry · delta = варіант поверх base.</p>
+      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = унікальний компонент · delta = надбавка поверх base.</p>
       <div class="table-wrap">
       <table>
         <thead>
@@ -341,7 +354,7 @@
     </section>
     <section id="g-sliders">
       <h2>4. Sliders / carousels</h2>
-      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = з registry · delta = варіант поверх base.</p>
+      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = унікальний компонент · delta = надбавка поверх base.</p>
       <div class="table-wrap">
       <table>
         <thead>
@@ -378,7 +391,7 @@
     </section>
     <section id="g-forms">
       <h2>5. Forms / modals</h2>
-      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = з registry · delta = варіант поверх base.</p>
+      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = унікальний компонент · delta = надбавка поверх base.</p>
       <div class="table-wrap">
       <table>
         <thead>
@@ -414,7 +427,7 @@
     </section>
     <section id="g-catalog">
       <h2>6. Catalog / filters</h2>
-      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = з registry · delta = варіант поверх base.</p>
+      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = унікальний компонент · delta = надбавка поверх base.</p>
       <div class="table-wrap">
       <table>
         <thead>
@@ -457,7 +470,7 @@
     </section>
     <section id="g-offer">
       <h2>7. Offer / lot / auction</h2>
-      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = з registry · delta = варіант поверх base.</p>
+      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = унікальний компонент · delta = надбавка поверх base.</p>
       <div class="table-wrap">
       <table>
         <thead>
@@ -509,7 +522,7 @@
     </section>
     <section id="g-content">
       <h2>8. Content / blog / expert</h2>
-      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = з registry · delta = варіант поверх base.</p>
+      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = унікальний компонент · delta = надбавка поверх base.</p>
       <div class="table-wrap">
       <table>
         <thead>
@@ -541,7 +554,7 @@
     </section>
     <section id="g-pages">
       <h2>9. Page sections</h2>
-      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = з registry · delta = варіант поверх base.</p>
+      <p class="lead">Одиниці оцінки з preview desktop / mobile. Type: base = унікальний компонент · delta = надбавка поверх base.</p>
       <div class="table-wrap">
       <table>
         <thead>
@@ -591,7 +604,7 @@
       <h2>Покриття і наступні кроки</h2>
       <p class="lead">
         Ця сторінка — чернетка. Після рев’ю вирішимо, що лишаємо як канон
-        (estimate / registry / inventory). Поки всі три артефакти співіснують.
+        (каталог+оцінка / скріни по сторінках). Окремий реєстр — архів.
       </p>
       <ul class="legend">
         <li>Inventory — скріни по сторінках (не чіпали).</li>
@@ -603,8 +616,7 @@
     <footer>
       <code>COMPONENT-ESTIMATE-UA.html</code>
       · <a href="index.html">роадмап</a>
-      · <a href="COMPONENT-REGISTRY-UA.html">registry</a>
-      · <a href="FE-COMPONENTS-UA.html">inventory</a>
+      · <a href="FE-COMPONENTS-UA.html">скріни по сторінках</a>
     </footer>
   </div>
 
