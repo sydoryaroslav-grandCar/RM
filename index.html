@@ -176,6 +176,7 @@
       <p>
         Що робимо на фронтенді й у якому порядку. Казахстан не входить.
         Каталог + оцінка — <a href="COMPONENT-ESTIMATE-UA.html" style="color:#ffb3bf;">COMPONENT-ESTIMATE-UA.html</a>
+        · сторінки+API — <a href="PAGE-API-ESTIMATE-UA.html" style="color:#ffb3bf;">PAGE-API-ESTIMATE-UA.html</a>
         · скріни по сторінках — <a href="FE-COMPONENTS-UA.html" style="color:#ffb3bf;">FE-COMPONENTS-UA.html</a>.
         Узгодження UX — <strong>Telegram</strong> (уся команда міграції).
       </p>
@@ -236,6 +237,7 @@
           Одна кнопка, одне модальне вікно, спільні фільтри на каталогах і відгуках,
           кастомні списки вибору. Повний перелік —
           <a href="COMPONENT-ESTIMATE-UA.html">каталог компонентів і оцінка</a>
+          · <a href="PAGE-API-ESTIMATE-UA.html">сторінки + API</a>
           · <a href="FE-COMPONENTS-UA.html">скріни по сторінках</a>.
         </p>
       </div>
@@ -349,19 +351,13 @@
       </div>
 
       <div class="card">
-        <div class="card-head"><span class="badge step">Етап 3</span><h3>Збірка сторінок</h3></div>
+        <div class="card-head"><span class="badge step">Етап 3–4</span><h3>Сторінки + бойові API</h3></div>
         <p style="margin:0;color:var(--muted);">
-          Головна, каталоги, картки авто, збережені (localStorage), відгуки, блог, контакти,
-          пошук, VIN, оболонка калькулятора, 404.
-          Меню на старті — тимчасовий список у коді, далі з API коли буде готове.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-head"><span class="badge step">Етап 4</span><h3>Дані з API + перевірка зв’язки</h3></div>
-        <p style="margin:0;color:var(--muted);">
-          Наповнення з JSON бекенду (у т.ч. URL фото). Перевіряємо: успіх, порожньо, помилка,
-          фільтри ↔ URL ↔ запит, пагінація/скрол, нотифікації форм.
+          Збірка шаблонів і wiring Public API (переходи, empty/error, форми, SEO).
+          У т.ч. <code>/favorites/</code>, <code>/auctions-korea/{id}/</code>,
+          <code>/avto-pislya-remontu/</code>, <code>/pryvezeni-v-ukrayinu-avto/</code>, <code>/sitemap/</code>.
+          Години — <a href="PAGE-API-ESTIMATE-UA.html">PAGE-API-ESTIMATE-UA.html</a>.
+          Меню на старті — тимчасовий список у коді, далі з API.
         </p>
       </div>
 
@@ -457,6 +453,7 @@
     <footer class="foot">
       <code>assets-from-production/FE-ROADMAP-UA.html</code>
       · <a href="COMPONENT-ESTIMATE-UA.html">каталог + оцінка</a>
+      · <a href="PAGE-API-ESTIMATE-UA.html">сторінки + API</a>
       · <a href="FE-COMPONENTS-UA.html">скріни по сторінках</a>
       · офлайн
     </footer>

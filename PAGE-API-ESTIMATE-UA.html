@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Естімейт: сторінки + API — grandcar.ua</title>
+  <style>
+    :root {
+      --bg: #f7f4ef; --bg2: #fffdf9; --ink: #1a1c1e; --muted: #5c636a;
+      --line: #d9d2c8; --brand: #c41230; --ok-soft: #e6f3ec; --card: #fff;
+      --shadow: 0 8px 24px rgba(26,28,30,.06);
+      --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--bg); line-height: 1.45; }
+    a { color: var(--brand); }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 24px 18px 72px; }
+    .hero {
+      background: #1a1c1e; color: #f5f2ec; border-radius: 18px;
+      padding: 26px 24px; margin-bottom: 14px; box-shadow: var(--shadow);
+    }
+    .hero h1 { margin: 0 0 8px; font-size: 1.45rem; }
+    .hero p { margin: 0; color: #cfc9c0; max-width: 54rem; }
+    .hero a { color: #ffb3bf; }
+    .meta { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+      background: rgba(255,255,255,.12); color: #fff;
+    }
+    .chip.red { background: var(--brand); }
+    .banner {
+      background: var(--ok-soft); border: 1px solid #b7d8c5; border-radius: 12px;
+      padding: 12px 14px; margin-bottom: 14px; font-size: .95rem;
+    }
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px;
+    }
+    @media (max-width: 800px) { .stats { grid-template-columns: 1fr 1fr; } }
+    .stat {
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+      padding: 12px; text-align: center; box-shadow: var(--shadow);
+    }
+    .stat .n { font-size: 1.5rem; font-weight: 800; }
+    .stat .l { font-size: 12px; color: var(--muted); }
+    nav.toc {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+      padding: 14px 16px; margin-bottom: 14px; box-shadow: var(--shadow);
+    }
+    nav.toc ol { margin: 8px 0 0; padding-left: 1.2rem; }
+    section {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+      padding: 16px; margin-bottom: 14px; box-shadow: var(--shadow);
+    }
+    h2 { margin: 0 0 6px; font-size: 1.15rem; }
+    .lead { color: var(--muted); margin: 0 0 12px; font-size: .92rem; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .86rem; min-width: 920px; }
+    th, td { border: 1px solid var(--line); padding: 7px 8px; vertical-align: top; text-align: left; }
+    th { background: #f3efe8; position: sticky; top: 0; z-index: 1; }
+    code { font-size: .9em; }
+    .est { font-weight: 700; white-space: nowrap; }
+    .mvp { color: #0d6b3a; font-weight: 700; }
+    .be { font-size: 12px; color: var(--muted); }
+    footer { margin-top: 18px; color: var(--muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1>Естімейт: сторінки + бойові API · grandcar.ua</h1>
+      <p>
+        Шар B+C: збірка шаблонів з готовими компонентами + підключення Public API,
+        переходи, empty/error, форми, SEO shell. Компоненти UI — окремо в
+        <a href="COMPONENT-ESTIMATE-UA.html">каталозі</a>.
+        План — <a href="index.html">роадмап</a>.
+        Скоуп MVP = усі основні URL з продакшену (rev 14.10).
+      </p>
+      <div class="meta">
+        <span class="chip red">draft · pages + API · AI-first</span>
+        <span class="chip">1 FE</span>
+        <span class="chip">uk + /ru/ той самий шаблон</span>
+        <span class="chip">без повторного рахунку компонентів</span>
+      </div>
+    </header>
+
+    <div class="banner">
+      <strong>Як читати:</strong>
+      Est.h = збірка сторінки + wiring API (loading / empty / error / URL sync / submit).
+      Компоненти вже в <a href="COMPONENT-ESTIMATE-UA.html">COMPONENT-ESTIMATE-UA.html</a> (~227–358 год).
+      <code>/favorites/</code> = колишній saved. Лот Кореї = <code>/auctions-korea/{id}/</code>.
+      SEO facet-URL (марка/модель/рік) = той самий listing-шаблон + query/path filters, не окремі сторінки.
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="n">50–76</div><div class="l">платформа (P0–P4)</div></div>
+      <div class="stat"><div class="n">214–312</div><div class="l">шаблони сторінок</div></div>
+      <div class="stat"><div class="n">264–388</div><div class="l">Σ B+C год</div></div>
+      <div class="stat"><div class="n">~33–49</div><div class="l">≈ роб. дні (×8)</div></div>
+    </div>
+
+    <nav class="toc">
+      <strong>Зміст</strong>
+      <ol>
+        <li><a href="#platform">Платформа (один раз)</a></li>
+        <li><a href="#pages">Шаблони сторінок (MVP)</a></li>
+        <li><a href="#totals">Разом із компонентами</a></li>
+      </ol>
+    </nav>
+
+    <section id="platform">
+      <h2>1. Платформа (один раз)</h2>
+      <p class="lead">Спільне для всіх сторінок. Не дублюється в рядках нижче.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Пакет</th>
+              <th>Що входить</th>
+              <th>Depends on BE</th>
+              <th>Est.h</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>P0</td>
+              <td><code>App shell</code></td>
+              <td>layout · uk + <code>/ru/</code> · Header/Footer live · middleware · навігація</td>
+              <td class="be">host / locale</td>
+              <td class="est">16–24</td>
+            </tr>
+            <tr>
+              <td>P1</td>
+              <td><code>API client</code></td>
+              <td>OpenAPI TS · fetch · помилки · revalidate / cache tags</td>
+              <td class="be">public-v1.yaml (Б1)</td>
+              <td class="est">12–18</td>
+            </tr>
+            <tr>
+              <td>P2</td>
+              <td><code>Leads pipeline</code></td>
+              <td>callback / lead / bonus / feedback → API + тости</td>
+              <td class="be">заявки / outbox</td>
+              <td class="est">8–12</td>
+            </tr>
+            <tr>
+              <td>P3</td>
+              <td><code>Header search</code></td>
+              <td>live search · empty · «всі результати»</td>
+              <td class="be">search API</td>
+              <td class="est">8–12</td>
+            </tr>
+            <tr>
+              <td>P4</td>
+              <td><code>SEO helpers</code></td>
+              <td>title / description / canonical / hreflang з даних</td>
+              <td class="be">мета в API / pages</td>
+              <td class="est">6–10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pages">
+      <h2>2. Шаблони сторінок (MVP сразу)</h2>
+      <p class="lead">Один рядок = один шаблон (D+M). <span class="mvp">MVP</span> — у першій хвилі.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Route / шаблон</th>
+              <th>API / дані</th>
+              <th>Wave</th>
+              <th>Est.h</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><code>/</code> Home</td>
+              <td>блоки контенту · слайдери · форми</td>
+              <td class="mvp">MVP</td>
+              <td class="est">16–24</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><code>/cars/</code> listing</td>
+              <td>list · filters ↔ URL · sort/page · empty</td>
+              <td class="mvp">MVP</td>
+              <td class="est">28–40</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><code>/cars/{slug}/</code></td>
+              <td>card · gallery · similar · forms</td>
+              <td class="mvp">MVP</td>
+              <td class="est">20–28</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><code>/auctions/</code></td>
+              <td>list · datepicker · timer · reuse cards/filters</td>
+              <td class="mvp">MVP</td>
+              <td class="est">16–24</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><code>/auctions/{id}/</code></td>
+              <td>lot detail · timer · forms</td>
+              <td class="mvp">MVP</td>
+              <td class="est">14–20</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td><code>/auctions-korea/</code> + <code>/auctions-korea/{id}/</code></td>
+              <td>listing + lot · korea-блоки (tooltip, body, history…)</td>
+              <td class="mvp">MVP</td>
+              <td class="est">16–24</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td><code>/calculator/</code></td>
+              <td>UI + calculate API</td>
+              <td class="mvp">MVP</td>
+              <td class="est">10–14</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td><code>/perevirka-avto-po-vin-kodu/</code></td>
+              <td>search · status · cards · sales history</td>
+              <td class="mvp">MVP</td>
+              <td class="est">12–18</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td><code>/zvit-po-perevirci-avto-amerika/</code></td>
+              <td>landing · CTA / form</td>
+              <td class="mvp">MVP</td>
+              <td class="est">6–10</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>CMS-пачка:<br>
+                <code>/pro-kompaniyu/</code> · <code>/garantiyi-dostavky-avto-z-ssha/</code> ·
+                <code>/dostavka-avto-z-ssha/</code> · <code>/oplata/</code> · <code>/dopomoga-zsu/</code>
+              </td>
+              <td>pages / blocks API</td>
+              <td class="mvp">MVP</td>
+              <td class="est">20–28</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td><code>/blog/</code> · <code>/news/</code> · article · categories</td>
+              <td>posts list/detail</td>
+              <td class="mvp">MVP</td>
+              <td class="est">12–18</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td><code>/experts/{slug}/</code></td>
+              <td>profile · articles</td>
+              <td class="mvp">MVP</td>
+              <td class="est">8–12</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td><code>/contacts/</code> · <code>/vidguky/</code></td>
+              <td>map · info · form · reviews</td>
+              <td class="mvp">MVP</td>
+              <td class="est">8–12</td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td><code>/favorites/</code></td>
+              <td>localStorage + картки (без BE favorites)</td>
+              <td class="mvp">MVP</td>
+              <td class="est">6–8</td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td><code>/avto-pislya-remontu/</code></td>
+              <td>listing · repaired cards · «Дивитися більше (N)»</td>
+              <td class="mvp">MVP</td>
+              <td class="est">8–12</td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td><code>/pryvezeni-v-ukrayinu-avto/</code></td>
+              <td>listing · delivered cards · interest CTA</td>
+              <td class="mvp">MVP</td>
+              <td class="est">8–12</td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td><code>/career/</code> · <code>/privacy-policy/</code> · <code>/bot/</code></td>
+              <td>CMS / static pages</td>
+              <td class="mvp">MVP</td>
+              <td class="est">6–10</td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td><code>/sitemap/</code></td>
+              <td>HtmlSitemap · лінки з API / статичний зріз</td>
+              <td class="mvp">MVP</td>
+              <td class="est">4–6</td>
+            </tr>
+            <tr>
+              <td>19</td>
+              <td>404 NotFound</td>
+              <td>shell + NotFoundContent</td>
+              <td class="mvp">MVP</td>
+              <td class="est">2–4</td>
+            </tr>
+            <tr>
+              <td>20</td>
+              <td>SEO facet landings<br><span class="be">(марка / кузов / паливо… — один listing-шаблон)</span></td>
+              <td>reuse <code>/cars/</code> + path/query filters</td>
+              <td class="mvp">MVP</td>
+              <td class="est">4–8</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="totals">
+      <h2>3. Разом із компонентами</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Шар</th><th>Зміст</th><th>Est.h</th><th>≈ роб. дні</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A</td>
+              <td>Компоненти UI — <a href="COMPONENT-ESTIMATE-UA.html">каталог</a></td>
+              <td class="est">226.5–357.5</td>
+              <td>~28–45</td>
+            </tr>
+            <tr>
+              <td>B+C</td>
+              <td>Платформа + сторінки (ця сторінка)</td>
+              <td class="est">264–388</td>
+              <td>~33–49</td>
+            </tr>
+            <tr>
+              <td><strong>A+B+C</strong></td>
+              <td>Без окремого QA/cutover буфера</td>
+              <td class="est">490.5–745.5</td>
+              <td>~61–93 (~3–4.5 міс)</td>
+            </tr>
+            <tr>
+              <td>D (орієнтир)</td>
+              <td>QA / polish / cutover FE (+15–20%)</td>
+              <td class="est">~75–150</td>
+              <td>~10–19</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lead" style="margin-top:12px;">
+        У горизонт 4–6 міс (1 FE, 40 год/тиж) A+B+C+D лягає ближче до низу–середини,
+        якщо Public API (бекенд Б1) не блокує довго і AI-first тримає темп.
+      </p>
+    </section>
+
+    <footer>
+      <code>PAGE-API-ESTIMATE-UA.html</code>
+      · <a href="index.html">роадмап</a>
+      · <a href="COMPONENT-ESTIMATE-UA.html">каталог + оцінка</a>
+      · <a href="FE-COMPONENTS-UA.html">скріни по сторінках</a>
+    </footer>
+  </div>
+</body>
+</html>
