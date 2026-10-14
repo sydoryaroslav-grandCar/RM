@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Роадмап до MVP: фронтенд — grandcar.ua (вижимка)</title>
+  <style>
+    :root {
+      --ink: #1a1c1e; --muted: #5c636a; --line: #d9d2c8; --brand: #c41230;
+      --bg: #f7f4ef; --card: #fff; --ok: #e6f3ec; --wait: #f7efd6; --soft: #f8e6e9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink); background: var(--bg); line-height: 1.5;
+    }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 28px 20px 80px; }
+    .hero {
+      background: linear-gradient(145deg, #1a1c1e 0%, #2c3035 55%, #3a2226 100%);
+      color: #f5f2ec; border-radius: 18px; padding: 28px 24px; margin-bottom: 14px;
+    }
+    .hero .eyebrow { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; opacity: .75; margin-bottom: 8px; }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(1.35rem, 3vw, 1.85rem); line-height: 1.2; }
+    .hero p { margin: 0; color: #d7d2cb; max-width: 52rem; }
+    .hero a { color: #ffb3bf; }
+    .meta { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 12px; padding: 5px 11px; border-radius: 999px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.14);
+    }
+    .chip.red { background: rgba(196,18,48,.28); border-color: rgba(196,18,48,.45); }
+    .how {
+      background: var(--wait); border: 1px solid #e0c36a; border-radius: 12px;
+      padding: 12px 14px; margin-bottom: 14px; font-size: .92rem;
+    }
+    nav.toc {
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+      padding: 14px 16px; margin-bottom: 12px;
+    }
+    nav.toc ol { margin: 6px 0 0; padding-left: 1.2rem; columns: 2; gap: 20px; }
+    @media (max-width: 640px) { nav.toc ol { columns: 1; } }
+    section {
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+      padding: 18px; margin-bottom: 12px;
+    }
+    h2 { margin: 0 0 8px; font-size: 1.22rem; }
+    h3 { margin: 14px 0 6px; font-size: 1.02rem; }
+    .lead { color: var(--muted); margin: 0 0 12px; font-size: .95rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+    .box {
+      border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: #fffdf9;
+    }
+    .box.ok { background: var(--ok); border-color: #b7d8c5; }
+    .box.wait { background: var(--wait); border-color: #e4d5a4; }
+    .box h4 { margin: 0 0 6px; font-size: .95rem; }
+    .box ul { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: .92rem; }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    th, td { border: 1px solid var(--line); padding: 7px 9px; text-align: left; vertical-align: top; }
+    th { background: #f3efe8; }
+    .est { font-weight: 700; white-space: nowrap; }
+    .be { color: var(--muted); font-size: .85rem; }
+    .verdict {
+      background: #1a1c1e; color: #f5f2ec; border-radius: 10px;
+      padding: 12px 14px; margin-top: 12px; font-size: .95rem;
+    }
+    .verdict strong { color: #ffb3bf; }
+    .shot {
+      border: 2px dashed var(--line); border-radius: 10px; padding: 22px 14px;
+      text-align: center; color: var(--muted); background: #faf8f4; margin: 8px 0;
+      font-size: .9rem;
+    }
+    .note {
+      margin-top: 10px; padding: 10px 12px; border-left: 4px solid var(--brand);
+      background: var(--soft); border-radius: 0 8px 8px 0; font-size: .92rem;
+    }
+    ul.plain { margin: 0; padding-left: 1.2rem; color: var(--muted); }
+    ul.plain li { margin: 5px 0; }
+    footer { margin-top: 18px; font-size: 13px; color: var(--muted); text-align: center; }
+    a { color: var(--brand); }
+    code { font-size: .9em; }
+    @media print {
+      body { background: #fff; }
+      .how { break-after: avoid; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="eyebrow">GrandCar · фронтенд · лише сайт України · вижимка 0.1</div>
+      <h1>Роадмап до MVP:<br />фронтенд grandcar.ua</h1>
+      <p>
+        Версія 0.1 · 14.10.2026 · чернетка на погодження.
+        Старт робіт: <strong style="color:#fff;">понеділок 19.10.2026</strong>.
+        Терміни для <strong style="color:#fff;">одного FE</strong> ≈ 40 год/тиждень.
+        Це оцінка, не погоджений план: інше навантаження зсуває дати пропорційно.
+      </p>
+      <p style="margin-top:10px;">
+        Документ охоплює Next.js <code style="color:#ffb3bf;">web-ua</code>, UI-компоненти, збірку сторінок і підключення Public API.
+        Бекенд і адмінка — <strong style="color:#fff;">окремий роадмап</strong>; тут бек лише як джерело контракту.
+        UX — Telegram.
+      </p>
+      <p style="margin-top:8px;font-size:.92rem;color:#c9c4bc;">
+        Повні матеріали:
+        <a href="https://sydoryaroslav-grandcar.github.io/RM/">роадмап</a> ·
+        <a href="https://sydoryaroslav-grandcar.github.io/RM/COMPONENT-ESTIMATE-UA.html">компоненти</a> ·
+        <a href="https://sydoryaroslav-grandcar.github.io/RM/PAGE-API-ESTIMATE-UA.html">сторінки+API</a>
+      </p>
+      <div class="meta">
+        <span class="chip">uk + /ru/</span>
+        <span class="chip">AI-first</span>
+        <span class="chip">повний FE 3.4–5.3 міс</span>
+        <span class="chip red">дедлайн 4–6 міс</span>
+      </div>
+    </header>
+
+    <div class="how">
+      <strong>Google Docs:</strong> відкрий у браузері → Cmd+A → Cmd+C → встав у новий Doc.
+      Графіки: скрін з <a href="https://sydoryaroslav-grandcar.github.io/RM/#gantt">роадмапу §5</a> у плейсхолдери нижче.
+    </div>
+
+    <nav class="toc">
+      <strong>Зміст</strong>
+      <ol>
+        <li><a href="#short">Коротко</a></li>
+        <li><a href="#dates">Контрольні дати</a></li>
+        <li><a href="#scope">Обсяг</a></li>
+        <li><a href="#estimate">Естімейт</a></li>
+        <li><a href="#status">Що вже є</a></li>
+        <li><a href="#milestones">Віхи Ф0–Ф6</a></li>
+        <li><a href="#pages">Сторінки (вижимка)</a></li>
+        <li><a href="#components">Компоненти (вижимка)</a></li>
+        <li><a href="#backend">Що потрібно від бекенду</a></li>
+        <li><a href="#risks">Ризики</a></li>
+        <li><a href="#known">Уже відомо</a></li>
+      </ol>
+    </nav>
+
+    <section id="short">
+      <h2>1. Коротко</h2>
+      <p class="lead">
+        Бойовий сайт grandcar.ua на новому <code>web-ua</code> замість WordPress:
+        усі основні сторінки, дані з Public API, заявки, SEO-теги, потім cutover.
+      </p>
+      <div class="grid-2">
+        <div class="box ok">
+          <h4>Робимо</h4>
+          <ul>
+            <li>UI-бібліотека + усі ключові URL</li>
+            <li>Підключення каталогу, контенту, форм до API</li>
+            <li>uk у корені + <code>/ru/</code></li>
+            <li>Стенд → репетиція переїзду з беком</li>
+          </ul>
+        </div>
+        <div class="box wait">
+          <h4>Не блокує старт FE</h4>
+          <ul>
+            <li>До 01.11 — сторінки на моках</li>
+            <li>Живі оголошення — після Public API каталогу</li>
+            <li>Дату відкриття сайту тут не ставимо</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note">
+        Калькулятор: <strong>екран і форма в першій хвилі FE</strong>; суми лише з бекенд API
+        (у бек-роадмапі calc після MVP — узгодити строк або мок).
+      </div>
+      <div class="verdict">
+        <strong>Висновок:</strong> праця FE <strong>3.4–5.3 міс</strong>
+        (низ ~14.02 / верх ~20.03.2027 від старту 19.10).
+        У дедлайн <strong>4–6 міс</strong> вкладаємось. Відкриття сайту — разом із готовністю беку й підписами.
+      </div>
+    </section>
+
+    <section id="dates">
+      <h2>2. Контрольні дати</h2>
+      <p class="lead">Старт FE: <strong>19.10.2026</strong>. ⛔ — залежить від даних/API бекенду.</p>
+      <table>
+        <thead><tr><th>Дата</th><th>Що це означає для FE</th></tr></thead>
+        <tbody>
+          <tr><td class="est">19.10.2026</td><td>Старт: каркас + клієнт API на моках</td></tr>
+          <tr><td class="est">01.11.2026</td><td>Очікуємо Public API каталогу → бойовий listing</td></tr>
+          <tr><td class="est">~13.12.2026</td><td>Каталог + основні сторінки на стенді</td></tr>
+          <tr><td class="est">~24.01.2027</td><td>Майже всі URL на стенді (низ)</td></tr>
+          <tr><td class="est">~14.02 / ~20.03.2027 ⛔</td><td>FE готовий до репетиції переїзду (низ / верх)</td></tr>
+          <tr><td><em>не фіксуємо</em></td><td>Go-live сайту — коли готові FE, бек і підписи команд</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="scope">
+      <h2>3. Обсяг першої хвилі</h2>
+      <div class="grid-2">
+        <div class="box ok">
+          <h4>Входить</h4>
+          <ul>
+            <li>Усі головні типи сторінок з продакшену (див. §7)</li>
+            <li>Компоненти UI + wiring Public API</li>
+            <li>Форми заявок, пошук у шапці, SEO-теги</li>
+            <li>Посадкові з фільтром = <code>/cars/</code> + фільтр у URL</li>
+            <li>QA / polish / участь у cutover</li>
+          </ul>
+        </div>
+        <div class="box wait">
+          <h4>Не верстка / пізніше</h4>
+          <ul>
+            <li>Повна матриця legacy-URL (SEO + бек)</li>
+            <li>Розбір Google Search Console</li>
+            <li>Деталі бек-адмінки, ingestion, міграції WP — у роадмапі беку</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="estimate">
+      <h2>4. Естімейт (зведена з трьох файлів)</h2>
+      <p class="lead">1 міс ≈ 21 роб. день ≈ 168 год. Години компонентів і сторінок <strong>не дублюються</strong>.</p>
+      <table>
+        <thead>
+          <tr><th>Шар</th><th>Зміст</th><th>Години</th><th>Місяці</th><th>Джерело</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>A</strong></td>
+            <td>UI-компоненти (~127 од.)</td>
+            <td class="est">226.5–357.5</td>
+            <td class="est">1.3–2.1</td>
+            <td>COMPONENT</td>
+          </tr>
+          <tr>
+            <td><strong>B+C</strong></td>
+            <td>Каркас 50–76 + сторінки 214–312</td>
+            <td class="est">264–388</td>
+            <td class="est">1.6–2.3</td>
+            <td>PAGE-API</td>
+          </tr>
+          <tr>
+            <td><strong>A+B+C</strong></td>
+            <td>Розробка</td>
+            <td class="est">490.5–745.5</td>
+            <td class="est">2.9–4.4</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><strong>D</strong></td>
+            <td>QA · polish · cutover FE (+15–20%)</td>
+            <td class="est">75–150</td>
+            <td class="est">0.4–0.9</td>
+            <td>PAGE-API</td>
+          </tr>
+          <tr>
+            <td><strong>Повний FE</strong></td>
+            <td>A+B+C+D</td>
+            <td class="est">565.5–895.5</td>
+            <td class="est">3.4–5.3</td>
+            <td>усі три</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="lead" style="margin-top:10px;margin-bottom:0">
+        Бюджет 4 міс (672 год) — лише по <strong>низу</strong> і при вчасному Public API.
+        Верх ~5.3 міс; горизонт команди <strong>6 міс</strong> — із запасом на cutover.
+      </p>
+    </section>
+
+    <section id="status">
+      <h2>5. Що вже є</h2>
+      <div class="grid-2">
+        <div class="box ok">
+          <h4>Є</h4>
+          <ul>
+            <li>Каркас <code>web-ua</code> у репо (не бойовий сайт)</li>
+            <li>Live-сайт + код WordPress</li>
+            <li>SEO-аналіз</li>
+            <li>Інвентаризація компонентів + оцінки A / B+C</li>
+            <li>Цей роадмап (чернетка)</li>
+          </ul>
+        </div>
+        <div class="box wait">
+          <h4>З 19.10</h4>
+          <ul>
+            <li>Ф0: каркас, мови, клієнт API</li>
+            <li>Далі Ф1→Ф5 за віхами</li>
+            <li>Спільний staging URL для показів</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="milestones">
+      <h2>6. Віхи Ф0–Ф6</h2>
+      <p class="lead">
+        Після кожної віхи — показ на стенді. Колонка «Від беку» — залежність, не задача FE.
+        Таблиця дат — <strong>по низу</strong>; верх — у другій колонці / на графіку 2b.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Віха</th>
+            <th>Низ</th>
+            <th>Верх</th>
+            <th>Зміст</th>
+            <th>Готово, коли</th>
+            <th>Від беку</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Ф0</strong> Каркас і старт</td>
+            <td class="est">19.10–25.10</td>
+            <td class="est">19.10–01.11</td>
+            <td>uk+/ru/, layout, API-клієнт на моках</td>
+            <td>Проєкт стартує локально</td>
+            <td class="be">Опис API (контракт)</td>
+          </tr>
+          <tr>
+            <td><strong>Ф1</strong> UI-компоненти</td>
+            <td class="est">26.10–22.11</td>
+            <td class="est">27.10–20.12</td>
+            <td>Бібліотека UI (шар A)</td>
+            <td>Є деталі для збірки сторінок</td>
+            <td class="be">—</td>
+          </tr>
+          <tr>
+            <td><strong>Ф2</strong> Сторінки на моках</td>
+            <td class="est">09.11–13.12</td>
+            <td class="est">17.11–31.01</td>
+            <td>Home, /cars/, картка, 404… без бойової БД</td>
+            <td>Видно «як виглядатиме» без живих даних</td>
+            <td class="be">—</td>
+          </tr>
+          <tr>
+            <td><strong>Ф3</strong> Бойовий каталог</td>
+            <td class="est">01.11–13.12</td>
+            <td class="est">01.11–31.01</td>
+            <td>Listing + фільтри + картка з Public API</td>
+            <td>Бойові оголошення на стенді</td>
+            <td><strong>Каталог API · 01.11</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Ф4</strong> Решта + форми</td>
+            <td class="est">14.12–24.01</td>
+            <td class="est">01.02–07.03</td>
+            <td>Решта URL, заявки, пошук, UI калькулятора</td>
+            <td>Усі основні URL; заявки доходять (або мок)</td>
+            <td class="be">Заявки · контент API</td>
+          </tr>
+          <tr>
+            <td><strong>Ф5</strong> Підчистка</td>
+            <td class="est">25.01–14.02</td>
+            <td class="est">08.03–20.03</td>
+            <td>SEO-теги, баги, staging</td>
+            <td>Чекліст SEO; стабільний URL стенду</td>
+            <td class="be">Редиректи (паралельно)</td>
+          </tr>
+          <tr>
+            <td><strong>Ф6</strong> Репетиція ⛔</td>
+            <td colspan="2">разом з беком</td>
+            <td>Smoke, вимкнення WP, hypercare FE</td>
+            <td>Репетиція без критичних дір</td>
+            <td><strong>Міграція / cutover</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="lead" style="margin-top:10px">
+        Ф2∥Ф3: сторінки на моках можна збирати паралельно з підключенням живого каталогу після API.
+      </p>
+
+      <h3>Рис. 2 — графіки віх (як у бек-роадмапі)</h3>
+      <p class="lead">
+        Живі Ганти:
+        <a href="https://sydoryaroslav-grandcar.github.io/RM/#gantt">2a · по низу (~14.02)</a> ·
+        <a href="https://sydoryaroslav-grandcar.github.io/RM/#gantt-high">2b · по верху (~20.03)</a>
+      </p>
+      <div class="shot">[Встав скрін: Рис. 2a — оптимістичний · FE готовий ~14.02.2027]</div>
+      <div class="shot">[Встав скрін: Рис. 2b — неоптимістичний · FE готовий ~20.03.2027]</div>
+    </section>
+
+    <section id="pages">
+      <h2>7. Сторінки + каркас (вижимка PAGE-API)</h2>
+
+      <h3>7.1 Каркас один раз — 50–76 год</h3>
+      <table>
+        <thead><tr><th>#</th><th>Що</th><th>Від API</th><th>Est.h</th></tr></thead>
+        <tbody>
+          <tr><td>P0</td><td>Мови, шапка/футер, меню, навігація</td><td>сайт/локаль за host</td><td class="est">16–24</td></tr>
+          <tr><td>P1</td><td>Клієнт OpenAPI, помилки, кеш</td><td>public-v1</td><td class="est">12–18</td></tr>
+          <tr><td>P2</td><td>Заявки з форм</td><td>прийом заявок</td><td class="est">8–12</td></tr>
+          <tr><td>P3</td><td>Пошук у шапці</td><td>search</td><td class="est">8–12</td></tr>
+          <tr><td>P4</td><td>SEO-теги (title, description, canonical, hreflang)</td><td>метадані</td><td class="est">6–10</td></tr>
+        </tbody>
+      </table>
+
+      <h3>7.2 Типи сторінок — 214–312 год</h3>
+      <p class="lead">Посадкові SEO ≠ окремі екрани: той самий <code>/cars/</code> + фільтр у адресі (№20).</p>
+      <table>
+        <thead><tr><th>#</th><th>URL / тип</th><th>Est.h</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code>/</code> Головна</td><td class="est">16–24</td></tr>
+          <tr><td>2</td><td><code>/cars/</code> Каталог</td><td class="est">28–40</td></tr>
+          <tr><td>3</td><td><code>/cars/{slug}/</code> Картка</td><td class="est">20–28</td></tr>
+          <tr><td>4–5</td><td>Аукціони США список + лот</td><td class="est">30–44</td></tr>
+          <tr><td>6</td><td>Аукціони Корея список + лот</td><td class="est">16–24</td></tr>
+          <tr><td>7</td><td><code>/calculator/</code></td><td class="est">10–14</td></tr>
+          <tr><td>8–9</td><td>VIN + звіт перевірки США</td><td class="est">18–28</td></tr>
+          <tr><td>10</td><td>CMS-пачка (про компанію, доставка, оплата…)</td><td class="est">20–28</td></tr>
+          <tr><td>11–13</td><td>Blog/news · experts · contacts/відгуки</td><td class="est">28–42</td></tr>
+          <tr><td>14</td><td><code>/favorites/</code> (localStorage)</td><td class="est">6–8</td></tr>
+          <tr><td>15–16</td><td>Після ремонту · привезені в Україну</td><td class="est">16–24</td></tr>
+          <tr><td>17–19</td><td>Career/privacy/bot · sitemap HTML · 404</td><td class="est">12–20</td></tr>
+          <tr><td>20</td><td>Посадкові з фільтрами (SEO)</td><td class="est">4–8</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="components">
+      <h2>8. Компоненти UI (вижимка COMPONENT)</h2>
+      <p class="lead">
+        Разом <strong>226.5–357.5 год</strong> · ~127 одиниць.
+        Повний каталог зі скрінами:
+        <a href="https://sydoryaroslav-grandcar.github.io/RM/COMPONENT-ESTIMATE-UA.html">COMPONENT-ESTIMATE-UA.html</a>
+        · форми — <a href="https://sydoryaroslav-grandcar.github.io/RM/COMPONENT-ESTIMATE-UA.html#g-forms">#g-forms</a>.
+      </p>
+      <table>
+        <thead><tr><th>#</th><th>Група</th><th>Од.</th><th>Примітка</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Shell / chrome</td><td>9</td><td>Шапка, меню, футер</td></tr>
+          <tr><td>2</td><td>Atoms / controls</td><td>19</td><td>Кнопки, лінки, інпути</td></tr>
+          <tr><td>3</td><td>Cards</td><td>19</td><td>Картки авто / лотів</td></tr>
+          <tr><td>4</td><td>Sliders / carousels</td><td>9</td><td>Потрібні URL медіа в API</td></tr>
+          <tr><td>5</td><td>Forms / modals</td><td>10</td><td>Заявки, FirstPay тощо</td></tr>
+          <tr><td>6</td><td>Catalog / filters</td><td>18</td><td>Фасети ↔ URL (Б1)</td></tr>
+          <tr><td>7</td><td>Offer / lot / auction</td><td>18</td><td>Картка, таймер, галерея</td></tr>
+          <tr><td>8</td><td>Content / blog / expert</td><td>6</td><td>CMS / пости</td></tr>
+          <tr><td>9</td><td>Page sections</td><td>19</td><td>Блоки головної тощо</td></tr>
+        </tbody>
+      </table>
+      <div class="note">
+        Принцип верстки: мобільний у <strong>px</strong>, десктоп у <strong>rem</strong>. Одна бібліотека компонентів на весь сайт.
+      </div>
+    </section>
+
+    <section id="backend">
+      <h2>9. Що потрібно від бекенду</h2>
+      <p class="lead">
+        Умова роботи FE. Детальний план беку (Б0–Б9, адмінка, міграція) — у <strong>їхньому</strong> роадмапі; тут лише контрактні залежності.
+      </p>
+      <table>
+        <thead><tr><th>Потрібно</th><th>Для віхи FE</th></tr></thead>
+        <tbody>
+          <tr><td>Опис Public API (OpenAPI) + приклади JSON</td><td>Ф0–Ф1 клієнт / моки</td></tr>
+          <tr><td><strong>Каталог API до 01.11</strong> (список, картка, фільтри, пошук, марки/моделі)</td><td>Ф3</td></tr>
+          <tr><td>Готові URL картинок у відповідях</td><td>картки / галереї</td></tr>
+          <tr><td>Прийом заявок</td><td>Ф4</td></tr>
+          <tr><td>Content API (сторінки, пости, блоки)</td><td>Ф4</td></tr>
+          <tr><td>Метадані SEO в API</td><td>Ф5 / P4</td></tr>
+          <tr><td>Розрахунок калькулятора — дата або мок</td><td>UI вже в хвилі FE</td></tr>
+          <tr><td>Сайт/локаль за host; без <code>site_id</code> від клієнта</td><td>ізоляція UA</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="risks">
+      <h2>10. Ризики для термінів FE</h2>
+      <table>
+        <thead><tr><th>Ризик</th><th>Наслідок</th><th>Що робимо</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Public API пізно / ламає контракт</td>
+            <td>Зсув Ф3+</td>
+            <td>Моки до API; лише сумісні зміни v1</td>
+          </tr>
+          <tr>
+            <td>Немає endpoint калькулятора</td>
+            <td>UI є, бойових сум немає</td>
+            <td>Узгодити дату або мок</td>
+          </tr>
+          <tr>
+            <td>Legacy-редиректи / GSC не готові</td>
+            <td>Ризик SEO на cutover</td>
+            <td>Паралельно SEO+бек; верстку не стопимо</td>
+          </tr>
+          <tr>
+            <td>Один FE випадає</td>
+            <td>Дати їдуть</td>
+            <td>Показ після віхи; діапазон низ–верх</td>
+          </tr>
+          <tr>
+            <td>Cutover беку стоїть на даних</td>
+            <td>Ф6 чекає</td>
+            <td>Ф0–Ф5 закриваємо незалежно</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="known">
+      <h2>11. Уже відомо</h2>
+      <table>
+        <thead><tr><th>Тема</th><th>Рішення</th></tr></thead>
+        <tbody>
+          <tr><td>Favorites</td><td><code>/favorites/</code> · localStorage (без BE-акаунта)</td></tr>
+          <tr><td>Локалі</td><td>uk + <code>/ru/</code> на запуску</td></tr>
+          <tr><td>Меню на старті</td><td>Тимчасово в коді → пізніше API</td></tr>
+          <tr><td>Картинки</td><td>URL у JSON від беку</td></tr>
+          <tr><td>Чат</td><td>Telegram</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      <code>FE-ROADMAP-SUMMARY.html</code>
+      · вижимка з
+      <a href="index.html">роадмапу</a> ·
+      <a href="COMPONENT-ESTIMATE-UA.html">COMPONENT</a> ·
+      <a href="PAGE-API-ESTIMATE-UA.html">PAGE-API</a>
+      · для Google Docs · офлайн OK
+    </footer>
+  </div>
+</body>
+</html>
