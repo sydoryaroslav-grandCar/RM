@@ -7,8 +7,8 @@
   <style>
     :root {
       --bg: #f7f4ef; --bg2: #fffdf9; --ink: #1a1c1e; --muted: #5c636a;
-      --line: #d9d2c8; --brand: #c41230; --ok-soft: #e6f3ec; --card: #fff;
-      --shadow: 0 8px 24px rgba(26,28,30,.06);
+      --line: #d9d2c8; --brand: #c41230; --ok-soft: #e6f3ec; --warn-soft: #fff3cd;
+      --card: #fff; --shadow: 0 8px 24px rgba(26,28,30,.06);
       --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     }
     * { box-sizing: border-box; }
@@ -21,7 +21,7 @@
       padding: 26px 24px; margin-bottom: 14px; box-shadow: var(--shadow);
     }
     .hero h1 { margin: 0 0 8px; font-size: 1.45rem; }
-    .hero p { margin: 0; color: #cfc9c0; max-width: 54rem; }
+    .hero p { margin: 0; color: #cfc9c0; max-width: 56rem; }
     .hero a { color: #ffb3bf; }
     .meta { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
@@ -33,16 +33,25 @@
       background: var(--ok-soft); border: 1px solid #b7d8c5; border-radius: 12px;
       padding: 12px 14px; margin-bottom: 14px; font-size: .95rem;
     }
+    .banner.warn {
+      background: var(--warn-soft); border-color: #e0c36a;
+    }
+    .verdict {
+      background: #1a1c1e; color: #f5f2ec; border-radius: 12px;
+      padding: 14px 16px; margin-top: 14px; font-size: .95rem;
+    }
+    .verdict strong { color: #ffb3bf; }
     .stats {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px;
     }
-    @media (max-width: 800px) { .stats { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 900px) { .stats { grid-template-columns: 1fr 1fr; } }
     .stat {
       background: var(--card); border: 1px solid var(--line); border-radius: 12px;
       padding: 12px; text-align: center; box-shadow: var(--shadow);
     }
-    .stat .n { font-size: 1.5rem; font-weight: 800; }
-    .stat .l { font-size: 12px; color: var(--muted); }
+    .stat .n { font-size: 1.35rem; font-weight: 800; }
+    .stat .l { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .stat .sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
     nav.toc {
       background: var(--card); border: 1px solid var(--line); border-radius: 14px;
       padding: 14px 16px; margin-bottom: 14px; box-shadow: var(--shadow);
@@ -54,14 +63,24 @@
     }
     h2 { margin: 0 0 6px; font-size: 1.15rem; }
     .lead { color: var(--muted); margin: 0 0 12px; font-size: .92rem; }
+    .flow {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      margin: 0 0 14px; font-size: 13px; font-weight: 600;
+    }
+    .flow .node {
+      background: var(--bg2); border: 1px solid var(--line); border-radius: 10px;
+      padding: 8px 10px;
+    }
+    .flow .node small { display: block; font-weight: 500; color: var(--muted); font-size: 11px; }
+    .flow .arrow { color: var(--muted); }
     .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: .86rem; min-width: 920px; }
+    table { width: 100%; border-collapse: collapse; font-size: .86rem; min-width: 880px; }
     th, td { border: 1px solid var(--line); padding: 7px 8px; vertical-align: top; text-align: left; }
     th { background: #f3efe8; position: sticky; top: 0; z-index: 1; }
     code { font-size: .9em; }
     .est { font-weight: 700; white-space: nowrap; }
-    .mvp { color: #0d6b3a; font-weight: 700; }
     .be { font-size: 12px; color: var(--muted); }
+    .plain { margin: 0; padding-left: 1.2rem; color: var(--muted); font-size: .92rem; }
     footer { margin-top: 18px; color: var(--muted); font-size: 13px; }
   </style>
 </head>
@@ -70,94 +89,129 @@
     <header class="hero">
       <h1>Естімейт: сторінки + бойові API · grandcar.ua</h1>
       <p>
-        Шар B+C: збірка шаблонів з готовими компонентами + підключення Public API,
-        переходи, empty/error, форми, SEO shell. Компоненти UI — окремо в
-        <a href="COMPONENT-ESTIMATE-UA.html">каталозі</a>.
-        План — <a href="index.html">роадмап</a>.
-        Скоуп MVP = усі основні URL з продакшену (rev 14.10).
+        Скільки часу зібрати <strong>живий новий сайт</strong> (усі основні сторінки + дані з API)
+        і потім замінити ним WordPress.
+        Кнопки/картки/фільтри як UI — окремо в
+        <a href="COMPONENT-ESTIMATE-UA.html">каталозі компонентів</a>.
+        План робіт — <a href="index.html">роадмап</a>.
       </p>
       <div class="meta">
-        <span class="chip red">draft · pages + API · AI-first</span>
-        <span class="chip">1 FE</span>
-        <span class="chip">uk + /ru/ той самий шаблон</span>
-        <span class="chip">без повторного рахунку компонентів</span>
+        <span class="chip red">1 фронтендер · AI-first</span>
+        <span class="chip">пн–пт × 8 год · 1 міс ≈ 168 год (21 день)</span>
+        <span class="chip">uk + /ru/ один шаблон</span>
+        <span class="chip">бойовий сайт одразу → cutover з WP</span>
       </div>
     </header>
 
     <div class="banner">
-      <strong>Як читати:</strong>
-      Est.h = збірка сторінки + wiring API (loading / empty / error / URL sync / submit).
-      Компоненти вже в <a href="COMPONENT-ESTIMATE-UA.html">COMPONENT-ESTIMATE-UA.html</a> (~227–358 год).
-      Лот Кореї = <code>/auctions-korea/{id}/</code>.
-      Посадкові з фільтрами (напр. «BMW зі США», «Acura 2.0») — <strong>не окремі сторінки з нуля</strong>:
-      той самий шаблон <code>/cars/</code> + фільтр у URL (ряд. 20).
+      <strong>Як читати години:</strong>
+      тут лише збірка сторінок + підключення API (завантаження / порожньо / помилка / фільтри в URL / відправка форм).
+      Години компонентів з каталогу <strong>не додаються вдруге</strong>.
+      Каталог авто = рядок <code>/cars/</code> (список).
+      Тисячі адрес на кшталт «BMW зі США» = той самий каталог з уже вибраним фільтром (ряд. 20), не 1000 окремих екранів.
+    </div>
+
+    <div class="flow">
+      <div class="node">A · Компоненти<small>1.3–2.1 міс</small></div>
+      <span class="arrow">→</span>
+      <div class="node">B+C · Живий сайт<small>1.6–2.3 міс</small></div>
+      <span class="arrow">→</span>
+      <div class="node">D · Перевірка + переїзд<small>0.4–0.9 міс</small></div>
+      <span class="arrow">→</span>
+      <div class="node">Готово до заміни WP<small>разом 3.4–5.3 міс</small></div>
     </div>
 
     <div class="stats">
-      <div class="stat"><div class="n">50–76</div><div class="l">платформа (P0–P4)</div></div>
-      <div class="stat"><div class="n">214–312</div><div class="l">шаблони сторінок</div></div>
-      <div class="stat"><div class="n">264–388</div><div class="l">Σ B+C год</div></div>
-      <div class="stat"><div class="n">~33–49</div><div class="l">≈ роб. дні (×8)</div></div>
+      <div class="stat">
+        <div class="n">50–76 год</div>
+        <div class="l">Спільний каркас сайту</div>
+        <div class="sub">≈ 6–10 роб. днів · 0.3–0.5 міс</div>
+      </div>
+      <div class="stat">
+        <div class="n">214–312 год</div>
+        <div class="l">Усі типи сторінок</div>
+        <div class="sub">≈ 27–39 роб. днів · 1.3–1.9 міс</div>
+      </div>
+      <div class="stat">
+        <div class="n">264–388 год</div>
+        <div class="l">Разом цей файл (B+C)</div>
+        <div class="sub">≈ 33–49 роб. днів · 1.6–2.3 міс</div>
+      </div>
+      <div class="stat">
+        <div class="n">3.4–5.3 міс</div>
+        <div class="l">Повний FE з компонентами + D</div>
+        <div class="sub">≈ 71–112 роб. днів · 566–896 год</div>
+      </div>
     </div>
 
     <nav class="toc">
       <strong>Зміст</strong>
       <ol>
-        <li><a href="#platform">Платформа (один раз)</a></li>
-        <li><a href="#pages">Шаблони сторінок (MVP)</a></li>
-        <li><a href="#totals">Разом із компонентами</a></li>
+        <li><a href="#platform">Спільний каркас (один раз)</a></li>
+        <li><a href="#pages">Типи сторінок</a></li>
+        <li><a href="#totals">Разом: години · дні · місяці</a></li>
+        <li><a href="#risks">Ризики переїзду з WordPress</a></li>
       </ol>
     </nav>
 
     <section id="platform">
-      <h2>1. Платформа (один раз)</h2>
-      <p class="lead">Спільне для всіх сторінок. Не дублюється в рядках нижче.</p>
+      <h2>1. Спільний каркас (один раз на весь сайт)</h2>
+      <p class="lead">
+        Робиться на початку. Не повторюється в кожній сторінці нижче.
+        Разом <strong>50–76 год ≈ 6–10 роб. днів ≈ 0.3–0.5 міс</strong>.
+      </p>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
               <th>#</th>
-              <th>Пакет</th>
-              <th>Що входить</th>
-              <th>Depends on BE</th>
+              <th>Простими словами</th>
+              <th>Що робимо</th>
+              <th>Потрібно від бекенду</th>
               <th>Est.h</th>
+              <th>≈ дні</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>P0</td>
-              <td><code>App shell</code></td>
-              <td>layout · uk + <code>/ru/</code> · Header/Footer live · middleware · навігація</td>
-              <td class="be">host / locale</td>
+              <td><strong>Каркас сайту</strong></td>
+              <td>Мови uk і <code>/ru/</code>, шапка, футер, меню, переходи між сторінками</td>
+              <td class="be">сайт / локаль за доменом</td>
               <td class="est">16–24</td>
+              <td>2–3</td>
             </tr>
             <tr>
               <td>P1</td>
-              <td><code>API client</code></td>
-              <td>OpenAPI TS · fetch · помилки · revalidate / cache tags</td>
-              <td class="be">public-v1.yaml (Б1)</td>
+              <td><strong>Підключення до API</strong></td>
+              <td>Клієнт з контракту OpenAPI, обробка помилок, кеш відповідей</td>
+              <td class="be">public-v1.yaml (віха Б1)</td>
               <td class="est">12–18</td>
+              <td>1.5–2</td>
             </tr>
             <tr>
               <td>P2</td>
-              <td><code>Leads pipeline</code></td>
-              <td>callback / lead / bonus / feedback → API + тости</td>
-              <td class="be">заявки / outbox</td>
+              <td><strong>Заявки з форм</strong></td>
+              <td>«Замовити дзвінок», бонус, зворотний зв’язок → відправка на бекенд + повідомлення користувачу</td>
+              <td class="be">прийом заявок</td>
               <td class="est">8–12</td>
+              <td>1–1.5</td>
             </tr>
             <tr>
               <td>P3</td>
-              <td><code>Header search</code></td>
-              <td>live search · empty · «всі результати»</td>
+              <td><strong>Пошук у шапці</strong></td>
+              <td>Живий пошук на всіх сторінках, порожній результат, «усі результати»</td>
               <td class="be">search API</td>
               <td class="est">8–12</td>
+              <td>1–1.5</td>
             </tr>
             <tr>
               <td>P4</td>
-              <td><code>SEO helpers</code></td>
-              <td>title / description / canonical / hreflang з даних</td>
-              <td class="be">мета в API / pages</td>
+              <td><strong>SEO-теги сторінок</strong></td>
+              <td>Заголовок вкладки, опис для Google, canonical, зв’язок uk↔ru (hreflang) — з даних API</td>
+              <td class="be">метадані в API</td>
               <td class="est">6–10</td>
+              <td>1–1.5</td>
             </tr>
           </tbody>
         </table>
@@ -165,165 +219,169 @@
     </section>
 
     <section id="pages">
-      <h2>2. Шаблони сторінок (MVP сразу)</h2>
-      <p class="lead">Один рядок = один шаблон (D+M). <span class="mvp">MVP</span> — у першій хвилі.</p>
+      <h2>2. Типи сторінок (усі в першому релізі)</h2>
+      <p class="lead">
+        Один рядок = один тип екрана (десктоп + мобайл).
+        Робимо <strong>одразу бойовий сайт</strong>; WordPress вимикаємо після готовності (cutover).
+        Разом сторінки <strong>214–312 год ≈ 27–39 роб. днів ≈ 1.3–1.9 міс</strong>.
+      </p>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
               <th>#</th>
-              <th>Route / шаблон</th>
-              <th>API / дані</th>
-              <th>Wave</th>
+              <th>Сторінка (URL)</th>
+              <th>Що підключаємо</th>
               <th>Est.h</th>
+              <th>≈ дні</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>1</td>
-              <td><code>/</code> Home</td>
-              <td>блоки контенту · слайдери · форми</td>
-              <td class="mvp">MVP</td>
+              <td><code>/</code> Головна</td>
+              <td>блоки · слайдери · форми</td>
               <td class="est">16–24</td>
+              <td>2–3</td>
             </tr>
             <tr>
               <td>2</td>
-              <td><code>/cars/</code> listing</td>
-              <td>list · filters ↔ URL · sort/page · empty</td>
-              <td class="mvp">MVP</td>
+              <td><code>/cars/</code> Каталог (список авто)</td>
+              <td>список · фільтри ↔ адреса · сортування · порожньо</td>
               <td class="est">28–40</td>
+              <td>3.5–5</td>
             </tr>
             <tr>
               <td>3</td>
-              <td><code>/cars/{slug}/</code></td>
-              <td>card · gallery · similar · forms</td>
-              <td class="mvp">MVP</td>
+              <td><code>/cars/{slug}/</code> Картка авто</td>
+              <td>галерея · схожі · форми</td>
               <td class="est">20–28</td>
+              <td>2.5–3.5</td>
             </tr>
             <tr>
               <td>4</td>
-              <td><code>/auctions/</code></td>
-              <td>list · datepicker · timer · reuse cards/filters</td>
-              <td class="mvp">MVP</td>
+              <td><code>/auctions/</code> Аукціони США</td>
+              <td>список · дата · таймер · картки/фільтри</td>
               <td class="est">16–24</td>
+              <td>2–3</td>
             </tr>
             <tr>
               <td>5</td>
-              <td><code>/auctions/{id}/</code></td>
-              <td>lot detail · timer · forms</td>
-              <td class="mvp">MVP</td>
+              <td><code>/auctions/{id}/</code> Лот США</td>
+              <td>деталі лота · таймер · форми</td>
               <td class="est">14–20</td>
+              <td>2–2.5</td>
             </tr>
             <tr>
               <td>6</td>
               <td><code>/auctions-korea/</code> + <code>/auctions-korea/{id}/</code></td>
-              <td>listing + lot · korea-блоки (tooltip, body, history…)</td>
-              <td class="mvp">MVP</td>
+              <td>список і лот Кореї · спец. блоки</td>
               <td class="est">16–24</td>
+              <td>2–3</td>
             </tr>
             <tr>
               <td>7</td>
               <td><code>/calculator/</code></td>
-              <td>UI + calculate API</td>
-              <td class="mvp">MVP</td>
+              <td>форма + розрахунок через API</td>
               <td class="est">10–14</td>
+              <td>1–2</td>
             </tr>
             <tr>
               <td>8</td>
               <td><code>/perevirka-avto-po-vin-kodu/</code></td>
-              <td>search · status · cards · sales history</td>
-              <td class="mvp">MVP</td>
+              <td>пошук · статус · картки · історія продажів</td>
               <td class="est">12–18</td>
+              <td>1.5–2</td>
             </tr>
             <tr>
               <td>9</td>
               <td><code>/zvit-po-perevirci-avto-amerika/</code></td>
-              <td>landing · CTA / form</td>
-              <td class="mvp">MVP</td>
+              <td>лендінг · CTA / форма</td>
               <td class="est">6–10</td>
+              <td>1–1.5</td>
             </tr>
             <tr>
               <td>10</td>
-              <td>CMS-пачка:<br>
+              <td>Контент-пачка:<br>
                 <code>/pro-kompaniyu/</code> · <code>/garantiyi-dostavky-avto-z-ssha/</code> ·
                 <code>/dostavka-avto-z-ssha/</code> · <code>/oplata/</code> · <code>/dopomoga-zsu/</code>
               </td>
-              <td>pages / blocks API</td>
-              <td class="mvp">MVP</td>
+              <td>сторінки / блоки з CMS API</td>
               <td class="est">20–28</td>
+              <td>2.5–3.5</td>
             </tr>
             <tr>
               <td>11</td>
-              <td><code>/blog/</code> · <code>/news/</code> · article · categories</td>
-              <td>posts list/detail</td>
-              <td class="mvp">MVP</td>
+              <td><code>/blog/</code> · <code>/news/</code> · стаття · категорії</td>
+              <td>список і текст постів</td>
               <td class="est">12–18</td>
+              <td>1.5–2</td>
             </tr>
             <tr>
               <td>12</td>
               <td><code>/experts/{slug}/</code></td>
-              <td>profile · articles</td>
-              <td class="mvp">MVP</td>
+              <td>профіль · статті експерта</td>
               <td class="est">8–12</td>
+              <td>1–1.5</td>
             </tr>
             <tr>
               <td>13</td>
               <td><code>/contacts/</code> · <code>/vidguky/</code></td>
-              <td>map · info · form · reviews</td>
-              <td class="mvp">MVP</td>
+              <td>карта · контакти · форма · відгуки</td>
               <td class="est">8–12</td>
+              <td>1–1.5</td>
             </tr>
             <tr>
               <td>14</td>
-              <td><code>/favorites/</code></td>
-              <td>localStorage + картки (без BE favorites)</td>
-              <td class="mvp">MVP</td>
+              <td><code>/favorites/</code> Збережені авто</td>
+              <td>localStorage + картки (без бекенд-збережень)</td>
               <td class="est">6–8</td>
+              <td>1</td>
             </tr>
             <tr>
               <td>15</td>
               <td><code>/avto-pislya-remontu/</code></td>
-              <td>listing · repaired cards · «Дивитися більше (N)»</td>
-              <td class="mvp">MVP</td>
+              <td>список · картки «після» · «Дивитися більше (N)»</td>
               <td class="est">8–12</td>
+              <td>1–1.5</td>
             </tr>
             <tr>
               <td>16</td>
               <td><code>/pryvezeni-v-ukrayinu-avto/</code></td>
-              <td>listing · delivered cards · interest CTA</td>
-              <td class="mvp">MVP</td>
+              <td>список · картки · «Цікавить схоже»</td>
               <td class="est">8–12</td>
+              <td>1–1.5</td>
             </tr>
             <tr>
               <td>17</td>
               <td><code>/career/</code> · <code>/privacy-policy/</code> · <code>/bot/</code></td>
-              <td>CMS / static pages</td>
-              <td class="mvp">MVP</td>
+              <td>прості CMS / статичні сторінки</td>
               <td class="est">6–10</td>
+              <td>1–1.5</td>
             </tr>
             <tr>
               <td>18</td>
-              <td><code>/sitemap/</code></td>
-              <td>HtmlSitemap · лінки з API / статичний зріз</td>
-              <td class="mvp">MVP</td>
+              <td><code>/sitemap/</code> Карта сайту (HTML)</td>
+              <td>колонки лінків</td>
               <td class="est">4–6</td>
+              <td>0.5–1</td>
             </tr>
             <tr>
               <td>19</td>
-              <td>404 NotFound</td>
-              <td>shell + NotFoundContent</td>
-              <td class="mvp">MVP</td>
+              <td>404</td>
+              <td>сторінка «не знайдено»</td>
               <td class="est">2–4</td>
+              <td>0.5</td>
             </tr>
             <tr>
               <td>20</td>
               <td>Посадкові з фільтрами (SEO)<br>
-                <span class="be">Тисячі URL на кшталт «BMW зі США» / «Acura кросовер» / «дизель» —
-                це не нові екрани: один шаблон каталогу + активний фільтр у адресі</span>
+                <span class="be">«BMW зі США», «Acura кросовер», «дизель»… —
+                той самий каталог <code>/cars/</code> з фільтром у адресі, не нові екрани</span>
               </td>
-              <td>reuse <code>/cars/</code> · path/query · title/hreflang</td>
-              <td class="mvp">MVP</td>
+              <td>роутинг фільтра · title / hreflang</td>
               <td class="est">4–8</td>
+              <td>0.5–1</td>
             </tr>
           </tbody>
         </table>
@@ -331,44 +389,91 @@
     </section>
 
     <section id="totals">
-      <h2>3. Разом із компонентами</h2>
+      <h2>3. Разом: години · робочі дні · місяці</h2>
+      <p class="lead">
+        База: <strong>1 фронтендер</strong>, пн–пт × 8 год.
+        <strong>1 місяць ≈ 21 робочий день ≈ 168 годин</strong>.
+      </p>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Шар</th><th>Зміст</th><th>Est.h</th><th>≈ роб. дні</th></tr>
+            <tr>
+              <th>Шар</th>
+              <th>Що це</th>
+              <th>Години</th>
+              <th>Роб. дні</th>
+              <th>Місяці</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
-              <td>A</td>
-              <td>Компоненти UI — <a href="COMPONENT-ESTIMATE-UA.html">каталог</a></td>
+              <td><strong>A</strong></td>
+              <td>Компоненти UI (кнопки, картки, фільтри…) — <a href="COMPONENT-ESTIMATE-UA.html">каталог</a></td>
               <td class="est">226.5–357.5</td>
               <td>~28–45</td>
+              <td class="est">1.3–2.1</td>
             </tr>
             <tr>
-              <td>B+C</td>
-              <td>Платформа + сторінки (ця сторінка)</td>
+              <td><strong>B+C</strong></td>
+              <td>Живий сайт: каркас + усі сторінки + API (ця сторінка)</td>
               <td class="est">264–388</td>
               <td>~33–49</td>
+              <td class="est">1.6–2.3</td>
             </tr>
             <tr>
               <td><strong>A+B+C</strong></td>
-              <td>Без окремого QA/cutover буфера</td>
+              <td>Розробка без фінальної перевірки й переїзду</td>
               <td class="est">490.5–745.5</td>
-              <td>~61–93 (~3–4.5 міс)</td>
+              <td>~61–93</td>
+              <td class="est">2.9–4.4</td>
             </tr>
             <tr>
-              <td>D (орієнтир)</td>
-              <td>QA / polish / cutover FE (+15–20%)</td>
-              <td class="est">~75–150</td>
+              <td><strong>D</strong></td>
+              <td>
+                Фініш перед заміною WordPress (+15–20% від розробки):<br>
+                <span class="be">
+                  <strong>QA</strong> — пройти сценарії як користувач ·
+                  <strong>Polish</strong> — підчистити дрібні баги/візуал ·
+                  <strong>Cutover</strong> — день перемикання домену + швидкі фікси
+                </span>
+              </td>
+              <td class="est">75–150</td>
               <td>~10–19</td>
+              <td class="est">0.4–0.9</td>
+            </tr>
+            <tr>
+              <td><strong>Повний цикл FE</strong></td>
+              <td>A + B+C + D — до готовності замінити WP</td>
+              <td class="est">565.5–895.5</td>
+              <td>~71–112</td>
+              <td class="est">3.4–5.3</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="lead" style="margin-top:12px;">
-        У горизонт 4–6 міс (1 FE, 40 год/тиж) A+B+C+D лягає ближче до низу–середини,
-        якщо Public API (бекенд Б1) не блокує довго і AI-first тримає темп.
-      </p>
+
+      <div class="verdict">
+        <strong>Висновок (без роздумів):</strong>
+        повний фронт grandcar.ua — орієнтир <strong>≈ 4–5 місяців</strong> одного FE.
+        Бюджет 4 міс = 672 год: вкладаємось лише по <strong>низу</strong> діапазону і якщо Public API готовий вчасно.
+        Верх (~5.3 міс) — якщо багато правок або бекенд затримується.
+        Горизонт <strong>6 місяців</strong> — з запасом на ризики переїзду.
+      </div>
+    </section>
+
+    <section id="risks">
+      <h2>4. Ризики переїзду з WordPress (cutover)</h2>
+      <p class="lead">Не роздувають години рядків вище, але можуть зсунути дату запуску.</p>
+      <ul class="plain">
+        <li><strong>Public API пізно або змінюється</strong> — сторінки каталогу стоять (залежність від бекенд Б1).</li>
+        <li><strong>Матриця старих URL / редіректів</strong> не готова — ризик SEO після вимкнення WP (робота SEO+бекенд, не лише FE).</li>
+        <li><strong>Немає staging / домену</strong> в день перемикання — cutover переноситься.</li>
+        <li><strong>Перший тиждень після запуску</strong> — гасіння багів (частина шару D).</li>
+      </ul>
+      <div class="banner warn" style="margin-top:12px;margin-bottom:0;">
+        Cutover = новий сайт уже бойовий на своєму середовищі → перемикаємо домен / трафік зі старого WordPress.
+        Не «друга хвиля фіч», а фінал релізу.
+      </div>
     </section>
 
     <footer>
