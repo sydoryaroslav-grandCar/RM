@@ -131,6 +131,9 @@
       Якорі (<code>#cars-listing</code> тощо) стабільні — не ламаємо.
       Каталог / години / D/M → <a href="COMPONENT-ESTIMATE-UA.html">COMPONENT-ESTIMATE-UA.html</a>.
     </p>
+    <p class="hint">
+      Доповнення 20.10.2026: <a href="#lead-forms">§31</a> — модалки й форми заявок, яких не було в §1–30. Розділи §1–30 не змінено.
+    </p>
 
         <nav class="toc">
       <strong>Зміст</strong>
@@ -167,6 +170,7 @@
         <li><a href="#expert-page">Експерт /experts/{slug}/</a> — Profile · Values · ArticleBody · Share · meta</li>
         <li><a href="#contacts-page">Контакти /contacts/</a> — OfficeMap · ContactsInfo</li>
         <li><a href="#saved-page">Збережені авто</a> (<code>/favorites/</code>) — PageLoader · SavedCarCard</li>
+        <li><a href="#lead-forms">Модалки й форми заявок</a> (доповнення 20.10.2026) — Offer · SimilarCar · Carfax · Quote · Repair · Consultation · StickyBuyBar</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -4304,6 +4308,224 @@
       <div class="note">
         <div class="label">Далі</div>
         <p>Інші URL / блоки — наступними секціями за скрінами.</p>
+      </div>
+    </section>
+
+    <section id="lead-forms">
+      <h2>31. Модалки й форми заявок · доповнення 20.10.2026</h2>
+      <p class="lead">Доповнення після research freeze: вікна й форми, яких не було в §1–30. Знайдено під час верстки форм <code>apps/web-ua</code> (задача #113): в шаблонах теми GrandCarWP (<code>footer.php</code>, <code>template-parts/pop-up*.php</code>) і перевірено на живому сайті, виміри — 1440 і 360. Скріни зроблено 20.10.2026 з живого сайту, файли — <code>component-shots/lead-forms/</code>.<br /><br />Номер у дужках (#9, #14…) — id форми Ninja Forms на живому сайті: за ним форму видно в адмінці й у розмітці (<code>#nf-form-9-cont</code>).</p>
+      <div class="meta">
+        <span class="chip">Сторінки: home · /vidguky/ · /pryvezeni-v-ukrayinu-avto/ · /zvit-po-perevirci-avto-amerika/ · /calculator/ · /perevirka-po-vin-kodu/ · /dostavka-avto-z-ssha/ · /auctions/{id}/</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>31.1. OfferModal — «Отримати пропозицію» (#9)</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/lead-forms/01-offer-modal-desktop.png" alt="Модалка персональної пропозиції desktop" loading="lazy" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 1 · desktop · картка 400 · «Залишіть ваш номер, щоб отримати персональну пропозицію» · ім’я · телефон · дисклеймер · «Отримати підбір»</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/lead-forms/02-offer-modal-mobile.png" alt="Модалка персональної пропозиції mobile" loading="lazy" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 2 · mobile · та сама картка з відступом 20 від країв</div>
+      </div>
+      <div class="box brand">
+        <h4>Як знайти на живому</h4>
+        <p>Головна → банер → «Отримати пропозицію» (посилання <code>href="#callback"</code>).</p>
+      </div>
+      <div class="box brand">
+        <h4>Vs CallbackModal (§3.4)</h4>
+        <p>Той самий каркас і ті самі поля; інші заголовок і CTA. Окремий компонент не потрібен — інша конфігурація форми.</p>
+      </div>
+
+      <h3>31.2. SimilarCarModal — «Цікавить схоже авто» (#14)</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/lead-forms/03-similar-modal-desktop.jpg" alt="Модалка схоже авто desktop" loading="lazy" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 3 · desktop · 1280 · фото з адмінки зліва (те саме, що в «ціна під ключ») · «Заповніть форму нижче і менеджер підбере для вас схоже авто» · «Авто: {назва}» · ім’я · телефон · «Отримати підбір»</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/lead-forms/04-similar-modal-mobile.png" alt="Модалка схоже авто mobile" loading="lazy" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 4 · mobile · без фото · лише форма</div>
+      </div>
+      <div class="box brand">
+        <h4>Як знайти на живому</h4>
+        <p>Картка відео-відгуку (§8.1) → «Цікавить схоже авто»: головна, <a href="https://www.grandcar.ua/vidguky/">/vidguky/</a>, <a href="https://www.grandcar.ua/pryvezeni-v-ukrayinu-avto/">/pryvezeni-v-ukrayinu-avto/</a>.</p>
+      </div>
+      <div class="box brand">
+        <h4>Поведінка</h4>
+        <ul>
+          <li>Рядок «Авто:» — назва з картки відгуку; у прихованих полях форма відправляє назву й посилання на YouTube-відео відгуку.</li>
+          <li>Каркас = TurnkeyPriceModal (§13.46): фото | форма, на mobile фото немає.</li>
+        </ul>
+      </div>
+
+      <h3>31.3. CarfaxModal — «Замовити Carfax» (#15)</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/lead-forms/05-carfax-modal-desktop.png" alt="Модалка замовити Carfax desktop" loading="lazy" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 5 · desktop · картка <strong>290</strong> (не 400, як решта) · VIN · ім’я · телефон · «Замовити»</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/lead-forms/06-carfax-modal-mobile.png" alt="Модалка замовити Carfax mobile" loading="lazy" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 6 · mobile · картка 280 з відступом 40 від країв</div>
+      </div>
+      <div class="box brand">
+        <h4>Як знайти на живому</h4>
+        <p><a href="https://www.grandcar.ua/zvit-po-perevirci-avto-amerika/">/zvit-po-perevirci-avto-amerika/</a> → банер → «Замовити звіт» (§21.2).</p>
+      </div>
+      <div class="box brand">
+        <h4>Відмінність від шаблону</h4>
+        <p>Вужча за стандартну картку 400 лише на живому сайті. Рішення Ярослава 20.10.2026: у новому сайті — стандартна картка 400, без винятку (див. <code>apps/web-ua/lib/forms/README.md</code>, «Свідомо інакше, ніж на живому»).</p>
+      </div>
+
+      <h3>31.4. QuoteModal — «Прорахувати авто» (#36)</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/lead-forms/07-quote-modal-desktop.png" alt="Модалка прорахунку авто desktop" loading="lazy" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 7 · desktop · картка 520 · «Вкажіть на який автомобіль ви хочете отримати прорахунок…» · марка й модель · рік · ім’я · телефон · CTA 280 по центру</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/lead-forms/08-quote-modal-mobile.png" alt="Модалка прорахунку авто mobile" loading="lazy" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 8 · mobile · картка на всю ширину з відступом 20 · CTA на всю ширину</div>
+      </div>
+      <div class="box brand">
+        <h4>Як знайти на живому</h4>
+        <p><a href="https://www.grandcar.ua/pryvezeni-v-ukrayinu-avto/">/pryvezeni-v-ukrayinu-avto/</a> → двічі «Дивитися більше» під відгуками → вставка «Цікавить прорахунок по конкретному автомобілю?» → «Прорахувати авто». Перша вставка (після першого натискання) — інша, про доставку.</p>
+      </div>
+      <div class="box brand">
+        <h4>Поведінка</h4>
+        <ul>
+          <li>Вікно — адмінський «triggered» попап (<code>pop-up__triggered.php</code>), не з <code>footer.php</code>.</li>
+          <li>Поля 70 заввишки (кожні 90), рік — число.</li>
+          <li>Рік поза 2000–2030: живий показує «Мін. / Макс. номер помилки» (зламаний переклад Ninja Forms); новий сайт — «Некоректне значення». Причина — у <code>apps/web-ua/lib/forms/README.md</code>.</li>
+          <li>Підпис поля на живому — «Ваше ім`я» (гравіс замість апострофа); у новому сайті — «Ваше ім’я».</li>
+        </ul>
+      </div>
+
+      <h3>31.5. RepairModal — «Розрахувати ремонт» (#38)</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/lead-forms/09-repair-modal-desktop.jpg" alt="Модалка розрахунку ремонту desktop" loading="lazy" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 9 · desktop · 1280 · фото сервісу з адмінки зліва · «Заповніть форму нижче і фахівець розрахує ремонт цього авто» · «Авто:» · ім’я · телефон · «Отримати розрахунок»</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/lead-forms/10-repair-modal-mobile.png" alt="Модалка розрахунку ремонту mobile" loading="lazy" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 10 · mobile · без фото · лише форма</div>
+      </div>
+      <div class="box brand">
+        <h4>Як знайти на живому</h4>
+        <p>Лот аукціону (§17), напр. <a href="https://www.grandcar.ua/auctions/45823320/">/auctions/45823320/</a> → «Розрахувати ремонт».</p>
+      </div>
+      <div class="box brand">
+        <h4>Поведінка</h4>
+        <ul>
+          <li>Каркас = TurnkeyPriceModal (§13.46), інше фото й тексти.</li>
+          <li>На скрінах 9–10 рядок «Авто:» порожній: вікно відкрито кліком зі скрипта, і назва лота не підставилась. При кліку рукою там назва лота з VIN (скрін власника 20.10.2026, «… (2C4RC1BG4FR656764)»). Довга назва переноситься на наступний рядок.</li>
+          <li>Фото в обох вікнах (ціна під ключ, ремонт) — завжди картинка з адмінки, не фото лота (рішення Ярослава 20.10.2026: «як на живому»).</li>
+        </ul>
+      </div>
+
+      <h3>31.6. ConsultationForm — «Виникли питання?» (#26 · #29 · #31)</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/lead-forms/11-consultation-report-desktop.jpg" alt="Форма консультації на сторінці звіту desktop" loading="lazy" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 11 · desktop · /zvit-po-perevirci-avto-amerika/ (#26) · фото | заголовок + ім’я · телефон · «Отримати консультацію»</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/lead-forms/12-consultation-report-mobile.jpg" alt="Форма консультації на сторінці звіту mobile" loading="lazy" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 12 · mobile · фото зверху · форма під ним</div>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/lead-forms/13-consultation-calculator-desktop.jpg" alt="Форма консультації на калькуляторі desktop" loading="lazy" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 13 · desktop · /calculator/ (#29; та сама форма на /perevirka-po-vin-kodu/)</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/lead-forms/14-consultation-calculator-mobile.jpg" alt="Форма консультації на калькуляторі mobile" loading="lazy" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 14 · mobile · «Виникли питання? Зверніться за безкоштовною консультацією до нашого спеціаліста»</div>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/lead-forms/15-consultation-delivery-desktop.jpg" alt="Форма консультації на доставці desktop" loading="lazy" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 15 · desktop · /dostavka-avto-z-ssha/ (#31) · «Виникли питання щодо доставки?…»</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/lead-forms/16-consultation-delivery-mobile.jpg" alt="Форма консультації на доставці mobile" loading="lazy" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 16 · mobile</div>
+      </div>
+      <div class="box brand">
+        <h4>Як знайти на живому</h4>
+        <p>Унизу сторінок: <a href="https://www.grandcar.ua/zvit-po-perevirci-avto-amerika/">/zvit-po-perevirci-avto-amerika/</a> (#26), <a href="https://www.grandcar.ua/calculator/">/calculator/</a> і <a href="https://www.grandcar.ua/perevirka-po-vin-kodu/">/perevirka-po-vin-kodu/</a> (#29), <a href="https://www.grandcar.ua/dostavka-avto-z-ssha/">/dostavka-avto-z-ssha/</a> (#31) — над футером.</p>
+      </div>
+      <div class="box brand">
+        <h4>Vs CatalogFeedbackForm (§13)</h4>
+        <p>Той самий макет «фото | форма» і ті самі поля (ім’я · телефон). Відрізняються лише заголовок і CTA, тож це одна секція з різними текстами. Форма каталогу й контактів (#34, «Бажаєте замовити авто зі США…») — той самий блок.</p>
+      </div>
+
+      <h3>31.7. StickyBuyBar — лот аукціону (<code>gc-sticky-buy</code>)</h3>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/lead-forms/17-sticky-buy-desktop.png" alt="Sticky-панель лота desktop" loading="lazy" style="max-width:640px;max-height:320px" />
+        <div class="cap">Скрін 17 · desktop · панель унизу екрана, до 1000 завширшки · фото · назва з VIN · «Фіксована ціна в США: 950 $» · «Дізнатися ціну під ключ»</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/lead-forms/18-sticky-buy-mobile.png" alt="Sticky-панель лота mobile" loading="lazy" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 18 · mobile · на всю ширину, притиснута до низу · фото + назва (обрізана «…») + ціна · кнопка на всю ширину</div>
+      </div>
+      <div class="box brand">
+        <h4>Як знайти на живому</h4>
+        <p>Лот аукціону (§17), напр. <a href="https://www.grandcar.ua/auctions/45823320/">/auctions/45823320/</a> → прокрутити вниз, щоб кнопка «Дізнатися ціну під ключ» пішла з екрана.</p>
+      </div>
+      <div class="box brand">
+        <h4>Поведінка (живий <code>index.js</code>, звірено 20.10.2026)</h4>
+        <ul>
+          <li>З’являється, коли головна кнопка лота поза екраном (вище або нижче); ховається, коли вона видна.</li>
+          <li>Кнопка панелі натискає оригінальну кнопку сторінки: «Дізнатися ціну під ключ», а після форми — «Розрахувати ремонт».</li>
+          <li>Дані (фото, назва, ціна) беруться зі сторінки лота.</li>
+          <li>Desktop: сітка фото · назва · ціна · кнопка, відступ 12 від країв. Mobile (≤767): на всю ширину, кути заокруглені лише зверху, кнопка окремим рядком.</li>
+          <li>Поява й зникнення — 0.2 s, вимикається при <code>prefers-reduced-motion</code>.</li>
+          <li>Цього коду немає в локальній копії GrandCarWP — лише на живому сайті (новіша версія <code>index.js</code>).</li>
+        </ul>
+      </div>
+
+      <h3>Підсумок · модалки й форми заявок</h3>
+      <table>
+        <thead>
+          <tr><th>Компонент</th><th>Нове?</th><th>Нотатка</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>OfferModal (#9)</td>
+            <td>Варіант CallbackModal</td>
+            <td>інші заголовок і CTA</td>
+          </tr>
+          <tr>
+            <td>SimilarCarModal (#14)</td>
+            <td>Варіант TurnkeyPriceModal</td>
+            <td>фото з адмінки · «Авто:» з картки відгуку · прихований YouTube</td>
+          </tr>
+          <tr>
+            <td>CarfaxModal (#15)</td>
+            <td>Варіант CallbackModal</td>
+            <td>+ поле VIN · на живому 290 → у нас 400 (рішення)</td>
+          </tr>
+          <tr>
+            <td>QuoteModal (#36)</td>
+            <td>Варіант CallbackModal</td>
+            <td>520 · 4 поля по 70 · CTA 280 по центру</td>
+          </tr>
+          <tr>
+            <td>RepairModal (#38)</td>
+            <td>Варіант TurnkeyPriceModal</td>
+            <td>фото сервісу з адмінки</td>
+          </tr>
+          <tr>
+            <td>ConsultationForm (#26 · #29 · #31)</td>
+            <td>Варіант CatalogFeedbackForm</td>
+            <td>той самий макет · різні тексти</td>
+          </tr>
+          <tr>
+            <td>StickyBuyBar</td>
+            <td><strong>Нове</strong></td>
+            <td>лише лот · desktop / mobile · проксі на кнопку сторінки</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Оцінка цих одиниць — <a href="COMPONENT-ESTIMATE-UA.html#g-forms-extra"><code>component-estimate.md</code></a>, розділ «5. Forms / modals».</p>
       </div>
     </section>
 
