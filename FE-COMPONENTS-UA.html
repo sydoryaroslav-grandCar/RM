@@ -4534,7 +4534,7 @@
     </section>
     <section id="extra-2210">
       <h2>32. Доповнення 22.10.2026 · підказки карток, слайдери, поправки</h2>
-      <p class="lead">Доповнення після research freeze: що знайшли 21–22.10.2026 під час верстки карток (#111) і слайдерів (#112), чого не було в §1–31. Джерела — живий сайт (виміри 1440 і 360) і вихідники теми GrandCarWP. Скріни ще не зняті (⬜). Як це зроблено в <code>apps/web-ua</code> і чим відрізняється від живого — у журналі фронтенду (<code>docs/frontend/frontend-changelog.md</code>) (п. 161–164, 189–193, 213–226).</p>
+      <p class="lead">Доповнення після research freeze: що знайшли 21–22.10.2026 під час верстки карток (#111) і слайдерів (#112), чого не було в §1–31. Джерела — живий сайт (виміри 1440 і 360) і вихідники теми GrandCarWP. Скріни зроблено 22.10.2026 з живого сайту (1440 і 360), файли — <code>component-shots/inventory-2210/</code>. Без скрінів: §32.6 (потрібна перевірка VIN — форму на живому не відправляли), §32.8 (віджет Trustindex не відмалювався в автоматичному Chrome), §32.4, §32.9, §32.10 (нових блоків немає або відкладено). Як це зроблено в <code>apps/web-ua</code> і чим відрізняється від живого — у журналі фронтенду (<code>docs/frontend/frontend-changelog.md</code>) (п. 161–164, 189–193, 213–226).</p>
       <div class="meta">
         <span class="chip">Сторінки: /cars/ · /auctions/ · /auctions-korea/ · /favorites/ · home · /career/ · /perevirka-po-vin-kodu/ · сторінки послуг · /vidguky/ · /auctions/{id}/</span>
         <span class="chip red">Desktop + Mobile</span>
@@ -4550,10 +4550,26 @@
           <li><strong>Важливо:</strong> у локальній копії GrandCarWP цього коду немає — нове на живому (знято 21.10.2026).</li>
         </ul>
       </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2210/01-card-tips-desktop.jpg" alt="CardTips — поповер «Гарантії» desktop" loading="lazy" style="max-width:640px;max-height:600px" />
+        <div class="cap">Скрін 1 · desktop · /cars/ · наведення на «Гарантії»: поповер шириною фото картки (365) з хвостиком до бейджа</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2210/01-card-tips-mobile.jpg" alt="CardTips — поповер «Гарантії» mobile" loading="lazy" style="max-width:360px;max-height:720px" />
+        <div class="cap">Скрін 2 · mobile · /cars/ · дотик до «Гарантії»: поповер угору, прилипає до лівого краю (баг живого)</div>
+      </div>
 
       <h3>32.2. PriceHint — «i» біля ціни корейського авто</h3>
       <div class="box brand">
-        <p>/auctions-korea/: після «Ціна в Кореї: 107 778 $» червона іконка «i» 16 px; по наведенню — підказка 170 px «Актуальність ціни уточнюйте у менеджера.» з іконкою документа.</p>
+        <p>/auctions-korea/: після «Ціна в Кореї: 107 778 $» червона іконка «i» 16 px; по кліку (дотику) — підказка 170 px «Актуальність ціни уточнюйте у менеджера.» з іконкою документа; наведення її не відкриває (перевірено 22.10.2026: клас <code>active</code> ставить клік).</p>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2210/02-korea-price-hint-desktop.jpg" alt="PriceHint корейського авто desktop" loading="lazy" style="max-width:640px;max-height:260px" />
+        <div class="cap">Скрін 3 · desktop · /auctions-korea/ · клік по «i»: підказка над іконкою</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2210/02-korea-price-hint-mobile.jpg" alt="PriceHint корейського авто mobile" loading="lazy" style="max-width:360px;max-height:800px" />
+        <div class="cap">Скрін 4 · mobile · /auctions-korea/ · дотик до «i»; це ж і корейський варіант картки (§32.3)</div>
       </div>
 
       <h3>32.3. Картка лота: таймер і корейський варіант</h3>
@@ -4562,6 +4578,14 @@
           <li><strong>Таймер лота</strong> (/auctions/) — 5-й рядок того самого списку характеристик, а не окремий блок: годинник 20 + «дд:гг:хх:сс».</li>
           <li><strong>Корейський варіант картки</strong> (/auctions-korea/): 3 характеристики (без приводу), «Ціна в Кореї:» з PriceHint (§32.2).</li>
         </ul>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2210/03-lot-card-timer-desktop.jpg" alt="Картка лота з таймером desktop" loading="lazy" style="max-width:640px;max-height:260px" />
+        <div class="cap">Скрін 5 · desktop · /auctions/ · таймер — 5-й рядок характеристик (годинник + «дд:гг:хх:сс»)</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2210/03-lot-card-timer-mobile.jpg" alt="Картка лота з таймером mobile" loading="lazy" style="max-width:360px;max-height:680px" />
+        <div class="cap">Скрін 6 · mobile · /auctions/ · та сама картка в колонку</div>
       </div>
 
       <h3>32.4. Варіанти карток авто — звірка 21.10.2026</h3>
@@ -4575,6 +4599,22 @@
           <li><strong>«Робота, яка змінює життя»:</strong> 2 картки в ряд (1440: 2 × 672), на телефоні картка майже на всю ширину (≈ 95 %) по центру; картки поза кадром притемнені (0,6); автопрокрутка 7 с; гортання — невидимі зони кліку по краях (<code>div</code> без назви, не з клавіатури).</li>
           <li><strong>«Реальні історії успіху в GrandCar»:</strong> 3 картки 424 через 24 — білі, тінь картки, відступ 20: відео YouTube 384 × 312 (плеєр вантажиться разом зі сторінкою), назва 20 / 600, червона «Дивитись» 48 (YouTube у новій вкладці). На десктопі всі 3 в кадрі — стоїть; на телефоні стрічка, 7 с.</li>
         </ul>
+      </div>
+      <div class="shot" style="max-width:720px">
+        <img src="component-shots/inventory-2210/05-career-benefits-desktop.jpg" alt="Слайдер «Робота, яка змінює життя» desktop" loading="lazy" style="max-width:720px;max-height:300px" />
+        <div class="cap">Скрін 7 · desktop · /career/ · «Робота, яка змінює життя»: 2 картки в ряд, сусідні по краях</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2210/05-career-benefits-mobile.jpg" alt="Слайдер «Робота, яка змінює життя» mobile" loading="lazy" style="max-width:360px;max-height:440px" />
+        <div class="cap">Скрін 8 · mobile · /career/ · одна картка майже на всю ширину</div>
+      </div>
+      <div class="shot" style="max-width:720px">
+        <img src="component-shots/inventory-2210/05-career-videos-desktop.jpg" alt="Слайдер «Реальні історії успіху» desktop" loading="lazy" style="max-width:720px;max-height:300px" />
+        <div class="cap">Скрін 9 · desktop · /career/ · «Реальні історії успіху в GrandCar»: 3 картки з відео в кадрі — стоїть</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2210/05-career-videos-mobile.jpg" alt="Слайдер «Реальні історії успіху» mobile" loading="lazy" style="max-width:360px;max-height:520px" />
+        <div class="cap">Скрін 10 · mobile · /career/ · стрічка карток з відео</div>
       </div>
 
       <h3>32.6. Галерея історії VIN — результат перевірки</h3>
@@ -4591,6 +4631,14 @@
       <h3>32.7. Банер з одним слайдом — сторінки послуг</h3>
       <div class="box brand">
         <p>/dostavka-avto-z-ssha/, /garantiyi-dostavky-avto-z-ssha/, /oplata/, /pro-kompaniyu/: InformativeBanner з одним слайдом — без номерів, з підказкою «нижче», що підстрибує (1 с).</p>
+      </div>
+      <div class="shot" style="max-width:720px">
+        <img src="component-shots/inventory-2210/07-banner-single-desktop.jpg" alt="Банер з одним слайдом desktop" loading="lazy" style="max-width:720px;max-height:460px" />
+        <div class="cap">Скрін 11 · desktop · /dostavka-avto-z-ssha/ · один слайд без номерів</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2210/07-banner-single-mobile.jpg" alt="Банер з одним слайдом mobile" loading="lazy" style="max-width:360px;max-height:740px" />
+        <div class="cap">Скрін 12 · mobile · /dostavka-avto-z-ssha/ · підказка «Переглянути інформацію про доставку» зі стрілкою вниз</div>
       </div>
 
       <h3>32.8. Відгуки Google — віджет Trustindex</h3>
