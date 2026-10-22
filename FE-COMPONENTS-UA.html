@@ -134,6 +134,9 @@
     <p class="hint">
       Доповнення 20.10.2026: <a href="#lead-forms">§31</a> — модалки й форми заявок, яких не було в §1–30. Розділи §1–30 не змінено.
     </p>
+    <p class="hint">
+      Доповнення 22.10.2026: <a href="#extra-2210">§32</a> — підказки карток, слайдери (кар'єра, галерея VIN, банер з одним слайдом, відгуки Google / Trustindex), лендинги (відкладено, П60) і поправки (форма VIN — #25; бейджа «ПІСЛЯ» немає). Розділи §1–31 не змінено, крім поправки #25 у §31.6.
+    </p>
 
         <nav class="toc">
       <strong>Зміст</strong>
@@ -171,6 +174,7 @@
         <li><a href="#contacts-page">Контакти /contacts/</a> — OfficeMap · ContactsInfo</li>
         <li><a href="#saved-page">Збережені авто</a> (<code>/favorites/</code>) — PageLoader · SavedCarCard</li>
         <li><a href="#lead-forms">Модалки й форми заявок</a> (доповнення 20.10.2026) — Offer · SimilarCar · Carfax · Quote · Repair · Consultation · StickyBuyBar</li>
+        <li><a href="#extra-2210">Підказки карток, слайдери, поправки</a> (доповнення 22.10.2026) — CardTips · PriceHint · KoreaCarCard · кар'єра · VIN · банер · Trustindex · лендинги</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -4421,7 +4425,7 @@
         </ul>
       </div>
 
-      <h3>31.6. ConsultationForm — «Виникли питання?» (#26 · #29 · #31)</h3>
+      <h3>31.6. ConsultationForm — «Виникли питання?» (#25 · #26 · #29 · #31)</h3>
       <div class="shot" style="max-width:640px">
         <img src="component-shots/lead-forms/11-consultation-report-desktop.jpg" alt="Форма консультації на сторінці звіту desktop" loading="lazy" style="max-width:640px;max-height:320px" />
         <div class="cap">Скрін 11 · desktop · /zvit-po-perevirci-avto-amerika/ (#26) · фото | заголовок + ім’я · телефон · «Отримати консультацію»</div>
@@ -4432,7 +4436,7 @@
       </div>
       <div class="shot" style="max-width:640px">
         <img src="component-shots/lead-forms/13-consultation-calculator-desktop.jpg" alt="Форма консультації на калькуляторі desktop" loading="lazy" style="max-width:640px;max-height:320px" />
-        <div class="cap">Скрін 13 · desktop · /calculator/ (#29; та сама форма на /perevirka-po-vin-kodu/)</div>
+        <div class="cap">Скрін 13 · desktop · /calculator/ (#29; той самий макет на /perevirka-po-vin-kodu/ — там форма #25, поправка 21.10.2026)</div>
       </div>
       <div class="shot" style="max-width:360px">
         <img src="component-shots/lead-forms/14-consultation-calculator-mobile.jpg" alt="Форма консультації на калькуляторі mobile" loading="lazy" style="max-width:360px;max-height:520px" />
@@ -4448,7 +4452,7 @@
       </div>
       <div class="box brand">
         <h4>Як знайти на живому</h4>
-        <p>Унизу сторінок: <a href="https://www.grandcar.ua/zvit-po-perevirci-avto-amerika/">/zvit-po-perevirci-avto-amerika/</a> (#26), <a href="https://www.grandcar.ua/calculator/">/calculator/</a> і <a href="https://www.grandcar.ua/perevirka-po-vin-kodu/">/perevirka-po-vin-kodu/</a> (#29), <a href="https://www.grandcar.ua/dostavka-avto-z-ssha/">/dostavka-avto-z-ssha/</a> (#31) — над футером.</p>
+        <p>Унизу сторінок: <a href="https://www.grandcar.ua/zvit-po-perevirci-avto-amerika/">/zvit-po-perevirci-avto-amerika/</a> (#26), <a href="https://www.grandcar.ua/calculator/">/calculator/</a> (#29), <a href="https://www.grandcar.ua/perevirka-po-vin-kodu/">/perevirka-po-vin-kodu/</a> (#25 — поправка 21.10.2026: не #29; поля, заголовок і кнопка ті самі), <a href="https://www.grandcar.ua/dostavka-avto-z-ssha/">/dostavka-avto-z-ssha/</a> (#31) — над футером.</p>
       </div>
       <div class="box brand">
         <h4>Vs CatalogFeedbackForm (§13)</h4>
@@ -4512,7 +4516,7 @@
             <td>фото сервісу з адмінки</td>
           </tr>
           <tr>
-            <td>ConsultationForm (#26 · #29 · #31)</td>
+            <td>ConsultationForm (#25 · #26 · #29 · #31)</td>
             <td>Варіант CatalogFeedbackForm</td>
             <td>той самий макет · різні тексти</td>
           </tr>
@@ -4526,6 +4530,95 @@
       <div class="note">
         <div class="label">Далі</div>
         <p>Оцінка цих одиниць — <a href="COMPONENT-ESTIMATE-UA.html#g-forms-extra"><code>component-estimate.md</code></a>, розділ «5. Forms / modals».</p>
+      </div>
+    </section>
+    <section id="extra-2210">
+      <h2>32. Доповнення 22.10.2026 · підказки карток, слайдери, поправки</h2>
+      <p class="lead">Доповнення після research freeze: що знайшли 21–22.10.2026 під час верстки карток (#111) і слайдерів (#112), чого не було в §1–31. Джерела — живий сайт (виміри 1440 і 360) і вихідники теми GrandCarWP. Скріни ще не зняті (⬜). Як це зроблено в <code>apps/web-ua</code> і чим відрізняється від живого — у журналі фронтенду (<code>docs/frontend/frontend-changelog.md</code>) (п. 161–164, 189–193, 213–226).</p>
+      <div class="meta">
+        <span class="chip">Сторінки: /cars/ · /auctions/ · /auctions-korea/ · /favorites/ · home · /career/ · /perevirka-po-vin-kodu/ · сторінки послуг · /vidguky/ · /auctions/{id}/</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>32.1. CardTips — «Гарантії» / «Розстрочка» на фото картки авто</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Що:</strong> бейджі на фото картки; по наведенню (миша) чи дотику — поповер із хвостиком до бейджа й ×. «Гарантії» — список «іконка + заголовок + текст»: «Юридична гарантія та фіксація ціни під ключ у договорі», «Детальна перевірка авто перед покупкою в США», «Команда особистих фахівців», «Страхування авто від пошкоджень в дорозі»; «Розстрочка» — один пункт «Оплата частинами».</li>
+          <li><strong>Розмітка:</strong> один спільний поповер <code>#gc-tip-popup</code>, вміст — із 4 шаблонів (США / Корея × гарантії / розстрочка). Ширина = ширина фото картки (1440: 365, 360: 312); на 360 «Гарантії» відкривається вгору, «Розстрочка» — вниз.</li>
+          <li><strong>Де:</strong> /cars/, /auctions/, /auctions-korea/, /favorites/, головна, слайдери карток авто й лотів. На /pryvezeni-v-ukrayinu-avto/ бейджів немає.</li>
+          <li><strong>Баг живого:</strong> на 360 поповер «Гарантії» прилипає до лівого краю (left 0, праворуч 48).</li>
+          <li><strong>Важливо:</strong> у локальній копії GrandCarWP цього коду немає — нове на живому (знято 21.10.2026).</li>
+        </ul>
+      </div>
+
+      <h3>32.2. PriceHint — «i» біля ціни корейського авто</h3>
+      <div class="box brand">
+        <p>/auctions-korea/: після «Ціна в Кореї: 107 778 $» червона іконка «i» 16 px; по наведенню — підказка 170 px «Актуальність ціни уточнюйте у менеджера.» з іконкою документа.</p>
+      </div>
+
+      <h3>32.3. Картка лота: таймер і корейський варіант</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Таймер лота</strong> (/auctions/) — 5-й рядок того самого списку характеристик, а не окремий блок: годинник 20 + «дд:гг:хх:сс».</li>
+          <li><strong>Корейський варіант картки</strong> (/auctions-korea/): 3 характеристики (без приводу), «Ціна в Кореї:» з PriceHint (§32.2).</li>
+        </ul>
+      </div>
+
+      <h3>32.4. Варіанти карток авто — звірка 21.10.2026</h3>
+      <div class="box brand">
+        <p>9 варіантів на живому: рядок каталогу, плитка, у слайдері, на головній, обране, привезені / після ремонту (з відео), відеовідгук, кейс блогера, темні картки сторінок марок (§32.9), рядок автокомпліту пошуку. <strong>Поправки до §1–30:</strong> бейджа «ПІСЛЯ» на картках «після ремонту» на живому немає; «Нещодавно переглянуті» на живому не знайдено; /vidnovleni-avto/ — 404.</p>
+      </div>
+
+      <h3>32.5. Кар'єра · /career/ — два слайдери</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>«Робота, яка змінює життя»:</strong> 2 картки в ряд (1440: 2 × 672), на телефоні картка майже на всю ширину (≈ 95 %) по центру; картки поза кадром притемнені (0,6); автопрокрутка 7 с; гортання — невидимі зони кліку по краях (<code>div</code> без назви, не з клавіатури).</li>
+          <li><strong>«Реальні історії успіху в GrandCar»:</strong> 3 картки 424 через 24 — білі, тінь картки, відступ 20: відео YouTube 384 × 312 (плеєр вантажиться разом зі сторінкою), назва 20 / 600, червона «Дивитись» 48 (YouTube у новій вкладці). На десктопі всі 3 в кадрі — стоїть; на телефоні стрічка, 7 с.</li>
+        </ul>
+      </div>
+
+      <h3>32.6. Галерея історії VIN — результат перевірки</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Де:</strong> /perevirka-po-vin-kodu/ після перевірки VIN (<code>includes/car-history-state.php</code>, <code>assets/scripts/vin-check.js</code>).</li>
+          <li><strong>На сторінці:</strong> фото по одному (Glide), тонкі білі шеврони 9 × 26, «на весь екран», мініатюри 74 (видно 4) + «+N фото».</li>
+          <li><strong>На весь екран:</strong> окремий слайдер із крапками під фото (8 через 8), Esc закриває.</li>
+          <li><strong>Доступність:</strong> стрілки, «на весь екран» і крапки — <code>div</code> (не кнопки, без назв); <code>alt</code> фото — «Lot image 0».</li>
+          <li><strong>Ще на сторінці:</strong> стрічка схожих авто — той самий слайдер карток, що в §4–5.</li>
+        </ul>
+      </div>
+
+      <h3>32.7. Банер з одним слайдом — сторінки послуг</h3>
+      <div class="box brand">
+        <p>/dostavka-avto-z-ssha/, /garantiyi-dostavky-avto-z-ssha/, /oplata/, /pro-kompaniyu/: InformativeBanner з одним слайдом — без номерів, з підказкою «нижче», що підстрибує (1 с).</p>
+      </div>
+
+      <h3>32.8. Відгуки Google — віджет Trustindex</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Що це:</strong> сторонній сервіс Trustindex (trustindex.io), не код теми: шорткод <code>[trustindex data-widget-id=…]</code> (головна, /vidguky/, шаблон <code>new-testimonials</code>) обробляє плагін WordPress, той вантажить завантажувач із CDN Trustindex. Відгуки, рейтинг 4,7 і кількість (1239; у заголовку — «1100+») зберігає Trustindex.</li>
+          <li><strong>Вигляд:</strong> 4 картки в ряд, стрілки, автопрокрутка 6 с; у картці — фото й ім'я автора, відносна дата, значок Google, 5 зірок і галочка Trustindex, текст до 4 рядків, мініатюра першого фото відгуку, «Читати далі».</li>
+          <li><strong>Клік по картці</strong> відкриває вікно відгуку: шапка, фото відгуку великою стрічкою, повний текст.</li>
+          <li><strong>Питання:</strong> П62 — звідки брати відгуки на новому сайті.</li>
+        </ul>
+      </div>
+
+      <h3>32.9. Лендинги — слайдери (відкладено, П60)</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Сторінки марок</strong> (<code>/&lt;марка&gt;-zi-ssha/</code>, 6 сторінок): «Youtube відео по темі цієї марки авто» — центральне відео збільшене (× 1,27), сусідні зменшені (× 0,72) і притемнені (0,5), перехід 0,35 с; «Привезені авто цієї моделі» — картки 6 у ряд на всю ширину екрана, стрілки 52 зверху праворуч, 7 с.</li>
+          <li><strong>/grandcar-magnit/:</strong> «Наш мерч» — один широкий слайд (1096 у колонці 1320), сусідні не видно, стрілки 64 по боках, назва й «Хочу» на темній смузі поверх фото; відеовідгуки — стрічка зліва до краю екрана, текст блоку й стрілки праворуч.</li>
+        </ul>
+      </div>
+
+      <h3>32.10. Сторінка лота — без нових компонентів</h3>
+      <div class="box brand">
+        <p>/auctions/{id}/: галерея й «Схожі авто» — ті самі компоненти, що на сторінці авто (живий шаблон <code>content-usa_lot_single_new.php</code>, стрічка — <code>index.js</code>).</p>
+      </div>
+
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Оцінка — <a href="COMPONENT-ESTIMATE-UA.html#g-cards-extra">§3а</a> і <a href="COMPONENT-ESTIMATE-UA.html#g-sliders-extra">§4а</a> (розмір і години ⬜). Скріни для §32 ще не зняті.</p>
       </div>
     </section>
 
