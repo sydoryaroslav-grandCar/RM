@@ -137,6 +137,9 @@
     <p class="hint">
       Доповнення 22.10.2026: <a href="#extra-2210">§32</a> — підказки карток, слайдери (кар'єра, галерея VIN, банер з одним слайдом, відгуки Google / Trustindex), лендинги (відкладено, П60) і поправки (форма VIN — #25; бейджа «ПІСЛЯ» немає). Розділи §1–31 не змінено, крім поправки #25 у §31.6.
     </p>
+    <p class="hint">
+      Доповнення 23.10.2026: <a href="#extra-2310">§33</a> — сторінки послуг (доставка, оплата, гарантії, про компанію, контакти), аукціони (фільтри й видача, лоти), звірка стенду й баги живого. Розділи §1–32 не змінено.
+    </p>
 
         <nav class="toc">
       <strong>Зміст</strong>
@@ -175,6 +178,7 @@
         <li><a href="#saved-page">Збережені авто</a> (<code>/favorites/</code>) — PageLoader · SavedCarCard</li>
         <li><a href="#lead-forms">Модалки й форми заявок</a> (доповнення 20.10.2026) — Offer · SimilarCar · Carfax · Quote · Repair · Consultation · StickyBuyBar</li>
         <li><a href="#extra-2210">Підказки карток, слайдери, поправки</a> (доповнення 22.10.2026) — CardTips · PriceHint · KoreaCarCard · кар'єра · VIN · банер · Trustindex · лендинги</li>
+        <li><a href="#extra-2310">Сторінки послуг, аукціони, поправки</a> (доповнення 23.10.2026) — доставка · оплата · гарантії · про компанію · контакти · фільтри · лоти · баги живого</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -4670,6 +4674,207 @@
       </div>
     </section>
 
+    <section id="extra-2310">
+      <h2>33. Доповнення 23.10.2026 · сторінки послуг, аукціони, поправки</h2>
+      <p class="lead">Доповнення після research freeze: що знайшли 23.10.2026 — розвідка сторінок послуг (/dostavka-avto-z-ssha/, /oplata/, /garantiyi-dostavky-avto-z-ssha/, /pro-kompaniyu/, /contacts/) і сторінок аукціонів (/auctions/, /auctions-korea/, лоти), звірка стенду з живим і верстка фільтрів (#114). Джерела — живий сайт (виміри 1440 і 360–375) і вихідники теми GrandCarWP. Скріни зроблено 23.10.2026 з живого сайту (1440 і 375), файли — <code>component-shots/inventory-2310/</code>. Як це зроблено в <code>apps/web-ua</code> і чим відрізняється від живого — у журналі фронтенду (<code>docs/frontend/frontend-changelog.md</code>) (п. 227–242).</p>
+      <div class="meta">
+        <span class="chip">Сторінки: /dostavka-avto-z-ssha/ · /oplata/ · /garantiyi-dostavky-avto-z-ssha/ · /pro-kompaniyu/ · /contacts/ · /auctions/ · /auctions-korea/ · /auctions/{id}/</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>33.1. Доставка /dostavka-avto-z-ssha/ — що не описано</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Блоки сторінки:</strong> банер з одним слайдом (§32.7) → хлібні крихти → «Етапи доставки вашого автомобіля із США» → «Вартість доставки» → «Відгуки наших клієнтів» → FAQ → текст сторінки → «ТОП-5…» над футером.</li>
+          <li><strong>Етапи доставки (DeliveryStep), поправка:</strong> 6 кроків; на 1440 — сітка 3 × 2, номер ліворуч, текст по центру; на 360 — стовпчик, текст по лівому краю.</li>
+          <li><strong>Вартість доставки:</strong> текст у дві колонки (CSS columns 2, проміжок 28); на телефоні — одна колонка. В інвентаризації не було.</li>
+          <li><strong>Відгуки наших клієнтів:</strong> заголовок + стрічка відеовідгуків + «Дивитись більше відгуків» — той самий блок, що на /oplata/, /garantiyi…/ і головній. В інвентаризації не було.</li>
+          <li><strong>Ще не описано:</strong> FAQ і текст сторінки.</li>
+        </ul>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/01-delivery-steps-desktop.jpg" alt="«Етапи доставки» — сітка 3 × 2 desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 1 · desktop · «Етапи доставки» — сітка 3 × 2</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2310/01-delivery-steps-mobile.jpg" alt="«Етапи доставки» — стовпчик, текст ліворуч mobile" loading="lazy" style="max-width:360px;max-height:760px" />
+        <div class="cap">Скрін 2 · mobile · «Етапи доставки» — стовпчик, текст ліворуч</div>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/02-two-column-text-desktop.jpg" alt="«Вартість доставки» — текст у дві колонки desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 3 · desktop · «Вартість доставки» — текст у дві колонки</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2310/02-two-column-text-mobile.jpg" alt="«Вартість доставки» — одна колонка mobile" loading="lazy" style="max-width:360px;max-height:760px" />
+        <div class="cap">Скрін 4 · mobile · «Вартість доставки» — одна колонка</div>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/03-video-reviews-desktop.jpg" alt="«Відгуки наших клієнтів» — стрічка відеовідгуків desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 5 · desktop · «Відгуки наших клієнтів» — стрічка відеовідгуків</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2310/03-video-reviews-mobile.jpg" alt="«Відгуки наших клієнтів» — стрічка mobile" loading="lazy" style="max-width:360px;max-height:760px" />
+        <div class="cap">Скрін 6 · mobile · «Відгуки наших клієнтів» — стрічка</div>
+      </div>
+
+      <h3>33.2. Оплата /oplata/</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Над таймлайном:</strong> H1 «Способи оформлення замовлення та оплати автомобіля» з текстом у дві колонки (на телефоні — одна). В інвентаризації не було.</li>
+          <li><strong>PaymentTimeline, поправка:</strong> від 992 — зигзаг і вісь з анімацією; на 360 осі й анімації немає — 5 етапів стовпчиком через 60 (в інвентаризації: «вертикальний таймлайн уздовж осі»).</li>
+          <li><strong>Ще на сторінці:</strong> відгуки, FAQ і форма консультації #32 зі своїм заголовком (у нас її немає).</li>
+        </ul>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/04-payment-timeline-desktop.jpg" alt="текст у дві колонки й таймлайн: зигзаг і вісь desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 7 · desktop · текст у дві колонки й таймлайн: зигзаг і вісь</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2310/04-payment-timeline-mobile.jpg" alt="текст і етапи стовпчиком, без осі mobile" loading="lazy" style="max-width:360px;max-height:760px" />
+        <div class="cap">Скрін 8 · mobile · текст і етапи стовпчиком, без осі</div>
+      </div>
+
+      <h3>33.3. Гарантії /garantiyi-dostavky-avto-z-ssha/</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Крім карток:</strong> вступний текст, відгуки, форма консультації (загальна), FAQ — в інвентаризації були лише картки.</li>
+          <li><strong>GuaranteeFeatureCard, поправка:</strong> посилання є у двох картках («Поетапна оплата», «Рекомендації від наших клієнтів»), а не в одній; колір посилань — браузерний синій (баг живого).</li>
+          <li><strong>Оцінка:</strong> ValueCard і GuaranteeFeatureCard стоять в оцінці в §3 «Cards», а не в §9.</li>
+        </ul>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/05-guarantee-cards-desktop.jpg" alt="картки гарантій, 3 в ряд desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 9 · desktop · картки гарантій, 3 в ряд</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2310/05-guarantee-cards-mobile.jpg" alt="картки гарантій стовпчиком mobile" loading="lazy" style="max-width:360px;max-height:760px" />
+        <div class="cap">Скрін 10 · mobile · картки гарантій стовпчиком</div>
+      </div>
+
+      <h3>33.4. Про компанію /pro-kompaniyu/</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Банер — інший варіант:</strong> фонове відео й кнопка «Переглянути відео» на весь екран (на інших сторінках послуг банер з фото).</li>
+          <li><strong>Цінності компанії:</strong> вступний текст, картки цінностей + фото, слоган. В інвентаризації не було.</li>
+          <li><strong>Відділи (DepartmentsSection), поправка:</strong> відділів 4; на десктопі таби, на телефоні акордеон. Баг живого: «HR відділ» позначений відкритим (шеврон угору), але згорнутий; таби й акордеон — <code>div</code> без клавіатури.</li>
+          <li><strong>JoinTeamCta:</strong> на 360 — біла картка з відступом 20, фото сховане (збігається з інвентаризацією).</li>
+        </ul>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/06-about-video-banner-desktop.jpg" alt="банер з фоновим відео й «Переглянути відео» desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 11 · desktop · банер з фоновим відео й «Переглянути відео»</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2310/06-about-video-banner-mobile.jpg" alt="банер з відео mobile" loading="lazy" style="max-width:360px;max-height:760px" />
+        <div class="cap">Скрін 12 · mobile · банер з відео</div>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/07-values-desktop.jpg" alt="«Цінності компанії» — картки й фото desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 13 · desktop · «Цінності компанії» — картки й фото</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2310/07-values-mobile.jpg" alt="«Цінності компанії» стовпчиком mobile" loading="lazy" style="max-width:360px;max-height:760px" />
+        <div class="cap">Скрін 14 · mobile · «Цінності компанії» стовпчиком</div>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/08-departments-desktop.jpg" alt="відділи: таби й панель desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 15 · desktop · відділи: таби й панель</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2310/08-departments-mobile.jpg" alt="відділи: акордеон mobile" loading="lazy" style="max-width:360px;max-height:760px" />
+        <div class="cap">Скрін 16 · mobile · відділи: акордеон</div>
+      </div>
+
+      <h3>33.5. Контакти /contacts/</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>OfficeMap, поправка:</strong> картка над картою (рейтинг, «Відкрити на Картах») — штатний оверлей Google embed, своєї розмітки немає: досить iframe з назвою (title).</li>
+          <li><strong>Форма:</strong> форма #34 «Бажаєте замовити авто…» — у нас уже є (вигляд «підбір»).</li>
+          <li><strong>ContactsInfo, телефон:</strong> порядок: адреса → телефони → соцмережі → пошта, потім карта.</li>
+        </ul>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/09-contacts-desktop.jpg" alt="контакти 2 × 2 і карта desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 17 · desktop · контакти 2 × 2 і карта</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2310/09-contacts-mobile.jpg" alt="контакти стовпчиком, потім карта mobile" loading="lazy" style="max-width:360px;max-height:760px" />
+        <div class="cap">Скрін 18 · mobile · контакти стовпчиком, потім карта</div>
+      </div>
+
+      <h3>33.6. Аукціони: фільтри й видача — поправки</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Застосування:</strong> фільтри застосовуються одразу на кожен вибір; кнопки «Застосувати» немає (у панелі телефона «Показати» лише закриває панель).</li>
+          <li><strong>Варіанти:</strong> лічильників біля варіантів немає; «Показати ще» — після 8 варіантів під полем пошуку (на /cars/ «Показати більше» — після 5); у «Марка» 235 варіантів.</li>
+          <li><strong>Дата аукціону:</strong> два нативні поля дати, а не датапікер (в оцінці FilterDatePicker L 4–8 — завищено).</li>
+          <li><strong>Секція й чипи:</strong> шеврон секції не повертається (і на /cars/); чипи вибраного — темно-сірі #393E41 (і на /cars/).</li>
+          <li><strong>Сортування:</strong> коди й пункти живого (<code>odometer_desc</code>, <code>auction_date_asc</code>…), у пунктах русизми («Дата аукциона», «від дальної»); у поля сортування немає назви.</li>
+          <li><strong>Пагінація Кореї:</strong> посилання пагінації й «Показати ще» на /auctions-korea/ ведуть на /auctions/?page=N (баг живого; працює лише з JS).</li>
+          <li><strong>Статус у нас (#114):</strong> зроблено на стенді, PR #191 у dev — <strong>у роботі, не прийнято</strong>; не зроблено: «Показати ще» і пагінація лотів, фільтри ↔ адреса, чип «Авто з Кореї».</li>
+        </ul>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/10-auction-filters-open-desktop.jpg" alt="колонка фільтрів /auctions/ desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 19 · desktop · колонка фільтрів /auctions/</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2310/11-auction-filters-panel-mobile.jpg" alt="панель фільтрів на телефоні mobile" loading="lazy" style="max-width:360px;max-height:760px" />
+        <div class="cap">Скрін 20 · mobile · панель фільтрів на телефоні</div>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/12-auction-date-desktop.jpg" alt="«Дата аукціону» — два нативні поля desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 21 · desktop · «Дата аукціону» — два нативні поля</div>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/13-auction-sort-desktop.jpg" alt="ряд сортування й «На сторінці» desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 22 · desktop · ряд сортування й «На сторінці»</div>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/16-korea-pagination-desktop.jpg" alt="пагінація Кореї (посилання ведуть на США) desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 23 · desktop · пагінація Кореї (посилання ведуть на США)</div>
+      </div>
+
+      <h3>33.7. Лоти США і Кореї — поправки</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>«Популярно серед інших»:</strong> горизонтальний ряд чипів-посилань на лоті США (в оцінці — PopularLots).</li>
+          <li><strong>Липка панель купівлі (§31.7):</strong> 1344 завширшки, а не 1000.</li>
+          <li><strong>Історія (Корея):</strong> у картки історії 3 стани, а не 2.</li>
+        </ul>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/14-lot-popular-desktop.jpg" alt="«Популярно серед інших» — ряд чипів desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 24 · desktop · «Популярно серед інших» — ряд чипів</div>
+      </div>
+      <div class="shot" style="max-width:640px">
+        <img src="component-shots/inventory-2310/15-lot-sticky-desktop.jpg" alt="липка панель купівлі, 1344 desktop" loading="lazy" style="max-width:640px;max-height:640px" />
+        <div class="cap">Скрін 25 · desktop · липка панель купівлі, 1344</div>
+      </div>
+
+      <h3>33.8. Звірка стенду з живим 23.10.2026 — поправки</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Форми:</strong> на перевірці VIN — форма #29 (не #25); на /oplata/ — своя форма #32; «Розрахувати ремонт» #38 — ще на сторінках авто й лотах Кореї.</li>
+          <li><strong>Блоки:</strong> блок Telegram — і на /auctions-korea/; «ТОП-5 найвигідніших авто…» над футером 23.10.2026 на живому не було (20.10 був).</li>
+        </ul>
+      </div>
+
+      <h3>33.9. Баги живого, знайдені 23.10.2026</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Шапка:</strong> на телефоні пошук і меню відкриваються одне над одним (у нас виправлено, журнал п. 230).</li>
+          <li><strong>Аукціони:</strong> пагінація Кореї веде на США; «Знайдено 1 лотів»; × і «Показати» панелі фільтрів — <code>span</code> і <code>div</code>; повтор <code>id="rangeMin"</code> / <code>"rangeMax"</code> у повзунків, повзунки без назв, рік «2 024»; «Показати ще» — <code>div</code>, вибране після 8-го ховається; русизми в сортуванні.</li>
+          <li><strong>Сторінки послуг:</strong> «HR відділ» відкритий, але згорнутий; таби відділів без клавіатури; посилання в картках гарантій — браузерний синій.</li>
+          <li><strong>Доступність сайту:</strong> 23.10.2026 близько 17:09–17:12 www.grandcar.ua віддавав 502 на всіх сторінках.</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Оцінка — <a href="COMPONENT-ESTIMATE-UA.html#g-catalog-extra">§6а</a> (поправки до фільтрів) і <a href="COMPONENT-ESTIMATE-UA.html#g-pages-extra">§9а</a> (нові одиниці сторінок послуг), розмір і години ⬜.</p>
+      </div>
+    </section>
     <footer>
       <code>FE-COMPONENTS-UA.html</code>
       · <a href="index.html">роадмап</a>

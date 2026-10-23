@@ -204,6 +204,7 @@
     </div>
     <p class="legend">Доповнення 20.10.2026: 7 одиниць у <a href="#g-forms-extra">§5а</a> — поза підсумками вище, розмір і години ⬜ (на затвердження).</p>
     <p class="legend">Доповнення 22.10.2026: 7 одиниць у <a href="#g-cards-extra">§3а</a> і <a href="#g-sliders-extra">§4а</a> — поза підсумками вище, розмір і години ⬜ (на затвердження).</p>
+    <p class="legend">Доповнення 23.10.2026: 5 одиниць у <a href="#g-pages-extra">§9а</a> і поправки в <a href="#g-catalog-extra">§6а</a> / §9а — поза підсумками вище, розмір і години ⬜ (на затвердження).</p>
 
     <nav class="toc">
       <strong>Групи компонентів</strong>
@@ -552,6 +553,16 @@
         </tbody>
       </table>
       </div>
+      <h3 id="g-catalog-extra">6а. Доповнення 23.10.2026 — фільтри (поправки)</h3>
+      <p class="lead">Звірка з живим під час верстки фільтрів аукціонів (задача #114), опис — <a href="FE-COMPONENTS-UA.html#extra-2310">§33.6</a>. Нових одиниць немає; поправки до рядків §6 вище:</p>
+      <ul>
+        <li><strong>Статус #114:</strong> фільтри зроблено на стенді (PR #191 у dev) — <strong>у роботі, не прийнято</strong>; не зроблено «Показати ще» і пагінацію лотів, фільтри ↔ адреса.</li>
+        <li><strong>FilterDatePicker:</strong> на живому — два нативні поля дати, без власного календаря: розмір L 4–8 завищено (§33.6).</li>
+        <li><strong>FilterOptions · show-more:</strong> /auctions/ — після 8 (під полем пошуку), /cars/ — після 5 (§33.6).</li>
+        <li><strong>FilterChip:</strong> темно-сірі #393E41 і на /auctions/, і на /cars/ (§33.6).</li>
+        <li><strong>CatalogFilterAccordion:</strong> застосування одразу, без кнопки; лічильників біля варіантів немає; шеврон не повертається (§33.6).</li>
+        <li><strong>PageSizeSelect / SortSelect:</strong> коди сортування живого не збігаються з контрактом каталогу ядра; немає дати аукціону (§33.6).</li>
+      </ul>
     </section>
     <section id="g-offer">
       <h2>7. Offer / lot / auction</h2>
@@ -684,6 +695,43 @@
         </tbody>
       </table>
       </div>
+      <h3 id="g-pages-extra">9а. Доповнення 23.10.2026 — сторінки послуг</h3>
+      <p class="lead">Знайдено розвідкою сторінок послуг 23.10.2026, опис — <a href="FE-COMPONENTS-UA.html#extra-2310">§33.1–33.5, §33.8</a>. У підсумки вгорі <strong>не</strong> входять: розмір і години не оцінено (⬜). Скріни — живий сайт 23.10.2026, 1440 і 375.</p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="prev">Desktop</th>
+            <th class="prev">Mobile</th>
+            <th>Component</th>
+            <th>Type</th>
+            <th>States</th>
+            <th>Variants</th>
+            <th>Used on</th>
+            <th>Size</th>
+            <th>Est.h</th>
+            <th>Inventory</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr data-type="delta"><td class="prev"><button type="button" class="thumb" data-full="component-shots/inventory-2310/02-two-column-text-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/inventory-2310/02-two-column-text-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td><td class="prev"><button type="button" class="thumb" data-full="component-shots/inventory-2310/02-two-column-text-mobile.jpg" aria-label="Відкрити preview (M)"><img src="component-shots/inventory-2310/02-two-column-text-mobile.jpg" alt="M" loading="lazy" /><span>M</span></button></td><td><code>TextBlocks · two-column TwoColumnText</code><div class="scope">Текст у дві колонки (CSS columns) — delta над TextBlocks</div></td><td><span class="type delta">delta</span></td><td class="states"><span class="states-empty">—</span></td><td>2 колонки desktop · 1 mobile</td><td>/dostavka-avto-z-ssha/ · /oplata/</td><td><span class="states-empty">⬜</span></td><td class="est">⬜</td><td class="inv"><a href="FE-COMPONENTS-UA.html#extra-2310">extra-2310</a></td></tr>
+        <tr data-type="base"><td class="prev"><button type="button" class="thumb" data-full="component-shots/inventory-2310/03-video-reviews-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/inventory-2310/03-video-reviews-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td><td class="prev"><button type="button" class="thumb" data-full="component-shots/inventory-2310/03-video-reviews-mobile.jpg" aria-label="Відкрити preview (M)"><img src="component-shots/inventory-2310/03-video-reviews-mobile.jpg" alt="M" loading="lazy" /><span>M</span></button></td><td><code>VideoReviewsSection</code><div class="scope">«Відгуки наших клієнтів»: заголовок + стрічка відеовідгуків + «Дивитись більше відгуків»</div></td><td><span class="type base">base</span></td><td class="states"><span class="states-empty">—</span></td><td>стрічка · кнопка</td><td>/dostavka-avto-z-ssha/ · /oplata/ · /garantiyi…/ · home</td><td><span class="states-empty">⬜</span></td><td class="est">⬜</td><td class="inv"><a href="FE-COMPONENTS-UA.html#extra-2310">extra-2310</a></td></tr>
+        <tr data-type="delta"><td class="prev"><button type="button" class="thumb" data-full="component-shots/inventory-2310/06-about-video-banner-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/inventory-2310/06-about-video-banner-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td><td class="prev"><button type="button" class="thumb" data-full="component-shots/inventory-2310/06-about-video-banner-mobile.jpg" aria-label="Відкрити preview (M)"><img src="component-shots/inventory-2310/06-about-video-banner-mobile.jpg" alt="M" loading="lazy" /><span>M</span></button></td><td><code>InformativeBanner · video</code><div class="scope">Банер з фоновим відео й «Переглянути відео» на весь екран — delta над InformativeBanner</div></td><td><span class="type delta">delta</span></td><td class="states"><span class="states-empty">—</span></td><td>фонове відео · fullscreen</td><td>/pro-kompaniyu/</td><td><span class="states-empty">⬜</span></td><td class="est">⬜</td><td class="inv"><a href="FE-COMPONENTS-UA.html#extra-2310">extra-2310</a></td></tr>
+        <tr data-type="base"><td class="prev"><button type="button" class="thumb" data-full="component-shots/inventory-2310/07-values-desktop.jpg" aria-label="Відкрити preview (D)"><img src="component-shots/inventory-2310/07-values-desktop.jpg" alt="D" loading="lazy" /><span>D</span></button></td><td class="prev"><button type="button" class="thumb" data-full="component-shots/inventory-2310/07-values-mobile.jpg" aria-label="Відкрити preview (M)"><img src="component-shots/inventory-2310/07-values-mobile.jpg" alt="M" loading="lazy" /><span>M</span></button></td><td><code>ValuesSection</code><div class="scope">«Цінності компанії»: вступ, картки ValueCard + фото, слоган</div></td><td><span class="type base">base</span></td><td class="states"><span class="states-empty">—</span></td><td>desktop сітка · mobile стовпчик</td><td>/pro-kompaniyu/</td><td><span class="states-empty">⬜</span></td><td class="est">⬜</td><td class="inv"><a href="FE-COMPONENTS-UA.html#extra-2310">extra-2310</a></td></tr>
+        <tr data-type="delta"><td class="prev"><span class="states-empty">—</span></td><td class="prev"><span class="states-empty">—</span></td><td><code>ConsultationForm · payment (#32)</code><div class="scope">Форма консультації /oplata/ зі своїм заголовком — delta над ConsultationForm</div></td><td><span class="type delta">delta</span></td><td class="states"><span class="states-empty">—</span></td><td>свій заголовок</td><td>/oplata/</td><td><span class="states-empty">⬜</span></td><td class="est">⬜</td><td class="inv"><a href="FE-COMPONENTS-UA.html#extra-2310">extra-2310</a></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p><strong>Поправки до рядків §9 і §5а:</strong></p>
+      <ul>
+        <li><strong>DeliveryStep:</strong> на 1440 сітка 3 × 2, номер ліворуч, текст по центру; на 360 — текст по лівому краю (§33.1).</li>
+        <li><strong>PaymentTimeline:</strong> на 360 без осі й анімації — 5 етапів стовпчиком через 60 (§33.2).</li>
+        <li><strong>GuaranteeFeatureCard:</strong> посилання у двох картках; стоїть у §3, а не в §9 (§33.3).</li>
+        <li><strong>DepartmentsSection:</strong> 4 відділи; баг живого «HR відділ»; таби без клавіатури (§33.4).</li>
+        <li><strong>OfficeMap:</strong> лише iframe з title — картка над картою належить Google (§33.5).</li>
+        <li><strong>ContactsInfo:</strong> мобільний порядок: адреса → телефони → соцмережі → пошта (§33.5).</li>
+        <li><strong>ConsultationForm:</strong> на перевірці VIN — #29 (не #25) (§33.8).</li>
+      </ul>
     </section>
 
     <section>
