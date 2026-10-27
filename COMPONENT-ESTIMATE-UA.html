@@ -205,6 +205,7 @@
     <p class="legend">Доповнення 20.10.2026: 7 одиниць у <a href="#g-forms-extra">§5а</a> — поза підсумками вище, розмір і години ⬜ (на затвердження).</p>
     <p class="legend">Доповнення 22.10.2026: 7 одиниць у <a href="#g-cards-extra">§3а</a> і <a href="#g-sliders-extra">§4а</a> — поза підсумками вище, розмір і години ⬜ (на затвердження).</p>
     <p class="legend">Доповнення 23.10.2026: 5 одиниць у <a href="#g-pages-extra">§9а</a> і поправки в <a href="#g-catalog-extra">§6а</a> / §9а — поза підсумками вище, розмір і години ⬜ (на затвердження).</p>
+    <p class="legend">Доповнення 27.10.2026: 1 одиниця (LotPrice) і поправки в <a href="#g-offer-extra">§7а</a> — поза підсумками вище, розмір і години ⬜ (на затвердження).</p>
 
     <nav class="toc">
       <strong>Групи компонентів</strong>
@@ -615,6 +616,14 @@
         </tbody>
       </table>
       </div>
+      <h3 id="g-offer-extra">7а. Доповнення 27.10.2026 — сторінка лота США (поправки)</h3>
+      <p class="lead">Звірка з живим під час верстки сторінки лота, опис — <a href="FE-COMPONENTS-UA.html#extra-2710">§34</a>. Одна нова одиниця (LotPrice, години ⬜); поправки до рядків §7 вище:</p>
+      <ul>
+        <li><strong>Статус:</strong> зроблено на стенді «Сторінка лота США — верх» (гілка feat/lot-page) — <strong>у роботі, не прийнято</strong>: LotIdentity (LotBadge / VinCopy), LotSummary (OfferSummary + SpecsList), AuctionData, StickyBuyBar. Галерея й «Схожі авто» — готові компоненти.</li>
+        <li><strong>LotPrice</strong> (нове, delta над CarPrice): рядок ціни лота з підписом і сумою різного розміру — спільний для зведення й липкої панелі.</li>
+        <li><strong>LotDescription · ModelRange · PopularLots:</strong> не робимо до рішення П66 (лоти noindex за ADR-039).</li>
+        <li><strong>Дані:</strong> полів лота (номер, VIN, дані аукціону, привід, ключі) немає в контракті картки ядра — П65; сторінка на моку.</li>
+      </ul>
     </section>
     <section id="g-content">
       <h2>8. Content / blog / expert</h2>

@@ -140,6 +140,9 @@
     <p class="hint">
       Доповнення 23.10.2026: <a href="#extra-2310">§33</a> — сторінки послуг (доставка, оплата, гарантії, про компанію, контакти), аукціони (фільтри й видача, лоти), звірка стенду й баги живого. Розділи §1–32 не змінено.
     </p>
+    <p class="hint">
+      Доповнення 27.10.2026: <a href="#extra-2710">§34</a> — сторінка лота США: номер і VIN, зведення, «Дані аукціону», липка панель, баги живого. Розділи §1–33 не змінено.
+    </p>
 
         <nav class="toc">
       <strong>Зміст</strong>
@@ -179,6 +182,7 @@
         <li><a href="#lead-forms">Модалки й форми заявок</a> (доповнення 20.10.2026) — Offer · SimilarCar · Carfax · Quote · Repair · Consultation · StickyBuyBar</li>
         <li><a href="#extra-2210">Підказки карток, слайдери, поправки</a> (доповнення 22.10.2026) — CardTips · PriceHint · KoreaCarCard · кар'єра · VIN · банер · Trustindex · лендинги</li>
         <li><a href="#extra-2310">Сторінки послуг, аукціони, поправки</a> (доповнення 23.10.2026) — доставка · оплата · гарантії · про компанію · контакти · фільтри · лоти · баги живого</li>
+        <li><a href="#extra-2710">Сторінка лота США</a> (доповнення 27.10.2026) — LotIdentity · LotSummary · LotPrice · AuctionData · StickyBuyBar · баги живого</li>
       </ol>
     </nav>
     <section id="reuse">
@@ -4873,6 +4877,73 @@
       <div class="note">
         <div class="label">Далі</div>
         <p>Оцінка — <a href="COMPONENT-ESTIMATE-UA.html#g-catalog-extra">§6а</a> (поправки до фільтрів) і <a href="COMPONENT-ESTIMATE-UA.html#g-pages-extra">§9а</a> (нові одиниці сторінок послуг), розмір і години ⬜.</p>
+      </div>
+    </section>
+    <section id="extra-2710">
+      <h2>34. Доповнення 27.10.2026 · сторінка лота США</h2>
+      <p class="lead">Розвідка лота <a href="https://www.grandcar.ua/auctions/71440866/">/auctions/71440866/</a> (2017 FORD FUSION TITANIUM) під час верстки сторінки лота: заміри 1440 і 375, вихідники теми GrandCarWP (<code>content-usa_lot_single_new.php</code>, <code>single-product.css</code>). Скріни — живий сайт 27.10.2026. Як зроблено в <code>apps/web-ua</code> і чим відрізняється від живого — журнал фронтенду п. 266–270 (у роботі, не прийнято).</p>
+      <div class="meta">
+        <span class="chip">Сторінка: /auctions/{id}/</span>
+        <span class="chip red">Desktop + Mobile</span>
+      </div>
+
+      <h3>34.1. Верх лота: номер і VIN, зведення</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Номер і VIN (LotBadge / VinCopy → у нас LotIdentity):</strong> дві кнопки в рамці 1 px, 13 / 600, відступ 8, через 8; під курсором червоні, VIN повністю (на 5 останніх — зірочки); клік копіює, «Скопійовано» на 1 с.</li>
+          <li><strong>Зведення (OfferSummary → у нас LotSummary):</strong> H1 32 / 700 (телефон 24) з VIN у дужках; «поділитися» 36 праворуч; ціна 32 (телефон: підпис 16, сума 24); на 1440 підпис ціни переноситься на два рядки, сума притиснута праворуч; кнопки «Дізнатися ціну під ключ» і «Розрахувати ремонт» — 14 / 600, 46 заввишки, дві колонки через 24, під ними 28 і сіра лінія; 9 характеристик з іконками (марка, модель, рік, об'єм, паливо, привід, коробка, ключі, колір) — 20 з лінією під кожною (телефон 15, без ліній).</li>
+          <li><strong>Рядок ціни (нове: LotPrice):</strong> той самий рядок у зведенні й липкій панелі — delta над CarPrice (підпис і сума різного розміру).</li>
+        </ul>
+      </div>
+      <div class="shot" style="max-width:720px">
+        <img src="component-shots/inventory-2710/01-lot-top-desktop.jpg" alt="Верх лота: номер, VIN, галерея, зведення — desktop" loading="lazy" style="max-width:720px;max-height:640px" />
+        <div class="cap">Скрін 1 · desktop · номер і VIN над галереєю, зведення праворуч</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2710/01-lot-top-mobile.jpg" alt="Верх лота — mobile" loading="lazy" style="max-width:360px;max-height:760px" />
+        <div class="cap">Скрін 2 · mobile · те саме стовпчиком, кнопки одна під одною</div>
+      </div>
+
+      <h3>34.2. «Дані аукціону» (AuctionData)</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Вигляд:</strong> заголовок 24 / 600 (телефон 20) з лінією; рядки 16, поля 8 / 12, «іконка · назва: значення праворуч»; 3 колонки на десктопі, 1 на телефоні.</li>
+          <li><strong>Рядки:</strong> аукціон, локація, оновлено, стан, «Є пошкодження», основне й додаткове пошкодження, документи, вартість ремонту, роздрібна ціна, «Часу лишилось», «Час завершення», «Діюча ставка». Після торгів — «Аукціон проведено», без часу завершення й ставки.</li>
+          <li><strong>Дані:</strong> у контракті картки ядра цих полів немає (крім часу завершення) — питання П65 журналу.</li>
+        </ul>
+      </div>
+      <div class="shot" style="max-width:720px">
+        <img src="component-shots/inventory-2710/02-auction-data-desktop.jpg" alt="«Дані аукціону» — 3 колонки desktop" loading="lazy" style="max-width:720px;max-height:400px" />
+        <div class="cap">Скрін 3 · desktop · «Дані аукціону», 3 колонки</div>
+      </div>
+      <div class="shot" style="max-width:360px">
+        <img src="component-shots/inventory-2710/02-auction-data-mobile.jpg" alt="«Дані аукціону» — список mobile" loading="lazy" style="max-width:360px;max-height:760px" />
+        <div class="cap">Скрін 4 · mobile · список</div>
+      </div>
+
+      <h3>34.3. Липка панель (StickyBuyBar), поправки до §31.7</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Правило появи:</strong> спостерігається кнопка «Дізнатися ціну під ключ» — панель видна, коли кнопка поза екраном (вище чи нижче).</li>
+          <li><strong>Desktop:</strong> до 1344, 12 від низу, радіус 10, padding 8 12; фото 86 × 64, назва 17,6 / 700, ціна (підпис 600 сірий, сума 700), кнопка 16 / 600.</li>
+          <li><strong>Mobile:</strong> на всю ширину, радіус 10 лише вгорі, padding 12 20 20; фото 54 × 40, назва 16 / 600 в один рядок з «…», ціна 12, кнопка на всю ширину окремим рядком.</li>
+        </ul>
+      </div>
+
+      <h3>34.4. Баги живого, знайдені 27.10.2026</h3>
+      <div class="box brand">
+        <ul>
+          <li><strong>Переклад:</strong> значення аукціону англійською — «Stationary», «Minor Dent/Scratches», «Other»; підпис «Локация» (русизм); «Об`єм двигуна» з бектиком.</li>
+          <li><strong>Дані:</strong> «Оновлено: 2026-10-27 11:47:19» — сирий формат; «Діюча ставка: 0 $»; «Поробіг» (опечатка) — пробігу в характеристиках немає; «Модельний ряд FORD» — 163 посилання одним полотном.</li>
+          <li><strong>Таймер:</strong> час завершення = збережений мінус 1 година; після кінця пише «Аукціон відбувся», після перезавантаження — «Аукціон проведено».</li>
+          <li><strong>Доступність:</strong> на липкій панелі <code>aria-hidden="true"</code>, а кнопка всередині отримує фокус; «Скопійовано» не озвучується; «поділитися» без назви.</li>
+          <li><strong>SEO:</strong> лот віддає <code>index, follow</code>; на новому сайті аукціонні лоти не індексуються (ADR-039) — питання П66.</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <div class="label">Далі</div>
+        <p>Оцінка — <a href="COMPONENT-ESTIMATE-UA.html#g-offer-extra">§7а</a> (поправки до сторінки лота).</p>
       </div>
     </section>
     <footer>
